@@ -2,12 +2,16 @@
 
 This takes a
 
-- VIRTUAL-CODEOWNERS file with (virtual) team names
+- VIRTUAL-CODEOWNERS file with (virtual) teams
 - a `virtual-teams.yml` file which define the teams
 
-... and churns out a CODEOWNERS with usernames
+... and churns out a CODEOWNERS with usernames.
 
 ## Usage
+
+- Rename your `CODEOWNERS` to `VIRTUAL-CODEOWNERS` and put team names in them.
+- Specify team names that don't (yet) exist on GitHub level in a `virtual-teams.yml`
+- Run this:
 
 ```
 npx virtual-code-owners VIRTUAL-CODEOWNERS virtual-teams.yml > .github/CODEOWNERS
@@ -15,10 +19,17 @@ npx virtual-code-owners VIRTUAL-CODEOWNERS virtual-teams.yml > .github/CODEOWNER
 
 ## Why?
 
-For organizations that have large mono repositories with loads of code owners, but
-who don't (yet) can or want to use GitHub teams to arrange their tens or hundreds
-of contributors, but who also don't want to manually manage a humongous
-code -> people mapping in a CODEOWNERS file.
+Organizations sometimes have large mono repositories with loads of code owners.
+They or they bureaucracy hasn't landed on actually using GitHub teams to clearly
+demarcate that. Teams in those organizations who want to have clear code ownership
+have the following choices:
+
+- Wrestle the bureaucracy. This is the recommended approach. It might take a
+  while, though - and even though there are good people on many levels in
+  bureaucracies, it might eventually not pan out because of #reasons.
+- Maintain a large CODEOWNERS file with portions of code divied out to large
+  lists of individuals. This is laborious to maintain.
+- Use `virtual-code-owners` to simplify this task a bit.
 
 ## Formats
 
@@ -26,24 +37,19 @@ code -> people mapping in a CODEOWNERS file.
 
 Is a regular, valid GitHub [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-and-branch-protection) file.
 The only difference between VIRTUAL-CODEOWNERS and a CODEOWNERS file is that
-the _groups_ the former uses don't yet exist, except in a `virtual-groups.yml`.
+the _groups_ the former uses might not exist yet, except in a `virtual-groups.yml`.
 
 Example:
 
 ```
-# This is a comment
 * @cloud-heroes-all
-
 .github/ @ch/transversal
 apps/broker @ch/transversal
 apps/ux-portal/ @ch/ux @ch/transversal
-apps/platform-shizzle/ @ch/transversal @william-the-fourth-ch
 libs/ubc-sales/ @ch/sales
 libs/ubc-after-sales/ @ch/after-sales
 libs/ubc-pre-sales/ @ch/pre-sales
 libs/components/ @ch/ux
-libs/common/ @ch/transversal @ch/tgif
-tools/ @ch/tgif
 ```
 
 ### virtual-teams.yml
@@ -71,18 +77,30 @@ ch/transversal:
 # etc
 ```
 
-### Mixing real and virtual groups
+## FAQ
 
-It might be you already have a group or two defined, but just want to use
-_additional_ groups. In that case just don't specify it in `group-mapping.yml`
-and _virtual-code-owners_ will leave it alone.
+### Can I mix real and virtual groups in `VIRTUAL-CODEOWNERS`?
 
-### Having usernames in VIRTUAL-CODEOWNERS
+Yes.
 
-This is possible as well - just make sure there's no name clashes between the
-username and a (virtual) group name and _virtual-code-owners_ will leave
-the real name alone.
+It might be you already have a team or two defined, but just want to use
+_additional_ teams. In that case just don't specify the already-defined teams
+in `virtual-teams.yml` and _virtual-code-owners_ will leave them alone.
 
-### Limitations
+### Can I still use usernames in `VIRTUAL-CODEOWNERS`
 
-Currently only works for _usernames_ and _team names_
+Yes.
+
+Just make sure there's no name clashes between the username and a (virtual)
+group name and _virtual-code-owners_ will leave the real name alone.
+
+### Any limitations I should know of?
+
+- Currently only works for _usernames_ to identify team members - not for e-mail addresses.
+- If people are in more than one team, chances are they get mentioned multiple
+  times on the same line if both teams are code owners of the same part of the
+  code. While maybe not ideal, the resulting code owners file is still valid
+- _virtual-code-owners_ assumes the VIRTUAL-CODEOWNERS is a valid CODEOWNERS file
+  and the virtual-teams.yml is a valid yaml file with teams names as keys and
+  team members as arrays under these. It will likely throw errors when this
+  assumption is not met, but the error-messages might not be as clear as possible.

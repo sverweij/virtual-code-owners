@@ -14,7 +14,7 @@ tools/ @team-tgif`;
     expect(convert(lCodeOwners, {})).toEqual(lCodeOwners);
   });
 
-  it("replaces team names with usernames as specified in the team map", () => {
+  it("replaces team naxmes with usernames as specified in the team map", () => {
     const lTeamMap: ITeamMap = {
       "team-sales": ["jan", "pier", "tjorus", "korneel"],
     };
@@ -28,7 +28,7 @@ libs/after-sales @team-after-sales
 tools/ @team-tgif`;
   });
 
-  it("replaces team nameswhen there's > 1 team on the line", () => {
+  it("replaces team names when there's > 1 team on the line", () => {
     const lFixture = "tools/shared @team-sales @team-after-sales";
     const lTeamMapFixture = {
       "team-sales": ["jan", "pier", "tjorus"],
@@ -38,7 +38,7 @@ tools/ @team-tgif`;
     expect(convert(lFixture, lTeamMapFixture)).toBe(lExpected);
   });
 
-  it.skip("replaces team names & deduplicates usernames when there's > 1 team on the line", () => {
+  it.skip("replaces team names & deduplicates usernames when there's > 1 team on the line => doesn't seem necessary; repeating usernames seem OK", () => {
     const lFixture = "tools/shared @team-sales @team-after-sales";
     const lTeamMapFixture = {
       "team-sales": ["jan", "multi-teamer", "tjorus"],

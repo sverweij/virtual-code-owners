@@ -1,0 +1,24 @@
+# catch-all to ensure there at least _is_ a code owner, even when
+# it's _everyone_
+
+* @cloud-heroes-all
+
+# admin & ci shizzle => transversal
+
+.github/ @luke-the-lucky-ch
+
+# generic stuff
+
+apps/framework @luke-the-lucky-ch
+apps/ux-portal/ @davy-davidson-ch @john-johnson-ch @joe-dalton-ch @luke-the-lucky-ch
+libs/components/ @davy-davidson-ch @john-johnson-ch @joe-dalton-ch
+
+# specific functionality
+
+libs/ubc-sales/ @gregory-gregson-ch @jane-doe-ch
+libs/ubc-after-sales/ @john-doe-ch @pete-peterson-ch @william-the-fourth-ch
+libs/ubc-pre-sales/ @jean-claude-ch @valerie-valerton-ch @averel-dalton-ch
+
+# The VIRTUAL-CODEOWNERS.txt file has the .txt extension because untamed vscode
+# installations might otherwise interpret it as markdown and auto-correct
+# and auto-format it as such

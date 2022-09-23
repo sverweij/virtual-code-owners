@@ -1,4 +1,4 @@
-import { EOL } from "os";
+import { EOL } from "node:os";
 
 export interface ITeamMap {
   [teamName: string]: string[];
@@ -24,7 +24,7 @@ function convertLine(pTeamMap: ITeamMap) {
     // leave comments & empty lines alone
     if (lTrimmedLine.startsWith("#") || lTrimmedLine === "") {
       return pLine;
-      // replace known group names with the
+      // replace known group names with the names from the teams
     } else {
       return replaceGroupNames(pLine, pTeamMap);
     }

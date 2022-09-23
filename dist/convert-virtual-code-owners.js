@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.convert = void 0;
-const os_1 = require("os");
+const node_os_1 = require("node:os");
 function replaceGroupNames(pLine, pTeamMap) {
     let lReturnValue = pLine;
     for (let lTeamName of Object.keys(pTeamMap)) {
@@ -12,10 +12,8 @@ function replaceGroupNames(pLine, pTeamMap) {
 function convertLine(pTeamMap) {
     return (pLine) => {
         const lTrimmedLine = pLine.trimStart();
-        // leave comments & empty lines alone
         if (lTrimmedLine.startsWith("#") || lTrimmedLine === "") {
             return pLine;
-            // replace known group names with the
         }
         else {
             return replaceGroupNames(pLine, pTeamMap);
@@ -24,8 +22,8 @@ function convertLine(pTeamMap) {
 }
 function convert(pCodeOwnersFileAsString, pTeamMap) {
     return pCodeOwnersFileAsString
-        .split(os_1.EOL)
+        .split(node_os_1.EOL)
         .map(convertLine(pTeamMap))
-        .join(os_1.EOL);
+        .join(node_os_1.EOL);
 }
 exports.convert = convert;
