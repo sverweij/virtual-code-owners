@@ -51,22 +51,22 @@ tools/ @ch/tgif
 Contains a list of groups, with for each group its team members, like so:
 
 ```yaml
-- ch/after-sales
+ch/after-sales:
   - john-doe-ch
   - pete-peterson-ch
   - william-the-fourth-ch
-- ch/sales
+ch/sales:
   - gregory-gregson-ch
   - jane-doe-ch
-- ch/pre-sales
+ch/pre-sales:
   - jean-claude-ch
   - valerie-valerton-ch
   - averel-dalton-ch
-- ch/ux
+ch/ux:
   - davy-davidson-ch
   - john-johnson-ch
   - joe-dalton-ch
-- ch/transversal
+ch/transversal:
   - luke-the-lucky-ch
 # etc
 ```

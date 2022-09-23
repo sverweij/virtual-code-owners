@@ -1,0 +1,26 @@
+{
+  "name": "virtual-code-owners",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --loglevel warn --write \"**/*.{md,ts,json,yml}\"",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Sander Verweij (https://sverweij.github.io/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.0.3",
+    "@types/node": "^18.7.18",
+    "jest": "^29.0.3",
+    "prettier": "^2.7.1",
+    "ts-jest": "^29.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "commander": "^9.4.0",
+    "js-yaml": "^4.1.0"
+  }
+}
