@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.convert = void 0;
 const node_os_1 = require("node:os");
-function replaceGroupNames(pLine, pTeamMap) {
+function replaceTeamNames(pLine, pTeamMap) {
     let lReturnValue = pLine;
     for (let lTeamName of Object.keys(pTeamMap)) {
         lReturnValue = lReturnValue.replace(`@${lTeamName}`, pTeamMap[lTeamName].map((pUserName) => `@${pUserName}`).join(" "));
@@ -10,13 +10,13 @@ function replaceGroupNames(pLine, pTeamMap) {
     return lReturnValue;
 }
 function convertLine(pTeamMap) {
-    return (pLine) => {
-        const lTrimmedLine = pLine.trimStart();
+    return (pUntreatedLine) => {
+        const lTrimmedLine = pUntreatedLine.trimStart();
         if (lTrimmedLine.startsWith("#") || lTrimmedLine === "") {
-            return pLine;
+            return pUntreatedLine;
         }
         else {
-            return replaceGroupNames(pLine, pTeamMap);
+            return replaceTeamNames(pUntreatedLine, pTeamMap);
         }
     };
 }

@@ -181,7 +181,7 @@ module.exports = {
       path: "node_modules",
     },
     moduleSystems: ["cjs", "es6"],
-    // prefix: '',
+    prefix: "https://github.com/sverweij/virtual-code-owners/blob/main/",
     tsPreCompilationDeps: true,
     tsConfig: {
       fileName: "tsconfig.json",

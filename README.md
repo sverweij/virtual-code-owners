@@ -24,11 +24,12 @@ They or they bureaucracy hasn't landed on actually using GitHub teams to clearly
 demarcate that. Teams in those organizations who want to have clear code ownership
 have the following choices:
 
-- Wrestle the bureaucracy. This is the recommended approach. It might take a
-  while, though - and even though there are good people on many levels in
-  bureaucracies, it might eventually not pan out because of #reasons.
-- Maintain a large CODEOWNERS file with portions of code divied out to large
-  lists of individuals. This is laborious to maintain.
+- Wrestle the bureaucracy.
+  This is the recommended approach. It might take a while, though - and even
+  though there are good people on many levels in bureaucracies, it might
+  eventually not pan out because of #reasons.
+- Maintain a CODEOWNERS file with code assigned to large lists of individuals.
+  An option, but laborious to maintain.
 - Use `virtual-code-owners` to simplify this task a bit.
 
 ## Formats
@@ -37,7 +38,7 @@ have the following choices:
 
 Is a regular, valid GitHub [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-and-branch-protection) file.
 The only difference between VIRTUAL-CODEOWNERS and a CODEOWNERS file is that
-the _groups_ the former uses might not exist yet, except in a `virtual-groups.yml`.
+the _teams_ the former uses might not exist yet, except in a `virtual-teams.yml`.
 
 Example:
 
@@ -54,7 +55,7 @@ libs/components/ @ch/ux
 
 ### virtual-teams.yml
 
-Contains a list of groups, with for each group its team members, like so:
+A valid YAML file that contains a list of teams, with for each team its members:
 
 ```yaml
 ch/after-sales:
@@ -79,7 +80,7 @@ ch/transversal:
 
 ## FAQ
 
-### Can I mix real and virtual groups in `VIRTUAL-CODEOWNERS`?
+### Can I mix real and virtual teams in `VIRTUAL-CODEOWNERS`?
 
 Yes.
 
@@ -92,14 +93,16 @@ in `virtual-teams.yml` and _virtual-code-owners_ will leave them alone.
 Yes.
 
 Just make sure there's no name clashes between the username and a (virtual)
-group name and _virtual-code-owners_ will leave the real name alone.
+team name and _virtual-code-owners_ will leave the real name alone.
 
 ### Any limitations I should know of?
 
-- Currently only works for _usernames_ to identify team members - not for e-mail addresses.
+- Currently only works for _usernames_ to identify team members - not for e-mail
+  addresses.
 - If people are in more than one team, chances are they get mentioned multiple
   times on the same line if both teams are code owners of the same part of the
-  code. While maybe not ideal, the resulting code owners file is still valid
+  code. While maybe not _looking_ ideal, the resulting code owners file is still
+  valid & ready to rock'n roll.
 - _virtual-code-owners_ assumes the VIRTUAL-CODEOWNERS is a valid CODEOWNERS file
   and the virtual-teams.yml is a valid yaml file with teams names as keys and
   team members as arrays under these. It will likely throw errors when this

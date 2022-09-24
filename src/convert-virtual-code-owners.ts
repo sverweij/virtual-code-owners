@@ -4,7 +4,7 @@ export interface ITeamMap {
   [teamName: string]: string[];
 }
 
-function replaceGroupNames(pLine: string, pTeamMap: ITeamMap) {
+function replaceTeamNames(pLine: string, pTeamMap: ITeamMap) {
   let lReturnValue = pLine;
 
   for (let lTeamName of Object.keys(pTeamMap)) {
@@ -18,15 +18,15 @@ function replaceGroupNames(pLine: string, pTeamMap: ITeamMap) {
 }
 
 function convertLine(pTeamMap: ITeamMap) {
-  return (pLine: string): string => {
-    const lTrimmedLine = pLine.trimStart();
+  return (pUntreatedLine: string): string => {
+    const lTrimmedLine = pUntreatedLine.trimStart();
 
-    // leave comments & empty lines alone
     if (lTrimmedLine.startsWith("#") || lTrimmedLine === "") {
-      return pLine;
-      // replace known group names with the names from the teams
+      // leave comments & empty lines alone
+      return pUntreatedLine;
     } else {
-      return replaceGroupNames(pLine, pTeamMap);
+      // replace known team names with the names from the teams
+      return replaceTeamNames(pUntreatedLine, pTeamMap);
     }
   };
 }
