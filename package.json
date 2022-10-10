@@ -39,7 +39,7 @@
     "url": "https://github.com/sverweij/virtual-code-owners/issues"
   },
   "devDependencies": {
-    "@types/jest": "29.1.1",
+    "@types/jest": "29.1.2",
     "@types/js-yaml": "4.0.5",
     "@types/node": "18.8.0",
     "dependency-cruiser": "11.16.1",
