@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.convert = void 0;
-const node_os_1 = require("node:os");
+import { EOL } from "node:os";
 function replaceTeamNames(pLine, pTeamMap) {
     let lReturnValue = pLine;
     for (let lTeamName of Object.keys(pTeamMap)) {
@@ -20,10 +17,9 @@ function convertLine(pTeamMap) {
         }
     };
 }
-function convert(pCodeOwnersFileAsString, pTeamMap) {
+export function convert(pCodeOwnersFileAsString, pTeamMap) {
     return pCodeOwnersFileAsString
-        .split(node_os_1.EOL)
+        .split(EOL)
         .map(convertLine(pTeamMap))
-        .join(node_os_1.EOL);
+        .join(EOL);
 }
-exports.convert = convert;
