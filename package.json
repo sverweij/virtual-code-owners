@@ -2,6 +2,15 @@
   "name": "virtual-code-owners",
   "version": "0.1.0",
   "description": "merges a VIRTUAL-CODEOWNERS and a virtual-teams.yml into CODEOWNERS",
+  "type": "module",
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/read-and-convert.js"
+      },
+      "./dist/read-and-convert.js"
+    ]
+  },
   "main": "dist/read-and-convert.js",
   "bin": "dist/cli.js",
   "files": [
@@ -11,14 +20,15 @@
   ],
   "scripts": {
     "build": "rm -rf dist && node tools/get-version.mjs > src/version.ts && tsc",
-    "depcruise": "depcruise src --config .dependency-cruiser.js",
+    "depcruise": "depcruise src --config .dependency-cruiser.cjs",
     "depcruise:graph": "depcruise src --include-only '^(src)' --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html",
     "depcruise:graph:dev": "depcruise src --include-only '^(src)' --prefix vscode://file/$(pwd)/ --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html | browser",
     "depcruise:graph:diff:mermaid": "depcruise src --include-only '^(src)' --config --output-type mermaid --output-to - --reaches \"$(watskeburt $SHA -T regex)\"",
     "depcruise:html": "depcruise src --progress --config --output-type err-html --output-to dependency-violation-report.html",
     "format": "prettier --loglevel warn --write \"**/*.{md,ts,json,yml}\"",
     "scm:stage": "git add .",
-    "test": "jest",
+    "test": "mocha",
+    "test:cover": "c8 --check-coverage --statements 100 --branches 100 --functions 100 --lines 100 --exclude \"{src/**/*.spec.ts,.mocharc.cjs}\" --reporter text-summary --reporter html --reporter json-summary mocha",
     "update-dependencies": "npm run upem:update && npm run upem:install && npm run format && npm run build && npm test",
     "upem-outdated": "npm outdated --json --long | upem --dry-run",
     "upem:install": "npm install",
@@ -39,13 +49,14 @@
     "url": "https://github.com/sverweij/virtual-code-owners/issues"
   },
   "devDependencies": {
-    "@types/jest": "29.1.1",
+    "@types/chai": "4.3.3",
     "@types/js-yaml": "4.0.5",
     "@types/node": "18.8.0",
+    "c8": "7.12.0",
+    "chai": "4.3.6",
     "dependency-cruiser": "11.16.1",
-    "jest": "29.1.2",
+    "mocha": "10.0.0",
     "prettier": "2.7.1",
-    "ts-jest": "29.0.3",
     "ts-node": "10.9.1",
     "typescript": "4.8.4",
     "upem": "7.3.0",
