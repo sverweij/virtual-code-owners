@@ -5,8 +5,8 @@ updates:
     schedule:
       interval: "weekly"
     commit-message:
-      prefix: "build(npm)"
-      prefix-development: "build(npm-dev)"
+      prefix: "build"
+      prefix-development: "build"
       include: scope
 
   - package-ecosystem: "github-actions"
@@ -14,5 +14,5 @@ updates:
     schedule:
       interval: "weekly"
     commit-message:
-      prefix: "build(GHA)"
+      prefix: "ci"
       include: scope
