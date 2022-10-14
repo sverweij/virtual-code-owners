@@ -193,11 +193,29 @@ module.exports = {
     reporterOptions: {
       dot: {
         collapsePattern: "node_modules/[^/]+",
-
         theme: {
           graph: {
             splines: "ortho",
           },
+          modules: [
+            {
+              criteria: {
+                matchesReaches: true,
+              },
+              attributes: {
+                fillcolor: "lime",
+                penwidth: 2,
+              },
+            },
+            {
+              criteria: {
+                source: ".spec.ts",
+              },
+              attributes: {
+                fillcolor: "#ccccff",
+              },
+            },
+          ],
         },
       },
       text: {
