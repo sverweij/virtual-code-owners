@@ -28,8 +28,8 @@
     "depcruise:html": "depcruise src --progress --config --output-type err-html --output-to dependency-violation-report.html",
     "format": "prettier --loglevel warn --write \"**/*.{md,ts,json,yml}\"",
     "scm:stage": "git add .",
-    "test": "mocha",
-    "test:cover": "c8 --check-coverage --statements 100 --branches 100 --functions 100 --lines 100 --exclude \"{src/**/*.spec.ts,.mocharc.cjs}\" --reporter text-summary --reporter html --reporter json-summary mocha",
+    "test": "NODE_OPTIONS=--no-warnings mocha",
+    "test:cover": "NODE_OPTIONS=--no-warnings c8 --check-coverage --statements 100 --branches 100 --functions 100 --lines 100 --exclude \"{src/**/*.spec.ts,.mocharc.cjs}\" --reporter text-summary --reporter html --reporter json-summary mocha",
     "update-dependencies": "npm run upem:update && npm run upem:install && npm run format && npm run build && npm test",
     "upem-outdated": "npm outdated --json --long | upem --dry-run",
     "upem:install": "npm install",
@@ -53,13 +53,13 @@
     "@types/js-yaml": "4.0.5",
     "@types/node": "18.11.9",
     "c8": "7.12.0",
-    "dependency-cruiser": "11.18.0",
+    "dependency-cruiser": "12.0.0",
     "mocha": "10.1.0",
     "prettier": "2.7.1",
     "ts-node": "10.9.1",
-    "typescript": "4.8.4",
+    "typescript": "4.9.3",
     "upem": "7.3.1",
-    "watskeburt": "0.8.1"
+    "watskeburt": "0.9.0"
   },
   "dependencies": {
     "commander": "9.4.1",
