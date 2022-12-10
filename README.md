@@ -20,23 +20,23 @@ npx virtual-code-owners VIRTUAL-CODEOWNERS virtual-teams.yml > .github/CODEOWNER
 ## Why?
 
 Organizations sometimes have large mono repositories with loads of code owners.
-They or they bureaucracy hasn't landed on actually using GitHub teams to clearly
+They or their bureaucracy haven't landed on actually using GitHub teams to clearly
 demarcate that. Teams in those organizations who want to have clear code ownership
 have the following choices:
 
-- Wrestle the bureaucracy.
+- Wrestle the bureaucracy.  
   This is the recommended approach. It might take a while, though - and even
   though there are good people on many levels in bureaucracies, it might
-  eventually not pan out because of #reasons.
-- Maintain a CODEOWNERS file with code assigned to large lists of individuals.
+  eventually not pan out because #reasons.
+- Maintain a CODEOWNERS file with code assigned to large lists of individuals.  
   An option, but laborious to maintain.
-- Use `virtual-code-owners` to simplify this task a bit.
+- Use `virtual-code-owners`.
 
 ## Formats
 
 ### VIRTUAL-CODEOWNERS
 
-Is a regular, valid GitHub [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-and-branch-protection) file.
+`VIRTUAL_CODEOWNERS` is a regular, valid GitHub [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-and-branch-protection) file.
 The only difference between VIRTUAL-CODEOWNERS and a CODEOWNERS file is that
 the _teams_ the former uses might not exist yet, except in a `virtual-teams.yml`.
 
