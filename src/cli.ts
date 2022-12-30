@@ -2,7 +2,7 @@
 
 import { program } from "commander";
 import { VERSION } from "./version.js";
-import { readAndCovert } from "./read-and-convert.js";
+import { readAndConvert } from "./read-and-convert.js";
 
 program
   .description(
@@ -13,7 +13,7 @@ program
   .parse(process.argv);
 
 try {
-  console.log(readAndCovert(program.args[0], program.args[1]));
+  console.log(readAndConvert(program.args[0], program.args[1]));
 } catch (pError: any) {
   console.error(`ERROR: ${pError.message}`);
 }
