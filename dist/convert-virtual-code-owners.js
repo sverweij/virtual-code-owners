@@ -1,4 +1,12 @@
 import { EOL } from "node:os";
+const DEFAULT_GENERATED_WARNING = `#${EOL}` +
+    `# DO NOT EDIT - this file is generated and your edits will be overwritten${EOL}` +
+    `#${EOL}` +
+    `# To make changes:${EOL}` +
+    `#${EOL}` +
+    `#   - edit VIRTUAL-CODEOWNERS.txt${EOL}` +
+    `#   - run 'npx virtual-code-owners VIRTUAL-CODE-OWNERS.txt virtual-teams.yml > CODEOWNERS'${EOL}` +
+    `#${EOL}${EOL}`;
 function replaceTeamNames(pLine, pTeamMap) {
     let lReturnValue = pLine;
     for (let lTeamName of Object.keys(pTeamMap)) {
@@ -17,9 +25,9 @@ function convertLine(pTeamMap) {
         }
     };
 }
-export function convert(pCodeOwnersFileAsString, pTeamMap) {
-    return pCodeOwnersFileAsString
+export function convert(pCodeOwnersFileAsString, pTeamMap, pGeneratedWarning = DEFAULT_GENERATED_WARNING) {
+    return `${pGeneratedWarning}${pCodeOwnersFileAsString
         .split(EOL)
         .map(convertLine(pTeamMap))
-        .join(EOL);
+        .join(EOL)}`;
 }

@@ -1,6 +1,8 @@
 import { equal } from "node:assert";
+import { EOL } from "node:os";
 import { convert, ITeamMap } from "./convert-virtual-code-owners.js";
-describe("doSomething does something", () => {
+
+describe("convert-virtual-code-owners converts", () => {
   const lCodeOwners = `# here's a comment
 * @everyone
 # regular functionality
@@ -11,7 +13,7 @@ libs/after-sales @team-after-sales
 tools/ @team-tgif`;
 
   it("leaves an code owners as-is when the team map is empty", () => {
-    equal(convert(lCodeOwners, {}), lCodeOwners);
+    equal(convert(lCodeOwners, {}, ""), lCodeOwners);
   });
 
   it("replaces team names with usernames as specified in the team map", () => {
@@ -26,7 +28,7 @@ libs/after-sales @team-after-sales
 
 # tooling maintained by a rag tag band of 20% friday afternooners
 tools/ @team-tgif`;
-    equal(convert(lCodeOwners, lTeamMap), lExpected);
+    equal(convert(lCodeOwners, lTeamMap, ""), lExpected);
   });
 
   it("replaces team names when there's > 1 team on the line", () => {
@@ -36,7 +38,7 @@ tools/ @team-tgif`;
       "team-after-sales": ["wim", "zus", "jet"],
     };
     const lExpected = "tools/shared @jan @pier @tjorus @wim @zus @jet";
-    equal(convert(lFixture, lTeamMapFixture), lExpected);
+    equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 
   it.skip("replaces team names & deduplicates usernames when there's > 1 team on the line => doesn't seem necessary; repeating usernames seem OK", () => {
@@ -46,6 +48,15 @@ tools/ @team-tgif`;
       "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],
     };
     const lExpected = "tools/shared @jan @multi-teamer @tjorus @wim @zus @jet";
-    equal(convert(lFixture, lTeamMapFixture), lExpected);
+    equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
+  });
+
+  it("adds a warning text on top when passed one", () => {
+    const lFixture = "tools/shared @team-sales @team-after-sales";
+    const lTeamMapFixture = {};
+    const lWarningText = `# warning - generated, do not edit${EOL}`;
+    const lExpected = `${lWarningText}${lFixture}`;
+
+    equal(convert(lFixture, lTeamMapFixture, lWarningText), lExpected);
   });
 });
