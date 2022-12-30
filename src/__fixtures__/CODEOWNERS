@@ -1,3 +1,12 @@
+#
+# DO NOT EDIT - this file is generated and your edits will be overwritten
+#
+# To make changes:
+#
+#   - edit VIRTUAL-CODEOWNERS.txt
+#   - run 'npx virtual-code-owners VIRTUAL-CODE-OWNERS.txt virtual-teams.yml > CODEOWNERS'
+#
+
 # catch-all to ensure there at least _is_ a code owner, even when
 # it's _everyone_
 
