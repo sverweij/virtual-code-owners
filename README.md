@@ -2,19 +2,19 @@
 
 This takes a
 
-- VIRTUAL-CODEOWNERS file with (virtual) teams
+- VIRTUAL-CODEOWNERS.txt file with (virtual) teams
 - a `virtual-teams.yml` file which define the teams
 
-... and churns out a CODEOWNERS with usernames.
+... and churns out a CODEOWNERS with user names.
 
 ## Usage
 
-- Rename your `CODEOWNERS` to `VIRTUAL-CODEOWNERS` and put team names in them.
+- Rename your `CODEOWNERS` to `VIRTUAL-CODEOWNERS.txt` and put team names in them.
 - Specify team names that don't (yet) exist on GitHub level in a `virtual-teams.yml`
 - Run this:
 
 ```
-npx virtual-code-owners VIRTUAL-CODEOWNERS virtual-teams.yml > .github/CODEOWNERS
+npx virtual-code-owners VIRTUAL-CODEOWNERS.txt virtual-teams.yml > .github/CODEOWNERS
 ```
 
 ## Why?
@@ -34,9 +34,9 @@ have the following choices:
 
 ## Formats
 
-### VIRTUAL-CODEOWNERS
+### VIRTUAL-CODEOWNERS.txt
 
-`VIRTUAL_CODEOWNERS` is a regular, valid GitHub [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-and-branch-protection) file.
+`VIRTUAL_CODEOWNERS.txt` is a regular, valid GitHub [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-and-branch-protection) file.
 The only difference between VIRTUAL-CODEOWNERS and a CODEOWNERS file is that
 the _teams_ the former uses might not exist yet, except in a `virtual-teams.yml`.
 
@@ -80,7 +80,7 @@ ch/transversal:
 
 ## FAQ
 
-### Can I mix real and virtual teams in `VIRTUAL-CODEOWNERS`?
+### Can I mix real and virtual teams in `VIRTUAL-CODEOWNERS.txt`?
 
 Yes.
 
@@ -88,7 +88,7 @@ It might be you already have a team or two defined, but just want to use
 _additional_ teams. In that case just don't specify the already-defined teams
 in `virtual-teams.yml` and _virtual-code-owners_ will leave them alone.
 
-### Can I still use usernames in `VIRTUAL-CODEOWNERS`
+### Can I still use usernames in `VIRTUAL-CODEOWNERS.txt`
 
 Yes.
 
@@ -103,7 +103,17 @@ team name and _virtual-code-owners_ will leave the real name alone.
   times on the same line if both teams are code owners of the same part of the
   code. While maybe not _looking_ ideal, the resulting code owners file is still
   valid & ready to rock'n roll.
-- _virtual-code-owners_ assumes the VIRTUAL-CODEOWNERS is a valid CODEOWNERS file
-  and the virtual-teams.yml is a valid yaml file with teams names as keys and
-  team members as arrays under these. It will likely throw errors when this
+- _virtual-code-owners_ assumes the VIRTUAL-CODEOWNERS.txt is a valid CODEOWNERS
+  file and the virtual-teams.yml is a valid yaml file with teams names as keys
+  and team members as arrays under these. It will likely throw errors when this
   assumption is not met, but the error-messages might not be as clear as possible.
+
+### Why the `.txt` extension?
+
+Various editors assume an ALL_CAPS file name with `#` characters on various lines
+to be markdown, and will auto format them as such - making for either very ugly
+or in worst cases invalid CODOWNERS files. Usually such autoformatting is not
+present on text files.
+
+Apparently these editors know about CODEOWNERS, though so this auto formatting
+doesn't seem to be happening over there.

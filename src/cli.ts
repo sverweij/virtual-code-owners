@@ -6,7 +6,7 @@ import { readAndConvert } from "./read-and-convert.js";
 
 program
   .description(
-    "Takes a VIRTUAL-CODEOWNERS & a virtual-teams.yml and emits a CODEOWNERS to stdout"
+    "Takes a VIRTUAL-CODEOWNERS.txt & a virtual-teams.yml and emits a CODEOWNERS to stdout"
   )
   .version(VERSION)
   .arguments("<virtual-code-owners-file> <virtual-teams.yml>")
