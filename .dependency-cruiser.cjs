@@ -189,6 +189,7 @@ module.exports = {
     enhancedResolveOptions: {
       exportsFields: ["exports"],
       conditionNames: ["import", "require", "node", "default"],
+      extensions: [".cjs", ".ts"],
     },
     reporterOptions: {
       dot: {
@@ -221,6 +222,10 @@ module.exports = {
       text: {
         highlightFocused: true,
       },
+    },
+    cache: "node_modules/.cache/dependency-cruiser",
+    progress: {
+      type: "performance-log",
     },
   },
 };

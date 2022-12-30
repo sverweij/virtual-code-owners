@@ -1,6 +1,10 @@
 /node_modules/
-/coverage/
 *.log
 *.swp
 tmp-*
 *.tgz
+
+# analysis tooling output
+/coverage/
+dependency-graph.html
+dependency-violation-report.html
