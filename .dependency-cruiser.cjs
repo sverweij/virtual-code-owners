@@ -223,7 +223,9 @@ module.exports = {
         highlightFocused: true,
       },
     },
-    cache: "node_modules/.cache/dependency-cruiser",
+    cache: {
+      strategy: "content",
+    },
     progress: {
       type: "performance-log",
     },
