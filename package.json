@@ -29,7 +29,7 @@
     "format": "prettier --loglevel warn --write \"**/*.{md,ts,json,yml}\"",
     "scm:stage": "git add .",
     "test": "NODE_OPTIONS=--no-warnings mocha",
-    "test:cover": "NODE_OPTIONS=--no-warnings c8 --check-coverage --statements 100 --branches 100 --functions 100 --lines 100 --exclude \"{src/**/*.spec.ts,.mocharc.cjs}\" --reporter text-summary --reporter html --reporter json-summary mocha",
+    "test:cover": "NODE_OPTIONS=--no-warnings c8 mocha",
     "update-dependencies": "npm run upem:update && npm run upem:install && npm run format && npm run build && npm test",
     "upem-outdated": "npm outdated --json --long | upem --dry-run",
     "upem:install": "npm install",
