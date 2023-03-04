@@ -43,6 +43,12 @@ the _teams_ the former uses might not exist yet, except in a `virtual-teams.yml`
 Example:
 
 ```
+#! comments that start with #! won't appear in the CODEOWNERS output e.g.
+#! this is not the CODEOWNERS file - to get that one run
+#!   npx virtual-code-owners VIRTUAL-CODE-OWNERS.txt virtual-teams.yml > CODEOWNERS
+#! on this.
+#!
+# Regular comments are retained
 * @cloud-heroes-all
 .github/ @ch/transversal
 apps/broker @ch/transversal

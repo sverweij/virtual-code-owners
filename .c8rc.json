@@ -1,4 +1,5 @@
 {
+  "checkCoverage": true,
   "statements": 100,
   "branches": 100,
   "functions": 100,
