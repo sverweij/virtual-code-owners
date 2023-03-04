@@ -41,6 +41,17 @@ function convertLine(pTeamMap: ITeamMap) {
   };
 }
 
+function isNotIgnorable(pLine: string): boolean {
+  // You can mark comments that aren't relevant to appear in the result with
+  // a #! token.
+  //
+  // #! this is not the CODEOWNERS file - to get that one run
+  // #!   npx convert-code-owner  thisfile.txt virtual-teams.yml > CODEOWNERS
+  // #! on this.
+  //
+  return !pLine.trimStart().startsWith("#!");
+}
+
 export function convert(
   pCodeOwnersFileAsString: string,
   pTeamMap: ITeamMap,
@@ -48,6 +59,7 @@ export function convert(
 ): string {
   return `${pGeneratedWarning}${pCodeOwnersFileAsString
     .split(EOL)
+    .filter(isNotIgnorable)
     .map(convertLine(pTeamMap))
     .join(EOL)}`;
 }

@@ -20,6 +20,7 @@
   ],
   "scripts": {
     "build": "rm -rf dist && node tools/get-version.mjs > src/version.ts && tsc",
+    "check": "npm run format && npm run build && npm run depcruise -- --no-progress && npm test",
     "depcruise": "depcruise src --config .dependency-cruiser.cjs",
     "depcruise:graph": "depcruise src --include-only '^(src)' --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html",
     "depcruise:graph:dev": "depcruise src --prefix vscode://file/$(pwd)/ --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html | browser",
@@ -28,9 +29,8 @@
     "depcruise:html": "depcruise src --config --output-type err-html --output-to dependency-violation-report.html",
     "format": "prettier --loglevel warn --write \"**/*.{md,ts,json,yml}\"",
     "scm:stage": "git add .",
-    "test": "NODE_OPTIONS=--no-warnings mocha",
-    "test:cover": "NODE_OPTIONS=--no-warnings c8 mocha",
-    "update-dependencies": "npm run upem:update && npm run upem:install && npm run format && npm run build && npm test",
+    "test": "NODE_OPTIONS=--no-warnings c8 mocha",
+    "update-dependencies": "npm run upem:update && npm run upem:install && npm run check",
     "upem-outdated": "npm outdated --json --long | upem --dry-run",
     "upem:install": "npm install",
     "upem:update": "npm outdated --json --long | upem | pbcopy && pbpaste",
@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "@types/js-yaml": "4.0.5",
+    "@types/mocha": "10.0.1",
     "@types/node": "18.14.5",
     "c8": "7.13.0",
     "dependency-cruiser": "12.10.0",

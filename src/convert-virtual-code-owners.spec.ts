@@ -51,6 +51,12 @@ tools/ @team-tgif`;
     equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 
+  it("skips lines that start with '#!'", () => {
+    const lFixture = `#!ignore this line${EOL}    #! and this as well${EOL}# but not this one${EOL}and/neither @this-one`;
+    const lExpected = `# but not this one${EOL}and/neither @this-one`;
+    equal(convert(lFixture, {}, ""), lExpected);
+  });
+
   it("adds a warning text on top when passed one", () => {
     const lFixture = "tools/shared @team-sales @team-after-sales";
     const lTeamMapFixture = {};

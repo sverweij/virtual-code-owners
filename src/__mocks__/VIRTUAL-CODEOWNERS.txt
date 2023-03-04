@@ -1,3 +1,7 @@
+#! this is not the CODEOWNERS file - to get that one run
+#!   npx virtual-code-owners VIRTUAL-CODE-OWNERS.txt virtual-teams.yml > CODEOWNERS
+#! on this.
+#!
 # catch-all to ensure there at least _is_ a code owner, even when
 # it's _everyone_
 
@@ -18,7 +22,7 @@ libs/components/ @ch/ux
 libs/ubc-sales/ @ch/sales
 libs/ubc-after-sales/ @ch/after-sales
 libs/ubc-pre-sales/ @ch/pre-sales
-
-# The VIRTUAL-CODEOWNERS.txt file has the .txt extension because untamed vscode
-# installations might otherwise interpret it as markdown and auto-correct
-# and auto-format it as such
+#!
+#! The VIRTUAL-CODEOWNERS.txt file has the .txt extension because untamed vscode
+#! installations might otherwise interpret it as markdown and auto-correct
+#! and auto-format it as such

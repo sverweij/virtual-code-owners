@@ -25,9 +25,13 @@ function convertLine(pTeamMap) {
         }
     };
 }
+function isNotIgnorable(pLine) {
+    return !pLine.trimStart().startsWith("#!");
+}
 export function convert(pCodeOwnersFileAsString, pTeamMap, pGeneratedWarning = DEFAULT_GENERATED_WARNING) {
     return `${pGeneratedWarning}${pCodeOwnersFileAsString
         .split(EOL)
+        .filter(isNotIgnorable)
         .map(convertLine(pTeamMap))
         .join(EOL)}`;
 }

@@ -52,7 +52,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run depcruise
-      - run: npm run test:cover
+      - run: npm test
       - name: emit coverage results to step summary
         if: always() && matrix.node-version == env.NODE_LATEST
         run: |

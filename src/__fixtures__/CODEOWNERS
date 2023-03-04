@@ -27,7 +27,3 @@ libs/components/ @davy-davidson-ch @john-johnson-ch @joe-dalton-ch
 libs/ubc-sales/ @gregory-gregson-ch @jane-doe-ch
 libs/ubc-after-sales/ @john-doe-ch @pete-peterson-ch @william-the-fourth-ch
 libs/ubc-pre-sales/ @jean-claude-ch @valerie-valerton-ch @averel-dalton-ch
-
-# The VIRTUAL-CODEOWNERS.txt file has the .txt extension because untamed vscode
-# installations might otherwise interpret it as markdown and auto-correct
-# and auto-format it as such
