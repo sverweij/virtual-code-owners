@@ -41,13 +41,28 @@ function convertLine(pTeamMap: ITeamMap) {
   };
 }
 
-function isNotIgnorable(pLine: string): boolean {
+function deduplicateUserNames(pLine: string): string {
+  // This is not necessary. Duplicate names work just fine. OCD is real, though.
+  const lTrimmedLine = pLine.trim();
+  const lSplitLine = lTrimmedLine.match(
+    /^(?<filesPattern>[^\s]+)(?<theRest>.*)$/
+  );
+
+  if (lTrimmedLine.startsWith("#") || !lSplitLine?.groups) {
+    return pLine;
+  }
+
+  return `${lSplitLine.groups.filesPattern} ${Array.from(
+    new Set(lSplitLine.groups.theRest.trim().split(/\s+/))
+  ).join(" ")}`;
+}
+
+function shouldAppearInResult(pLine: string): boolean {
   // You can mark comments that aren't relevant to appear in the result with
-  // a #! token.
+  // a #! token - like e.g. to write a usage message:
   //
   // #! this is not the CODEOWNERS file - to get that one run
-  // #!   npx convert-code-owner  thisfile.txt virtual-teams.yml > CODEOWNERS
-  // #! on this.
+  // #!   npx convert-code-owner
   //
   return !pLine.trimStart().startsWith("#!");
 }
@@ -59,7 +74,8 @@ export function convert(
 ): string {
   return `${pGeneratedWarning}${pCodeOwnersFileAsString
     .split(EOL)
-    .filter(isNotIgnorable)
+    .filter(shouldAppearInResult)
     .map(convertLine(pTeamMap))
+    .map(deduplicateUserNames)
     .join(EOL)}`;
 }
