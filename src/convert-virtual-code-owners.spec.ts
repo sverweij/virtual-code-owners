@@ -41,6 +41,16 @@ tools/ @team-tgif`;
     equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 
+  it("correctly replaces a team name that is a substring of another one", () => {
+    const lFixture = "tools/shared @substring";
+    const lTeamMapFixture = {
+      sub: ["jan", "pier", "tjorus"],
+      substring: ["wim", "zus", "jet"],
+    };
+    const lExpected = "tools/shared @wim @zus @jet";
+    equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
+  });
+
   it.skip("replaces team names & deduplicates usernames when there's > 1 team on the line => doesn't seem necessary; repeating usernames seem OK", () => {
     const lFixture = "tools/shared @team-sales @team-after-sales";
     const lTeamMapFixture = {
