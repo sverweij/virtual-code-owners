@@ -10,7 +10,7 @@ const DEFAULT_GENERATED_WARNING = `#${EOL}` +
 function replaceTeamNames(pLine, pTeamMap) {
     let lReturnValue = pLine;
     for (let lTeamName of Object.keys(pTeamMap)) {
-        lReturnValue = lReturnValue.replace(`@${lTeamName}`, pTeamMap[lTeamName].map((pUserName) => `@${pUserName}`).join(" "));
+        lReturnValue = lReturnValue.replace(new RegExp(`(\\s)@${lTeamName}(\\s|$)`, "g"), `$1${pTeamMap[lTeamName].map((pUserName) => `@${pUserName}`).join(" ")}$2`);
     }
     return lReturnValue;
 }
