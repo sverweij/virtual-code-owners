@@ -1,0 +1,8 @@
+#! this is not the CODEOWNERS file - to get that one run
+#!   npx virtual-code-owners
+#!
+# catch-all to ensure there at least _is_ a code owner
+* @vco-maintainers
+
+# For things in .github also the eye of the admin group is useful
+.github/ @vco-admins

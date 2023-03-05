@@ -3,8 +3,8 @@
 #
 # To make changes:
 #
-#   - edit VIRTUAL-CODEOWNERS.txt
-#   - run 'npx virtual-code-owners VIRTUAL-CODE-OWNERS.txt virtual-teams.yml > CODEOWNERS'
+#   - edit .github/VIRTUAL-CODEOWNERS.txt
+#   - run 'npx virtual-code-owners'
 #
 
 # catch-all to ensure there at least _is_ a code owner, even when
