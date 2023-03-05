@@ -19,8 +19,8 @@ function replaceTeamNames(pLine: string, pTeamMap: ITeamMap) {
 
   for (let lTeamName of Object.keys(pTeamMap)) {
     lReturnValue = lReturnValue.replace(
-      `@${lTeamName}`,
-      pTeamMap[lTeamName].map((pUserName) => `@${pUserName}`).join(" ")
+      new RegExp(`(\\s)@${lTeamName}(\\s|$)`, "g"),
+      `$1${pTeamMap[lTeamName].map((pUserName) => `@${pUserName}`).join(" ")}$2`
     );
   }
 
