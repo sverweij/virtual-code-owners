@@ -51,8 +51,8 @@ tools/ @team-tgif`;
     equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 
-  it.skip("replaces team names & deduplicates usernames when there's > 1 team on the line => doesn't seem necessary; repeating usernames seem OK", () => {
-    const lFixture = "tools/shared @team-sales @team-after-sales";
+  it("replaces team names & deduplicates usernames when there's > 1 team on the line", () => {
+    const lFixture = "tools/shared  @team-sales @team-after-sales             ";
     const lTeamMapFixture = {
       "team-sales": ["jan", "multi-teamer", "tjorus"],
       "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],

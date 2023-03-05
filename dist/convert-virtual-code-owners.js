@@ -25,13 +25,22 @@ function convertLine(pTeamMap) {
         }
     };
 }
-function isNotIgnorable(pLine) {
+function deduplicateUserNames(pLine) {
+    const lTrimmedLine = pLine.trim();
+    const lSplitLine = lTrimmedLine.match(/^(?<filesPattern>[^\s]+)(?<theRest>.*)$/);
+    if (lTrimmedLine.startsWith("#") || !lSplitLine?.groups) {
+        return pLine;
+    }
+    return `${lSplitLine.groups.filesPattern} ${Array.from(new Set(lSplitLine.groups.theRest.trim().split(/\s+/))).join(" ")}`;
+}
+function shouldAppearInResult(pLine) {
     return !pLine.trimStart().startsWith("#!");
 }
 export function convert(pCodeOwnersFileAsString, pTeamMap, pGeneratedWarning = DEFAULT_GENERATED_WARNING) {
     return `${pGeneratedWarning}${pCodeOwnersFileAsString
         .split(EOL)
-        .filter(isNotIgnorable)
+        .filter(shouldAppearInResult)
         .map(convertLine(pTeamMap))
+        .map(deduplicateUserNames)
         .join(EOL)}`;
 }
