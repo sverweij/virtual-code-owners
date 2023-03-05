@@ -5,16 +5,25 @@ This takes a
 - VIRTUAL-CODEOWNERS.txt file with (virtual) teams
 - a `virtual-teams.yml` file which define the teams
 
-... and churns out a CODEOWNERS with user names.
+... and merges them into a CODEOWNERS with user names.
 
 ## Usage
 
-- Rename your `CODEOWNERS` to `VIRTUAL-CODEOWNERS.txt` and put team names in them.
-- Specify team names that don't (yet) exist on GitHub level in a `virtual-teams.yml`
+- Rename your `.github/CODEOWNERS` to `.github/VIRTUAL-CODEOWNERS.txt` and put team names in them.
+- Specify team names that don't (yet) exist on GitHub level in a `.github/virtual-teams.yml`
 - Run this:
 
 ```
-npx virtual-code-owners VIRTUAL-CODEOWNERS.txt virtual-teams.yml > .github/CODEOWNERS
+npx virtual-code-owners
+```
+
+or, if you want to be verbose
+
+```
+npx virtual-code-owners \
+  --virtual-code-owners .github/VIRTUAL-CODEOWNERS.txt \
+  --virtual-teams .github/virtual-teams.yml \
+  --code-owners .github/CODEOWNERS
 ```
 
 ## Why?
@@ -94,7 +103,7 @@ It might be you already have a team or two defined, but just want to use
 _additional_ teams. In that case just don't specify the already-defined teams
 in `virtual-teams.yml` and _virtual-code-owners_ will leave them alone.
 
-### Can I still use usernames in `VIRTUAL-CODEOWNERS.txt`
+### Can I still use usernames in `VIRTUAL-CODEOWNERS.txt`?
 
 Yes.
 
@@ -123,3 +132,18 @@ present on text files.
 
 Apparently these editors know about CODEOWNERS, though so this auto formatting
 doesn't seem to be happening over there.
+
+### Do I have to run this each time I edit `VIRTUAL-CODEOWNERS.txt`?
+
+Yes. But please automate this for your own sake.
+
+You can for instance set up a rule for `lint-staged` in a `.lintstagedrc.json`
+like this:
+
+```json
+{
+  ".github/VIRTUAL-CODEOWNERS.txt|.github/virtual-teams.yml": [
+    "npx virtual-code-owners"
+  ]
+}
+```

@@ -4,8 +4,8 @@ const DEFAULT_GENERATED_WARNING = `#${EOL}` +
     `#${EOL}` +
     `# To make changes:${EOL}` +
     `#${EOL}` +
-    `#   - edit VIRTUAL-CODEOWNERS.txt${EOL}` +
-    `#   - run 'npx virtual-code-owners VIRTUAL-CODE-OWNERS.txt virtual-teams.yml > CODEOWNERS'${EOL}` +
+    `#   - edit .github/VIRTUAL-CODEOWNERS.txt${EOL}` +
+    `#   - run 'npx virtual-code-owners'${EOL}` +
     `#${EOL}${EOL}`;
 function replaceTeamNames(pLine, pTeamMap) {
     let lReturnValue = pLine;

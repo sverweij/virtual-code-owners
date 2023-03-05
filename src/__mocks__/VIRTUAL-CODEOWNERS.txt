@@ -1,6 +1,5 @@
 #! this is not the CODEOWNERS file - to get that one run
-#!   npx virtual-code-owners VIRTUAL-CODE-OWNERS.txt virtual-teams.yml > CODEOWNERS
-#! on this.
+#!   npx virtual-code-owners
 #!
 # catch-all to ensure there at least _is_ a code owner, even when
 # it's _everyone_
