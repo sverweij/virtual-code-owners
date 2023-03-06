@@ -16,7 +16,8 @@
   "files": [
     "dist",
     "package.json",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "rm -rf dist && ts-node --esm tools/get-version.ts > src/version.ts && tsc",
