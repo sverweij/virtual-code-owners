@@ -1,6 +1,6 @@
 {
   "name": "virtual-code-owners",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Merges a VIRTUAL-CODEOWNERS.txt and a virtual-teams.yml into CODEOWNERS",
   "type": "module",
   "exports": {
