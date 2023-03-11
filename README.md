@@ -114,14 +114,10 @@ team name and _virtual-code-owners_ will leave the real name alone.
 
 - Currently only works for _usernames_ to identify team members - not for e-mail
   addresses.
-- If people are in more than one team, chances are they get mentioned multiple
-  times on the same line if both teams are code owners of the same part of the
-  code. While maybe not _looking_ ideal, the resulting code owners file is still
-  valid & ready to rock'n roll.
 - _virtual-code-owners_ assumes the VIRTUAL-CODEOWNERS.txt is a valid CODEOWNERS
   file and the virtual-teams.yml is a valid yaml file with teams names as keys
   and team members as arrays under these. It will likely throw errors when this
-  assumption is not met, but the error-messages might not be as clear as possible.
+  assumption is not met, but the error-messages might not be cryptic.
 
 ### Why the `.txt` extension?
 
