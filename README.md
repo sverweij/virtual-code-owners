@@ -45,8 +45,8 @@ have the following choices:
 
 ### VIRTUAL-CODEOWNERS.txt
 
-`VIRTUAL_CODEOWNERS.txt` is a regular, valid GitHub [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-and-branch-protection) file.
-The only difference between VIRTUAL-CODEOWNERS and a CODEOWNERS file is that
+`VIRTUAL_CODEOWNERS.txt` is a regular, valid GitHub [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) file.
+The only difference between VIRTUAL-CODEOWNERS.txt and a CODEOWNERS file is that
 the _teams_ the former uses might not exist yet, except in a `virtual-teams.yml`.
 
 Example:
