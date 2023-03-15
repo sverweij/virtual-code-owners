@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../virtual-teams.schema.json
 ch/after-sales:
   - john-doe-ch
   - pete-peterson-ch
