@@ -1,5 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/sverweij/virtual-code-owners/main/src/virtual-teams.schema.json
 vco:
   - sverweij
 vco-admins:
   - sverweij
   - mcmeadow
+

@@ -73,6 +73,7 @@ libs/components/ @ch/ux
 A valid YAML file that contains a list of teams, with for each team its members:
 
 ```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/sverweij/virtual-code-owners/main/src/virtual-teams.schema.json
 ch/after-sales:
   - john-doe-ch
   - pete-peterson-ch
