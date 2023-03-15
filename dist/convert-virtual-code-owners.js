@@ -7,16 +7,20 @@ const DEFAULT_GENERATED_WARNING = `#${EOL}` +
     `#   - edit .github/VIRTUAL-CODEOWNERS.txt${EOL}` +
     `#   - run 'npx virtual-code-owners'${EOL}` +
     `#${EOL}${EOL}`;
-function replaceTeamNames(pLine, pTeamMap) {
-    let lReturnValue = pLine;
-    for (let lTeamName of Object.keys(pTeamMap)) {
-        lReturnValue = lReturnValue.replace(new RegExp(`(\\s)@${lTeamName}(\\s|$)`, "g"), `$1${pTeamMap[lTeamName].map((pUserName) => `@${pUserName}`).join(" ")}$2`);
-    }
-    return lReturnValue;
+export function convert(pCodeOwnersFileAsString, pTeamMap, pGeneratedWarning = DEFAULT_GENERATED_WARNING) {
+    return `${pGeneratedWarning}${pCodeOwnersFileAsString
+        .split(EOL)
+        .filter(shouldAppearInResult)
+        .map(convertLine(pTeamMap))
+        .map(deduplicateUserNames)
+        .join(EOL)}`;
+}
+function shouldAppearInResult(pLine) {
+    return !pLine.trimStart().startsWith("#!");
 }
 function convertLine(pTeamMap) {
     return (pUntreatedLine) => {
-        const lTrimmedLine = pUntreatedLine.trimStart();
+        const lTrimmedLine = pUntreatedLine.trim();
         if (lTrimmedLine.startsWith("#") || lTrimmedLine === "") {
             return pUntreatedLine;
         }
@@ -25,6 +29,16 @@ function convertLine(pTeamMap) {
         }
     };
 }
+function replaceTeamNames(pLine, pTeamMap) {
+    let lReturnValue = pLine;
+    for (let lTeamName of Object.keys(pTeamMap)) {
+        lReturnValue = lReturnValue.replace(new RegExp(`(\\s)@${lTeamName}(\\s|$)`, "g"), `$1${stringifyTeamMembers(pTeamMap, lTeamName)}$2`);
+    }
+    return lReturnValue;
+}
+function stringifyTeamMembers(pTeamMap, pTeamName) {
+    return pTeamMap[pTeamName].map((pUserName) => `@${pUserName}`).join(" ");
+}
 function deduplicateUserNames(pLine) {
     const lTrimmedLine = pLine.trim();
     const lSplitLine = lTrimmedLine.match(/^(?<filesPattern>[^\s]+)(?<theRest>.*)$/);
@@ -32,15 +46,4 @@ function deduplicateUserNames(pLine) {
         return pLine;
     }
     return `${lSplitLine.groups.filesPattern} ${Array.from(new Set(lSplitLine.groups.theRest.trim().split(/\s+/))).join(" ")}`;
-}
-function shouldAppearInResult(pLine) {
-    return !pLine.trimStart().startsWith("#!");
-}
-export function convert(pCodeOwnersFileAsString, pTeamMap, pGeneratedWarning = DEFAULT_GENERATED_WARNING) {
-    return `${pGeneratedWarning}${pCodeOwnersFileAsString
-        .split(EOL)
-        .filter(shouldAppearInResult)
-        .map(convertLine(pTeamMap))
-        .map(deduplicateUserNames)
-        .join(EOL)}`;
 }
