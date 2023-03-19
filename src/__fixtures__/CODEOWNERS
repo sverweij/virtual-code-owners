@@ -20,11 +20,11 @@
 # generic stuff
 
 apps/framework @luke-the-lucky-ch
-apps/ux-portal/ @davy-davidson-ch @john-johnson-ch @joe-dalton-ch @luke-the-lucky-ch
-libs/components/ @davy-davidson-ch @john-johnson-ch @joe-dalton-ch
+apps/ux-portal/ @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @luke-the-lucky-ch
+libs/components/ @davy-davidson-ch @joe-dalton-ch @john-johnson-ch
 
 # specific functionality
 
 libs/ubc-sales/ @gregory-gregson-ch @jane-doe-ch
 libs/ubc-after-sales/ @john-doe-ch @pete-peterson-ch @william-the-fourth-ch
-libs/ubc-pre-sales/ @jean-claude-ch @valerie-valerton-ch @averel-dalton-ch
+libs/ubc-pre-sales/ @averel-dalton-ch @jean-claude-ch @valerie-valerton-ch

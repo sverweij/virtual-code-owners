@@ -86,5 +86,7 @@ function deduplicateUserNames(pTrimmedLine: string): string {
 
   return `${lSplitLine.groups.filesPattern}${Array.from(
     new Set(lSplitLine.groups.userNames.trim().split(/\s+/))
-  ).join(" ")}`;
+  )
+    .sort()
+    .join(" ")}`;
 }

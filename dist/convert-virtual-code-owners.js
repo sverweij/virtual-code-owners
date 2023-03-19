@@ -50,5 +50,7 @@ function deduplicateUserNames(pTrimmedLine) {
     if (pTrimmedLine.startsWith("#") || !lSplitLine?.groups) {
         return pTrimmedLine;
     }
-    return `${lSplitLine.groups.filesPattern}${Array.from(new Set(lSplitLine.groups.userNames.trim().split(/\s+/))).join(" ")}`;
+    return `${lSplitLine.groups.filesPattern}${Array.from(new Set(lSplitLine.groups.userNames.trim().split(/\s+/)))
+        .sort()
+        .join(" ")}`;
 }

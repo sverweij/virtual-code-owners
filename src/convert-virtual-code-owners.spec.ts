@@ -23,7 +23,7 @@ tools/ @team-tgif`;
     const lExpected = `# here's a comment
 * @everyone
 # regular functionality
-libs/sales @jan @pier @tjorus @korneel @the-cat
+libs/sales @jan @korneel @pier @the-cat @tjorus
 libs/after-sales @team-after-sales
 
 # tooling maintained by a rag tag band of 20% friday afternooners
@@ -37,7 +37,7 @@ tools/ @team-tgif`;
       "team-sales": ["jan", "pier", "tjorus"],
       "team-after-sales": ["wim", "zus", "jet"],
     };
-    const lExpected = "tools/shared @jan @pier @tjorus @wim @zus @jet";
+    const lExpected = "tools/shared @jan @jet @pier @tjorus @wim @zus";
     equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 
@@ -47,7 +47,7 @@ tools/ @team-tgif`;
       sub: ["jan", "pier", "tjorus"],
       substring: ["wim", "zus", "jet"],
     };
-    const lExpected = "tools/shared @wim @zus @jet";
+    const lExpected = "tools/shared @jet @wim @zus";
     equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 
@@ -57,7 +57,7 @@ tools/ @team-tgif`;
       "team-sales": ["jan", "multi-teamer", "tjorus"],
       "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],
     };
-    const lExpected = "tools/shared @jan @multi-teamer @tjorus @wim @zus @jet";
+    const lExpected = "tools/shared @jan @jet @multi-teamer @tjorus @wim @zus";
     equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 
@@ -67,7 +67,7 @@ tools/ @team-tgif`;
       "team-sales": ["jan", "multi-teamer", "tjorus"],
       "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],
     };
-    const lExpected = "@team-sales @multi-teamer @wim @zus @jet";
+    const lExpected = "@team-sales @jet @multi-teamer @wim @zus";
     equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 
@@ -79,7 +79,7 @@ tools/ @team-tgif`;
       "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],
     };
     const lExpected =
-      "tools/shared     @jan @multi-teamer @tjorus @wim @zus @jet";
+      "tools/shared     @jan @jet @multi-teamer @tjorus @wim @zus";
     equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 
@@ -100,11 +100,19 @@ tools/ @team-tgif`;
   });
 
   it("adds a warning text on top when passed one", () => {
-    const lFixture = "tools/shared @team-sales @team-after-sales";
+    const lFixture = "tools/shared @team-after-sales @team-sales";
     const lTeamMapFixture = {};
     const lWarningText = `# warning - generated, do not edit${EOL}`;
     const lExpected = `${lWarningText}${lFixture}`;
 
     equal(convert(lFixture, lTeamMapFixture, lWarningText), lExpected);
+  });
+  it("sorts the usernames in place", () => {
+    const lFixture = "tools/shared @team-unsorted";
+    const lTeamMapFixture = {
+      "team-unsorted": ["zus", "jan", "tjorus", "teun", "jet", "gijs"],
+    };
+    const lExpected = "tools/shared @gijs @jan @jet @teun @tjorus @zus";
+    equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 });
