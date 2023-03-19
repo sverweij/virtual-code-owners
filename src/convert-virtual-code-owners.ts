@@ -13,6 +13,7 @@ const DEFAULT_GENERATED_WARNING =
   `#   - edit .github/VIRTUAL-CODEOWNERS.txt${EOL}` +
   `#   - run 'npx virtual-code-owners'${EOL}` +
   `#${EOL}${EOL}`;
+const LINE_PATTERN = /^(?<filesPattern>[^\s]+\s+)(?<userNames>.*)$/;
 
 export function convert(
   pCodeOwnersFileAsString: string,
@@ -32,7 +33,7 @@ function shouldAppearInResult(pLine: string): boolean {
   // a #! token - like e.g. to write a usage message:
   //
   // #! this is not the CODEOWNERS file - to get that one run
-  // #!   npx convert-code-owner
+  // #!   npx virtual-code-owners
   //
   return !pLine.trimStart().startsWith("#!");
 }
@@ -46,40 +47,43 @@ function convertLine(pTeamMap: ITeamMap) {
       return pUntreatedLine;
     } else {
       // replace known team names with the names from the teams
-      return replaceTeamNames(pUntreatedLine, pTeamMap);
+      return replaceTeamNames(lTrimmedLine, pTeamMap);
     }
   };
 }
 
-function replaceTeamNames(pLine: string, pTeamMap: ITeamMap) {
-  let lReturnValue = pLine;
+function replaceTeamNames(pTrimmedLine: string, pTeamMap: ITeamMap) {
+  const lSplitLine = pTrimmedLine.match(LINE_PATTERN);
+
+  if (!lSplitLine?.groups) {
+    return pTrimmedLine;
+  }
+
+  let lUserNames = lSplitLine.groups.userNames.trim();
 
   for (let lTeamName of Object.keys(pTeamMap)) {
-    lReturnValue = lReturnValue.replace(
-      new RegExp(`(\\s)@${lTeamName}(\\s|$)`, "g"),
+    lUserNames = lUserNames.replace(
+      new RegExp(`(\\s|^)@${lTeamName}(\\s|$)`, "g"),
       `$1${stringifyTeamMembers(pTeamMap, lTeamName)}$2`
     );
   }
-
-  return lReturnValue;
+  return `${lSplitLine.groups.filesPattern}${lUserNames}`;
 }
 
 function stringifyTeamMembers(pTeamMap: ITeamMap, pTeamName: string): string {
   return pTeamMap[pTeamName].map((pUserName) => `@${pUserName}`).join(" ");
 }
 
-function deduplicateUserNames(pLine: string): string {
-  // This is not necessary. Duplicate names work just fine. OCD is real, though.
-  const lTrimmedLine = pLine.trim();
-  const lSplitLine = lTrimmedLine.match(
-    /^(?<filesPattern>[^\s]+)(?<theRest>.*)$/
-  );
+function deduplicateUserNames(pTrimmedLine: string): string {
+  // De-duplicating usernames is not necessary. Duplicate names work just fine.
+  // OCD is real, though.
+  const lSplitLine = pTrimmedLine.match(LINE_PATTERN);
 
-  if (lTrimmedLine.startsWith("#") || !lSplitLine?.groups) {
-    return pLine;
+  if (pTrimmedLine.startsWith("#") || !lSplitLine?.groups) {
+    return pTrimmedLine;
   }
 
-  return `${lSplitLine.groups.filesPattern} ${Array.from(
-    new Set(lSplitLine.groups.theRest.trim().split(/\s+/))
+  return `${lSplitLine.groups.filesPattern}${Array.from(
+    new Set(lSplitLine.groups.userNames.trim().split(/\s+/))
   ).join(" ")}`;
 }
