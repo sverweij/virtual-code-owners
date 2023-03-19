@@ -5,6 +5,7 @@ const DEFAULT_GENERATED_WARNING = `#${EOL}` +
     `# To make changes:${EOL}` +
     `#${EOL}` +
     `#   - edit .github/VIRTUAL-CODEOWNERS.txt${EOL}` +
+    `#   - and/ or add team members to .github/virtual-teams.yml${EOL}` +
     `#   - run 'npx virtual-code-owners'${EOL}` +
     `#${EOL}${EOL}`;
 const LINE_PATTERN = /^(?<filesPattern>[^\s]+\s+)(?<userNames>.*)$/;

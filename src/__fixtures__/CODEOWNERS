@@ -4,6 +4,7 @@
 # To make changes:
 #
 #   - edit .github/VIRTUAL-CODEOWNERS.txt
+#   - and/ or add team members to .github/virtual-teams.yml
 #   - run 'npx virtual-code-owners'
 #
 
