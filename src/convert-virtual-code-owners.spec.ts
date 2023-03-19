@@ -52,12 +52,44 @@ tools/ @team-tgif`;
   });
 
   it("replaces team names & deduplicates usernames when there's > 1 team on the line", () => {
-    const lFixture = "tools/shared  @team-sales @team-after-sales             ";
+    const lFixture = "tools/shared @team-sales @team-after-sales             ";
     const lTeamMapFixture = {
       "team-sales": ["jan", "multi-teamer", "tjorus"],
       "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],
     };
     const lExpected = "tools/shared @jan @multi-teamer @tjorus @wim @zus @jet";
+    equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
+  });
+
+  it("does not replace file names that happen to be a team name as well", () => {
+    const lFixture = "@team-sales @team-after-sales";
+    const lTeamMapFixture = {
+      "team-sales": ["jan", "multi-teamer", "tjorus"],
+      "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],
+    };
+    const lExpected = "@team-sales @multi-teamer @wim @zus @jet";
+    equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
+  });
+
+  it("retains spaces between filenames and user names", () => {
+    const lFixture =
+      "tools/shared     @team-sales @team-after-sales             ";
+    const lTeamMapFixture = {
+      "team-sales": ["jan", "multi-teamer", "tjorus"],
+      "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],
+    };
+    const lExpected =
+      "tools/shared     @jan @multi-teamer @tjorus @wim @zus @jet";
+    equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
+  });
+
+  it("leaves lines that don't have the filesPattern & usernames pattern alone", () => {
+    const lFixture = "tools/shared";
+    const lTeamMapFixture = {
+      "team-sales": ["jan", "multi-teamer", "tjorus"],
+      "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],
+    };
+    const lExpected = "tools/shared";
     equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 
