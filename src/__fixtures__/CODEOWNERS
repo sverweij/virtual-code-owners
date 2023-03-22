@@ -13,18 +13,19 @@
 
 * @cloud-heroes-all
 
-# admin & ci shizzle => transversal
+# admin & ci stuff => transversal
 
-.github/ @luke-the-lucky-ch
+.github/                @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
 
 # generic stuff
 
-apps/framework @luke-the-lucky-ch
-apps/ux-portal/ @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @luke-the-lucky-ch
-libs/components/ @davy-davidson-ch @joe-dalton-ch @john-johnson-ch
+apps/framework/         @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
+apps/ux-portal/         @abraham-lincoln @benjamin-franklin @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
+libs/components/        @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets
 
 # specific functionality
 
-libs/ubc-sales/ @gregory-gregson-ch @jane-doe-ch
-libs/ubc-after-sales/ @john-doe-ch @pete-peterson-ch @william-the-fourth-ch
-libs/ubc-pre-sales/ @averel-dalton-ch @jean-claude-ch @valerie-valerton-ch
+libs/ubc-sales/         @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-charleston-ch @dagny-taggert-ch @gregory-gregson-ch @jane-doe-ch @karl-marx-ch
+libs/ubc-after-sales/   @daisy-duck @donald-duck @john-doe-ch @pete-peterson-ch @william-the-fourth-ch
+libs/ubc-pre-sales/     @averel-dalton-ch @jean-claude-ch @john-galt-ch @valerie-valerton-ch
+libs/ubc-refund/        @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-charleston-ch @dagny-taggert-ch @daisy-duck @donald-duck @gregory-gregson-ch @jane-doe-ch @john-doe-ch @karl-marx-ch @pete-peterson-ch @william-the-fourth-ch

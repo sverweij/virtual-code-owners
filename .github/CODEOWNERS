@@ -4,6 +4,7 @@
 # To make changes:
 #
 #   - edit .github/VIRTUAL-CODEOWNERS.txt
+#   - and/ or add team members to .github/virtual-teams.yml
 #   - run 'npx virtual-code-owners'
 #
 
@@ -11,4 +12,4 @@
 *        @sverweij
 
 # For things in .github also the eye of the admin group is useful
-.github/ @sverweij @mcmeadow
+.github/ @mcmeadow @sverweij

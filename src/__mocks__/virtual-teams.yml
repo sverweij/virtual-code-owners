@@ -3,16 +3,31 @@ ch/after-sales:
   - john-doe-ch
   - pete-peterson-ch
   - william-the-fourth-ch
+  - daisy-duck
+  - donald-duck
 ch/sales:
   - gregory-gregson-ch
   - jane-doe-ch
+  - abraham-ableton-ch
+  - boris-bubbleblower-ch
+  - charlotte-charleston-ch
+  - dagny-taggert-ch
+  - karl-marx-ch
 ch/pre-sales:
   - jean-claude-ch
   - valerie-valerton-ch
   - averel-dalton-ch
+  - john-galt-ch
 ch/ux:
   - davy-davidson-ch
   - john-johnson-ch
   - joe-dalton-ch
+  - koos-koets
+  - charlotte-de-bourbon-ch
 ch/transversal:
+  - mary-the-merry-ch
   - luke-the-lucky-ch
+  - naomi-the-namegiver-ch
+  - benjamin-franklin
+  - koos-koets
+  - abraham-lincoln
