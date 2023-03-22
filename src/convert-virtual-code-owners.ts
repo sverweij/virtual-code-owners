@@ -47,11 +47,7 @@ function convertLine(pTeamMap: ITeamMap) {
       /^(?<filesPattern>[^\s]+\s+)(?<userNames>.*)$/
     );
 
-    if (
-      lTrimmedLine.startsWith("#") ||
-      lTrimmedLine === "" ||
-      !lSplitLine?.groups
-    ) {
+    if (lTrimmedLine.startsWith("#") || !lSplitLine?.groups) {
       return pUntreatedLine;
     }
     const lUserNames = replaceTeamNames(lSplitLine.groups.userNames, pTeamMap);

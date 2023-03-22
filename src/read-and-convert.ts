@@ -6,16 +6,13 @@ export function readAndConvert(
   pVirtualCodeOwnersFileName: string,
   pVirtualTeamsFileName: string
 ) {
-  const lVirtualCodeOwnersFileAsAString = readFileSync(
-    pVirtualCodeOwnersFileName,
-    {
-      encoding: "utf-8",
-    }
-  );
-  const lVirtualTeamsYamlAsAString = readFileSync(pVirtualTeamsFileName, {
+  const lVirtualCodeOwnersAsAString = readFileSync(pVirtualCodeOwnersFileName, {
     encoding: "utf-8",
   });
-  const lTeamMap = yaml.load(lVirtualTeamsYamlAsAString) as ITeamMap;
+  const lVirtualTeamsAsAString = readFileSync(pVirtualTeamsFileName, {
+    encoding: "utf-8",
+  });
+  const lTeamMap = yaml.load(lVirtualTeamsAsAString) as ITeamMap;
 
-  return convert(lVirtualCodeOwnersFileAsAString, lTeamMap);
+  return convert(lVirtualCodeOwnersAsAString, lTeamMap);
 }
