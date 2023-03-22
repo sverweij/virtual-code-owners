@@ -4,7 +4,7 @@ export interface ITeamMap {
   [teamName: string]: string[];
 }
 
-const DEFAULT_GENERATED_WARNING =
+const DEFAULT_WARNING =
   `#${EOL}` +
   `# DO NOT EDIT - this file is generated and your edits will be overwritten${EOL}` +
   `#${EOL}` +
@@ -14,19 +14,20 @@ const DEFAULT_GENERATED_WARNING =
   `#   - and/ or add team members to .github/virtual-teams.yml${EOL}` +
   `#   - run 'npx virtual-code-owners'${EOL}` +
   `#${EOL}${EOL}`;
-const LINE_PATTERN = /^(?<filesPattern>[^\s]+\s+)(?<userNames>.*)$/;
 
 export function convert(
   pCodeOwnersFileAsString: string,
   pTeamMap: ITeamMap,
-  pGeneratedWarning: string = DEFAULT_GENERATED_WARNING
+  pGeneratedWarning: string = DEFAULT_WARNING
 ): string {
-  return `${pGeneratedWarning}${pCodeOwnersFileAsString
-    .split(EOL)
-    .filter(shouldAppearInResult)
-    .map(convertLine(pTeamMap))
-    .map(deduplicateUserNames)
-    .join(EOL)}`;
+  return (
+    pGeneratedWarning +
+    pCodeOwnersFileAsString
+      .split(EOL)
+      .filter(shouldAppearInResult)
+      .map(convertLine(pTeamMap))
+      .join(EOL)
+  );
 }
 
 function shouldAppearInResult(pLine: string): boolean {
@@ -42,51 +43,40 @@ function shouldAppearInResult(pLine: string): boolean {
 function convertLine(pTeamMap: ITeamMap) {
   return (pUntreatedLine: string): string => {
     const lTrimmedLine = pUntreatedLine.trim();
+    const lSplitLine = lTrimmedLine.match(
+      /^(?<filesPattern>[^\s]+\s+)(?<userNames>.*)$/
+    );
 
-    if (lTrimmedLine.startsWith("#") || lTrimmedLine === "") {
-      // leave comments & empty lines alone
+    if (
+      lTrimmedLine.startsWith("#") ||
+      lTrimmedLine === "" ||
+      !lSplitLine?.groups
+    ) {
       return pUntreatedLine;
-    } else {
-      // replace known team names with the names from the teams
-      return replaceTeamNames(lTrimmedLine, pTeamMap);
     }
+    const lUserNames = replaceTeamNames(lSplitLine.groups.userNames, pTeamMap);
+    return lSplitLine.groups.filesPattern + uniqAndSortUserNames(lUserNames);
   };
 }
 
-function replaceTeamNames(pTrimmedLine: string, pTeamMap: ITeamMap) {
-  const lSplitLine = pTrimmedLine.match(LINE_PATTERN);
-
-  if (!lSplitLine?.groups) {
-    return pTrimmedLine;
-  }
-
-  let lUserNames = lSplitLine.groups.userNames.trim();
+function replaceTeamNames(pUserNames: string, pTeamMap: ITeamMap) {
+  let lReturnValue = pUserNames;
 
   for (let lTeamName of Object.keys(pTeamMap)) {
-    lUserNames = lUserNames.replace(
+    lReturnValue = lReturnValue.replace(
       new RegExp(`(\\s|^)@${lTeamName}(\\s|$)`, "g"),
       `$1${stringifyTeamMembers(pTeamMap, lTeamName)}$2`
     );
   }
-  return `${lSplitLine.groups.filesPattern}${lUserNames}`;
+  return lReturnValue;
 }
 
 function stringifyTeamMembers(pTeamMap: ITeamMap, pTeamName: string): string {
   return pTeamMap[pTeamName].map((pUserName) => `@${pUserName}`).join(" ");
 }
 
-function deduplicateUserNames(pTrimmedLine: string): string {
-  // De-duplicating usernames is not necessary. Duplicate names work just fine.
-  // OCD is real, though.
-  const lSplitLine = pTrimmedLine.match(LINE_PATTERN);
-
-  if (pTrimmedLine.startsWith("#") || !lSplitLine?.groups) {
-    return pTrimmedLine;
-  }
-
-  return `${lSplitLine.groups.filesPattern}${Array.from(
-    new Set(lSplitLine.groups.userNames.trim().split(/\s+/))
-  )
+function uniqAndSortUserNames(pUserNames: string): string {
+  return Array.from(new Set(pUserNames.split(/\s+/)))
     .sort()
-    .join(" ")}`;
+    .join(" ");
 }
