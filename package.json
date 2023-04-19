@@ -22,12 +22,12 @@
   "scripts": {
     "build": "rm -rf dist && ts-node --esm tools/get-version.ts > src/version.ts && tsc",
     "check": "npm run format && npm run build && npm run depcruise -- --no-progress && npm test",
-    "depcruise": "depcruise src tools --config .dependency-cruiser.cjs",
-    "depcruise:graph": "depcruise src --include-only '^(src)' --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html",
-    "depcruise:graph:dev": "depcruise src --prefix vscode://file/$(pwd)/ --config --output-type dot | dot -T svg | depcruise-wrap-stream-in-html | browser",
-    "depcruise:graph:diff:dev": "depcruise src --prefix vscode://file/$(pwd)/ --config --output-type dot --reaches \"$(watskeburt $SHA -T regex)\"| dot -T svg | depcruise-wrap-stream-in-html | browser",
-    "depcruise:graph:diff:mermaid": "depcruise src tools --config --output-type mermaid --output-to - --reaches \"$(watskeburt $SHA -T regex)\"",
-    "depcruise:html": "depcruise src tools --config --output-type err-html --output-to dependency-violation-report.html",
+    "depcruise": "depcruise src tools",
+    "depcruise:graph": "depcruise src --include-only '^(src)' --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html",
+    "depcruise:graph:dev": "depcruise src --prefix vscode://file/$(pwd)/ --output-type dot | dot -T svg | depcruise-wrap-stream-in-html | browser",
+    "depcruise:graph:diff:dev": "depcruise src --prefix vscode://file/$(pwd)/ --output-type dot --reaches \"$(watskeburt $SHA -T regex)\"| dot -T svg | depcruise-wrap-stream-in-html | browser",
+    "depcruise:graph:diff:mermaid": "depcruise src tools --output-type mermaid --output-to - --reaches \"$(watskeburt $SHA -T regex)\"",
+    "depcruise:html": "depcruise src tools --output-type err-html --output-to dependency-violation-report.html",
     "format": "prettier --loglevel warn --write \"**/*.{md,ts,json,yml}\"",
     "prepare": "husky install",
     "scm:stage": "git add .",
@@ -56,7 +56,7 @@
     "@types/mocha": "10.0.1",
     "@types/node": "18.15.11",
     "c8": "7.13.0",
-    "dependency-cruiser": "12.11.1",
+    "dependency-cruiser": "^13.0.0-beta-2",
     "husky": "8.0.3",
     "lint-staged": "13.2.1",
     "mocha": "10.2.0",
@@ -69,6 +69,15 @@
   "dependencies": {
     "commander": "10.0.1",
     "js-yaml": "4.1.0"
+  },
+  "upem": {
+    "policies": [
+      {
+        "package": "dependency-cruiser",
+        "policy": "wanted",
+        "because": "we're beta testing dependency-cruiser v13 and the _latest_ policy would bump down to v12 again"
+      }
+    ]
   },
   "engines": {
     "node": "^14.13.1||^16||>=18"

@@ -1,8 +1,8 @@
-const yaml = require("js-yaml");
-const { readFileSync } = require("node:fs");
+import yaml from "js-yaml";
+import { readFileSync } from "node:fs";
 
 /** @type {import('dependency-cruiser').IConfiguration} */
-module.exports = {
+export default {
   forbidden: yaml.load(
     readFileSync("./tools/dependency-cruiser-config/rules.yml", "utf-8")
   ),
