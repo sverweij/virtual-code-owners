@@ -64,7 +64,7 @@
     "ts-node": "10.9.1",
     "typescript": "5.0.4",
     "upem": "7.3.2",
-    "watskeburt": "0.10.1"
+    "watskeburt": "0.10.2"
   },
   "dependencies": {
     "commander": "10.0.0",
