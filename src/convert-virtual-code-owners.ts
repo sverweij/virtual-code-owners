@@ -44,14 +44,18 @@ function convertLine(pTeamMap: ITeamMap) {
   return (pUntreatedLine: string): string => {
     const lTrimmedLine = pUntreatedLine.trim();
     const lSplitLine = lTrimmedLine.match(
-      /^(?<filesPattern>[^\s]+\s+)(?<userNames>.*)$/
+      /^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/
     );
 
     if (lTrimmedLine.startsWith("#") || !lSplitLine?.groups) {
       return pUntreatedLine;
     }
     const lUserNames = replaceTeamNames(lSplitLine.groups.userNames, pTeamMap);
-    return lSplitLine.groups.filesPattern + uniqAndSortUserNames(lUserNames);
+    return (
+      lSplitLine.groups.filesPattern +
+      lSplitLine.groups.spaces +
+      uniqAndSortUserNames(lUserNames)
+    );
   };
 }
 
