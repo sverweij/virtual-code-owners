@@ -20,7 +20,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "rm -rf dist && ts-node --esm tools/get-version.ts > src/version.ts && tsc",
+    "build": "rm -rf dist && node --no-warnings --loader ts-node/esm tools/get-version.ts > src/version.ts && tsc",
     "check": "npm run format && npm run build && npm run depcruise -- --no-progress && npm test",
     "depcruise": "depcruise src tools",
     "depcruise:graph": "depcruise src --include-only '^(src)' --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html",
@@ -80,6 +80,6 @@
     ]
   },
   "engines": {
-    "node": "^14.13.1||^16||>=18"
+    "node": "^16.14||>=18"
   }
 }
