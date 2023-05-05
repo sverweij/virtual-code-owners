@@ -22,12 +22,14 @@ function shouldAppearInResult(pLine) {
 function convertLine(pTeamMap) {
     return (pUntreatedLine) => {
         const lTrimmedLine = pUntreatedLine.trim();
-        const lSplitLine = lTrimmedLine.match(/^(?<filesPattern>[^\s]+\s+)(?<userNames>.*)$/);
+        const lSplitLine = lTrimmedLine.match(/^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/);
         if (lTrimmedLine.startsWith("#") || !lSplitLine?.groups) {
             return pUntreatedLine;
         }
         const lUserNames = replaceTeamNames(lSplitLine.groups.userNames, pTeamMap);
-        return lSplitLine.groups.filesPattern + uniqAndSortUserNames(lUserNames);
+        return (lSplitLine.groups.filesPattern +
+            lSplitLine.groups.spaces +
+            uniqAndSortUserNames(lUserNames));
     };
 }
 function replaceTeamNames(pUserNames, pTeamMap) {
