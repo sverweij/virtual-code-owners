@@ -1,6 +1,7 @@
 {
-  ".github/VIRTUAL-CODEOWNERS.txt|.github/virtual-teams.yml": [
-    "node dist/cli.js"
+  ".github/{VIRTUAL-CODEOWNERS.txt,virtual-teams.yml}": [
+    "node dist/cli.js",
+    "git add ."
   ],
   "{workflows,src,tools}/**/*.{js,cjs,ts,json,md,yml}|*.{json,cjs,md}": [
     "prettier --write"

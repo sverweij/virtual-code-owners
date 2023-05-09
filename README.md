@@ -193,8 +193,9 @@ like this:
 
 ```json
 {
-  ".github/VIRTUAL-CODEOWNERS.txt|.github/virtual-teams.yml": [
-    "npx virtual-code-owners"
+  ".github/{VIRTUAL-CODEOWNERS.txt,virtual-teams.yml}": [
+    "virtual-code-owners",
+    "git add ."
   ]
 }
 ```

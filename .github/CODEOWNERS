@@ -9,7 +9,8 @@
 #
 
 # catch-all to ensure there at least _is_ a code owner
-*        @sverweij
+*         @sverweij
 
 # For things in .github also the eye of the admin group is useful
-.github/ @mcmeadow @sverweij
+.github/  @mcmeadow @sverweij
+tools/    @mcmeadow @sverweij
