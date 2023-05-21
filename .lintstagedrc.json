@@ -1,5 +1,5 @@
 {
-  ".github/{VIRTUAL-CODEOWNERS.txt,virtual-teams.yml}": [
+  ".github/{VIRTUAL-CODEOWNERS.txt,virtual-teams.yml,CODEOWNERS}": [
     "node dist/cli.js",
     "git add ."
   ],

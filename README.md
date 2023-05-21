@@ -21,9 +21,9 @@ or, if you want to be verbose
 
 ```
 npx virtual-code-owners \
-  --virtual-code-owners .github/VIRTUAL-CODEOWNERS.txt \
-  --virtual-teams       .github/virtual-teams.yml \
-  --code-owners         .github/CODEOWNERS
+  --virtualCodeOwners .github/VIRTUAL-CODEOWNERS.txt \
+  --virtualTeams      .github/virtual-teams.yml \
+  --codeOwners        .github/CODEOWNERS
 ```
 
 ## Why?
