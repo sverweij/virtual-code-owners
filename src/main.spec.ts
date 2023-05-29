@@ -1,7 +1,8 @@
 import { match } from "node:assert";
 import { main } from "./main.js";
+import { Writable } from "node:stream";
 
-class WritableTestStream extends WritableStream {
+class WritableTestStream extends Writable {
   expected = /^$/;
 
   constructor(pExpected?: RegExp) {
@@ -20,9 +21,7 @@ describe("main", () => {
   it("shows the version number when asked for", () => {
     let lOutStream = new WritableTestStream(/^[0-9]+\.[0-9]+\.[0-9]+(-.+)?\n$/);
     let lErrStream = new WritableTestStream();
-    // @ts-expect-error can't assign WritableTestSTream to WriteStream
     main(["-V"], lOutStream, lErrStream);
-    // @ts-expect-error can't assign WritableTestSTream to WriteStream
     main(["--version"], lOutStream, lErrStream);
   });
 
@@ -31,9 +30,7 @@ describe("main", () => {
       /^Usage: virtual-code-owners \[options\].*/
     );
     let lErrStream = new WritableTestStream();
-    // @ts-expect-error can't assign WritableTestSTream to WriteStream
     main(["-h"], lOutStream, lErrStream);
-    // @ts-expect-error can't assign WritableTestSTream to WriteStream
     main(["--help"], lOutStream, lErrStream);
   });
 
@@ -42,14 +39,12 @@ describe("main", () => {
     let lErrStream = new WritableTestStream(
       /.*ERROR:.*'--thisArgumentDoesNotExist'.*/
     );
-    // @ts-expect-error can't assign WritableTestSTream to WriteStream
     main(["--thisArgumentDoesNotExist"], lOutStream, lErrStream);
   });
 
   it("shows an error when passed a non-existing file", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(/.*ERROR: ENOENT:.*/);
-    // @ts-expect-error can't assign WritableTestSTream to WriteStream
     main(["-v", "this-file-does-not-exist.txt"], lOutStream, lErrStream);
   });
 
@@ -70,7 +65,6 @@ describe("main", () => {
         "positional",
         "arguments",
       ],
-      // @ts-expect-error can't assign WritableTestSTream to WriteStream
       lOutStream,
       lErrStream
     );

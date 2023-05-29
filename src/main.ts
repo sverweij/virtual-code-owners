@@ -3,6 +3,7 @@ import { readAndConvert } from "./read-and-convert.js";
 import { writeFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { parseArgs } from "node:util";
+import { type Writable } from "node:stream";
 
 interface IOptions {
   virtualCodeOwners: string;
@@ -29,8 +30,8 @@ Options:
 
 export function main(
   pArguments: string[] = process.argv.slice(2),
-  pOutStream: NodeJS.WriteStream = process.stdout,
-  pErrorStream: NodeJS.WriteStream = process.stderr
+  pOutStream: Writable = process.stdout,
+  pErrorStream: Writable = process.stderr
 ) {
   try {
     let lOptions = getOptions(pArguments);
