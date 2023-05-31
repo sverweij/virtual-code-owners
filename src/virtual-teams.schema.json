@@ -1,14 +1,15 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "virtual teams schema for virtual-code-owners",
-  "description": "lalala",
-  "$id": "org.js.virtual-code-owners/2.2.0",
+  "description": "a list of teams and their team members",
+  "$id": "org.js.virtual-code-owners/4.1.0",
   "type": "object",
   "additionalProperties": {
     "type": "array",
     "items": {
       "type": "string",
-      "description": "User name of a team member (don't prefix with '@')"
+      "description": "Username or e-mail address of a team member. (Don't prefix usernames with '@')",
+      "pattern": "^[^@].+$"
     }
   }
 }
