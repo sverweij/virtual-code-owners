@@ -22,6 +22,7 @@ ch/ux:
   - davy-davidson-ch
   - john-johnson-ch
   - joe-dalton-ch
+  - korneel@example.com
   - koos-koets
   - charlotte-de-bourbon-ch
 ch/transversal:
@@ -31,3 +32,8 @@ ch/transversal:
   - benjamin-franklin
   - koos-koets
   - abraham-lincoln
+ch/mannen-met-baarden:
+  - jan@example.com
+  - pier@example.com
+  - tjorus@example.com
+  - korneel@example.com

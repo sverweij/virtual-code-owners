@@ -20,8 +20,8 @@
 # generic stuff
 
 apps/framework/         @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
-apps/ux-portal/         @abraham-lincoln @benjamin-franklin @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
-libs/components/        @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets
+apps/ux-portal/         @abraham-lincoln @benjamin-franklin @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch korneel@example.com
+libs/components/        @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets korneel@example.com
 
 # specific functionality
 
@@ -29,3 +29,4 @@ libs/ubc-sales/         @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-ch
 libs/ubc-after-sales/   @daisy-duck @donald-duck @john-doe-ch @pete-peterson-ch @william-the-fourth-ch
 libs/ubc-pre-sales/     @averel-dalton-ch @jean-claude-ch @john-galt-ch @valerie-valerton-ch
 libs/ubc-refund/        @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-charleston-ch @dagny-taggert-ch @daisy-duck @donald-duck @gregory-gregson-ch @jane-doe-ch @john-doe-ch @karl-marx-ch @pete-peterson-ch @william-the-fourth-ch
+libs/ubc-baarden/       jan@example.com korneel@example.com pier@example.com tjorus@example.com

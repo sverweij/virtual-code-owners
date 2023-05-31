@@ -22,6 +22,7 @@ libs/ubc-sales/         @ch/sales
 libs/ubc-after-sales/   @ch/after-sales
 libs/ubc-pre-sales/     @ch/pre-sales
 libs/ubc-refund/        @ch/sales @ch/after-sales
+libs/ubc-baarden/       @ch/mannen-met-baarden
 #!
 #! The VIRTUAL-CODEOWNERS.txt file has the .txt extension because untamed vscode
 #! installations might otherwise interpret it as markdown and auto-correct

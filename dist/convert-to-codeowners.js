@@ -40,7 +40,16 @@ function replaceTeamNames(pUserNames, pTeamMap) {
     return lReturnValue;
 }
 function stringifyTeamMembers(pTeamMap, pTeamName) {
-    return pTeamMap[pTeamName].map((pUserName) => `@${pUserName}`).join(" ");
+    return pTeamMap[pTeamName]
+        .map((pUserName) => userNameToCodeOwner(pUserName))
+        .join(" ");
+}
+function userNameToCodeOwner(pUserName) {
+    const lEmailIshUsernameRE = /^.+@.+$/;
+    if (pUserName.match(lEmailIshUsernameRE)) {
+        return pUserName;
+    }
+    return `@${pUserName}`;
 }
 function uniqAndSortUserNames(pUserNames) {
     return Array.from(new Set(pUserNames.split(/\s+/)))
