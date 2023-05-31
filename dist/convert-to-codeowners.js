@@ -40,9 +40,7 @@ function replaceTeamNames(pUserNames, pTeamMap) {
     return lReturnValue;
 }
 function stringifyTeamMembers(pTeamMap, pTeamName) {
-    return pTeamMap[pTeamName]
-        .map((pUserName) => userNameToCodeOwner(pUserName))
-        .join(" ");
+    return pTeamMap[pTeamName].map(userNameToCodeOwner).join(" ");
 }
 function userNameToCodeOwner(pUserName) {
     const lEmailIshUsernameRE = /^.+@.+$/;

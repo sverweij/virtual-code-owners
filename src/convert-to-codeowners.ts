@@ -72,9 +72,7 @@ function replaceTeamNames(pUserNames: string, pTeamMap: ITeamMap) {
 }
 
 function stringifyTeamMembers(pTeamMap: ITeamMap, pTeamName: string): string {
-  return pTeamMap[pTeamName]
-    .map((pUserName) => userNameToCodeOwner(pUserName))
-    .join(" ");
+  return pTeamMap[pTeamName].map(userNameToCodeOwner).join(" ");
 }
 
 function userNameToCodeOwner(pUserName: string): string {
