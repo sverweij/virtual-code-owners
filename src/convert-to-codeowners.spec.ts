@@ -1,6 +1,6 @@
 import { equal } from "node:assert";
 import { EOL } from "node:os";
-import { convert, ITeamMap } from "./convert-virtual-code-owners.js";
+import { convert, ITeamMap } from "./convert-to-codeowners.js";
 
 describe("convert-virtual-code-owners converts", () => {
   const lCodeOwners = `# here's a comment
@@ -48,6 +48,21 @@ tools/ @team-tgif`;
       substring: ["wim", "zus", "jet"],
     };
     const lExpected = "tools/shared @jet @wim @zus";
+    equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
+  });
+
+  it("correctly replaces both user names and e-mail addresses", () => {
+    const lFixture = "tools/shared @team-with-user-names-and-mail-addresses";
+    const lTeamMapFixture = {
+      "team-with-user-names-and-mail-addresses": [
+        "jan",
+        "pier@example.com",
+        "tjorus",
+        "korneel@example.com",
+      ],
+    };
+    const lExpected =
+      "tools/shared @jan @tjorus korneel@example.com pier@example.com";
     equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 

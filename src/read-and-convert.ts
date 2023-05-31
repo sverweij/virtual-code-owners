@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import yaml from "js-yaml";
-import { convert, type ITeamMap } from "./convert-virtual-code-owners.js";
+import { convert, type ITeamMap } from "./convert-to-codeowners.js";
 
 export function readAndConvert(
   pVirtualCodeOwnersFileName: string,

@@ -62,6 +62,7 @@ libs/ubc-sales/         @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-ch
 libs/ubc-after-sales/   @daisy-duck @donald-duck @john-doe-ch @pete-peterson-ch @william-the-fourth-ch
 libs/ubc-pre-sales/     @averel-dalton-ch @jean-claude-ch @john-galt-ch @valerie-valerton-ch
 libs/ubc-refund/        @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-charleston-ch @dagny-taggert-ch @daisy-duck @donald-duck @gregory-gregson-ch @jane-doe-ch @john-doe-ch @karl-marx-ch @pete-peterson-ch @william-the-fourth-ch
+libs/ubc-baarden/       jan@example.com korneel@example.com pier@example.com tjorus@example.com
 ```
 
 This is where `virtual-code-owners` comes in.
@@ -104,6 +105,7 @@ libs/ubc-sales/         @ch/sales
 libs/ubc-after-sales/   @ch/after-sales
 libs/ubc-pre-sales/     @ch/pre-sales
 libs/ubc-refund/        @ch/sales @ch/after-sales
+libs/ubc-baarden/       @ch/mannen-met-baarden
 ```
 
 ### virtual-teams.yml
@@ -167,8 +169,9 @@ team name and _virtual-code-owners_ will leave the real name alone.
 
 ### Any limitations I should know of?
 
-- Currently only works for _usernames_ to identify team members - not for e-mail
-  addresses.
+- ~~Currently only works for _user names_ to identify team members - not for e-mail
+  addresses.~~
+  Works with both user names and e-mail addresses
 - _virtual-code-owners_ assumes the VIRTUAL-CODEOWNERS.txt is a valid CODEOWNERS
   file and the virtual-teams.yml is a valid yaml file with teams names as keys
   and team members as arrays under these. It will likely throw errors when this
@@ -178,7 +181,7 @@ team name and _virtual-code-owners_ will leave the real name alone.
 
 Various editors assume an ALL_CAPS file name with `#` characters on various lines
 to be markdown, and will auto format them as such - making for either very ugly
-or in worst cases invalid CODOWNERS files. Usually such autoformatting is not
+or in worst cases invalid CODEOWNERS files. Usually such autoformatting is not
 present on text files.
 
 Apparently these editors know about CODEOWNERS, though so this auto formatting

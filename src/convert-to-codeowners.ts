@@ -72,7 +72,17 @@ function replaceTeamNames(pUserNames: string, pTeamMap: ITeamMap) {
 }
 
 function stringifyTeamMembers(pTeamMap: ITeamMap, pTeamName: string): string {
-  return pTeamMap[pTeamName].map((pUserName) => `@${pUserName}`).join(" ");
+  return pTeamMap[pTeamName]
+    .map((pUserName) => userNameToCodeOwner(pUserName))
+    .join(" ");
+}
+
+function userNameToCodeOwner(pUserName: string): string {
+  const lEmailIshUsernameRE = /^.+@.+$/;
+  if (pUserName.match(lEmailIshUsernameRE)) {
+    return pUserName;
+  }
+  return `@${pUserName}`;
 }
 
 function uniqAndSortUserNames(pUserNames: string): string {
