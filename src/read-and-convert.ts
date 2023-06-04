@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import yaml from "js-yaml";
+import { parse } from "yaml";
 import { convert, type ITeamMap } from "./convert-to-codeowners.js";
 
 export function readAndConvert(
@@ -12,7 +12,7 @@ export function readAndConvert(
   const lVirtualTeamsAsAString = readFileSync(pVirtualTeamsFileName, {
     encoding: "utf-8",
   });
-  const lTeamMap = yaml.load(lVirtualTeamsAsAString) as ITeamMap;
+  const lTeamMap = parse(lVirtualTeamsAsAString) as ITeamMap;
 
   return convert(lVirtualCodeOwnersAsAString, lTeamMap);
 }

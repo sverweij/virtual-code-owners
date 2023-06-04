@@ -52,7 +52,6 @@
     "url": "https://github.com/sverweij/virtual-code-owners/issues"
   },
   "devDependencies": {
-    "@types/js-yaml": "4.0.5",
     "@types/mocha": "10.0.1",
     "@types/node": "20.2.5",
     "c8": "7.14.0",
@@ -67,7 +66,7 @@
     "watskeburt": "0.11.3"
   },
   "dependencies": {
-    "js-yaml": "4.1.0"
+    "yaml": "2.3.1"
   },
   "engines": {
     "node": "^16.19.0||^18.11.0||>=20.0.0"
