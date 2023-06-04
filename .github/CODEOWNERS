@@ -1,0 +1,16 @@
+#
+# DO NOT EDIT - this file is generated and your edits will be overwritten
+#
+# To make changes:
+#
+#   - edit .github/VIRTUAL-CODEOWNERS.txt
+#   - and/ or add team members to .github/virtual-teams.yml
+#   - run 'npx virtual-code-owners'
+#
+
+# catch-all to ensure there at least _is_ a code owner
+*         @sverweij
+
+# For things in .github also the eye of the admin group is useful
+.github/  @mcmeadow @sverweij
+tools/    @mcmeadow @sverweij
