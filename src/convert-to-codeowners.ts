@@ -1,8 +1,7 @@
 import { EOL } from "node:os";
-
-export interface ITeamMap {
-  [teamName: string]: string[];
-}
+import { isEmailIshUsername } from "./utensils.js";
+import { parse, type ICSTLine, type IUser } from "./parse.js";
+import { type ITeamMap } from "./types.js";
 
 const DEFAULT_WARNING =
   `#${EOL}` +
@@ -20,71 +19,47 @@ export function convert(
   pTeamMap: ITeamMap,
   pGeneratedWarning: string = DEFAULT_WARNING
 ): string {
+  const lCST = parse(pCodeOwnersFileAsString, pTeamMap);
+
   return (
     pGeneratedWarning +
-    pCodeOwnersFileAsString
-      .split(EOL)
-      .filter(shouldAppearInResult)
-      .map(convertLine(pTeamMap))
+    lCST
+      .filter((pLine) => pLine.type !== "ignorable-comment")
+      .map((pLine) => convertLine(pLine, pTeamMap))
       .join(EOL)
   );
 }
 
-function shouldAppearInResult(pLine: string): boolean {
-  // You can mark comments that aren't relevant to appear in the result with
-  // a #! token - like e.g. to write a usage message:
-  //
-  // #! this is not the CODEOWNERS file - to get that one run
-  // #!   npx virtual-code-owners
-  //
-  return !pLine.trimStart().startsWith("#!");
-}
-
-function convertLine(pTeamMap: ITeamMap) {
-  return (pUntreatedLine: string): string => {
-    const lTrimmedLine = pUntreatedLine.trim();
-    const lSplitLine = lTrimmedLine.match(
-      /^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/
-    );
-
-    if (lTrimmedLine.startsWith("#") || !lSplitLine?.groups) {
-      return pUntreatedLine;
-    }
-    const lUserNames = replaceTeamNames(lSplitLine.groups.userNames, pTeamMap);
-    return (
-      lSplitLine.groups.filesPattern +
-      lSplitLine.groups.spaces +
-      uniqAndSortUserNames(lUserNames)
-    );
-  };
-}
-
-function replaceTeamNames(pUserNames: string, pTeamMap: ITeamMap) {
-  let lReturnValue = pUserNames;
-
-  for (let lTeamName of Object.keys(pTeamMap)) {
-    lReturnValue = lReturnValue.replace(
-      new RegExp(`(\\s|^)@${lTeamName}(\\s|$)`, "g"),
-      `$1${stringifyTeamMembers(pTeamMap, lTeamName)}$2`
-    );
+function convertLine(pCSTLine: ICSTLine, pTeamMap: ITeamMap): string {
+  if (pCSTLine.type === "rule") {
+    const lUserNames = uniq(
+      pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap))
+    )
+      .sort()
+      .join(" ");
+    return pCSTLine.filesPattern + pCSTLine.spaces + lUserNames;
   }
-  return lReturnValue;
+  return pCSTLine.raw;
 }
 
-function stringifyTeamMembers(pTeamMap: ITeamMap, pTeamName: string): string {
-  return pTeamMap[pTeamName].map(userNameToCodeOwner).join(" ");
+function expandTeamToUserNames(pUser: IUser, pTeamMap: ITeamMap): string[] {
+  if (pUser.type == "virtual-team-name") {
+    return stringifyTeamMembers(pTeamMap, pUser.raw.slice(1));
+  }
+  return [pUser.raw];
+}
+
+function stringifyTeamMembers(pTeamMap: ITeamMap, pTeamName: string): string[] {
+  return pTeamMap[pTeamName].map(userNameToCodeOwner);
 }
 
 function userNameToCodeOwner(pUserName: string): string {
-  const lEmailIshUsernameRE = /^.+@.+$/;
-  if (pUserName.match(lEmailIshUsernameRE)) {
+  if (isEmailIshUsername(pUserName)) {
     return pUserName;
   }
   return `@${pUserName}`;
 }
 
-function uniqAndSortUserNames(pUserNames: string): string {
-  return Array.from(new Set(pUserNames.split(/\s+/)))
-    .sort()
-    .join(" ");
+function uniq(pUserNames: string[]): string[] {
+  return Array.from(new Set(pUserNames));
 }

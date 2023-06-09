@@ -51,6 +51,16 @@ tools/ @team-tgif`;
     equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
   });
 
+  it("leaves e-mail addresses in the virtual-codeowners.txt alone", () => {
+    const lFixture = "tools/shared @substring korneel@example.com";
+    const lTeamMapFixture = {
+      sub: ["jan", "pier", "tjorus"],
+      substring: ["wim", "zus", "jet"],
+    };
+    const lExpected = "tools/shared @jet @wim @zus korneel@example.com";
+    equal(convert(lFixture, lTeamMapFixture, ""), lExpected);
+  });
+
   it("correctly replaces both user names and e-mail addresses", () => {
     const lFixture = "tools/shared @team-with-user-names-and-mail-addresses";
     const lTeamMapFixture = {

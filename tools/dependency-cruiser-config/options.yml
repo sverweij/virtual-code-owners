@@ -18,6 +18,7 @@ enhancedResolveOptions:
   extensions:
     - ".cjs"
     - ".ts"
+    - ".d.ts"
 reporterOptions:
   dot:
     collapsePattern: node_modules/[^/]+
