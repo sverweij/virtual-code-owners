@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { parse } from "yaml";
-import { convert } from "./convert-to-codeowners.js";
+import { convert } from "./generate-codeowners.js";
 import { type ITeamMap } from "./types.js";
 
 export function readAndConvert(

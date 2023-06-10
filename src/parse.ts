@@ -5,11 +5,13 @@ import { EOL } from "node:os";
 export type ICST = ICSTLine[];
 export type ICSTLine = IBoringCSTLine | IInterestingCSTLine;
 interface IBoringCSTLine {
-  type: "comment" | "ignorable-comment" | "unknown";
+  type: "comment" | "ignorable-comment" | "empty" | "unknown";
+  line: number;
   raw: string;
 }
 interface IInterestingCSTLine {
   type: "rule";
+  line: number;
   filesPattern: string;
   spaces: string;
   users: IUser[];
@@ -27,27 +29,37 @@ export function parse(
 ): ICST {
   return pVirtualCodeOwnersAsString
     .split(EOL)
-    .map((pUntreatedLine) => parseLine(pUntreatedLine, pTeamMap));
+    .map((pUntreatedLine, pLineNo) =>
+      parseLine(pUntreatedLine, pTeamMap, pLineNo + 1)
+    );
 }
 
-function parseLine(pUntreatedLine: string, pTeamMap: ITeamMap): ICSTLine {
+function parseLine(
+  pUntreatedLine: string,
+  pTeamMap: ITeamMap,
+  pLineNo: number
+): ICSTLine {
   const lTrimmedLine = pUntreatedLine.trim();
   const lSplitLine = lTrimmedLine.match(
     /^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/
   );
 
   if (lTrimmedLine.startsWith("#!")) {
-    return { type: "ignorable-comment", raw: pUntreatedLine };
+    return { type: "ignorable-comment", line: pLineNo, raw: pUntreatedLine };
   }
   if (lTrimmedLine.startsWith("#")) {
-    return { type: "comment", raw: pUntreatedLine };
+    return { type: "comment", line: pLineNo, raw: pUntreatedLine };
   }
   if (!lSplitLine?.groups) {
-    return { type: "unknown", raw: pUntreatedLine };
+    if (lTrimmedLine === "") {
+      return { type: "empty", line: pLineNo, raw: pUntreatedLine };
+    }
+    return { type: "unknown", line: pLineNo, raw: pUntreatedLine };
   }
 
   return {
     type: "rule",
+    line: pLineNo,
     filesPattern: lSplitLine.groups.filesPattern,
     spaces: lSplitLine.groups.spaces,
     users: parseUsers(lSplitLine.groups.userNames, pTeamMap),

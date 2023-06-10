@@ -1,0 +1,10 @@
+[
+  {
+    type: "rule",
+    line: 1,
+    filesPattern: "*",
+    spaces: " ",
+    users: [{ type: "virtual-team-name", raw: "@baarden" }],
+    raw: "* @baarden",
+  },
+]

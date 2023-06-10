@@ -1,8 +1,9 @@
 import { equal } from "node:assert";
 import { EOL } from "node:os";
-import { convert, ITeamMap } from "./convert-to-codeowners.js";
+import { convert } from "./generate-codeowners.js";
+import type { ITeamMap } from "./types.js";
 
-describe("convert-virtual-code-owners converts", () => {
+describe("generate-codeowners generates CODEOWNERS", () => {
   const lCodeOwners = `# here's a comment
 * @everyone
 # regular functionality
