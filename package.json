@@ -6,12 +6,12 @@
   "exports": {
     ".": [
       {
-        "import": "./dist/read-and-convert.js"
+        "import": "./dist/parse-and-generate.js"
       },
-      "./dist/read-and-convert.js"
+      "./dist/parse-and-generate.js"
     ]
   },
-  "main": "dist/read-and-convert.js",
+  "main": "dist/parse-and-generate.js",
   "bin": "dist/cli.js",
   "files": [
     "dist",
