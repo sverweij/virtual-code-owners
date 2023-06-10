@@ -12,7 +12,7 @@ export function generate(
   let lReturnValue = "";
   for (const lTeamName in pTeamMap) {
     const lPatternsForTeam = getPatternsForTeam(pCodeOwners, lTeamName)
-      .map((pPattern) => `  - ${yamlEscape(pPattern)}${EOL}`)
+      .map((pPattern) => `  - ${transformForYamlAndMinimatch(pPattern)}${EOL}`)
       .join("");
 
     if (lPatternsForTeam) {
@@ -41,17 +41,39 @@ function getPatternsForTeam(
   );
 }
 
-function yamlEscape(pUnescapedString: string): string {
-  let lReturnValue = pUnescapedString;
-  if (pUnescapedString === "*") {
+function transformForYamlAndMinimatch(pOriginalString: string): string {
+  let lReturnValue = pOriginalString;
+
+  // as documented in CODEOWNERS "*" means all files
+  // similarly in minimatch "*" means all files _in the root folder only_
+  // all files over there is "**" so ...
+  if (pOriginalString === "*") {
     lReturnValue = "**";
   }
+
+  // naked, unquoted "*" apparently mean something different in yaml then just
+  // the string "*" (yarn parsers & validators will loudly howl if you enter
+  // them naked).
+  // Something similar seems to go for values _starting_ with "*"
+  // Quoted they're, OK, though so that's what we'll do:
   if (lReturnValue.startsWith("*")) {
     lReturnValue = `'${lReturnValue}'`;
   }
-  if (pUnescapedString.endsWith("/")) {
+
+  // in CODEOWNERS a file pattern like src/bla/ means 'everything
+  // starting with "src/bla/"'. In minimatch it means 'everything
+  // equal to "src/bla/"'. If you want to convey the original meaning minimatch-
+  // wise you'd use "src/bla/**". So that's what we'll do.
+  //
+  // TODO: This does leave things like "src/bla" in the dark, though. Maybe
+  // just treat these the same?
+  if (pOriginalString.endsWith("/")) {
     lReturnValue = `${lReturnValue}**`;
   }
+
+  // TODO: These transformations cover my current _known_ use cases,
+  // but are these _all_ anomalies? Does a conversion lib for this exist maybe?
+
   return lReturnValue;
 }
 
