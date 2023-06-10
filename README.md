@@ -202,3 +202,18 @@ like this:
   ]
 }
 ```
+
+### It'd be _pretty_ handy if I could for which virtual teams a PR is. For instance with a bunch of labels. How do I go about that?
+
+You can use the [actions/labeler](https://github.com/actions/labeler) action for
+for this. Maintaining the configuration file (`.github/labeler.yml) and keeping it
+sync with the virtual-teams and virtual code-owners files manually is a bit of
+a chore, though, so `virtual-code-owners` also has an option to automate that.
+
+```sh
+npx virtual-code-owners --emitLabeler
+# Wrote .github/CODEOWNERS AND .github/labeler.yml
+```
+
+If you have an alternate file location for the `labeler.yml` you can specify that
+with virtual-code-owner's `--labelerLocation` parameter.
