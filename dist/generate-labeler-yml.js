@@ -3,7 +3,7 @@ export function generate(pCodeOwners, pTeamMap) {
     let lReturnValue = "";
     for (const lTeamName in pTeamMap) {
         const lPatternsForTeam = getPatternsForTeam(pCodeOwners, lTeamName)
-            .map((pPattern) => `  - ${yamlEscape(pPattern)}${EOL}`)
+            .map((pPattern) => `  - ${transformForYamlAndMinimatch(pPattern)}${EOL}`)
             .join("");
         if (lPatternsForTeam) {
             lReturnValue += `${lTeamName}:${EOL}${lPatternsForTeam}${EOL}`;
@@ -20,15 +20,15 @@ function getPatternsForTeam(pCodeOwners, pTeamName) {
     })
         .map((pLine) => pLine.filesPattern));
 }
-function yamlEscape(pUnescapedString) {
-    let lReturnValue = pUnescapedString;
-    if (pUnescapedString === "*") {
+function transformForYamlAndMinimatch(pOriginalString) {
+    let lReturnValue = pOriginalString;
+    if (pOriginalString === "*") {
         lReturnValue = "**";
     }
     if (lReturnValue.startsWith("*")) {
         lReturnValue = `'${lReturnValue}'`;
     }
-    if (pUnescapedString.endsWith("/")) {
+    if (pOriginalString.endsWith("/")) {
         lReturnValue = `${lReturnValue}**`;
     }
     return lReturnValue;
