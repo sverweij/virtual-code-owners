@@ -1,5 +1,6 @@
 import { VERSION } from "./version.js";
-import generate from "./parse-and-generate.js";
+import parseAndGenerateCodeOwners from "./parse-and-generate.js";
+import parseAndGenerateLabelerYml from "./parse-and-generate-labeler-yml.js";
 import { writeFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { parseArgs } from "node:util";
@@ -29,11 +30,20 @@ export function main(pArguments = process.argv.slice(2), pOutStream = process.st
             pOutStream.write(`${VERSION}${EOL}`);
             return;
         }
-        const lCodeOwnersContent = generate(lOptions.virtualCodeOwners, lOptions.virtualTeams);
+        const lCodeOwnersContent = parseAndGenerateCodeOwners(lOptions.virtualCodeOwners, lOptions.virtualTeams);
         writeFileSync(lOptions.codeOwners, lCodeOwnersContent, {
             encoding: "utf-8",
         });
-        pErrorStream.write(`${EOL}Wrote ${lOptions.codeOwners}${EOL}${EOL}`);
+        if (lOptions.emitLabeler) {
+            const lLabelerContent = parseAndGenerateLabelerYml(lOptions.virtualCodeOwners, lOptions.virtualTeams);
+            writeFileSync(lOptions.labelerLocation, lLabelerContent, {
+                encoding: "utf-8",
+            });
+            pErrorStream.write(`${EOL}Wrote ${lOptions.codeOwners} AND ${lOptions.labelerLocation}${EOL}${EOL}`);
+        }
+        else {
+            pErrorStream.write(`${EOL}Wrote ${lOptions.codeOwners}${EOL}${EOL}`);
+        }
     }
     catch (pError) {
         pErrorStream.write(`${EOL}ERROR: ${pError.message}${EOL}${EOL}`);
@@ -58,6 +68,15 @@ function getOptions(pArguments) {
                 type: "string",
                 short: "c",
                 default: ".github/CODEOWNERS",
+            },
+            emitLabeler: {
+                type: "boolean",
+                short: "l",
+                default: false,
+            },
+            labelerLocation: {
+                type: "string",
+                default: ".github/labeler.yml",
             },
             help: { type: "boolean", short: "h", default: false },
             version: { type: "boolean", short: "V", default: false },
