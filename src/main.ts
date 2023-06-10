@@ -53,6 +53,10 @@ export function main(
       return;
     }
 
+    // TODO the parseAndGenerate* methods do approximately the same.
+    //      Also if we ever (like in the next PR ...) want to use the
+    //      parse result for validation, we have to pull that in here.
+    //      When next touching this => refactor
     const lCodeOwnersContent = parseAndGenerateCodeOwners(
       lOptions.virtualCodeOwners,
       lOptions.virtualTeams
