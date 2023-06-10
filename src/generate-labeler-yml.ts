@@ -12,7 +12,7 @@ export function generate(
   let lReturnValue = "";
   for (const lTeamName in pTeamMap) {
     const lPatternsForTeam = getPatternsForTeam(pCodeOwners, lTeamName)
-      .map((pPattern) => `- ${yamlEscape(pPattern)}${EOL}`)
+      .map((pPattern) => `  - ${yamlEscape(pPattern)}${EOL}`)
       .join("");
 
     if (lPatternsForTeam) {
