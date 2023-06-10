@@ -31,9 +31,10 @@ function parseLine(pUntreatedLine, pTeamMap, pLineNo) {
 }
 function parseUsers(pUserNamesString, pTeamMap) {
     const lUserNames = pUserNamesString.split(/\s+/);
-    return lUserNames.map((pUserName) => {
+    return lUserNames.map((pUserName, pIndex) => {
         return {
             type: getUserNameType(pUserName, pTeamMap),
+            userNumberOnLine: pIndex + 1,
             bareName: getBareUserName(pUserName),
             raw: pUserName,
         };

@@ -5,7 +5,14 @@
     filesPattern: "*",
     spaces: " ",
     users:
-      [{ type: "other-user-or-team", raw: "@everyone", bareName: "everyone" }],
+      [
+        {
+          type: "other-user-or-team",
+          raw: "@everyone",
+          bareName: "everyone",
+          "userNumberWithinLine": 1,
+        },
+      ],
     raw: "* @everyone",
   },
 ]

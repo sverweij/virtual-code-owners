@@ -54,22 +54,28 @@ function parseLine(
 
 function parseUsers(pUserNamesString: string, pTeamMap: ITeamMap): IUser[] {
   const lUserNames = pUserNamesString.split(/\s+/);
-  return lUserNames.map((pUserName) => {
+  return lUserNames.map((pUserName, pIndex) => {
+    const lBareName = getBareUserName(pUserName);
     return {
-      type: getUserNameType(pUserName, pTeamMap),
-      bareName: getBareUserName(pUserName),
+      type: getUserNameType(pUserName, lBareName, pTeamMap),
+      userNumberWithinLine: pIndex + 1,
+      bareName: lBareName,
       raw: pUserName,
     };
   });
 }
 
-function getUserNameType(pUserName: string, pTeamMap: ITeamMap): UserType {
+function getUserNameType(
+  pUserName: string,
+  pBareName: string,
+  pTeamMap: ITeamMap
+): UserType {
   if (isEmailIshUsername(pUserName)) {
     return "e-mail-address";
   }
 
   if (pUserName.startsWith("@")) {
-    if (pTeamMap.hasOwnProperty(getBareUserName(pUserName))) {
+    if (pTeamMap.hasOwnProperty(pBareName)) {
       return "virtual-team-name";
     }
     return "other-user-or-team";

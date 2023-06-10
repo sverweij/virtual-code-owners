@@ -24,6 +24,7 @@ export type UserType =
   | "invalid";
 export type IUser = {
   type: UserType;
+  userNumberWithinLine: number;
   bareName: string;
   raw: string;
 };
