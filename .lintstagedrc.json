@@ -1,6 +1,6 @@
 {
   ".github/{VIRTUAL-CODEOWNERS.txt,virtual-teams.yml,CODEOWNERS}": [
-    "node dist/cli.js",
+    "node dist/cli.js --emitLabeler -- ",
     "git add ."
   ],
   "{workflows,src,tools}/**/*.{js,cjs,ts,json,md,yml}|*.{json,cjs,md}": [
