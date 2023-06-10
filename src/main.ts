@@ -1,5 +1,5 @@
 import { VERSION } from "./version.js";
-import { readAndConvert } from "./read-and-convert.js";
+import generate from "./parse-and-generate.js";
 import { writeFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { parseArgs } from "node:util";
@@ -45,7 +45,7 @@ export function main(
       return;
     }
 
-    const lCodeOwnersContent = readAndConvert(
+    const lCodeOwnersContent = generate(
       lOptions.virtualCodeOwners,
       lOptions.virtualTeams
     );

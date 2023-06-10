@@ -1,0 +1,18 @@
+[
+  {
+    type: "rule",
+    line: 1,
+    filesPattern: "*",
+    spaces: " ",
+    users:
+      [
+        {
+          type: "e-mail-address",
+          raw: "jan@example.com",
+          bareName: "jan@example.com",
+          userNumberWithinLine: 1,
+        },
+      ],
+    raw: "* jan@example.com",
+  },
+]

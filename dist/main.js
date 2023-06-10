@@ -1,5 +1,5 @@
 import { VERSION } from "./version.js";
-import { readAndConvert } from "./read-and-convert.js";
+import generate from "./parse-and-generate.js";
 import { writeFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { parseArgs } from "node:util";
@@ -29,7 +29,7 @@ export function main(pArguments = process.argv.slice(2), pOutStream = process.st
             pOutStream.write(`${VERSION}${EOL}`);
             return;
         }
-        const lCodeOwnersContent = readAndConvert(lOptions.virtualCodeOwners, lOptions.virtualTeams);
+        const lCodeOwnersContent = generate(lOptions.virtualCodeOwners, lOptions.virtualTeams);
         writeFileSync(lOptions.codeOwners, lCodeOwnersContent, {
             encoding: "utf-8",
         });

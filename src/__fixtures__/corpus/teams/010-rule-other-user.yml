@@ -1,0 +1,18 @@
+[
+  {
+    type: "rule",
+    line: 1,
+    filesPattern: "*",
+    spaces: " ",
+    users:
+      [
+        {
+          type: "other-user-or-team",
+          raw: "@everyone",
+          bareName: "everyone",
+          userNumberWithinLine: 1,
+        },
+      ],
+    raw: "* @everyone",
+  },
+]

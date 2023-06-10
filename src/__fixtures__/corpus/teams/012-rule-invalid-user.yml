@@ -1,0 +1,18 @@
+[
+  {
+    type: "rule",
+    line: 1,
+    filesPattern: "*",
+    spaces: " ",
+    users:
+      [
+        {
+          type: "invalid",
+          raw: "username-does-not-start-with-an-at",
+          bareName: "username-does-not-start-with-an-at",
+          userNumberWithinLine: 1,
+        },
+      ],
+    raw: "* username-does-not-start-with-an-at",
+  },
+]
