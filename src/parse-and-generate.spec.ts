@@ -6,7 +6,7 @@ import generate from "./parse-and-generate.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-describe("reads and converts", () => {
+describe("parses and generates", () => {
   it("returns a CODEOWNERS as a string when passed file names of valid virtual code owners & virtual teams", () => {
     equal(
       generate(

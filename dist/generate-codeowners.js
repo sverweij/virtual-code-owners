@@ -13,10 +13,10 @@ export function generate(pVirtualCodeOwners, pTeamMap, pGeneratedWarning = DEFAU
     return (pGeneratedWarning +
         pVirtualCodeOwners
             .filter((pLine) => pLine.type !== "ignorable-comment")
-            .map((pLine) => convertLine(pLine, pTeamMap))
+            .map((pLine) => generateLine(pLine, pTeamMap))
             .join(EOL));
 }
-function convertLine(pCSTLine, pTeamMap) {
+function generateLine(pCSTLine, pTeamMap) {
     if (pCSTLine.type === "rule") {
         const lUserNames = uniq(pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)))
             .sort()

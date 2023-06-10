@@ -27,12 +27,12 @@ export function generate(
     pGeneratedWarning +
     pVirtualCodeOwners
       .filter((pLine) => pLine.type !== "ignorable-comment")
-      .map((pLine) => convertLine(pLine, pTeamMap))
+      .map((pLine) => generateLine(pLine, pTeamMap))
       .join(EOL)
   );
 }
 
-function convertLine(
+function generateLine(
   pCSTLine: IVirtualCodeOwnerLine,
   pTeamMap: ITeamMap
 ): string {
