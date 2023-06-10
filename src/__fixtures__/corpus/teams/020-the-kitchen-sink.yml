@@ -19,7 +19,8 @@
     raw: "*       @baarden",
     spaces: "       ",
     type: "rule",
-    users: [{ raw: "@baarden", type: "virtual-team-name" }],
+    users:
+      [{ raw: "@baarden", type: "virtual-team-name", bareName: "baarden" }],
   },
   { line: 8, raw: "", type: "empty" },
   { line: 9, raw: "# admin & ci stuff => transversal", type: "comment" },
@@ -30,7 +31,14 @@
     raw: ".github/                @ch/transversal",
     spaces: "                ",
     type: "rule",
-    users: [{ raw: "@ch/transversal", type: "other-user-or-team" }],
+    users:
+      [
+        {
+          raw: "@ch/transversal",
+          type: "other-user-or-team",
+          bareName: "ch/transversal",
+        },
+      ],
   },
   { line: 12, raw: "", type: "empty" },
   { line: 13, raw: "# generic stuff", type: "comment" },
@@ -43,8 +51,16 @@
     type: "rule",
     users:
       [
-        { raw: "@leren-lezen", type: "virtual-team-name" },
-        { raw: "framework@example.com", type: "e-mail-address" },
+        {
+          raw: "@leren-lezen",
+          type: "virtual-team-name",
+          bareName: "leren-lezen",
+        },
+        {
+          raw: "framework@example.com",
+          type: "e-mail-address",
+          bareName: "framework@example.com",
+        },
       ],
   },
   {
@@ -55,8 +71,12 @@
     type: "rule",
     users:
       [
-        { raw: "@ch/ux", type: "other-user-or-team" },
-        { raw: "@ch/transversal", type: "other-user-or-team" },
+        { raw: "@ch/ux", type: "other-user-or-team", bareName: "ch/ux" },
+        {
+          raw: "@ch/transversal",
+          type: "other-user-or-team",
+          bareName: "ch/transversal",
+        },
       ],
   },
   {
@@ -65,7 +85,7 @@
     raw: "libs/components/        @ch/ux",
     spaces: "        ",
     type: "rule",
-    users: [{ raw: "@ch/ux", type: "other-user-or-team" }],
+    users: [{ raw: "@ch/ux", type: "other-user-or-team", bareName: "ch/ux" }],
   },
   { line: 18, raw: "", type: "empty" },
   { line: 19, raw: "# specific functionality", type: "comment" },
@@ -76,7 +96,8 @@
     raw: "libs/ubc-sales/         @ch/sales",
     spaces: "         ",
     type: "rule",
-    users: [{ raw: "@ch/sales", type: "other-user-or-team" }],
+    users:
+      [{ raw: "@ch/sales", type: "other-user-or-team", bareName: "ch/sales" }],
   },
   {
     filesPattern: "libs/ubc-after-sales/",
@@ -84,7 +105,14 @@
     raw: "libs/ubc-after-sales/   @ch/after-sales",
     spaces: "   ",
     type: "rule",
-    users: [{ raw: "@ch/after-sales", type: "other-user-or-team" }],
+    users:
+      [
+        {
+          raw: "@ch/after-sales",
+          type: "other-user-or-team",
+          bareName: "ch/after-sales",
+        },
+      ],
   },
   {
     filesPattern: "libs/ubc-pre-sales/",
@@ -92,7 +120,14 @@
     raw: "libs/ubc-pre-sales/     @ch/pre-sales",
     spaces: "     ",
     type: "rule",
-    users: [{ raw: "@ch/pre-sales", type: "other-user-or-team" }],
+    users:
+      [
+        {
+          raw: "@ch/pre-sales",
+          type: "other-user-or-team",
+          bareName: "ch/pre-sales",
+        },
+      ],
   },
   {
     filesPattern: "libs/ubc-refund/",
@@ -102,8 +137,12 @@
     type: "rule",
     users:
       [
-        { raw: "@ch/sales", type: "other-user-or-team" },
-        { raw: "@ch/after-sales", type: "other-user-or-team" },
+        { raw: "@ch/sales", type: "other-user-or-team", bareName: "ch/sales" },
+        {
+          raw: "@ch/after-sales",
+          type: "other-user-or-team",
+          bareName: "ch/after-sales",
+        },
       ],
   },
   {
@@ -112,7 +151,8 @@
     raw: "libs/ubc-baarden/       @baarden",
     spaces: "       ",
     type: "rule",
-    users: [{ raw: "@baarden", type: "virtual-team-name" }],
+    users:
+      [{ raw: "@baarden", type: "virtual-team-name", bareName: "baarden" }],
   },
   { line: 26, raw: "#!", type: "ignorable-comment" },
   {

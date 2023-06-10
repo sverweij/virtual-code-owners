@@ -1,6 +1,11 @@
 import { EOL } from "node:os";
 import { isEmailIshUsername } from "./utensils.js";
-import type { ITeamMap, ICSTLine, IUser, ICST } from "./types.js";
+import type {
+  ITeamMap,
+  IVirtualCodeOwnerLine,
+  IUser,
+  IVirtualCodeOwnersCST,
+} from "./types.js";
 
 const DEFAULT_WARNING =
   `#${EOL}` +
@@ -14,7 +19,7 @@ const DEFAULT_WARNING =
   `#${EOL}${EOL}`;
 
 export function generate(
-  pVirtualCodeOwners: ICST,
+  pVirtualCodeOwners: IVirtualCodeOwnersCST,
   pTeamMap: ITeamMap,
   pGeneratedWarning: string = DEFAULT_WARNING
 ): string {
@@ -27,7 +32,10 @@ export function generate(
   );
 }
 
-function convertLine(pCSTLine: ICSTLine, pTeamMap: ITeamMap): string {
+function convertLine(
+  pCSTLine: IVirtualCodeOwnerLine,
+  pTeamMap: ITeamMap
+): string {
   if (pCSTLine.type === "rule") {
     const lUserNames = uniq(
       pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap))
@@ -41,7 +49,7 @@ function convertLine(pCSTLine: ICSTLine, pTeamMap: ITeamMap): string {
 
 function expandTeamToUserNames(pUser: IUser, pTeamMap: ITeamMap): string[] {
   if (pUser.type == "virtual-team-name") {
-    return stringifyTeamMembers(pTeamMap, pUser.raw.slice(1));
+    return stringifyTeamMembers(pTeamMap, pUser.bareName);
   }
   return [pUser.raw];
 }

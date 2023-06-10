@@ -31,20 +31,29 @@ function parseLine(pUntreatedLine, pTeamMap, pLineNo) {
 }
 function parseUsers(pUserNamesString, pTeamMap) {
     const lUserNames = pUserNamesString.split(/\s+/);
-    return lUserNames.map((pUserName) => ({
-        type: getUserNameType(pUserName, pTeamMap),
-        raw: pUserName,
-    }));
+    return lUserNames.map((pUserName) => {
+        return {
+            type: getUserNameType(pUserName, pTeamMap),
+            bareName: getBareUserName(pUserName),
+            raw: pUserName,
+        };
+    });
 }
 function getUserNameType(pUserName, pTeamMap) {
     if (isEmailIshUsername(pUserName)) {
         return "e-mail-address";
     }
     if (pUserName.startsWith("@")) {
-        const lBareUsername = pUserName.slice(1);
-        if (pTeamMap.hasOwnProperty(lBareUsername)) {
+        if (pTeamMap.hasOwnProperty(getBareUserName(pUserName))) {
             return "virtual-team-name";
         }
+        return "other-user-or-team";
     }
-    return "other-user-or-team";
+    return "invalid";
+}
+function getBareUserName(pUserName) {
+    if (pUserName.startsWith("@")) {
+        return pUserName.slice(1);
+    }
+    return pUserName;
 }

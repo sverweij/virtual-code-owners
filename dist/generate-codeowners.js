@@ -27,7 +27,7 @@ function convertLine(pCSTLine, pTeamMap) {
 }
 function expandTeamToUserNames(pUser, pTeamMap) {
     if (pUser.type == "virtual-team-name") {
-        return stringifyTeamMembers(pTeamMap, pUser.raw.slice(1));
+        return stringifyTeamMembers(pTeamMap, pUser.bareName);
     }
     return [pUser.raw];
 }

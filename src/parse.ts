@@ -1,11 +1,17 @@
 import { isEmailIshUsername } from "./utensils.js";
-import type { ITeamMap, ICST, ICSTLine, IUser, UserType } from "./types.js";
+import type {
+  ITeamMap,
+  IVirtualCodeOwnersCST,
+  IVirtualCodeOwnerLine,
+  IUser,
+  UserType,
+} from "./types.js";
 import { EOL } from "node:os";
 
 export function parse(
   pVirtualCodeOwnersAsString: string,
   pTeamMap: ITeamMap = {}
-): ICST {
+): IVirtualCodeOwnersCST {
   return pVirtualCodeOwnersAsString
     .split(EOL)
     .map((pUntreatedLine, pLineNo) =>
@@ -17,7 +23,7 @@ function parseLine(
   pUntreatedLine: string,
   pTeamMap: ITeamMap,
   pLineNo: number
-): ICSTLine {
+): IVirtualCodeOwnerLine {
   const lTrimmedLine = pUntreatedLine.trim();
   const lSplitLine = lTrimmedLine.match(
     /^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/
@@ -48,10 +54,13 @@ function parseLine(
 
 function parseUsers(pUserNamesString: string, pTeamMap: ITeamMap): IUser[] {
   const lUserNames = pUserNamesString.split(/\s+/);
-  return lUserNames.map((pUserName) => ({
-    type: getUserNameType(pUserName, pTeamMap),
-    raw: pUserName,
-  }));
+  return lUserNames.map((pUserName) => {
+    return {
+      type: getUserNameType(pUserName, pTeamMap),
+      bareName: getBareUserName(pUserName),
+      raw: pUserName,
+    };
+  });
 }
 
 function getUserNameType(pUserName: string, pTeamMap: ITeamMap): UserType {
@@ -60,11 +69,19 @@ function getUserNameType(pUserName: string, pTeamMap: ITeamMap): UserType {
   }
 
   if (pUserName.startsWith("@")) {
-    const lBareUsername = pUserName.slice(1);
-    if (pTeamMap.hasOwnProperty(lBareUsername)) {
+    if (pTeamMap.hasOwnProperty(getBareUserName(pUserName))) {
       return "virtual-team-name";
     }
+    return "other-user-or-team";
   }
+  // usernames either start with an @ or are an e-mail address. When you're
+  // here the pUserName is neither so it's bound to be not valid
+  return "invalid";
+}
 
-  return "other-user-or-team";
+function getBareUserName(pUserName: string): string {
+  if (pUserName.startsWith("@")) {
+    return pUserName.slice(1);
+  }
+  return pUserName;
 }

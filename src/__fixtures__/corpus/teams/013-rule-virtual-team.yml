@@ -4,7 +4,8 @@
     line: 1,
     filesPattern: "*",
     spaces: " ",
-    users: [{ type: "virtual-team-name", raw: "@baarden" }],
+    users:
+      [{ type: "virtual-team-name", raw: "@baarden", bareName: "baarden" }],
     raw: "* @baarden",
   },
 ]

@@ -2,8 +2,8 @@ export interface ITeamMap {
   [teamName: string]: string[];
 }
 
-export type ICST = ICSTLine[];
-export type ICSTLine = IBoringCSTLine | IInterestingCSTLine;
+export type IVirtualCodeOwnersCST = IVirtualCodeOwnerLine[];
+export type IVirtualCodeOwnerLine = IBoringCSTLine | IInterestingCSTLine;
 export interface IBoringCSTLine {
   type: "comment" | "ignorable-comment" | "empty" | "unknown";
   line: number;
@@ -20,8 +20,10 @@ export interface IInterestingCSTLine {
 export type UserType =
   | "virtual-team-name"
   | "e-mail-address"
-  | "other-user-or-team";
+  | "other-user-or-team"
+  | "invalid";
 export type IUser = {
   type: UserType;
+  bareName: string;
   raw: string;
 };

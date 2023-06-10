@@ -1,0 +1,28 @@
+[
+  {
+    type: "rule",
+    line: 1,
+    filesPattern: "*",
+    spaces: " ",
+    users:
+      [
+        { type: "virtual-team-name", raw: "@baarden", bareName: "baarden" },
+        {
+          type: "virtual-team-name",
+          raw: "@leren-lezen",
+          bareName: "leren-lezen",
+        },
+        {
+          type: "other-user-or-team",
+          raw: "@real-team",
+          bareName: "real-team",
+        },
+        {
+          type: "e-mail-address",
+          raw: "jet@example.com",
+          bareName: "jet@example.com",
+        },
+      ],
+    raw: "* @baarden @leren-lezen @real-team jet@example.com",
+  },
+]

@@ -4,7 +4,8 @@
     line: 1,
     filesPattern: "*",
     spaces: " ",
-    users: [{ type: "other-user-or-team", raw: "@everyone" }],
+    users:
+      [{ type: "other-user-or-team", raw: "@everyone", bareName: "everyone" }],
     raw: "* @everyone",
   },
 ]
