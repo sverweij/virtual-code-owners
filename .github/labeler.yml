@@ -1,0 +1,7 @@
+vco:
+- '**'
+
+vco-admins:
+- .github/**
+- tools/**
+
