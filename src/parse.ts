@@ -5,7 +5,7 @@ import type {
   IVirtualCodeOwnerLine,
   IUser,
   UserType,
-} from "./types.js";
+} from "types/types.js";
 import { EOL } from "node:os";
 
 export function parse(

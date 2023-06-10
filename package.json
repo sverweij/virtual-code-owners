@@ -6,7 +6,8 @@
   "exports": {
     ".": [
       {
-        "import": "./dist/parse-and-generate.js"
+        "import": "./dist/parse-and-generate.js",
+        "types": "./types/parse-and-generate.d.ts"
       },
       "./dist/parse-and-generate.js"
     ]

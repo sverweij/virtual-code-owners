@@ -2,7 +2,7 @@ import { equal } from "node:assert";
 import { EOL } from "node:os";
 import { generate } from "./generate-codeowners.js";
 import { parse } from "./parse.js";
-import type { ITeamMap } from "./types.js";
+import type { ITeamMap } from "../types/types.js";
 
 export function generateCodeOwners(
   pCodeOwnersFileAsString: string,
