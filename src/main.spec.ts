@@ -69,4 +69,26 @@ describe("main", () => {
       lErrStream
     );
   });
+
+  it("ignores positional arguments", () => {
+    let lOutStream = new WritableTestStream();
+    let lErrStream = new WritableTestStream(
+      /.*Wrote node_modules\/tmp-code-owners\.txt AND node_modules\/tmp-labeler.yml.*/
+    );
+    main(
+      [
+        "--virtualCodeOwners",
+        "./src/__mocks__/VIRTUAL-CODEOWNERS.txt",
+        "--virtualTeams",
+        "./src/__mocks__/virtual-teams.yml",
+        "--codeOwners",
+        "node_modules/tmp-code-owners.txt",
+        "--emitLabeler",
+        "--labelerLocation",
+        "node_modules/tmp-labeler.yml",
+      ],
+      lOutStream,
+      lErrStream
+    );
+  });
 });

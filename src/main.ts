@@ -29,6 +29,11 @@ Options:
                                        (default: ".github/virtual-teams.yml")
   -c, --codeOwners [file-name]         The location of the CODEOWNERS file 
                                        (default: ".github/CODEOWNERS")
+  -l, --emitLabeler                    Whether or not to emit a labeler.yml to be
+                                       used with actions/labeler
+                                       (default: false)
+  --labelerLocation [file-name]        The location of the labeler.yml file
+                                       (default: ".github/labeler.yml")
   -h, --help                           display help for command`;
 
 export function main(

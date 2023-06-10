@@ -1,4 +1,4 @@
-import { EOL } from "os";
+import { EOL } from "node:os";
 export function generate(pCodeOwners, pTeamMap) {
     let lReturnValue = "";
     for (const lTeamName in pTeamMap) {
