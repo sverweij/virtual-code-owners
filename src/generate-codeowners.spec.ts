@@ -1,7 +1,18 @@
 import { equal } from "node:assert";
 import { EOL } from "node:os";
-import { convert } from "./generate-codeowners.js";
+import { generate } from "./generate-codeowners.js";
+import { parse } from "./parse.js";
 import type { ITeamMap } from "./types.js";
+
+export function convert(
+  pCodeOwnersFileAsString: string,
+  pTeamMap: ITeamMap,
+  pGeneratedWarning: string = ""
+): string {
+  const lVirtualCodeOwners = parse(pCodeOwnersFileAsString, pTeamMap);
+
+  return generate(lVirtualCodeOwners, pTeamMap, pGeneratedWarning);
+}
 
 describe("generate-codeowners generates CODEOWNERS", () => {
   const lCodeOwners = `# here's a comment

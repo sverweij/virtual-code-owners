@@ -1,7 +1,6 @@
 import { EOL } from "node:os";
 import { isEmailIshUsername } from "./utensils.js";
-import { parse, type ICSTLine, type IUser, type ICST } from "./parse.js";
-import { type ITeamMap } from "./types.js";
+import type { ITeamMap, ICSTLine, IUser, ICST } from "./types.js";
 
 const DEFAULT_WARNING =
   `#${EOL}` +
@@ -14,24 +13,14 @@ const DEFAULT_WARNING =
   `#   - run 'npx virtual-code-owners'${EOL}` +
   `#${EOL}${EOL}`;
 
-export function convert(
-  pCodeOwnersFileAsString: string,
-  pTeamMap: ITeamMap,
-  pGeneratedWarning: string = DEFAULT_WARNING
-): string {
-  const lVirtualCodeOwners = parse(pCodeOwnersFileAsString, pTeamMap);
-
-  return _convert(lVirtualCodeOwners, pTeamMap, pGeneratedWarning);
-}
-
-function _convert(
-  pVrtualCodeOwners: ICST,
+export function generate(
+  pVirtualCodeOwners: ICST,
   pTeamMap: ITeamMap,
   pGeneratedWarning: string = DEFAULT_WARNING
 ): string {
   return (
     pGeneratedWarning +
-    pVrtualCodeOwners
+    pVirtualCodeOwners
       .filter((pLine) => pLine.type !== "ignorable-comment")
       .map((pLine) => convertLine(pLine, pTeamMap))
       .join(EOL)

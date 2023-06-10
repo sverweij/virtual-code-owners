@@ -1,31 +1,10 @@
 import { isEmailIshUsername } from "./utensils.js";
-import { type ITeamMap } from "./types.js";
+import type { ITeamMap, ICST, ICSTLine, IUser, UserType } from "./types.js";
 import { EOL } from "node:os";
-
-export type ICST = ICSTLine[];
-export type ICSTLine = IBoringCSTLine | IInterestingCSTLine;
-interface IBoringCSTLine {
-  type: "comment" | "ignorable-comment" | "empty" | "unknown";
-  line: number;
-  raw: string;
-}
-interface IInterestingCSTLine {
-  type: "rule";
-  line: number;
-  filesPattern: string;
-  spaces: string;
-  users: IUser[];
-  raw: string;
-}
-type UserType = "virtual-team-name" | "e-mail-address" | "other-user-or-team";
-export type IUser = {
-  type: UserType;
-  raw: string;
-};
 
 export function parse(
   pVirtualCodeOwnersAsString: string,
-  pTeamMap: ITeamMap
+  pTeamMap: ITeamMap = {}
 ): ICST {
   return pVirtualCodeOwnersAsString
     .split(EOL)
