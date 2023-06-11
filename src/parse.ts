@@ -1,12 +1,15 @@
-import { isEmailIshUsername } from "./utensils.js";
+import { EOL } from "node:os";
 import type {
   ITeamMap,
-  IVirtualCodeOwnersCST,
-  IVirtualCodeOwnerLine,
   IUser,
+  IVirtualCodeOwnerLine,
+  IAnomaly,
+  ILineAnomaly,
+  IUserAnomaly,
+  IVirtualCodeOwnersCST,
   UserType,
 } from "types/types.js";
-import { EOL } from "node:os";
+import { isEmailIshUsername } from "./utensils.js";
 
 export function parse(
   pVirtualCodeOwnersAsString: string,
@@ -17,6 +20,34 @@ export function parse(
     .map((pUntreatedLine, pLineNo) =>
       parseLine(pUntreatedLine, pTeamMap, pLineNo + 1)
     );
+}
+
+export function getAnomalies(
+  pVirtualCodeOwners: IVirtualCodeOwnersCST
+): IAnomaly[] {
+  const weirdLines = pVirtualCodeOwners
+    .filter((pLine) => pLine.type === "unknown")
+    .map((pLine) => ({
+      ...pLine,
+      type: "invalid-line",
+    })) as ILineAnomaly[];
+  const weirdUsers = pVirtualCodeOwners.flatMap((pLine) => {
+    if (pLine.type === "rule") {
+      return pLine.users
+        .filter((pUser) => pUser.type === "invalid")
+        .map((pUser) => ({
+          ...pUser,
+          line: pLine.line,
+          type: "invalid-user",
+        }));
+    }
+    return [];
+  }) as IUserAnomaly[];
+  return (weirdLines as IAnomaly[]).concat(weirdUsers).sort(orderAnomaly);
+}
+
+function orderAnomaly(pLeft: IAnomaly, pRight: IAnomaly): number {
+  return pLeft.line > pRight.line ? 1 : -1;
 }
 
 function parseLine(

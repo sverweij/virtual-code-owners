@@ -7,6 +7,8 @@ import generateLabelerYml from "./generate-labeler-yml.js";
 import readTeamMap from "./read-team-map.js";
 import readVirtualCodeOwners from "./read-virtual-code-owners.js";
 import { VERSION } from "./version.js";
+import { IAnomaly, IVirtualCodeOwnersCST } from "types/types.js";
+import { getAnomalies } from "./parse.js";
 
 interface IOptions {
   virtualCodeOwners: string;
@@ -60,6 +62,12 @@ export function main(
       lOptions.virtualCodeOwners,
       lTeamMap
     );
+    const lAnomalies = getAnomalies(lVirtualCodeOwners);
+    if (lAnomalies.length > 0) {
+      throw new Error(
+        `${EOL}${reportAnomalies(lOptions.virtualCodeOwners, lAnomalies)}`
+      );
+    }
 
     const lCodeOwnersContent = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
     writeFileSync(lOptions.codeOwners, lCodeOwnersContent, {
@@ -81,6 +89,21 @@ export function main(
     pErrorStream.write(`${EOL}ERROR: ${pError.message}${EOL}${EOL}`);
     process.exitCode = 1;
   }
+}
+
+function reportAnomalies(pFileName: string, pAnomalies: IAnomaly[]): string {
+  return pAnomalies
+    .map((pAnomaly) => {
+      if (pAnomaly.type === "invalid-line") {
+        return `${pFileName}:${pAnomaly.line}:1 invalid line - neither a rule, comment nor empty: '${pAnomaly.raw}'`;
+      } else {
+        return (
+          `${pFileName}:${pAnomaly.line}:1 '${pAnomaly.raw}' (user ${pAnomaly.userNumberWithinLine} on this line) ` +
+          `is not valid as a user or team name. It should either start with '@' or be an e-mail address`
+        );
+      }
+    })
+    .join(EOL);
 }
 
 function getOptions(pArguments: string[]): IOptions {

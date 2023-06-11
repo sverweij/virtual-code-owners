@@ -2,7 +2,7 @@ import { deepStrictEqual } from "node:assert";
 import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { extname, join } from "node:path";
-import { parse } from "./parse.js";
+import { getAnomalies, parse } from "./parse.js";
 import { parse as parseYaml } from "yaml";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
@@ -52,4 +52,78 @@ describe("parses VIRTUAL-CODEOWNERS.txt - with 'virtual teams'", () => {
         deepStrictEqual(parse(lInput, TEAMS), parseYaml(lExpected));
       });
     });
+});
+
+describe("anomaly detection", () => {
+  it("reports an invalid line", () => {
+    const erroneousLine = "this-is-not-a-valid-rule-or-comment";
+    const lVirtualCodeOwners = parse(erroneousLine);
+    const lFound = getAnomalies(lVirtualCodeOwners);
+    const lExpected = [
+      {
+        type: "invalid-line",
+        line: 1,
+        raw: "this-is-not-a-valid-rule-or-comment",
+      },
+    ];
+    deepStrictEqual(lFound, lExpected);
+  });
+
+  it("reports an invalid user", () => {
+    const erroneousLine = "some/pattern/ username-without-an-at";
+    const lVirtualCodeOwners = parse(erroneousLine);
+    const lFound = getAnomalies(lVirtualCodeOwners);
+    const lExpected = [
+      {
+        type: "invalid-user",
+        line: 1,
+        userNumberWithinLine: 1,
+        bareName: "username-without-an-at",
+        raw: "username-without-an-at",
+      },
+    ];
+    deepStrictEqual(lFound, lExpected);
+  });
+
+  it("reports invalid users and lines (ordered by line number)", () => {
+    const lInput = `some/pattern/  tjorus@example.com username-without-an-at @normal-username
+      some/other/pattern @team1  @team2   team3-but-without-an-at
+      #comment - next line is empty
+
+      #!ignorable-comment
+      # next line is an error
+      -
+      # as is the next one
+      aintthatcutebutitisWRONG
+      `;
+    const lVirtualCodeOwners = parse(lInput);
+    const lFound = getAnomalies(lVirtualCodeOwners);
+    const lExpected = [
+      {
+        type: "invalid-user",
+        line: 1,
+        userNumberWithinLine: 2,
+        bareName: "username-without-an-at",
+        raw: "username-without-an-at",
+      },
+      {
+        type: "invalid-user",
+        line: 2,
+        userNumberWithinLine: 3,
+        bareName: "team3-but-without-an-at",
+        raw: "team3-but-without-an-at",
+      },
+      {
+        type: "invalid-line",
+        line: 7,
+        raw: "      -",
+      },
+      {
+        type: "invalid-line",
+        line: 9,
+        raw: "      aintthatcutebutitisWRONG",
+      },
+    ];
+    deepStrictEqual(lFound, lExpected);
+  });
 });
