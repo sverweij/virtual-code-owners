@@ -1,6 +1,15 @@
 import { EOL } from "node:os";
-export default function generateLabelerYml(pCodeOwners, pTeamMap) {
-    let lReturnValue = "";
+const DEFAULT_WARNING = `#${EOL}` +
+    `# DO NOT EDIT - this file is generated and your edits will be overwritten${EOL}` +
+    `#${EOL}` +
+    `# To make changes:${EOL}` +
+    `#${EOL}` +
+    `#   - edit .github/VIRTUAL-CODEOWNERS.txt${EOL}` +
+    `#   - and/ or add teams (& members) to .github/virtual-teams.yml${EOL}` +
+    `#   - run 'npx virtual-code-owners --emitLabeler'${EOL}` +
+    `#${EOL}${EOL}`;
+export default function generateLabelerYml(pCodeOwners, pTeamMap, pGeneratedWarning = DEFAULT_WARNING) {
+    let lReturnValue = pGeneratedWarning;
     for (const lTeamName in pTeamMap) {
         const lPatternsForTeam = getPatternsForTeam(pCodeOwners, lTeamName)
             .map((pPattern) => `  - ${transformForYamlAndMinimatch(pPattern)}${EOL}`)

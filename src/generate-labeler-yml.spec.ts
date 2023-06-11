@@ -1,5 +1,6 @@
 import { deepStrictEqual, equal } from "node:assert";
 import { readFileSync } from "node:fs";
+import { EOL } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
@@ -17,11 +18,11 @@ const TEAMS = {
 
 describe("generate-labeler-yml generates a labeler.yml", () => {
   it("empty virtual code owners & empty teams yields empty string", () => {
-    equal(generateLabelerYml([], {}), "");
+    equal(generateLabelerYml([], {}, ""), "");
   });
 
   it("empty virtual code owners  yields empty string", () => {
-    equal(generateLabelerYml([], TEAMS), "");
+    equal(generateLabelerYml([], TEAMS, ""), "");
   });
 
   it("virtual code owners with teams not matching any teams yields empty string", () => {
@@ -48,7 +49,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
         ],
       },
     ];
-    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS), "");
+    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS, ""), "");
   });
 
   it("virtual code owners with teams matching a rule yields the file pattern for that team", () => {
@@ -85,7 +86,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
   - knakkerdeknak/**
 
 `;
-    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS), lExpected);
+    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS, ""), lExpected);
   });
 
   it("rewrites glob magic from what gitignore/ codeowners uses what minimatch understands - '*'", () => {
@@ -110,7 +111,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
   - '**'
 
 `;
-    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS), lExpected);
+    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS, ""), lExpected);
   });
 
   it("rewrites glob magic from what gitignore/ codeowners uses what minimatch understands - starts with '*'", () => {
@@ -135,7 +136,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
   - '*/src/vlaai/*'
 
 `;
-    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS), lExpected);
+    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS, ""), lExpected);
   });
 
   it("rewrites glob magic from what gitignore/ codeowners uses what minimatch understands - ends with '/'", () => {
@@ -156,11 +157,18 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
         ],
       },
     ];
-    const lExpected = `baarden:
+    const lExpected = `# some header or other${EOL}baarden:
   - src/vlaai/**
 
 `;
-    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS), lExpected);
+    equal(
+      generateLabelerYml(
+        lVirtualCodeOwners,
+        TEAMS,
+        `# some header or other${EOL}`
+      ),
+      lExpected
+    );
   });
 
   it("writes the kitchensink", () => {

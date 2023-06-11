@@ -1,6 +1,17 @@
+#
+# DO NOT EDIT - this file is generated and your edits will be overwritten
+#
+# To make changes:
+#
+#   - edit .github/VIRTUAL-CODEOWNERS.txt
+#   - and/ or add teams (& members) to .github/virtual-teams.yml
+#   - run 'npx virtual-code-owners --emitLabeler'
+#
+
 vco:
-  - "**"
+  - '**'
 
 vco-admins:
   - .github/**
   - tools/**
+
