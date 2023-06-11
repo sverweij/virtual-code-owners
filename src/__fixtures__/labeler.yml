@@ -1,0 +1,22 @@
+ch/after-sales:
+  - libs/ubc-after-sales/**
+  - libs/ubc-refund/**
+
+ch/sales:
+  - libs/ubc-sales/**
+  - libs/ubc-refund/**
+
+ch/pre-sales:
+  - libs/ubc-pre-sales/**
+
+ch/ux:
+  - apps/ux-portal/**
+  - libs/components/**
+
+ch/transversal:
+  - .github/**
+  - apps/framework/**
+  - apps/ux-portal/**
+
+ch/mannen-met-baarden:
+  - libs/ubc-baarden/**

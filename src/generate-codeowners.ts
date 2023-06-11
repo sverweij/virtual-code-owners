@@ -1,11 +1,11 @@
 import { EOL } from "node:os";
-import { isEmailIshUsername } from "./utensils.js";
 import type {
   ITeamMap,
-  IVirtualCodeOwnerLine,
   IUser,
+  IVirtualCodeOwnerLine,
   IVirtualCodeOwnersCST,
 } from "types/types.js";
+import { isEmailIshUsername } from "./utensils.js";
 
 const DEFAULT_WARNING =
   `#${EOL}` +
@@ -18,7 +18,7 @@ const DEFAULT_WARNING =
   `#   - run 'npx virtual-code-owners'${EOL}` +
   `#${EOL}${EOL}`;
 
-export function generate(
+export default function generateCodeOwners(
   pVirtualCodeOwners: IVirtualCodeOwnersCST,
   pTeamMap: ITeamMap,
   pGeneratedWarning: string = DEFAULT_WARNING

@@ -1,8 +1,11 @@
-import { VERSION } from "./version.js";
-import generate from "./parse-and-generate.js";
 import { writeFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { parseArgs } from "node:util";
+import generateCodeOwners from "./generate-codeowners.js";
+import generateLabelerYml from "./generate-labeler-yml.js";
+import readTeamMap from "./read-team-map.js";
+import readVirtualCodeOwners from "./read-virtual-code-owners.js";
+import { VERSION } from "./version.js";
 const HELP_MESSAGE = `Usage: virtual-code-owners [options]
 
 Merges a VIRTUAL-CODEOWNERS.txt and a virtual-teams.yml into CODEOWNERS
@@ -17,10 +20,15 @@ Options:
                                        (default: ".github/virtual-teams.yml")
   -c, --codeOwners [file-name]         The location of the CODEOWNERS file 
                                        (default: ".github/CODEOWNERS")
+  -l, --emitLabeler                    Whether or not to emit a labeler.yml to be
+                                       used with actions/labeler
+                                       (default: false)
+  --labelerLocation [file-name]        The location of the labeler.yml file
+                                       (default: ".github/labeler.yml")
   -h, --help                           display help for command`;
 export function main(pArguments = process.argv.slice(2), pOutStream = process.stdout, pErrorStream = process.stderr) {
     try {
-        let lOptions = getOptions(pArguments);
+        const lOptions = getOptions(pArguments);
         if (lOptions.help) {
             pOutStream.write(`${HELP_MESSAGE}${EOL}`);
             return;
@@ -29,11 +37,22 @@ export function main(pArguments = process.argv.slice(2), pOutStream = process.st
             pOutStream.write(`${VERSION}${EOL}`);
             return;
         }
-        const lCodeOwnersContent = generate(lOptions.virtualCodeOwners, lOptions.virtualTeams);
+        const lTeamMap = readTeamMap(lOptions.virtualTeams);
+        const lVirtualCodeOwners = readVirtualCodeOwners(lOptions.virtualCodeOwners, lTeamMap);
+        const lCodeOwnersContent = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
         writeFileSync(lOptions.codeOwners, lCodeOwnersContent, {
             encoding: "utf-8",
         });
-        pErrorStream.write(`${EOL}Wrote ${lOptions.codeOwners}${EOL}${EOL}`);
+        if (lOptions.emitLabeler) {
+            const lLabelerContent = generateLabelerYml(lVirtualCodeOwners, lTeamMap);
+            writeFileSync(lOptions.labelerLocation, lLabelerContent, {
+                encoding: "utf-8",
+            });
+            pErrorStream.write(`${EOL}Wrote ${lOptions.codeOwners} AND ${lOptions.labelerLocation}${EOL}${EOL}`);
+        }
+        else {
+            pErrorStream.write(`${EOL}Wrote ${lOptions.codeOwners}${EOL}${EOL}`);
+        }
     }
     catch (pError) {
         pErrorStream.write(`${EOL}ERROR: ${pError.message}${EOL}${EOL}`);
@@ -58,6 +77,15 @@ function getOptions(pArguments) {
                 type: "string",
                 short: "c",
                 default: ".github/CODEOWNERS",
+            },
+            emitLabeler: {
+                type: "boolean",
+                short: "l",
+                default: false,
+            },
+            labelerLocation: {
+                type: "string",
+                default: ".github/labeler.yml",
             },
             help: { type: "boolean", short: "h", default: false },
             version: { type: "boolean", short: "V", default: false },

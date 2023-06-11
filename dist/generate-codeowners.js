@@ -9,7 +9,7 @@ const DEFAULT_WARNING = `#${EOL}` +
     `#   - and/ or add team members to .github/virtual-teams.yml${EOL}` +
     `#   - run 'npx virtual-code-owners'${EOL}` +
     `#${EOL}${EOL}`;
-export function generate(pVirtualCodeOwners, pTeamMap, pGeneratedWarning = DEFAULT_WARNING) {
+export default function generateCodeOwners(pVirtualCodeOwners, pTeamMap, pGeneratedWarning = DEFAULT_WARNING) {
     return (pGeneratedWarning +
         pVirtualCodeOwners
             .filter((pLine) => pLine.type !== "ignorable-comment")
