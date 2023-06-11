@@ -1,17 +1,24 @@
-import { equal } from "node:assert";
+import { deepStrictEqual, equal } from "node:assert";
+import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
-import { generate } from "./generate-codeowners.js";
-import { parse } from "./parse.js";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import type { ITeamMap } from "../types/types.js";
+import generateCodeOwners from "./generate-codeowners.js";
+import { parse } from "./parse.js";
+import readTeamMap from "./read-team-map.js";
+import readVirtualCodeOwners from "./read-virtual-code-owners.js";
 
-export function generateCodeOwners(
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+
+export function generateCodeOwnersFromString(
   pCodeOwnersFileAsString: string,
   pTeamMap: ITeamMap,
   pGeneratedWarning: string = ""
 ): string {
   const lVirtualCodeOwners = parse(pCodeOwnersFileAsString, pTeamMap);
 
-  return generate(lVirtualCodeOwners, pTeamMap, pGeneratedWarning);
+  return generateCodeOwners(lVirtualCodeOwners, pTeamMap, pGeneratedWarning);
 }
 
 describe("generate-codeowners generates CODEOWNERS", () => {
@@ -25,7 +32,7 @@ libs/after-sales @team-after-sales
 tools/ @team-tgif`;
 
   it("leaves an code owners as-is when the team map is empty", () => {
-    equal(generateCodeOwners(lCodeOwners, {}, ""), lCodeOwners);
+    equal(generateCodeOwnersFromString(lCodeOwners, {}, ""), lCodeOwners);
   });
 
   it("replaces team names with usernames as specified in the team map", () => {
@@ -40,7 +47,7 @@ libs/after-sales @team-after-sales
 
 # tooling maintained by a rag tag band of 20% friday afternooners
 tools/ @team-tgif`;
-    equal(generateCodeOwners(lCodeOwners, lTeamMap, ""), lExpected);
+    equal(generateCodeOwnersFromString(lCodeOwners, lTeamMap, ""), lExpected);
   });
 
   it("replaces team names when there's > 1 team on the line", () => {
@@ -50,7 +57,10 @@ tools/ @team-tgif`;
       "team-after-sales": ["wim", "zus", "jet"],
     };
     const lExpected = "tools/shared @jan @jet @pier @tjorus @wim @zus";
-    equal(generateCodeOwners(lFixture, lTeamMapFixture, ""), lExpected);
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected
+    );
   });
 
   it("correctly replaces a team name that is a substring of another one", () => {
@@ -60,7 +70,10 @@ tools/ @team-tgif`;
       substring: ["wim", "zus", "jet"],
     };
     const lExpected = "tools/shared @jet @wim @zus";
-    equal(generateCodeOwners(lFixture, lTeamMapFixture, ""), lExpected);
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected
+    );
   });
 
   it("leaves e-mail addresses in the virtual-codeowners.txt alone", () => {
@@ -70,7 +83,10 @@ tools/ @team-tgif`;
       substring: ["wim", "zus", "jet"],
     };
     const lExpected = "tools/shared @jet @wim @zus korneel@example.com";
-    equal(generateCodeOwners(lFixture, lTeamMapFixture, ""), lExpected);
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected
+    );
   });
 
   it("correctly replaces both user names and e-mail addresses", () => {
@@ -85,7 +101,10 @@ tools/ @team-tgif`;
     };
     const lExpected =
       "tools/shared @jan @tjorus korneel@example.com pier@example.com";
-    equal(generateCodeOwners(lFixture, lTeamMapFixture, ""), lExpected);
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected
+    );
   });
 
   it("replaces team names & deduplicates usernames when there's > 1 team on the line", () => {
@@ -95,7 +114,10 @@ tools/ @team-tgif`;
       "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],
     };
     const lExpected = "tools/shared @jan @jet @multi-teamer @tjorus @wim @zus";
-    equal(generateCodeOwners(lFixture, lTeamMapFixture, ""), lExpected);
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected
+    );
   });
 
   it("does not replace file names that happen to be a team name as well", () => {
@@ -105,7 +127,10 @@ tools/ @team-tgif`;
       "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],
     };
     const lExpected = "@team-sales @jet @multi-teamer @wim @zus";
-    equal(generateCodeOwners(lFixture, lTeamMapFixture, ""), lExpected);
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected
+    );
   });
 
   it("retains spaces between filenames and user names", () => {
@@ -117,7 +142,10 @@ tools/ @team-tgif`;
     };
     const lExpected =
       "tools/shared     @jan @jet @multi-teamer @tjorus @wim @zus";
-    equal(generateCodeOwners(lFixture, lTeamMapFixture, ""), lExpected);
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected
+    );
   });
 
   it("leaves lines that don't have the filesPattern & usernames pattern alone", () => {
@@ -127,13 +155,16 @@ tools/ @team-tgif`;
       "team-after-sales": ["multi-teamer", "wim", "zus", "jet"],
     };
     const lExpected = "tools/shared";
-    equal(generateCodeOwners(lFixture, lTeamMapFixture, ""), lExpected);
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected
+    );
   });
 
   it("skips lines that start with '#!'", () => {
     const lFixture = `#!ignore this line${EOL}    #! and this as well${EOL}# but not this one${EOL}and/neither @this-one`;
     const lExpected = `# but not this one${EOL}and/neither @this-one`;
-    equal(generateCodeOwners(lFixture, {}, ""), lExpected);
+    equal(generateCodeOwnersFromString(lFixture, {}, ""), lExpected);
   });
 
   it("adds a warning text on top when passed one", () => {
@@ -143,16 +174,36 @@ tools/ @team-tgif`;
     const lExpected = `${lWarningText}${lFixture}`;
 
     equal(
-      generateCodeOwners(lFixture, lTeamMapFixture, lWarningText),
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, lWarningText),
       lExpected
     );
   });
+
   it("sorts the usernames in place", () => {
     const lFixture = "tools/shared @team-unsorted";
     const lTeamMapFixture = {
       "team-unsorted": ["zus", "jan", "tjorus", "teun", "jet", "gijs"],
     };
     const lExpected = "tools/shared @gijs @jan @jet @teun @tjorus @zus";
-    equal(generateCodeOwners(lFixture, lTeamMapFixture, ""), lExpected);
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected
+    );
+  });
+
+  it("writes the kitchensink", () => {
+    const lTeamMap = readTeamMap(
+      join(__dirname, "__mocks__", "virtual-teams.yml")
+    );
+    const lVirtualCodeOwners = readVirtualCodeOwners(
+      join(__dirname, "__mocks__", "VIRTUAL-CODEOWNERS.txt"),
+      lTeamMap
+    );
+    const lExpected = readFileSync(
+      join(__dirname, "__fixtures__", "CODEOWNERS"),
+      "utf-8"
+    );
+    const lFound = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
+    deepStrictEqual(lFound, lExpected);
   });
 });

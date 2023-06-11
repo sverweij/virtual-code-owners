@@ -1,10 +1,12 @@
-import { VERSION } from "./version.js";
-import parseAndGenerateCodeOwners from "./parse-and-generate.js";
-import parseAndGenerateLabelerYml from "./parse-and-generate-labeler-yml.js";
 import { writeFileSync } from "node:fs";
 import { EOL } from "node:os";
-import { parseArgs } from "node:util";
 import { type Writable } from "node:stream";
+import { parseArgs } from "node:util";
+import generateCodeOwners from "./generate-codeowners.js";
+import generateLabelerYml from "./generate-labeler-yml.js";
+import readTeamMap from "./read-team-map.js";
+import readVirtualCodeOwners from "./read-virtual-code-owners.js";
+import { VERSION } from "./version.js";
 
 interface IOptions {
   virtualCodeOwners: string;
@@ -42,7 +44,7 @@ export function main(
   pErrorStream: Writable = process.stderr
 ) {
   try {
-    let lOptions = getOptions(pArguments);
+    const lOptions = getOptions(pArguments);
 
     if (lOptions.help) {
       pOutStream.write(`${HELP_MESSAGE}${EOL}`);
@@ -53,23 +55,19 @@ export function main(
       return;
     }
 
-    // TODO the parseAndGenerate* methods do approximately the same.
-    //      Also if we ever (like in the next PR ...) want to use the
-    //      parse result for validation, we have to pull that in here.
-    //      When next touching this => refactor
-    const lCodeOwnersContent = parseAndGenerateCodeOwners(
+    const lTeamMap = readTeamMap(lOptions.virtualTeams);
+    const lVirtualCodeOwners = readVirtualCodeOwners(
       lOptions.virtualCodeOwners,
-      lOptions.virtualTeams
+      lTeamMap
     );
+
+    const lCodeOwnersContent = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
     writeFileSync(lOptions.codeOwners, lCodeOwnersContent, {
       encoding: "utf-8",
     });
 
     if (lOptions.emitLabeler) {
-      const lLabelerContent = parseAndGenerateLabelerYml(
-        lOptions.virtualCodeOwners,
-        lOptions.virtualTeams
-      );
+      const lLabelerContent = generateLabelerYml(lVirtualCodeOwners, lTeamMap);
       writeFileSync(lOptions.labelerLocation, lLabelerContent, {
         encoding: "utf-8",
       });

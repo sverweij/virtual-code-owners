@@ -70,7 +70,7 @@ describe("main", () => {
     );
   });
 
-  it("ignores positional arguments", () => {
+  it("shows that both a codeowners and a labeler file were generated when --emitLabeler is used", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(
       /.*Wrote node_modules\/tmp-code-owners\.txt AND node_modules\/tmp-labeler.yml.*/

@@ -1,5 +1,5 @@
 import { EOL } from "node:os";
-export function generate(pCodeOwners, pTeamMap) {
+export default function generateLabelerYml(pCodeOwners, pTeamMap) {
     let lReturnValue = "";
     for (const lTeamName in pTeamMap) {
         const lPatternsForTeam = getPatternsForTeam(pCodeOwners, lTeamName)

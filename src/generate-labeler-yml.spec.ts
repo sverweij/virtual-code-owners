@@ -1,6 +1,14 @@
-import { equal } from "node:assert";
-import { generate } from "./generate-labeler-yml.js";
+import { deepStrictEqual, equal } from "node:assert";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { parse as parseYaml } from "yaml";
 import { IVirtualCodeOwnersCST } from "../types/types.js";
+import generateLabelerYml from "./generate-labeler-yml.js";
+import readTeamMap from "./read-team-map.js";
+import readVirtualCodeOwners from "./read-virtual-code-owners.js";
+
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 const TEAMS = {
   "the-a-team": ["smith", "baracus", "peck", "murdock"],
@@ -9,11 +17,11 @@ const TEAMS = {
 
 describe("generate-labeler-yml generates a labeler.yml", () => {
   it("empty virtual code owners & empty teams yields empty string", () => {
-    equal(generate([], {}), "");
+    equal(generateLabelerYml([], {}), "");
   });
 
   it("empty virtual code owners  yields empty string", () => {
-    equal(generate([], TEAMS), "");
+    equal(generateLabelerYml([], TEAMS), "");
   });
 
   it("virtual code owners with teams not matching any teams yields empty string", () => {
@@ -40,7 +48,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
         ],
       },
     ];
-    equal(generate(lVirtualCodeOwners, TEAMS), "");
+    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS), "");
   });
 
   it("virtual code owners with teams matching a rule yields the file pattern for that team", () => {
@@ -77,7 +85,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
   - knakkerdeknak/**
 
 `;
-    equal(generate(lVirtualCodeOwners, TEAMS), lExpected);
+    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS), lExpected);
   });
 
   it("rewrites glob magic from what gitignore/ codeowners uses what minimatch understands - '*'", () => {
@@ -102,7 +110,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
   - '**'
 
 `;
-    equal(generate(lVirtualCodeOwners, TEAMS), lExpected);
+    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS), lExpected);
   });
 
   it("rewrites glob magic from what gitignore/ codeowners uses what minimatch understands - starts with '*'", () => {
@@ -127,7 +135,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
   - '*/src/vlaai/*'
 
 `;
-    equal(generate(lVirtualCodeOwners, TEAMS), lExpected);
+    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS), lExpected);
   });
 
   it("rewrites glob magic from what gitignore/ codeowners uses what minimatch understands - ends with '/'", () => {
@@ -152,6 +160,21 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
   - src/vlaai/**
 
 `;
-    equal(generate(lVirtualCodeOwners, TEAMS), lExpected);
+    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS), lExpected);
+  });
+
+  it("writes the kitchensink", () => {
+    const lTeamMap = readTeamMap(
+      join(__dirname, "__mocks__", "virtual-teams.yml")
+    );
+    const lVirtualCodeOwners = readVirtualCodeOwners(
+      join(__dirname, "__mocks__", "VIRTUAL-CODEOWNERS.txt"),
+      lTeamMap
+    );
+    const lExpected = parseYaml(
+      readFileSync(join(__dirname, "__fixtures__", "labeler.yml"), "utf-8")
+    );
+    const lFound = parseYaml(generateLabelerYml(lVirtualCodeOwners, lTeamMap));
+    deepStrictEqual(lFound, lExpected);
   });
 });

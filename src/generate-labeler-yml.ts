@@ -5,7 +5,7 @@ import type {
   IVirtualCodeOwnersCST,
 } from "types/types.js";
 
-export function generate(
+export default function generateLabelerYml(
   pCodeOwners: IVirtualCodeOwnersCST,
   pTeamMap: ITeamMap
 ): string {

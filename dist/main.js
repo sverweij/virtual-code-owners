@@ -1,9 +1,11 @@
-import { VERSION } from "./version.js";
-import parseAndGenerateCodeOwners from "./parse-and-generate.js";
-import parseAndGenerateLabelerYml from "./parse-and-generate-labeler-yml.js";
 import { writeFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { parseArgs } from "node:util";
+import generateCodeOwners from "./generate-codeowners.js";
+import generateLabelerYml from "./generate-labeler-yml.js";
+import readTeamMap from "./read-team-map.js";
+import readVirtualCodeOwners from "./read-virtual-code-owners.js";
+import { VERSION } from "./version.js";
 const HELP_MESSAGE = `Usage: virtual-code-owners [options]
 
 Merges a VIRTUAL-CODEOWNERS.txt and a virtual-teams.yml into CODEOWNERS
@@ -26,7 +28,7 @@ Options:
   -h, --help                           display help for command`;
 export function main(pArguments = process.argv.slice(2), pOutStream = process.stdout, pErrorStream = process.stderr) {
     try {
-        let lOptions = getOptions(pArguments);
+        const lOptions = getOptions(pArguments);
         if (lOptions.help) {
             pOutStream.write(`${HELP_MESSAGE}${EOL}`);
             return;
@@ -35,12 +37,14 @@ export function main(pArguments = process.argv.slice(2), pOutStream = process.st
             pOutStream.write(`${VERSION}${EOL}`);
             return;
         }
-        const lCodeOwnersContent = parseAndGenerateCodeOwners(lOptions.virtualCodeOwners, lOptions.virtualTeams);
+        const lTeamMap = readTeamMap(lOptions.virtualTeams);
+        const lVirtualCodeOwners = readVirtualCodeOwners(lOptions.virtualCodeOwners, lTeamMap);
+        const lCodeOwnersContent = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
         writeFileSync(lOptions.codeOwners, lCodeOwnersContent, {
             encoding: "utf-8",
         });
         if (lOptions.emitLabeler) {
-            const lLabelerContent = parseAndGenerateLabelerYml(lOptions.virtualCodeOwners, lOptions.virtualTeams);
+            const lLabelerContent = generateLabelerYml(lVirtualCodeOwners, lTeamMap);
             writeFileSync(lOptions.labelerLocation, lLabelerContent, {
                 encoding: "utf-8",
             });
