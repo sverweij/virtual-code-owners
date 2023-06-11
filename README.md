@@ -167,6 +167,23 @@ Yes.
 Just make sure there's no name clashes between the username and a (virtual)
 team name and _virtual-code-owners_ will leave the real name alone.
 
+### What validations does virtual-code-owners perform?
+
+On the VIRTUAL-CODEOWNERS.txt file it performs is a little bit of validation:
+
+- it will find invalid user/ team names (those that don't start with an `@` or
+  aren't an e-mail address)
+- it will find invalid 'rules'; which is the case when there is a file pattern on
+  the line, but no user or team names.
+
+When it encounters any of these virtual-code-owners will emit a clear error message
+with the location of the error and exit with a non-zero code, to prevent the
+creation of a potentially invalid CODEOWNERS file.
+
+It _does not_ check whether the user or team names actually exist in the current
+project, though. Although nice, there's already tooling on the generated CODEOWNERS
+file that will check that for you.
+
 ### Any limitations I should know of?
 
 - ~~Currently only works for _user names_ to identify team members - not for e-mail

@@ -48,6 +48,28 @@ describe("main", () => {
     main(["-v", "this-file-does-not-exist.txt"], lOutStream, lErrStream);
   });
 
+  it("shows an error when passed an invalid virtual-code-owners file", () => {
+    let lOutStream = new WritableTestStream();
+    let lErrStream = new WritableTestStream(
+      /.*\.\/src\/__mocks__\/erroneous-virtual-codeowners.txt:16:1 invalid user or team name 'jet' \(# 6 on this line\). It should either start with '@' or be an e-mail address.*/
+    );
+    main(
+      [
+        "--virtualCodeOwners",
+        "./src/__mocks__/erroneous-virtual-codeowners.txt",
+        "--virtualTeams",
+        "./src/__mocks__/virtual-teams.yml",
+        "--codeOwners",
+        "node_modules/tmp-code-owners.txt",
+        "--emitLabeler",
+        "--labelerLocation",
+        "node_modules/tmp-labeler.yml",
+      ],
+      lOutStream,
+      lErrStream
+    );
+  });
+
   it("ignores positional arguments", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(
