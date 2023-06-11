@@ -2,13 +2,13 @@ import { writeFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { type Writable } from "node:stream";
 import { parseArgs } from "node:util";
+import type { IAnomaly } from "types/types.js";
 import generateCodeOwners from "./generate-codeowners.js";
 import generateLabelerYml from "./generate-labeler-yml.js";
+import { getAnomalies } from "./parse.js";
 import readTeamMap from "./read-team-map.js";
 import readVirtualCodeOwners from "./read-virtual-code-owners.js";
 import { VERSION } from "./version.js";
-import { IAnomaly, IVirtualCodeOwnersCST } from "types/types.js";
-import { getAnomalies } from "./parse.js";
 
 interface IOptions {
   virtualCodeOwners: string;

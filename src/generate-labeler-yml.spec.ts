@@ -4,7 +4,7 @@ import { EOL } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
-import { IVirtualCodeOwnersCST } from "../types/types.js";
+import type { IVirtualCodeOwnersCST } from "../types/types.js";
 import generateLabelerYml from "./generate-labeler-yml.js";
 import readTeamMap from "./read-team-map.js";
 import readVirtualCodeOwners from "./read-virtual-code-owners.js";

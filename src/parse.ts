@@ -1,11 +1,11 @@
 import { EOL } from "node:os";
 import type {
-  ITeamMap,
-  IUser,
-  IVirtualCodeOwnerLine,
   IAnomaly,
   ILineAnomaly,
+  ITeamMap,
+  IUser,
   IUserAnomaly,
+  IVirtualCodeOwnerLine,
   IVirtualCodeOwnersCST,
   UserType,
 } from "types/types.js";

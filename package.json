@@ -4,15 +4,30 @@
   "description": "Merges a VIRTUAL-CODEOWNERS.txt and a virtual-teams.yml into CODEOWNERS",
   "type": "module",
   "exports": {
-    ".": [
+    "parse": [
       {
-        "import": "./dist/parse-and-generate.js",
-        "types": "./types/parse-and-generate.d.ts"
+        "import": "./dist/parse.js",
+        "types": "./types/parse.d.ts"
       },
-      "./dist/parse-and-generate.js"
+      "./dist/parse.js"
+    ],
+    "generateCodeOwners": [
+      {
+        "import": "./dist/generate-codeowners.js",
+        "types": "./types/generate-codeowners.d.ts"
+      },
+      "./dist/generate-codeowners.js"
+    ],
+    "generateLabelerYml": [
+      {
+        "import": "./dist/generate-labeler-yml.js",
+        "types": "./types/generate-labeler-yml.d.ts"
+      },
+      "./dist/generate-labeler-yml.js"
     ]
   },
-  "main": "dist/parse-and-generate.js",
+  "main": "dist/main.js",
+  "types": "types/types.d.ts",
   "bin": "dist/cli.js",
   "files": [
     "dist",

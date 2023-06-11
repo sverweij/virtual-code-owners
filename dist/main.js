@@ -3,10 +3,10 @@ import { EOL } from "node:os";
 import { parseArgs } from "node:util";
 import generateCodeOwners from "./generate-codeowners.js";
 import generateLabelerYml from "./generate-labeler-yml.js";
+import { getAnomalies } from "./parse.js";
 import readTeamMap from "./read-team-map.js";
 import readVirtualCodeOwners from "./read-virtual-code-owners.js";
 import { VERSION } from "./version.js";
-import { getAnomalies } from "./parse.js";
 const HELP_MESSAGE = `Usage: virtual-code-owners [options]
 
 Merges a VIRTUAL-CODEOWNERS.txt and a virtual-teams.yml into CODEOWNERS

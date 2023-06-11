@@ -1,6 +1,6 @@
 import { match } from "node:assert";
-import { main } from "./main.js";
 import { Writable } from "node:stream";
+import { main } from "./main.js";
 
 class WritableTestStream extends Writable {
   expected = /^$/;
