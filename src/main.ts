@@ -98,8 +98,8 @@ function reportAnomalies(pFileName: string, pAnomalies: IAnomaly[]): string {
         return `${pFileName}:${pAnomaly.line}:1 invalid line - neither a rule, comment nor empty: '${pAnomaly.raw}'`;
       } else {
         return (
-          `${pFileName}:${pAnomaly.line}:1 '${pAnomaly.raw}' (user ${pAnomaly.userNumberWithinLine} on this line) ` +
-          `is not valid as a user or team name. It should either start with '@' or be an e-mail address`
+          `${pFileName}:${pAnomaly.line}:1 invalid user or team name '${pAnomaly.raw}' (# ${pAnomaly.userNumberWithinLine} on this line). ` +
+          `It should either start with '@' or be an e-mail address.`
         );
       }
     })

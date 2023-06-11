@@ -27,7 +27,14 @@ export function getAnomalies(pVirtualCodeOwners) {
     return weirdLines.concat(weirdUsers).sort(orderAnomaly);
 }
 function orderAnomaly(pLeft, pRight) {
-    return pLeft.line > pRight.line ? 1 : -1;
+    if (pLeft.line === pRight.line &&
+        pLeft.type === "invalid-user" &&
+        pRight.type === "invalid-user") {
+        return pLeft.userNumberWithinLine > pRight.userNumberWithinLine ? 1 : -1;
+    }
+    else {
+        return pLeft.line > pRight.line ? 1 : -1;
+    }
 }
 function parseLine(pUntreatedLine, pTeamMap, pLineNo) {
     const lTrimmedLine = pUntreatedLine.trim();

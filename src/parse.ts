@@ -47,7 +47,15 @@ export function getAnomalies(
 }
 
 function orderAnomaly(pLeft: IAnomaly, pRight: IAnomaly): number {
-  return pLeft.line > pRight.line ? 1 : -1;
+  if (
+    pLeft.line === pRight.line &&
+    pLeft.type === "invalid-user" &&
+    pRight.type === "invalid-user"
+  ) {
+    return pLeft.userNumberWithinLine > pRight.userNumberWithinLine ? 1 : -1;
+  } else {
+    return pLeft.line > pRight.line ? 1 : -1;
+  }
 }
 
 function parseLine(
