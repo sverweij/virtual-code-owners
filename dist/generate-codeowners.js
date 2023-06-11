@@ -7,7 +7,8 @@ const DEFAULT_WARNING = `#${EOL}` +
     `#${EOL}` +
     `#   - edit .github/VIRTUAL-CODEOWNERS.txt${EOL}` +
     `#   - and/ or add team members to .github/virtual-teams.yml${EOL}` +
-    `#   - run 'npx virtual-code-owners'${EOL}` +
+    `#   - run 'npx virtual-code-owners' (or 'npx virtual-code-owners --emitLabeler' if you also${EOL}` +
+    `#     want to generate a .github/labeler.yml)${EOL}` +
     `#${EOL}${EOL}`;
 export default function generateCodeOwners(pVirtualCodeOwners, pTeamMap, pGeneratedWarning = DEFAULT_WARNING) {
     return (pGeneratedWarning +

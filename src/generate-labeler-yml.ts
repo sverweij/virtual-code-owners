@@ -5,11 +5,23 @@ import type {
   IVirtualCodeOwnersCST,
 } from "types/types.js";
 
+const DEFAULT_WARNING =
+  `#${EOL}` +
+  `# DO NOT EDIT - this file is generated and your edits will be overwritten${EOL}` +
+  `#${EOL}` +
+  `# To make changes:${EOL}` +
+  `#${EOL}` +
+  `#   - edit .github/VIRTUAL-CODEOWNERS.txt${EOL}` +
+  `#   - and/ or add teams (& members) to .github/virtual-teams.yml${EOL}` +
+  `#   - run 'npx virtual-code-owners --emitLabeler'${EOL}` +
+  `#${EOL}${EOL}`;
+
 export default function generateLabelerYml(
   pCodeOwners: IVirtualCodeOwnersCST,
-  pTeamMap: ITeamMap
+  pTeamMap: ITeamMap,
+  pGeneratedWarning: string = DEFAULT_WARNING
 ): string {
-  let lReturnValue = "";
+  let lReturnValue = pGeneratedWarning;
   for (const lTeamName in pTeamMap) {
     const lPatternsForTeam = getPatternsForTeam(pCodeOwners, lTeamName)
       .map((pPattern) => `  - ${transformForYamlAndMinimatch(pPattern)}${EOL}`)
