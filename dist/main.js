@@ -3,7 +3,6 @@ import { EOL } from "node:os";
 import { parseArgs } from "node:util";
 import generateCodeOwners from "./generate-codeowners.js";
 import generateLabelerYml from "./generate-labeler-yml.js";
-import { getAnomalies } from "./parse.js";
 import readTeamMap from "./read-team-map.js";
 import readVirtualCodeOwners from "./read-virtual-code-owners.js";
 import { VERSION } from "./version.js";
@@ -27,7 +26,7 @@ Options:
   --labelerLocation [file-name]        The location of the labeler.yml file
                                        (default: ".github/labeler.yml")
   -h, --help                           display help for command`;
-export function main(pArguments = process.argv.slice(2), pOutStream = process.stdout, pErrorStream = process.stderr) {
+export function cli(pArguments = process.argv.slice(2), pOutStream = process.stdout, pErrorStream = process.stderr) {
     try {
         const lOptions = getOptions(pArguments);
         if (lOptions.help) {
@@ -38,44 +37,12 @@ export function main(pArguments = process.argv.slice(2), pOutStream = process.st
             pOutStream.write(`${VERSION}${EOL}`);
             return;
         }
-        const lTeamMap = readTeamMap(lOptions.virtualTeams);
-        const lVirtualCodeOwners = readVirtualCodeOwners(lOptions.virtualCodeOwners, lTeamMap);
-        const lAnomalies = getAnomalies(lVirtualCodeOwners);
-        if (lAnomalies.length > 0) {
-            throw new Error(`${EOL}${reportAnomalies(lOptions.virtualCodeOwners, lAnomalies)}`);
-        }
-        const lCodeOwnersContent = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
-        writeFileSync(lOptions.codeOwners, lCodeOwnersContent, {
-            encoding: "utf-8",
-        });
-        if (lOptions.emitLabeler) {
-            const lLabelerContent = generateLabelerYml(lVirtualCodeOwners, lTeamMap);
-            writeFileSync(lOptions.labelerLocation, lLabelerContent, {
-                encoding: "utf-8",
-            });
-            pErrorStream.write(`${EOL}Wrote ${lOptions.codeOwners} AND ${lOptions.labelerLocation}${EOL}${EOL}`);
-        }
-        else {
-            pErrorStream.write(`${EOL}Wrote ${lOptions.codeOwners}${EOL}${EOL}`);
-        }
+        main(lOptions, pErrorStream);
     }
     catch (pError) {
         pErrorStream.write(`${EOL}ERROR: ${pError.message}${EOL}${EOL}`);
         process.exitCode = 1;
     }
-}
-function reportAnomalies(pFileName, pAnomalies) {
-    return pAnomalies
-        .map((pAnomaly) => {
-        if (pAnomaly.type === "invalid-line") {
-            return `${pFileName}:${pAnomaly.line}:1 invalid line - neither a rule, comment nor empty: '${pAnomaly.raw}'`;
-        }
-        else {
-            return (`${pFileName}:${pAnomaly.line}:1 invalid user or team name '${pAnomaly.raw}' (# ${pAnomaly.userNumberWithinLine} on this line). ` +
-                `It should either start with '@' or be an e-mail address.`);
-        }
-    })
-        .join(EOL);
 }
 function getOptions(pArguments) {
     return parseArgs({
@@ -112,4 +79,22 @@ function getOptions(pArguments) {
         allowPositionals: true,
         tokens: false,
     }).values;
+}
+function main(pOptions, pErrorStream) {
+    const lTeamMap = readTeamMap(pOptions.virtualTeams);
+    const lVirtualCodeOwners = readVirtualCodeOwners(pOptions.virtualCodeOwners, lTeamMap);
+    const lCodeOwnersContent = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
+    writeFileSync(pOptions.codeOwners, lCodeOwnersContent, {
+        encoding: "utf-8",
+    });
+    if (pOptions.emitLabeler) {
+        const lLabelerContent = generateLabelerYml(lVirtualCodeOwners, lTeamMap);
+        writeFileSync(pOptions.labelerLocation, lLabelerContent, {
+            encoding: "utf-8",
+        });
+        pErrorStream.write(`${EOL}Wrote '${pOptions.codeOwners}' AND '${pOptions.labelerLocation}'${EOL}${EOL}`);
+    }
+    else {
+        pErrorStream.write(`${EOL}Wrote '${pOptions.codeOwners}'${EOL}${EOL}`);
+    }
 }
