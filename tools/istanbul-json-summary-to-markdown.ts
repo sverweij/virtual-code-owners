@@ -34,7 +34,7 @@ function formatSummary(pCoverageSummary: ICoverageSummary): string {
 }
 
 /**
- * Takes the output from the instanbul json-summary reporter (in a readStream),
+ * Takes the output from the istanbul json-summary reporter (in a readStream),
  * formats it in a markdown table and writes it to the provided writeStream
  *
  * @param pStream stream to read the JSON from
