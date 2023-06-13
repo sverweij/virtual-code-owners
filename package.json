@@ -36,7 +36,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "rm -rf dist && node --no-warnings --loader ts-node/esm tools/get-version.ts > src/version.ts && tsc",
+    "build": "rm -rf dist && node --no-warnings --loader ts-node/esm tools/get-version.ts > src/version.ts && tsc && cp -f src/*.json dist/.",
     "check": "npm run format && npm run build && npm run depcruise -- --no-progress && npm test",
     "depcruise": "depcruise src tools",
     "depcruise:graph": "depcruise src --include-only '^(src)' --output-type dot | dot -T svg | depcruise-wrap-stream-in-html > dependency-graph.html",
@@ -82,6 +82,7 @@
     "watskeburt": "0.11.3"
   },
   "dependencies": {
+    "ajv": "8.12.0",
     "yaml": "2.3.1"
   },
   "engines": {

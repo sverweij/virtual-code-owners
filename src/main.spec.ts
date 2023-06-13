@@ -3,16 +3,22 @@ import { Writable } from "node:stream";
 import { cli } from "./main.js";
 
 class WritableTestStream extends Writable {
-  expected = /^$/;
+  expected: RegExp | RegExp[] = /^$/;
 
-  constructor(pExpected?: RegExp) {
+  constructor(pExpected?: RegExp | RegExp[]) {
     super();
     if (pExpected) {
       this.expected = pExpected;
     }
   }
   write(pChunk) {
-    match(pChunk, this.expected);
+    if (Array.isArray(this.expected)) {
+      this.expected.forEach((pExpectedRE) => {
+        match(pChunk, pExpectedRE);
+      });
+    } else {
+      match(pChunk, this.expected);
+    }
     return true;
   }
 }
@@ -46,6 +52,31 @@ describe("main", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(/.*ERROR: ENOENT:.*/);
     cli(["-v", "this-file-does-not-exist.txt"], lOutStream, lErrStream);
+  });
+
+  it("shows an error when passed an invalid virtual-teams file", () => {
+    let lOutStream = new WritableTestStream();
+    let lErrStream = new WritableTestStream([
+      /ERROR: This is not a valid virtual-teams\.yml:/,
+      /src\/__mocks__\/erroneous\-virtual\-teams\.yml: \/ch~1after-sales\/3 - "@daisy-duck" must match pattern/,
+      /src\/__mocks__\/erroneous\-virtual\-teams\.yml: \/ch~1pre-sales\/3 - "john-galt-ch dagny-taggert-ch" must match pattern/,
+      /src\/__mocks__\/erroneous-virtual-teams.yml: \/ch~1mannen-met-baarden - "arie - jan@example.com - pier@example.com - tjorus@example.com - korneel@example.com" must be array/,
+    ]);
+    cli(
+      [
+        "--virtualCodeOwners",
+        "./src/__mocks__/virtual-codeowners.txt",
+        "--virtualTeams",
+        "./src/__mocks__/erroneous-virtual-teams.yml",
+        "--codeOwners",
+        "node_modules/tmp-code-owners.txt",
+        "--emitLabeler",
+        "--labelerLocation",
+        "node_modules/tmp-labeler.yml",
+      ],
+      lOutStream,
+      lErrStream
+    );
   });
 
   it("shows an error when passed an invalid virtual-code-owners file", () => {
