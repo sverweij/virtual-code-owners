@@ -69,7 +69,7 @@ function transformForYamlAndMinimatch(pOriginalString: string): string {
   // Something similar seems to go for values _starting_ with "*"
   // Quoted they're, OK, though so that's what we'll do:
   if (lReturnValue.startsWith("*")) {
-    lReturnValue = `'${lReturnValue}'`;
+    lReturnValue = `"${lReturnValue}"`;
   }
 
   // in CODEOWNERS a file pattern like src/bla/ means 'everything

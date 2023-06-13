@@ -35,7 +35,7 @@ function transformForYamlAndMinimatch(pOriginalString) {
         lReturnValue = "**";
     }
     if (lReturnValue.startsWith("*")) {
-        lReturnValue = `'${lReturnValue}'`;
+        lReturnValue = `"${lReturnValue}"`;
     }
     if (pOriginalString.endsWith("/")) {
         lReturnValue = `${lReturnValue}**`;
