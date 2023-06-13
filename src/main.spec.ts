@@ -1,6 +1,6 @@
 import { match } from "node:assert";
 import { Writable } from "node:stream";
-import { main } from "./main.js";
+import { cli } from "./main.js";
 
 class WritableTestStream extends Writable {
   expected = /^$/;
@@ -21,8 +21,8 @@ describe("main", () => {
   it("shows the version number when asked for", () => {
     let lOutStream = new WritableTestStream(/^[0-9]+\.[0-9]+\.[0-9]+(-.+)?\n$/);
     let lErrStream = new WritableTestStream();
-    main(["-V"], lOutStream, lErrStream);
-    main(["--version"], lOutStream, lErrStream);
+    cli(["-V"], lOutStream, lErrStream);
+    cli(["--version"], lOutStream, lErrStream);
   });
 
   it("shows help when asked for", () => {
@@ -30,8 +30,8 @@ describe("main", () => {
       /^Usage: virtual-code-owners \[options\].*/
     );
     let lErrStream = new WritableTestStream();
-    main(["-h"], lOutStream, lErrStream);
-    main(["--help"], lOutStream, lErrStream);
+    cli(["-h"], lOutStream, lErrStream);
+    cli(["--help"], lOutStream, lErrStream);
   });
 
   it("shows an error when passed a non-existing argument", () => {
@@ -39,13 +39,13 @@ describe("main", () => {
     let lErrStream = new WritableTestStream(
       /.*ERROR:.*'--thisArgumentDoesNotExist'.*/
     );
-    main(["--thisArgumentDoesNotExist"], lOutStream, lErrStream);
+    cli(["--thisArgumentDoesNotExist"], lOutStream, lErrStream);
   });
 
   it("shows an error when passed a non-existing file", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(/.*ERROR: ENOENT:.*/);
-    main(["-v", "this-file-does-not-exist.txt"], lOutStream, lErrStream);
+    cli(["-v", "this-file-does-not-exist.txt"], lOutStream, lErrStream);
   });
 
   it("shows an error when passed an invalid virtual-code-owners file", () => {
@@ -53,7 +53,7 @@ describe("main", () => {
     let lErrStream = new WritableTestStream(
       /.*\.\/src\/__mocks__\/erroneous-virtual-codeowners.txt:16:1 invalid user or team name 'jet' \(# 6 on this line\). It should either start with '@' or be an e-mail address.*/
     );
-    main(
+    cli(
       [
         "--virtualCodeOwners",
         "./src/__mocks__/erroneous-virtual-codeowners.txt",
@@ -73,9 +73,9 @@ describe("main", () => {
   it("ignores positional arguments", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(
-      /.*Wrote node_modules\/tmp-code-owners\.txt.*/
+      /.*Wrote 'node_modules\/tmp-code-owners\.txt'.*/
     );
-    main(
+    cli(
       [
         "--virtualCodeOwners",
         "./src/__mocks__/VIRTUAL-CODEOWNERS.txt",
@@ -95,9 +95,9 @@ describe("main", () => {
   it("shows that both a codeowners and a labeler file were generated when --emitLabeler is used", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(
-      /.*Wrote node_modules\/tmp-code-owners\.txt AND node_modules\/tmp-labeler.yml.*/
+      /.*Wrote 'node_modules\/tmp-code-owners\.txt' AND 'node_modules\/tmp-labeler.yml'.*/
     );
-    main(
+    cli(
       [
         "--virtualCodeOwners",
         "./src/__mocks__/VIRTUAL-CODEOWNERS.txt",

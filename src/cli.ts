@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import { main } from "./main.js";
+import { cli } from "./main.js";
 
-main();
+cli();
