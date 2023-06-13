@@ -51,7 +51,7 @@ describe("main", () => {
   it("shows an error when passed an invalid virtual-code-owners file", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(
-      /.*\.\/src\/__mocks__\/erroneous-virtual-codeowners.txt:16:1 invalid user or team name 'jet' \(# 6 on this line\). It should either start with '@' or be an e-mail address.*/
+      /.*\.\/src\/__mocks__\/erroneous-virtual-codeowners.txt:16:1 invalid user or team name "jet" \(#6 on this line\). It should either start with "@" or be an e-mail address.*/
     );
     cli(
       [
