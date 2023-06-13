@@ -108,7 +108,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
       },
     ];
     const lExpected = `baarden:
-  - '**'
+  - "**"
 
 `;
     equal(generateLabelerYml(lVirtualCodeOwners, TEAMS, ""), lExpected);
@@ -133,7 +133,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
       },
     ];
     const lExpected = `baarden:
-  - '*/src/vlaai/*'
+  - "*/src/vlaai/*"
 
 `;
     equal(generateLabelerYml(lVirtualCodeOwners, TEAMS, ""), lExpected);
