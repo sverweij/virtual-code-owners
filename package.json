@@ -1,15 +1,15 @@
 {
   "name": "virtual-code-owners",
   "version": "6.0.0",
-  "description": "Merges a VIRTUAL-CODEOWNERS.txt and a virtual-teams.yml into CODEOWNERS",
+  "description": "Makes your CODEOWNERS file liveable again",
   "type": "module",
   "exports": {
     "parse": [
       {
-        "import": "./dist/parse.js",
-        "types": "./types/parse.d.ts"
+        "import": "./dist/parse-virtual-code-owners.js",
+        "types": "./types/parse-virtual-code-owners.d.ts"
       },
-      "./dist/parse.js"
+      "./dist/parse-virtual-code-owners.js"
     ],
     "generateCodeOwners": [
       {

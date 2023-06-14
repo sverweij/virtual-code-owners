@@ -4,7 +4,7 @@ import { extname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
 import type { IVirtualCodeOwnersCST } from "../types/types.js";
-import { getAnomalies, parse } from "./parse.js";
+import { getAnomalies, parse } from "./parse-virtual-code-owners.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

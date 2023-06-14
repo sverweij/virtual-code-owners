@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { ITeamMap } from "../types/types.js";
 import generateCodeOwners from "./generate-codeowners.js";
-import { parse } from "./parse.js";
+import { parse } from "./parse-virtual-code-owners.js";
 import readTeamMap from "./read-team-map.js";
 import readVirtualCodeOwners from "./read-virtual-code-owners.js";
 
