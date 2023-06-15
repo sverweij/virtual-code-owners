@@ -10,7 +10,20 @@
 
 vco:
   - "**"
+  - types/**
+  - README.md
 
 vco-admins:
   - .github/**
   - tools/**
+
+tools:
+  - tools/**
+
+admin:
+  - .github/**
+
+documentation:
+  - types/**
+  - README.md
+

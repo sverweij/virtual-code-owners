@@ -71,7 +71,7 @@ This is where `virtual-code-owners` comes in.
 
 ### VIRTUAL-CODEOWNERS.txt
 
-`VIRTUAL_CODEOWNERS.txt` is a regular, valid GitHub [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) file.
+`VIRTUAL-CODEOWNERS.txt` is a regular, valid GitHub [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) file.
 The only difference between VIRTUAL-CODEOWNERS.txt and a CODEOWNERS file is that
 the _teams_ the former uses might not exist yet, except in a `virtual-teams.yml`.
 This enables you to write a _much_ easier to maintain list of code owners.
@@ -189,10 +189,10 @@ file that will check that for you.
 - ~~Currently only works for _user names_ to identify team members - not for e-mail
   addresses.~~
   Works with both user names and e-mail addresses
-- _virtual-code-owners_ assumes the VIRTUAL-CODEOWNERS.txt is a valid CODEOWNERS
-  file and the virtual-teams.yml is a valid yaml file with teams names as keys
-  and team members as arrays under these. It will likely throw errors when this
-  assumption is not met, but the error-messages might be cryptic.
+- Although _virtual-code-owners_ performs basic validations on the CODEOWNER
+  format and tries to emit clear and actionable error messages about them, it
+  might not catch all of them - e.g. it doesn't check if the users in
+  virtual-teams.yml actually exist.
 
 ### Why the `.txt` extension?
 

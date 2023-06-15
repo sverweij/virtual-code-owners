@@ -4,3 +4,8 @@ vco:
 vco-admins:
   - sverweij
   - mcmeadow
+
+# just labels? pass an empty array
+tools: []
+admin: []
+documentation: []

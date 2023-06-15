@@ -5,5 +5,7 @@
 *         @vco
 
 # For things in .github also the eye of the admin group is useful
-.github/  @vco-admins
-tools/    @vco-admins
+.github/  @vco-admins @admin
+tools/    @vco-admins @tools
+types/    @vco @documentation
+README.md @vco @documentation
