@@ -20,7 +20,7 @@ export default function generateCodeOwners(pVirtualCodeOwners, pTeamMap, pGenera
 function generateLine(pCSTLine, pTeamMap) {
     if (pCSTLine.type === "rule") {
         const lUserNames = uniq(pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)))
-            .sort()
+            .sort(compareUserNames)
             .join(" ");
         return pCSTLine.filesPattern + pCSTLine.spaces + lUserNames;
     }
@@ -40,6 +40,9 @@ function userNameToCodeOwner(pUserName) {
         return pUserName;
     }
     return `@${pUserName}`;
+}
+function compareUserNames(pLeftName, pRightName) {
+    return pLeftName.toLowerCase() > pRightName.toLowerCase() ? 1 : -1;
 }
 function uniq(pUserNames) {
     return Array.from(new Set(pUserNames));

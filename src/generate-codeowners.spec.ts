@@ -191,6 +191,26 @@ tools/ @team-tgif`;
     );
   });
 
+  it("sorts the usernames in place - ignoring case", () => {
+    const lFixture = "tools/shared @team-unsorted";
+    const lTeamMapFixture = {
+      "team-unsorted": [
+        "zus",
+        "Jantje",
+        "jan",
+        "tjorus",
+        "teun",
+        "jet",
+        "gijs",
+      ],
+    };
+    const lExpected = "tools/shared @gijs @jan @Jantje @jet @teun @tjorus @zus";
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected
+    );
+  });
+
   it("writes the kitchensink", () => {
     const lTeamMap = readTeamMap(
       join(__dirname, "__mocks__", "virtual-teams.yml")
