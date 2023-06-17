@@ -1,15 +1,11 @@
 import { deepStrictEqual, equal } from "node:assert";
 import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
-import { join } from "node:path";
-import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
 import type { IVirtualCodeOwnersCST } from "../types/types.js";
 import generateLabelerYml from "./generate-labeler-yml.js";
 import readTeamMap from "./read-team-map.js";
 import readVirtualCodeOwners from "./read-virtual-code-owners.js";
-
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 const TEAMS = {
   "the-a-team": ["smith", "baracus", "peck", "murdock"],
@@ -173,14 +169,17 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
 
   it("writes the kitchensink", () => {
     const lTeamMap = readTeamMap(
-      join(__dirname, "__mocks__", "virtual-teams.yml")
+      new URL("./__mocks__/virtual-teams.yml", import.meta.url).pathname
     );
     const lVirtualCodeOwners = readVirtualCodeOwners(
-      join(__dirname, "__mocks__", "VIRTUAL-CODEOWNERS.txt"),
+      new URL("./__mocks__/VIRTUAL-CODEOWNERS.txt", import.meta.url).pathname,
       lTeamMap
     );
     const lExpected = parseYaml(
-      readFileSync(join(__dirname, "__fixtures__", "labeler.yml"), "utf-8")
+      readFileSync(
+        new URL("./__fixtures__/labeler.yml", import.meta.url),
+        "utf-8"
+      )
     );
     const lFound = parseYaml(generateLabelerYml(lVirtualCodeOwners, lTeamMap));
     deepStrictEqual(lFound, lExpected);

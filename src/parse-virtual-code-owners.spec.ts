@@ -1,18 +1,18 @@
 import { deepStrictEqual } from "node:assert";
 import { readFileSync, readdirSync } from "node:fs";
 import { extname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
 import type { IVirtualCodeOwnersCST } from "../types/types.js";
 import { getAnomalies, parse } from "./parse-virtual-code-owners.js";
 
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
-
 function relEmpty(pFileName) {
-  return join(__dirname, "__fixtures__/corpus/empty-teams", pFileName);
+  return new URL(
+    join("__fixtures__/corpus/empty-teams", pFileName),
+    import.meta.url
+  );
 }
 function rel(pFileName) {
-  return join(__dirname, "__fixtures__/corpus/teams", pFileName);
+  return new URL(join("__fixtures__/corpus/teams", pFileName), import.meta.url);
 }
 function getOutputFileName(pFileName) {
   return pFileName.replace(/\.txt$/, ".yml");
@@ -26,7 +26,9 @@ const TEAMS = {
 
 describe("parses VIRTUAL-CODEOWNERS.txt - empty 'virtual teams'", () => {
   readdirSync(relEmpty(""))
-    .filter((pFileName: string) => extname(relEmpty(pFileName)) === ".txt")
+    .filter(
+      (pFileName: string) => extname(relEmpty(pFileName).pathname) === ".txt"
+    )
     .sort()
     .forEach((pFileName: string) => {
       const lInput = readFileSync(relEmpty(pFileName), "utf-8");
@@ -41,7 +43,7 @@ describe("parses VIRTUAL-CODEOWNERS.txt - empty 'virtual teams'", () => {
 });
 describe("parses VIRTUAL-CODEOWNERS.txt - with 'virtual teams'", () => {
   readdirSync(rel(""))
-    .filter((pFileName: string) => extname(rel(pFileName)) === ".txt")
+    .filter((pFileName: string) => extname(rel(pFileName).pathname) === ".txt")
     .sort()
     .forEach((pFileName: string) => {
       const lInput = readFileSync(rel(pFileName), "utf-8");
