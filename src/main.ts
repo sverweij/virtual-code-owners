@@ -14,6 +14,7 @@ interface IOptions {
   codeOwners: string;
   emitLabeler: boolean;
   labelerLocation: string;
+  dryRun: boolean;
   help: boolean;
   version: boolean;
 }
@@ -36,6 +37,8 @@ Options:
                                        (default: false)
   --labelerLocation [file-name]        The location of the labeler.yml file
                                        (default: ".github/labeler.yml")
+  --dryRun                             Just validate inputs, don't generate
+                                       outputs (default: false)
   -h, --help                           display help for command`;
 
 export function cli(
@@ -90,6 +93,10 @@ function getOptions(pArguments: string[]): IOptions {
         type: "string",
         default: ".github/labeler.yml",
       },
+      dryRun: {
+        type: "boolean",
+        default: false,
+      },
       help: { type: "boolean", short: "h", default: false },
       version: { type: "boolean", short: "V", default: false },
     },
@@ -109,15 +116,19 @@ function main(pOptions: IOptions, pErrorStream: Writable) {
   );
 
   const lCodeOwnersContent = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
-  writeFileSync(pOptions.codeOwners, lCodeOwnersContent, {
-    encoding: "utf-8",
-  });
+  if (!pOptions.dryRun) {
+    writeFileSync(pOptions.codeOwners, lCodeOwnersContent, {
+      encoding: "utf-8",
+    });
+  }
 
   if (pOptions.emitLabeler) {
     const lLabelerContent = generateLabelerYml(lVirtualCodeOwners, lTeamMap);
-    writeFileSync(pOptions.labelerLocation, lLabelerContent, {
-      encoding: "utf-8",
-    });
+    if (!pOptions.dryRun) {
+      writeFileSync(pOptions.labelerLocation, lLabelerContent, {
+        encoding: "utf-8",
+      });
+    }
     pErrorStream.write(
       `${EOL}Wrote '${pOptions.codeOwners}' AND '${pOptions.labelerLocation}'${EOL}${EOL}`
     );

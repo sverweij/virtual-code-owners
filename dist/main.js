@@ -25,6 +25,8 @@ Options:
                                        (default: false)
   --labelerLocation [file-name]        The location of the labeler.yml file
                                        (default: ".github/labeler.yml")
+  --dryRun                             Just validate inputs, don't generate
+                                       outputs (default: false)
   -h, --help                           display help for command`;
 export function cli(pArguments = process.argv.slice(2), pOutStream = process.stdout, pErrorStream = process.stderr) {
     try {
@@ -72,6 +74,10 @@ function getOptions(pArguments) {
                 type: "string",
                 default: ".github/labeler.yml",
             },
+            dryRun: {
+                type: "boolean",
+                default: false,
+            },
             help: { type: "boolean", short: "h", default: false },
             version: { type: "boolean", short: "V", default: false },
         },
@@ -84,14 +90,18 @@ function main(pOptions, pErrorStream) {
     const lTeamMap = readTeamMap(pOptions.virtualTeams);
     const lVirtualCodeOwners = readVirtualCodeOwners(pOptions.virtualCodeOwners, lTeamMap);
     const lCodeOwnersContent = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
-    writeFileSync(pOptions.codeOwners, lCodeOwnersContent, {
-        encoding: "utf-8",
-    });
-    if (pOptions.emitLabeler) {
-        const lLabelerContent = generateLabelerYml(lVirtualCodeOwners, lTeamMap);
-        writeFileSync(pOptions.labelerLocation, lLabelerContent, {
+    if (!pOptions.dryRun) {
+        writeFileSync(pOptions.codeOwners, lCodeOwnersContent, {
             encoding: "utf-8",
         });
+    }
+    if (pOptions.emitLabeler) {
+        const lLabelerContent = generateLabelerYml(lVirtualCodeOwners, lTeamMap);
+        if (!pOptions.dryRun) {
+            writeFileSync(pOptions.labelerLocation, lLabelerContent, {
+                encoding: "utf-8",
+            });
+        }
         pErrorStream.write(`${EOL}Wrote '${pOptions.codeOwners}' AND '${pOptions.labelerLocation}'${EOL}${EOL}`);
     }
     else {
