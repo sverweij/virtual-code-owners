@@ -236,3 +236,13 @@ npx virtual-code-owners --emitLabeler
 
 If you have an alternate file location for the `labeler.yml` you can specify that
 with virtual-code-owner's `--labelerLocation` parameter.
+
+### Can I just run virtual-code-owners to validate VIRTUAL-CODEOWNERS.txt & virtual-teams.yml?
+
+So _without_ generating any output?
+
+Yes. Use the `--dryRun` command line option:
+
+```
+npx virtual-code-owners --dryRun
+```
