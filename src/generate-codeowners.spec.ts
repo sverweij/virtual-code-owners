@@ -1,15 +1,11 @@
 import { deepStrictEqual, equal } from "node:assert";
 import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
-import { join } from "node:path";
-import { fileURLToPath } from "node:url";
 import type { ITeamMap } from "../types/types.js";
 import generateCodeOwners from "./generate-codeowners.js";
 import { parse } from "./parse-virtual-code-owners.js";
 import readTeamMap from "./read-team-map.js";
 import readVirtualCodeOwners from "./read-virtual-code-owners.js";
-
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export function generateCodeOwnersFromString(
   pCodeOwnersFileAsString: string,
@@ -213,14 +209,14 @@ tools/ @team-tgif`;
 
   it("writes the kitchensink", () => {
     const lTeamMap = readTeamMap(
-      join(__dirname, "__mocks__", "virtual-teams.yml")
+      new URL("./__mocks__/virtual-teams.yml", import.meta.url).pathname
     );
     const lVirtualCodeOwners = readVirtualCodeOwners(
-      join(__dirname, "__mocks__", "VIRTUAL-CODEOWNERS.txt"),
+      new URL("./__mocks__/VIRTUAL-CODEOWNERS.txt", import.meta.url).pathname,
       lTeamMap
     );
     const lExpected = readFileSync(
-      join(__dirname, "__fixtures__", "CODEOWNERS"),
+      new URL("./__fixtures__/CODEOWNERS", import.meta.url),
       "utf-8"
     );
     const lFound = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
