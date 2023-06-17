@@ -41,7 +41,7 @@ function generateLine(
     const lUserNames = uniq(
       pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap))
     )
-      .sort()
+      .sort(compareUserNames)
       .join(" ");
     return pCSTLine.filesPattern + pCSTLine.spaces + lUserNames;
   }
@@ -64,6 +64,10 @@ function userNameToCodeOwner(pUserName: string): string {
     return pUserName;
   }
   return `@${pUserName}`;
+}
+
+function compareUserNames(pLeftName: string, pRightName: string): number {
+  return pLeftName.toLowerCase() > pRightName.toLowerCase() ? 1 : -1;
 }
 
 function uniq(pUserNames: string[]): string[] {
