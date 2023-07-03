@@ -71,7 +71,7 @@
     "@types/mocha": "10.0.1",
     "@types/node": "20.3.3",
     "c8": "8.0.0",
-    "dependency-cruiser": "13.0.4",
+    "dependency-cruiser": "13.0.5",
     "husky": "8.0.3",
     "lint-staged": "13.2.2",
     "mocha": "10.2.0",
