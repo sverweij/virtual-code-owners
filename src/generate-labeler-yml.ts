@@ -19,7 +19,7 @@ const DEFAULT_WARNING =
 export default function generateLabelerYml(
   pCodeOwners: IVirtualCodeOwnersCST,
   pTeamMap: ITeamMap,
-  pGeneratedWarning: string = DEFAULT_WARNING
+  pGeneratedWarning: string = DEFAULT_WARNING,
 ): string {
   let lReturnValue = pGeneratedWarning;
   for (const lTeamName in pTeamMap) {
@@ -36,7 +36,7 @@ export default function generateLabelerYml(
 
 function getPatternsForTeam(
   pCodeOwners: IVirtualCodeOwnersCST,
-  pTeamName: string
+  pTeamName: string,
 ): string[] {
   return (
     pCodeOwners
@@ -91,10 +91,10 @@ function transformForYamlAndMinimatch(pOriginalString: string): string {
 
 function lineContainsTeamName(
   pLine: IInterestingCSTLine,
-  pTeamName: string
+  pTeamName: string,
 ): boolean {
   return pLine.users.some(
     (pUser) =>
-      pUser.type === "virtual-team-name" && pUser.bareName === pTeamName
+      pUser.type === "virtual-team-name" && pUser.bareName === pTeamName,
   );
 }

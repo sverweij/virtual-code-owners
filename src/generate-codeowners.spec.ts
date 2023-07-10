@@ -10,7 +10,7 @@ import readVirtualCodeOwners from "./read-virtual-code-owners.js";
 export function generateCodeOwnersFromString(
   pCodeOwnersFileAsString: string,
   pTeamMap: ITeamMap,
-  pGeneratedWarning: string = ""
+  pGeneratedWarning: string = "",
 ): string {
   const lVirtualCodeOwners = parse(pCodeOwnersFileAsString, pTeamMap);
 
@@ -55,7 +55,7 @@ tools/ @team-tgif`;
     const lExpected = "tools/shared @jan @jet @pier @tjorus @wim @zus";
     equal(
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
-      lExpected
+      lExpected,
     );
   });
 
@@ -68,7 +68,7 @@ tools/ @team-tgif`;
     const lExpected = "tools/shared @jet @wim @zus";
     equal(
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
-      lExpected
+      lExpected,
     );
   });
 
@@ -81,7 +81,7 @@ tools/ @team-tgif`;
     const lExpected = "tools/shared @jet @wim @zus korneel@example.com";
     equal(
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
-      lExpected
+      lExpected,
     );
   });
 
@@ -99,7 +99,7 @@ tools/ @team-tgif`;
       "tools/shared @jan @tjorus korneel@example.com pier@example.com";
     equal(
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
-      lExpected
+      lExpected,
     );
   });
 
@@ -112,7 +112,7 @@ tools/ @team-tgif`;
     const lExpected = "tools/shared @jan @jet @multi-teamer @tjorus @wim @zus";
     equal(
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
-      lExpected
+      lExpected,
     );
   });
 
@@ -125,7 +125,7 @@ tools/ @team-tgif`;
     const lExpected = "@team-sales @jet @multi-teamer @wim @zus";
     equal(
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
-      lExpected
+      lExpected,
     );
   });
 
@@ -140,7 +140,7 @@ tools/ @team-tgif`;
       "tools/shared     @jan @jet @multi-teamer @tjorus @wim @zus";
     equal(
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
-      lExpected
+      lExpected,
     );
   });
 
@@ -153,7 +153,7 @@ tools/ @team-tgif`;
     const lExpected = "tools/shared";
     equal(
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
-      lExpected
+      lExpected,
     );
   });
 
@@ -171,7 +171,7 @@ tools/ @team-tgif`;
 
     equal(
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, lWarningText),
-      lExpected
+      lExpected,
     );
   });
 
@@ -183,7 +183,7 @@ tools/ @team-tgif`;
     const lExpected = "tools/shared @gijs @jan @jet @teun @tjorus @zus";
     equal(
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
-      lExpected
+      lExpected,
     );
   });
 
@@ -203,21 +203,21 @@ tools/ @team-tgif`;
     const lExpected = "tools/shared @gijs @jan @Jantje @jet @teun @tjorus @zus";
     equal(
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
-      lExpected
+      lExpected,
     );
   });
 
   it("writes the kitchensink", () => {
     const lTeamMap = readTeamMap(
-      new URL("./__mocks__/virtual-teams.yml", import.meta.url).pathname
+      new URL("./__mocks__/virtual-teams.yml", import.meta.url).pathname,
     );
     const lVirtualCodeOwners = readVirtualCodeOwners(
       new URL("./__mocks__/VIRTUAL-CODEOWNERS.txt", import.meta.url).pathname,
-      lTeamMap
+      lTeamMap,
     );
     const lExpected = readFileSync(
       new URL("./__fixtures__/CODEOWNERS", import.meta.url),
-      "utf-8"
+      "utf-8",
     );
     const lFound = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
     deepStrictEqual(lFound, lExpected);

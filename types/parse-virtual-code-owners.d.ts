@@ -10,9 +10,9 @@ import type { IAnomaly, ITeamMap, IVirtualCodeOwnersCST } from "./types.js";
  */
 export declare function parse(
   pVirtualCodeOwnersAsString: string,
-  pTeamMap?: ITeamMap
+  pTeamMap?: ITeamMap,
 ): IVirtualCodeOwnersCST;
 
 export declare function getAnomalies(
-  pVirtualCodeOwners: IVirtualCodeOwnersCST
+  pVirtualCodeOwners: IVirtualCodeOwnersCST,
 ): IAnomaly[];

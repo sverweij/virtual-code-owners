@@ -22,7 +22,7 @@ const DEFAULT_WARNING =
 export default function generateCodeOwners(
   pVirtualCodeOwners: IVirtualCodeOwnersCST,
   pTeamMap: ITeamMap,
-  pGeneratedWarning: string = DEFAULT_WARNING
+  pGeneratedWarning: string = DEFAULT_WARNING,
 ): string {
   return (
     pGeneratedWarning +
@@ -35,11 +35,11 @@ export default function generateCodeOwners(
 
 function generateLine(
   pCSTLine: IVirtualCodeOwnerLine,
-  pTeamMap: ITeamMap
+  pTeamMap: ITeamMap,
 ): string {
   if (pCSTLine.type === "rule") {
     const lUserNames = uniq(
-      pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap))
+      pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)),
     )
       .sort(compareUserNames)
       .join(" ");

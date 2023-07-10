@@ -8,22 +8,22 @@ import {
 
 export default function readVirtualCodeOwners(
   pVirtualCodeOwnersFileName: string,
-  pTeamMap: ITeamMap
+  pTeamMap: ITeamMap,
 ): IVirtualCodeOwnersCST {
   const lVirtualCodeOwnersAsAString = readFileSync(pVirtualCodeOwnersFileName, {
     encoding: "utf-8",
   });
   const lVirtualCodeOwners = parseVirtualCodeOwners(
     lVirtualCodeOwnersAsAString,
-    pTeamMap
+    pTeamMap,
   );
   const lAnomalies = getAnomalies(lVirtualCodeOwners);
   if (lAnomalies.length > 0) {
     throw new Error(
       `This is not a valid virtual code-owners file:${EOL}${reportAnomalies(
         pVirtualCodeOwnersFileName,
-        lAnomalies
-      )}`
+        lAnomalies,
+      )}`,
     );
   }
   return lVirtualCodeOwners;

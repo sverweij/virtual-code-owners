@@ -8,7 +8,7 @@ import { getAnomalies, parse } from "./parse-virtual-code-owners.js";
 function relEmpty(pFileName) {
   return new URL(
     join("__fixtures__/corpus/empty-teams", pFileName),
-    import.meta.url
+    import.meta.url,
   );
 }
 function rel(pFileName) {
@@ -27,14 +27,14 @@ const TEAMS = {
 describe("parses VIRTUAL-CODEOWNERS.txt - empty 'virtual teams'", () => {
   readdirSync(relEmpty(""))
     .filter(
-      (pFileName: string) => extname(relEmpty(pFileName).pathname) === ".txt"
+      (pFileName: string) => extname(relEmpty(pFileName).pathname) === ".txt",
     )
     .sort()
     .forEach((pFileName: string) => {
       const lInput = readFileSync(relEmpty(pFileName), "utf-8");
       const lExpected = readFileSync(
         relEmpty(getOutputFileName(pFileName)),
-        "utf-8"
+        "utf-8",
       );
       it(`parses ${pFileName}`, () => {
         deepStrictEqual(parse(lInput, TEAMS_EMPTY), parseYaml(lExpected));
@@ -49,7 +49,7 @@ describe("parses VIRTUAL-CODEOWNERS.txt - with 'virtual teams'", () => {
       const lInput = readFileSync(rel(pFileName), "utf-8");
       const lExpected = readFileSync(
         rel(getOutputFileName(pFileName)),
-        "utf-8"
+        "utf-8",
       );
       it(`parses ${pFileName}`, () => {
         deepStrictEqual(parse(lInput, TEAMS), parseYaml(lExpected));

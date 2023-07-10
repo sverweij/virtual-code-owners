@@ -13,17 +13,17 @@ import { isEmailIshUsername } from "./utensils.js";
 
 export function parse(
   pVirtualCodeOwnersAsString: string,
-  pTeamMap: ITeamMap = {}
+  pTeamMap: ITeamMap = {},
 ): IVirtualCodeOwnersCST {
   return pVirtualCodeOwnersAsString
     .split(EOL)
     .map((pUntreatedLine, pLineNo) =>
-      parseLine(pUntreatedLine, pTeamMap, pLineNo + 1)
+      parseLine(pUntreatedLine, pTeamMap, pLineNo + 1),
     );
 }
 
 export function getAnomalies(
-  pVirtualCodeOwners: IVirtualCodeOwnersCST
+  pVirtualCodeOwners: IVirtualCodeOwnersCST,
 ): IAnomaly[] {
   const weirdLines = pVirtualCodeOwners
     .filter((pLine) => pLine.type === "unknown")
@@ -61,11 +61,11 @@ function orderAnomaly(pLeft: IAnomaly, pRight: IAnomaly): number {
 function parseLine(
   pUntreatedLine: string,
   pTeamMap: ITeamMap,
-  pLineNo: number
+  pLineNo: number,
 ): IVirtualCodeOwnerLine {
   const lTrimmedLine = pUntreatedLine.trim();
   const lSplitLine = lTrimmedLine.match(
-    /^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/
+    /^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/,
   );
 
   if (lTrimmedLine.startsWith("#!")) {
@@ -107,7 +107,7 @@ function parseUsers(pUserNamesString: string, pTeamMap: ITeamMap): IUser[] {
 function getUserNameType(
   pUserName: string,
   pBareName: string,
-  pTeamMap: ITeamMap
+  pTeamMap: ITeamMap,
 ): UserType {
   if (isEmailIshUsername(pUserName)) {
     return "e-mail-address";

@@ -161,25 +161,25 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
       generateLabelerYml(
         lVirtualCodeOwners,
         TEAMS,
-        `# some header or other${EOL}`
+        `# some header or other${EOL}`,
       ),
-      lExpected
+      lExpected,
     );
   });
 
   it("writes the kitchensink", () => {
     const lTeamMap = readTeamMap(
-      new URL("./__mocks__/virtual-teams.yml", import.meta.url).pathname
+      new URL("./__mocks__/virtual-teams.yml", import.meta.url).pathname,
     );
     const lVirtualCodeOwners = readVirtualCodeOwners(
       new URL("./__mocks__/VIRTUAL-CODEOWNERS.txt", import.meta.url).pathname,
-      lTeamMap
+      lTeamMap,
     );
     const lExpected = parseYaml(
       readFileSync(
         new URL("./__fixtures__/labeler.yml", import.meta.url),
-        "utf-8"
-      )
+        "utf-8",
+      ),
     );
     const lFound = parseYaml(generateLabelerYml(lVirtualCodeOwners, lTeamMap));
     deepStrictEqual(lFound, lExpected);

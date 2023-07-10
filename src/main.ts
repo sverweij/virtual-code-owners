@@ -44,7 +44,7 @@ Options:
 export function cli(
   pArguments: string[] = process.argv.slice(2),
   pOutStream: Writable = process.stdout,
-  pErrorStream: Writable = process.stderr
+  pErrorStream: Writable = process.stderr,
 ) {
   try {
     const lOptions = getOptions(pArguments);
@@ -112,7 +112,7 @@ function main(pOptions: IOptions, pErrorStream: Writable) {
   const lTeamMap = readTeamMap(pOptions.virtualTeams);
   const lVirtualCodeOwners = readVirtualCodeOwners(
     pOptions.virtualCodeOwners,
-    lTeamMap
+    lTeamMap,
   );
 
   const lCodeOwnersContent = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
@@ -130,7 +130,7 @@ function main(pOptions: IOptions, pErrorStream: Writable) {
       });
     }
     pErrorStream.write(
-      `${EOL}Wrote '${pOptions.codeOwners}' AND '${pOptions.labelerLocation}'${EOL}${EOL}`
+      `${EOL}Wrote '${pOptions.codeOwners}' AND '${pOptions.labelerLocation}'${EOL}${EOL}`,
     );
   } else {
     pErrorStream.write(`${EOL}Wrote '${pOptions.codeOwners}'${EOL}${EOL}`);

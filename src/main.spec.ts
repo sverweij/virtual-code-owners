@@ -34,7 +34,7 @@ describe("main", () => {
 
   it("shows help when asked for", () => {
     let lOutStream = new WritableTestStream(
-      /^Usage: virtual-code-owners \[options\].*/
+      /^Usage: virtual-code-owners \[options\].*/,
     );
     let lErrStream = new WritableTestStream();
     cli(["-h"], lOutStream, lErrStream);
@@ -44,7 +44,7 @@ describe("main", () => {
   it("shows an error when passed a non-existing argument", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(
-      /.*ERROR:.*'--thisArgumentDoesNotExist'.*/
+      /.*ERROR:.*'--thisArgumentDoesNotExist'.*/,
     );
     cli(["--thisArgumentDoesNotExist"], lOutStream, lErrStream);
   });
@@ -76,14 +76,14 @@ describe("main", () => {
         "node_modules/tmp-labeler.yml",
       ],
       lOutStream,
-      lErrStream
+      lErrStream,
     );
   });
 
   it("shows an error when passed an invalid virtual-code-owners file", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(
-      /.*\.\/src\/__mocks__\/erroneous-virtual-codeowners.txt:16:1 invalid user or team name "jet" \(#6 on this line\). It should either start with "@" or be an e-mail address.*/
+      /.*\.\/src\/__mocks__\/erroneous-virtual-codeowners.txt:16:1 invalid user or team name "jet" \(#6 on this line\). It should either start with "@" or be an e-mail address.*/,
     );
     cli(
       [
@@ -98,14 +98,14 @@ describe("main", () => {
         "node_modules/tmp-labeler.yml",
       ],
       lOutStream,
-      lErrStream
+      lErrStream,
     );
   });
 
   it("with --dryRun, still shows an error when passed an invalid virtual-code-owners file", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(
-      /.*\.\/src\/__mocks__\/erroneous-virtual-codeowners.txt:16:1 invalid user or team name "jet" \(#6 on this line\). It should either start with "@" or be an e-mail address.*/
+      /.*\.\/src\/__mocks__\/erroneous-virtual-codeowners.txt:16:1 invalid user or team name "jet" \(#6 on this line\). It should either start with "@" or be an e-mail address.*/,
     );
     cli(
       [
@@ -121,14 +121,14 @@ describe("main", () => {
         "--dryRun",
       ],
       lOutStream,
-      lErrStream
+      lErrStream,
     );
   });
 
   it("ignores positional arguments", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(
-      /.*Wrote 'node_modules\/tmp-code-owners\.txt'.*/
+      /.*Wrote 'node_modules\/tmp-code-owners\.txt'.*/,
     );
     cli(
       [
@@ -143,14 +143,14 @@ describe("main", () => {
         "arguments",
       ],
       lOutStream,
-      lErrStream
+      lErrStream,
     );
   });
 
   it("shows that both a codeowners and a labeler file were generated when --emitLabeler is used + emits files", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(
-      /.*Wrote 'node_modules\/tmp-code-owners\.txt' AND 'node_modules\/tmp-labeler.yml'.*/
+      /.*Wrote 'node_modules\/tmp-code-owners\.txt' AND 'node_modules\/tmp-labeler.yml'.*/,
     );
     const lCodeOwnersFileName = "node_modules/tmp-code-owners.txt";
     const lLabelerFileName = "node_modules/tmp-labeler.yml";
@@ -169,7 +169,7 @@ describe("main", () => {
         lLabelerFileName,
       ],
       lOutStream,
-      lErrStream
+      lErrStream,
     );
     doesNotThrow(() => {
       accessSync(lCodeOwnersFileName, constants.R_OK);
@@ -184,7 +184,7 @@ describe("main", () => {
   it("with --dryRun, still shows that both a codeowners and a labeler file were generated when --emitLabeler is used + does not emit files", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream(
-      /.*Wrote 'node_modules\/tmp-dry-run-so-shouldnt-exist-code-owners\.txt' AND 'node_modules\/tmp-dry-run-so-shouldnt-exist-labeler.yml'.*/
+      /.*Wrote 'node_modules\/tmp-dry-run-so-shouldnt-exist-code-owners\.txt' AND 'node_modules\/tmp-dry-run-so-shouldnt-exist-labeler.yml'.*/,
     );
     cli(
       [
@@ -200,19 +200,19 @@ describe("main", () => {
         "--dryRun",
       ],
       lOutStream,
-      lErrStream
+      lErrStream,
     );
 
     throws(() => {
       accessSync(
         "node_modules/tmp-dry-run-so-shouldnt-exist-code-owners.txt",
-        constants.R_OK
+        constants.R_OK,
       );
     }, /ENOENT/);
     throws(() => {
       accessSync(
         "node_modules/tmp-dry-run-so-shouldnt-exist-labeler.yml",
-        constants.R_OK
+        constants.R_OK,
       );
     }, /ENOENT/);
   });

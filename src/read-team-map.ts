@@ -5,7 +5,10 @@ import type { ITeamMap } from "types/types.js";
 import { parse as parseYaml } from "yaml";
 
 const TEAM_MAP_SCHEMA = JSON.parse(
-  readFileSync(new URL("./virtual-teams.schema.json", import.meta.url), "utf-8")
+  readFileSync(
+    new URL("./virtual-teams.schema.json", import.meta.url),
+    "utf-8",
+  ),
 );
 
 export default function readTeamMap(pVirtualTeamsFileName: string): ITeamMap {
@@ -30,15 +33,15 @@ function validateTeamMap(pTeamMap: ITeamMap, pVirtualTeamsFileName: string) {
     throw new Error(
       `This is not a valid virtual-teams.yml:${EOL}${formatAjvErrors(
         ajv.errors,
-        pVirtualTeamsFileName
-      )}.\n`
+        pVirtualTeamsFileName,
+      )}.\n`,
     );
   }
 }
 
 function formatAjvErrors(
   pAjvErrors: any[],
-  pVirtualTeamsFileName: string
+  pVirtualTeamsFileName: string,
 ): string {
   return pAjvErrors
     .map((pAjvError) => formatAjvError(pAjvError, pVirtualTeamsFileName))
