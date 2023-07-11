@@ -16,12 +16,12 @@ export default function readTeamMap(pVirtualTeamsFileName: string): ITeamMap {
     encoding: "utf-8",
   });
   const lTeamMap = parseYaml(lVirtualTeamsAsAString) as ITeamMap;
-  validateTeamMap(lTeamMap, pVirtualTeamsFileName);
+  assertTeamMapValid(lTeamMap, pVirtualTeamsFileName);
 
   return lTeamMap;
 }
 
-function validateTeamMap(pTeamMap: ITeamMap, pVirtualTeamsFileName: string) {
+function assertTeamMapValid(pTeamMap: ITeamMap, pVirtualTeamsFileName: string) {
   //@ts-expect-error typescript can't find a constructor in the type declaration.
   // This _works_, though and is the canonical way to work with ajv
   const ajv = new Ajv({

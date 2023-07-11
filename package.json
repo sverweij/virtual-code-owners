@@ -45,7 +45,7 @@
     "depcruise:graph:diff:dev": "depcruise src --prefix vscode://file/$(pwd)/ --output-type dot --reaches \"$(watskeburt $SHA -T regex)\"| dot -T svg | depcruise-wrap-stream-in-html | browser",
     "depcruise:graph:diff:mermaid": "depcruise src tools --output-type mermaid --output-to - --reaches \"$(watskeburt $SHA -T regex)\"",
     "depcruise:html": "depcruise src tools --output-type err-html --output-to dependency-violation-report.html",
-    "format": "prettier --log-level log --write \"**/*.{md,ts,json,yml}\"",
+    "format": "prettier --log-level warn --write \"**/*.{md,ts,json,yml}\"",
     "prepare": "husky install",
     "scm:stage": "git add .",
     "test": "NODE_OPTIONS=--no-warnings c8 mocha",

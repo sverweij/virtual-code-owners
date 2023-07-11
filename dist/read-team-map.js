@@ -8,10 +8,10 @@ export default function readTeamMap(pVirtualTeamsFileName) {
         encoding: "utf-8",
     });
     const lTeamMap = parseYaml(lVirtualTeamsAsAString);
-    validateTeamMap(lTeamMap, pVirtualTeamsFileName);
+    assertTeamMapValid(lTeamMap, pVirtualTeamsFileName);
     return lTeamMap;
 }
-function validateTeamMap(pTeamMap, pVirtualTeamsFileName) {
+function assertTeamMapValid(pTeamMap, pVirtualTeamsFileName) {
     const ajv = new Ajv({
         allErrors: true,
         verbose: true,
