@@ -28,7 +28,7 @@ Options:
   --dryRun                             Just validate inputs, don't generate
                                        outputs (default: false)
   -h, --help                           display help for command`;
-export function cli(pArguments = process.argv.slice(2), pOutStream = process.stdout, pErrorStream = process.stderr) {
+export function cli(pArguments = process.argv.slice(2), pOutStream = process.stdout, pErrorStream = process.stderr, pErrorExitCode = 1) {
     try {
         const lOptions = getOptions(pArguments);
         if (lOptions.help) {
@@ -43,7 +43,7 @@ export function cli(pArguments = process.argv.slice(2), pOutStream = process.std
     }
     catch (pError) {
         pErrorStream.write(`${EOL}ERROR: ${pError.message}${EOL}${EOL}`);
-        process.exitCode = 1;
+        process.exitCode = pErrorExitCode;
     }
 }
 function getOptions(pArguments) {

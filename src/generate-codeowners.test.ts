@@ -1,6 +1,7 @@
 import { deepStrictEqual, equal } from "node:assert";
 import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
+import { describe, it } from "node:test";
 import type { ITeamMap } from "../types/types.js";
 import generateCodeOwners from "./generate-codeowners.js";
 import { parse } from "./parse-virtual-code-owners.js";

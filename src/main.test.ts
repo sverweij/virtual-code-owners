@@ -1,7 +1,8 @@
 import { doesNotThrow, match, throws } from "node:assert";
-import { Writable } from "node:stream";
-import { cli } from "./main.js";
 import { accessSync, constants, rmSync } from "node:fs";
+import { Writable } from "node:stream";
+import { describe, it } from "node:test";
+import { cli } from "./main.js";
 
 class WritableTestStream extends Writable {
   expected: RegExp | RegExp[] = /^$/;
@@ -46,7 +47,7 @@ describe("main", () => {
     let lErrStream = new WritableTestStream(
       /.*ERROR:.*'--thisArgumentDoesNotExist'.*/,
     );
-    cli(["--thisArgumentDoesNotExist"], lOutStream, lErrStream);
+    cli(["--thisArgumentDoesNotExist"], lOutStream, lErrStream, 0);
   });
 
   it("shows an error when passed a non-existing file", () => {
@@ -77,6 +78,7 @@ describe("main", () => {
       ],
       lOutStream,
       lErrStream,
+      0,
     );
   });
 
@@ -99,6 +101,7 @@ describe("main", () => {
       ],
       lOutStream,
       lErrStream,
+      0,
     );
   });
 
@@ -122,6 +125,7 @@ describe("main", () => {
       ],
       lOutStream,
       lErrStream,
+      0,
     );
   });
 
@@ -170,6 +174,7 @@ describe("main", () => {
       ],
       lOutStream,
       lErrStream,
+      0,
     );
     doesNotThrow(() => {
       accessSync(lCodeOwnersFileName, constants.R_OK);
@@ -201,6 +206,7 @@ describe("main", () => {
       ],
       lOutStream,
       lErrStream,
+      0,
     );
 
     throws(() => {
