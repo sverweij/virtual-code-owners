@@ -32,7 +32,7 @@ reporterOptions:
             fillcolor: lime
             penwidth: 2
         - criteria:
-            source: ".spec.ts"
+            source: ".test.ts"
           attributes:
             fillcolor: "#ccccff"
   text:

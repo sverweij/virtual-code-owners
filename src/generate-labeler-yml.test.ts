@@ -1,6 +1,7 @@
 import { deepStrictEqual, equal } from "node:assert";
 import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
+import { describe, it } from "node:test";
 import { parse as parseYaml } from "yaml";
 import type { IVirtualCodeOwnersCST } from "../types/types.js";
 import generateLabelerYml from "./generate-labeler-yml.js";

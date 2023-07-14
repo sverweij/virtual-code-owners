@@ -45,6 +45,7 @@ export function cli(
   pArguments: string[] = process.argv.slice(2),
   pOutStream: Writable = process.stdout,
   pErrorStream: Writable = process.stderr,
+  pErrorExitCode: number = 1,
 ) {
   try {
     const lOptions = getOptions(pArguments);
@@ -61,7 +62,7 @@ export function cli(
     main(lOptions, pErrorStream);
   } catch (pError: any) {
     pErrorStream.write(`${EOL}ERROR: ${pError.message}${EOL}${EOL}`);
-    process.exitCode = 1;
+    process.exitCode = pErrorExitCode;
   }
 }
 
