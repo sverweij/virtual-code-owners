@@ -86,9 +86,6 @@
   from: {}
   to:
     couldNotResolve: true
-    # https://github.com/nodejs/node/issues/42785 - node:test is not enumerated in builtinModules
-    # and won't ever be. Workaround in dependency-cruiser coming up. For now: ignore node:test
-    pathNot: "test"
 - name: no-duplicate-dep-types
   comment:
     Likely this module depends on an external ('npm') package that occurs more
