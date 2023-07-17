@@ -71,7 +71,7 @@
   "devDependencies": {
     "@types/node": "20.4.2",
     "c8": "8.0.0",
-    "dependency-cruiser": "13.1.0",
+    "dependency-cruiser": "13.1.1",
     "husky": "8.0.3",
     "lint-staged": "13.2.3",
     "prettier": "3.0.0",
