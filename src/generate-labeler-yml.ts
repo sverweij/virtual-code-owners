@@ -41,9 +41,8 @@ function getPatternsForTeam(
   return (
     pCodeOwners
       .filter((pLine) => {
-        const isARule = pLine.type === "rule";
         return (
-          isARule &&
+          pLine.type === "rule" &&
           lineContainsTeamName(pLine as IInterestingCSTLine, pTeamName)
         );
       })
@@ -57,8 +56,8 @@ function transformForYamlAndMinimatch(pOriginalString: string): string {
   let lReturnValue = pOriginalString;
 
   // as documented in CODEOWNERS "*" means all files
-  // similarly in minimatch "*" means all files _in the root folder only_
-  // all files over there is "**" so ...
+  // in minimatch "*" means all files _in the root folder only_; all files over
+  // there is "**" so ...
   if (pOriginalString === "*") {
     lReturnValue = "**";
   }
