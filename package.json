@@ -48,7 +48,7 @@
     "format": "prettier --log-level warn --write \"**/*.{md,ts,json,yml}\"",
     "prepare": "husky install",
     "scm:stage": "git add .",
-    "test": "c8 node --no-warnings --loader 'ts-node/esm' --test-reporter dot --test src/*.test.ts",
+    "test": "c8 node --no-warnings --loader 'ts-node/esm' --test-reporter ./tools/dot-with-summary.reporter.js --test src/*.test.ts",
     "update-dependencies": "npm run upem:update && npm run upem:install && npm run check",
     "upem-outdated": "npm outdated --json --long | upem --dry-run",
     "upem:install": "npm install",

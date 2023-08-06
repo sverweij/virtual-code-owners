@@ -4,6 +4,6 @@
   "branches": 100,
   "functions": 100,
   "lines": 100,
-  "exclude": ["{src/**/*.test.ts}"],
+  "exclude": ["{src/**/*.test.ts,tools/**/*}"],
   "reporter": ["text-summary", "html", "json-summary"]
 }
