@@ -23,8 +23,7 @@ export default function generateLabelerYml(pCodeOwners, pTeamMap, pGeneratedWarn
 function getPatternsForTeam(pCodeOwners, pTeamName) {
     return (pCodeOwners
         .filter((pLine) => {
-        const isARule = pLine.type === "rule";
-        return (isARule &&
+        return (pLine.type === "rule" &&
             lineContainsTeamName(pLine, pTeamName));
     })
         .map((pLine) => pLine.filesPattern));
