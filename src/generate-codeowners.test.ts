@@ -1,4 +1,4 @@
-import { deepStrictEqual, equal } from "node:assert";
+import { deepEqual, equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { describe, it } from "node:test";
@@ -221,6 +221,6 @@ tools/ @team-tgif`;
       "utf-8",
     );
     const lFound = generateCodeOwners(lVirtualCodeOwners, lTeamMap);
-    deepStrictEqual(lFound, lExpected);
+    deepEqual(lFound, lExpected);
   });
 });

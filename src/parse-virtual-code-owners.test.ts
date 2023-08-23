@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepEqual } from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
@@ -38,7 +38,7 @@ describe("parses VIRTUAL-CODEOWNERS.txt - empty 'virtual teams'", () => {
         "utf-8",
       );
       it(`parses ${pFileName}`, () => {
-        deepStrictEqual(parse(lInput, TEAMS_EMPTY), parseYaml(lExpected));
+        deepEqual(parse(lInput, TEAMS_EMPTY), parseYaml(lExpected));
       });
     });
 });
@@ -53,7 +53,7 @@ describe("parses VIRTUAL-CODEOWNERS.txt - with 'virtual teams'", () => {
         "utf-8",
       );
       it(`parses ${pFileName}`, () => {
-        deepStrictEqual(parse(lInput, TEAMS), parseYaml(lExpected));
+        deepEqual(parse(lInput, TEAMS), parseYaml(lExpected));
       });
     });
 });
@@ -70,7 +70,7 @@ describe("anomaly detection", () => {
         raw: "this-is-not-a-valid-rule-or-comment",
       },
     ];
-    deepStrictEqual(lFound, lExpected);
+    deepEqual(lFound, lExpected);
   });
 
   it("reports an invalid user", () => {
@@ -86,7 +86,7 @@ describe("anomaly detection", () => {
         raw: "username-without-an-at",
       },
     ];
-    deepStrictEqual(lFound, lExpected);
+    deepEqual(lFound, lExpected);
   });
 
   it("reports invalid users and lines (ordered by line number, username on that line)", () => {
@@ -135,7 +135,7 @@ describe("anomaly detection", () => {
         raw: "      aintthatcutebutitisWRONG",
       },
     ];
-    deepStrictEqual(lFound, lExpected);
+    deepEqual(lFound, lExpected);
   });
 
   it("reports users in the same order as they appear", () => {
@@ -222,6 +222,6 @@ describe("anomaly detection", () => {
         raw: "eight",
       },
     ];
-    deepStrictEqual(lFound, lExpected);
+    deepEqual(lFound, lExpected);
   });
 });
