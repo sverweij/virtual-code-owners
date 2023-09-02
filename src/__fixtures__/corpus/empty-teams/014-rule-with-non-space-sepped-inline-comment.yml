@@ -10,9 +10,10 @@
           type: "other-user-or-team",
           raw: "@everyone",
           bareName: "everyone",
-          userNumberWithinLine: 1,
+          "userNumberWithinLine": 1,
         },
       ],
-    raw: "* @everyone",
+    inlineComment: " inline comment",
+    raw: "* @everyone# inline comment",
   },
 ]

@@ -13,6 +13,7 @@
           userNumberWithinLine: 1,
         },
       ],
+    inlineComment: "",
     raw: "* username-does-not-start-with-an-at",
   },
 ]

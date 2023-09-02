@@ -31,6 +31,7 @@
           userNumberWithinLine: 4,
         },
       ],
+    inlineComment: "",
     raw: "* @baarden @leren-lezen @real-team jet@example.com",
   },
 ]
