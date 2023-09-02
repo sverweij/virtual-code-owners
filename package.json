@@ -1,6 +1,6 @@
 {
   "name": "virtual-code-owners",
-  "version": "6.1.2",
+  "version": "6.2.0",
   "description": "Makes your CODEOWNERS file liveable again",
   "type": "module",
   "exports": {
