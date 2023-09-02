@@ -208,6 +208,19 @@ tools/ @team-tgif`;
     );
   });
 
+  it("re-adds any inline comment", () => {
+    const lFixture = "no-plan-b/ @team    # this is a comment";
+    const lTeamMapFixture = {
+      team: ["b.a.barackus", "face", "hannibal", "murdock"],
+    };
+    const lExpected =
+      "no-plan-b/ @b.a.barackus @face @hannibal @murdock # this is a comment";
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected,
+    );
+  });
+
   it("writes the kitchensink", () => {
     const lTeamMap = readTeamMap(
       new URL("./__mocks__/virtual-teams.yml", import.meta.url).pathname,
