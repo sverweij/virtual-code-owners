@@ -13,6 +13,7 @@
           userNumberWithinLine: 1,
         },
       ],
+    inlineComment: "",
     raw: "* jan@example.com",
   },
 ]

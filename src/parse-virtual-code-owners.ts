@@ -64,7 +64,8 @@ function parseLine(
   pLineNo: number,
 ): IVirtualCodeOwnerLine {
   const lTrimmedLine = pUntreatedLine.trim();
-  const lSplitLine = lTrimmedLine.match(
+  const lCommentSplitLine = lTrimmedLine.split(/\s*#/);
+  const lRule = lCommentSplitLine[0].match(
     /^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/,
   );
 
@@ -74,7 +75,7 @@ function parseLine(
   if (lTrimmedLine.startsWith("#")) {
     return { type: "comment", line: pLineNo, raw: pUntreatedLine };
   }
-  if (!lSplitLine?.groups) {
+  if (!lRule?.groups) {
     if (lTrimmedLine === "") {
       return { type: "empty", line: pLineNo, raw: pUntreatedLine };
     }
@@ -84,9 +85,10 @@ function parseLine(
   return {
     type: "rule",
     line: pLineNo,
-    filesPattern: lSplitLine.groups.filesPattern,
-    spaces: lSplitLine.groups.spaces,
-    users: parseUsers(lSplitLine.groups.userNames, pTeamMap),
+    filesPattern: lRule.groups.filesPattern,
+    spaces: lRule.groups.spaces,
+    users: parseUsers(lRule.groups.userNames, pTeamMap),
+    inlineComment: lCommentSplitLine[1] ?? "",
     raw: pUntreatedLine,
   };
 }

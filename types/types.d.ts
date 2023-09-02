@@ -15,6 +15,7 @@ export interface IInterestingCSTLine {
   filesPattern: string;
   spaces: string;
   users: IUser[];
+  inlineComment: string;
   raw: string;
 }
 export type UserType =

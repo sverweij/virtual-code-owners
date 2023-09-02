@@ -21,7 +21,7 @@ libs/components/        @ch/ux
 libs/ubc-sales/         @ch/sales
 libs/ubc-after-sales/   @ch/after-sales
 libs/ubc-pre-sales/     @ch/pre-sales
-libs/ubc-refund/        @ch/sales @ch/after-sales
+libs/ubc-refund/        @ch/sales @ch/after-sales # shared responsibility
 libs/ubc-baarden/       @baarden
 #!
 #! The VIRTUAL-CODEOWNERS.txt file has the .txt extension because untamed vscode

@@ -28,6 +28,7 @@
           userNumberWithinLine: 1,
         },
       ],
+    inlineComment: "",
   },
   { line: 8, raw: "", type: "empty" },
   { line: 9, raw: "# admin & ci stuff => transversal", type: "comment" },
@@ -47,6 +48,7 @@
           userNumberWithinLine: 1,
         },
       ],
+    inlineComment: "",
   },
   { line: 12, raw: "", type: "empty" },
   { line: 13, raw: "# generic stuff", type: "comment" },
@@ -72,6 +74,7 @@
           userNumberWithinLine: 2,
         },
       ],
+    inlineComment: "",
   },
   {
     filesPattern: "apps/ux-portal/",
@@ -94,6 +97,7 @@
           userNumberWithinLine: 2,
         },
       ],
+    inlineComment: "",
   },
   {
     filesPattern: "libs/components/",
@@ -110,6 +114,7 @@
           userNumberWithinLine: 1,
         },
       ],
+    inlineComment: "",
   },
   { line: 18, raw: "", type: "empty" },
   { line: 19, raw: "# specific functionality", type: "comment" },
@@ -129,6 +134,7 @@
           userNumberWithinLine: 1,
         },
       ],
+    inlineComment: "",
   },
   {
     filesPattern: "libs/ubc-after-sales/",
@@ -145,6 +151,7 @@
           userNumberWithinLine: 1,
         },
       ],
+    inlineComment: "",
   },
   {
     filesPattern: "libs/ubc-pre-sales/",
@@ -161,11 +168,12 @@
           userNumberWithinLine: 1,
         },
       ],
+    inlineComment: "",
   },
   {
     filesPattern: "libs/ubc-refund/",
     line: 24,
-    raw: "libs/ubc-refund/        @ch/sales @ch/after-sales",
+    raw: "libs/ubc-refund/        @ch/sales @ch/after-sales # shared responsibility",
     spaces: "        ",
     type: "rule",
     users:
@@ -183,6 +191,7 @@
           userNumberWithinLine: 2,
         },
       ],
+    inlineComment: " shared responsibility",
   },
   {
     filesPattern: "libs/ubc-baarden/",
@@ -199,6 +208,7 @@
           userNumberWithinLine: 1,
         },
       ],
+    inlineComment: "",
   },
   { line: 26, raw: "#!", type: "ignorable-comment" },
   {

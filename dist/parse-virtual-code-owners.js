@@ -38,14 +38,15 @@ function orderAnomaly(pLeft, pRight) {
 }
 function parseLine(pUntreatedLine, pTeamMap, pLineNo) {
     const lTrimmedLine = pUntreatedLine.trim();
-    const lSplitLine = lTrimmedLine.match(/^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/);
+    const lCommentSplitLine = lTrimmedLine.split(/\s*#/);
+    const lRule = lCommentSplitLine[0].match(/^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/);
     if (lTrimmedLine.startsWith("#!")) {
         return { type: "ignorable-comment", line: pLineNo, raw: pUntreatedLine };
     }
     if (lTrimmedLine.startsWith("#")) {
         return { type: "comment", line: pLineNo, raw: pUntreatedLine };
     }
-    if (!lSplitLine?.groups) {
+    if (!lRule?.groups) {
         if (lTrimmedLine === "") {
             return { type: "empty", line: pLineNo, raw: pUntreatedLine };
         }
@@ -54,9 +55,10 @@ function parseLine(pUntreatedLine, pTeamMap, pLineNo) {
     return {
         type: "rule",
         line: pLineNo,
-        filesPattern: lSplitLine.groups.filesPattern,
-        spaces: lSplitLine.groups.spaces,
-        users: parseUsers(lSplitLine.groups.userNames, pTeamMap),
+        filesPattern: lRule.groups.filesPattern,
+        spaces: lRule.groups.spaces,
+        users: parseUsers(lRule.groups.userNames, pTeamMap),
+        inlineComment: lCommentSplitLine[1] ?? "",
         raw: pUntreatedLine,
     };
 }

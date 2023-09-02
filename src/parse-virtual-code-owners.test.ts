@@ -1,4 +1,4 @@
-import { deepEqual } from "node:assert/strict";
+import { deepEqual, equal } from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
@@ -196,6 +196,7 @@ describe("anomaly detection", () => {
             raw: "@two",
           },
         ],
+        inlineComment: "",
       },
     ];
     const lFound = getAnomalies(lVirtualCodeOwners);

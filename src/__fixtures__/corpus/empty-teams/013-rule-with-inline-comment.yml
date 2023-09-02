@@ -13,7 +13,7 @@
           "userNumberWithinLine": 1,
         },
       ],
-    inlineComment: "",
-    raw: "* @everyone",
+    inlineComment: " inline comment",
+    raw: "* @everyone   # inline comment",
   },
 ]
