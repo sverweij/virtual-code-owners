@@ -22,7 +22,10 @@ function generateLine(pCSTLine, pTeamMap) {
         const lUserNames = uniq(pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)))
             .sort(compareUserNames)
             .join(" ");
-        return pCSTLine.filesPattern + pCSTLine.spaces + lUserNames;
+        return (pCSTLine.filesPattern +
+            pCSTLine.spaces +
+            lUserNames +
+            (pCSTLine.inlineComment ? ` #${pCSTLine.inlineComment}` : ""));
     }
     return pCSTLine.raw;
 }
