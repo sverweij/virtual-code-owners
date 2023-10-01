@@ -35,6 +35,12 @@ reporterOptions:
             source: ".test.ts"
           attributes:
             fillcolor: "#ccccff"
+        - criteria:
+            source: "\\.d\\.ts"
+          attributes:
+            fontcolor: "#77777"
+            # shape: "component"
+            color: "#77777fe"
   text:
     highlightFocused: true
 cache:
