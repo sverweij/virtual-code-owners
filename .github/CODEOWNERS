@@ -15,5 +15,4 @@
 # For things in .github also the eye of the admin group is useful
 .github/  @mcmeadow @sverweij
 tools/    @mcmeadow @sverweij
-types/    @sverweij
 README.md @sverweij

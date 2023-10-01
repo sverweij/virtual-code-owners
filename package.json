@@ -6,7 +6,6 @@
   "bin": "dist/run-cli.js",
   "files": [
     "dist/",
-    "types/",
     "package.json",
     "README.md",
     "LICENSE"
