@@ -6,7 +6,7 @@ import { parse as parseYaml } from "yaml";
 
 const TEAM_MAP_SCHEMA = JSON.parse(
   readFileSync(
-    new URL("./virtual-teams.schema.json", import.meta.url),
+    new URL("../virtual-teams.schema.json", import.meta.url),
     "utf-8",
   ),
 );

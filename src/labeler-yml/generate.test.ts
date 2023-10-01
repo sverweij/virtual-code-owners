@@ -3,10 +3,10 @@ import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { describe, it } from "node:test";
 import { parse as parseYaml } from "yaml";
-import type { IVirtualCodeOwnersCST } from "../types/types.js";
-import generateLabelerYml from "./generate-labeler-yml.js";
-import readTeamMap from "./read-team-map.js";
-import readVirtualCodeOwners from "./read-virtual-code-owners.js";
+import type { IVirtualCodeOwnersCST } from "../../types/types.js";
+import generateLabelerYml from "./generate.js";
+import readTeamMap from "../team-map/read.js";
+import readVirtualCodeOwners from "../virtual-code-owners/read.js";
 
 const TEAMS = {
   "the-a-team": ["smith", "baracus", "peck", "murdock"],
@@ -30,6 +30,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
         spaces: " ",
         raw: "knakkerdeknak/ @another-user-or-team @and-yet-another-user",
         filesPattern: "knakkerdeknak/",
+        inlineComment: "",
         users: [
           {
             type: "other-user-or-team",
@@ -57,6 +58,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
         spaces: " ",
         raw: "knakkerdeknak/ @the-a-team @the-a-team pier@example.com",
         filesPattern: "knakkerdeknak/",
+        inlineComment: "",
         users: [
           {
             type: "virtual-team-name",
@@ -94,6 +96,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
         spaces: " ",
         raw: "* @baarden",
         filesPattern: "*",
+        inlineComment: "",
         users: [
           {
             type: "virtual-team-name",
@@ -119,6 +122,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
         spaces: " ",
         raw: "*/src/vlaai/* @baarden",
         filesPattern: "*/src/vlaai/*",
+        inlineComment: "",
         users: [
           {
             type: "virtual-team-name",
@@ -144,6 +148,7 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
         spaces: " ",
         raw: "src/vlaai/ @baarden",
         filesPattern: "src/vlaai/",
+        inlineComment: "",
         users: [
           {
             type: "virtual-team-name",

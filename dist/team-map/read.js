@@ -2,7 +2,7 @@ import Ajv from "ajv";
 import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { parse as parseYaml } from "yaml";
-const TEAM_MAP_SCHEMA = JSON.parse(readFileSync(new URL("./virtual-teams.schema.json", import.meta.url), "utf-8"));
+const TEAM_MAP_SCHEMA = JSON.parse(readFileSync(new URL("../virtual-teams.schema.json", import.meta.url), "utf-8"));
 export default function readTeamMap(pVirtualTeamsFileName) {
     const lVirtualTeamsAsAString = readFileSync(pVirtualTeamsFileName, {
         encoding: "utf-8",

@@ -1,8 +1,8 @@
 import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
 import type { IAnomaly, ITeamMap, IVirtualCodeOwnersCST } from "types/types.js";
-import { parse as parseVirtualCodeOwners } from "./parse-virtual-code-owners.js";
-import { getAnomalies } from "./virtual-code-owners-anomalies.js";
+import { parse as parseVirtualCodeOwners } from "./parse.js";
+import { getAnomalies } from "./anomalies.js";
 
 export default function readVirtualCodeOwners(
   pVirtualCodeOwnersFileName: string,

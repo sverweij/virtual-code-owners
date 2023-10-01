@@ -6,7 +6,7 @@ import type {
   IVirtualCodeOwnersCST,
   UserType,
 } from "types/types.js";
-import { isEmailIshUsername } from "./utensils.js";
+import { isEmailIshUsername } from "../utensils.js";
 
 export function parse(
   pVirtualCodeOwnersAsString: string,

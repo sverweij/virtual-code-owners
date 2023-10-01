@@ -2,10 +2,10 @@ import { writeFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { type Writable } from "node:stream";
 import { parseArgs } from "node:util";
-import generateCodeOwners from "./generate-codeowners.js";
-import generateLabelerYml from "./generate-labeler-yml.js";
-import readTeamMap from "./read-team-map.js";
-import readVirtualCodeOwners from "./read-virtual-code-owners.js";
+import generateCodeOwners from "./codeowners/generate.js";
+import generateLabelerYml from "./labeler-yml/generate.js";
+import readTeamMap from "./team-map/read.js";
+import readVirtualCodeOwners from "./virtual-code-owners/read.js";
 import { VERSION } from "./version.js";
 
 interface IOptions {
