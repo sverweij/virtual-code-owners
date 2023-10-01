@@ -3,7 +3,7 @@ import { EOL } from "node:os";
 import { parseArgs } from "node:util";
 import generateCodeOwners from "./codeowners/generate.js";
 import generateLabelerYml from "./labeler-yml/generate.js";
-import readTeamMap from "./read-team-map.js";
+import readTeamMap from "./team-map/read.js";
 import readVirtualCodeOwners from "./virtual-code-owners/read.js";
 import { VERSION } from "./version.js";
 const HELP_MESSAGE = `Usage: virtual-code-owners [options]

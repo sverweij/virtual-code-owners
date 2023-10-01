@@ -5,7 +5,7 @@ import { describe, it } from "node:test";
 import type { ITeamMap } from "../../types/types.js";
 import generateCodeOwners from "./generate.js";
 import { parse } from "../virtual-code-owners/parse.js";
-import readTeamMap from "../read-team-map.js";
+import readTeamMap from "../team-map/read.js";
 import readVirtualCodeOwners from "../virtual-code-owners/read.js";
 
 export function generateCodeOwnersFromString(

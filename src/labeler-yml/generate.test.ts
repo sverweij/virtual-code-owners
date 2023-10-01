@@ -5,7 +5,7 @@ import { describe, it } from "node:test";
 import { parse as parseYaml } from "yaml";
 import type { IVirtualCodeOwnersCST } from "../../types/types.js";
 import generateLabelerYml from "./generate.js";
-import readTeamMap from "../read-team-map.js";
+import readTeamMap from "../team-map/read.js";
 import readVirtualCodeOwners from "../virtual-code-owners/read.js";
 
 const TEAMS = {
