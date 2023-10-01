@@ -27,8 +27,9 @@
     ]
   },
   "main": "dist/main.js",
+  "module": "dist/main.js",
   "types": "types/types.d.ts",
-  "bin": "dist/cli.js",
+  "bin": "dist/run-cli.js",
   "files": [
     "dist/",
     "types/",

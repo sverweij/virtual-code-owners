@@ -2,7 +2,7 @@ import { doesNotThrow, match, throws } from "node:assert";
 import { accessSync, constants, rmSync } from "node:fs";
 import { Writable } from "node:stream";
 import { describe, it } from "node:test";
-import { cli } from "./main.js";
+import { cli } from "./cli.js";
 
 class WritableTestStream extends Writable {
   expected: RegExp | RegExp[] = /^$/;
@@ -25,7 +25,7 @@ class WritableTestStream extends Writable {
   }
 }
 
-describe("main", () => {
+describe("cli", () => {
   it("shows the version number when asked for", () => {
     let lOutStream = new WritableTestStream(/^[0-9]+\.[0-9]+\.[0-9]+(-.+)?\n$/);
     let lErrStream = new WritableTestStream();
