@@ -1,9 +1,14 @@
 import { EOL } from "node:os";
 import { type Writable } from "node:stream";
 import { parseArgs } from "node:util";
-import { VERSION } from "./version.js";
+import type { IOptions } from "./main.js";
 import { main } from "./main.js";
-import type { ICommandLineOptions } from "types/cli.js";
+import { VERSION } from "./version.js";
+
+export interface ICommandLineOptions extends IOptions {
+  help: boolean;
+  version: boolean;
+}
 
 const HELP_MESSAGE = `Usage: virtual-code-owners [options]
 

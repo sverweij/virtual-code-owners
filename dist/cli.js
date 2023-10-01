@@ -1,7 +1,7 @@
 import { EOL } from "node:os";
 import { parseArgs } from "node:util";
-import { VERSION } from "./version.js";
 import { main } from "./main.js";
+import { VERSION } from "./version.js";
 const HELP_MESSAGE = `Usage: virtual-code-owners [options]
 
 Merges a VIRTUAL-CODEOWNERS.txt and a virtual-teams.yml into CODEOWNERS

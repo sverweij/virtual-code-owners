@@ -3,10 +3,10 @@ import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { describe, it } from "node:test";
 import { parse as parseYaml } from "yaml";
-import type { IVirtualCodeOwnersCST } from "../../types/virtual-code-owners-cst.js";
-import generateLabelerYml from "./generate.js";
 import readTeamMap from "../team-map/read.js";
 import readVirtualCodeOwners from "../virtual-code-owners/read.js";
+import type { IVirtualCodeOwnersCST } from "../virtual-code-owners/cst.js";
+import generateLabelerYml from "./generate.js";
 
 const TEAMS = {
   "the-a-team": ["smith", "baracus", "peck", "murdock"],

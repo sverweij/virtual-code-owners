@@ -1,9 +1,9 @@
 import { EOL } from "node:os";
-import type { ITeamMap } from "types/team-map.js";
+import type { ITeamMap } from "../team-map/team-map.js";
 import type {
   IInterestingCSTLine,
   IVirtualCodeOwnersCST,
-} from "types/virtual-code-owners-cst.js";
+} from "../virtual-code-owners/cst.js";
 
 const DEFAULT_WARNING =
   `#${EOL}` +

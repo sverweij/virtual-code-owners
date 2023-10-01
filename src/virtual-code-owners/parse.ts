@@ -1,11 +1,11 @@
 import { EOL } from "node:os";
-import type { ITeamMap } from "types/team-map.js";
+import type { ITeamMap } from "../team-map/team-map.js";
 import type {
   IUser,
   IVirtualCodeOwnerLine,
   IVirtualCodeOwnersCST,
   UserType,
-} from "types/virtual-code-owners-cst.js";
+} from "./cst.js";
 import { isEmailIshUsername } from "../utensils.js";
 
 export function parse(

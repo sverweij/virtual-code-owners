@@ -5,7 +5,14 @@ import generateCodeOwners from "./codeowners/generate.js";
 import generateLabelerYml from "./labeler-yml/generate.js";
 import readTeamMap from "./team-map/read.js";
 import readVirtualCodeOwners from "./virtual-code-owners/read.js";
-import type { IOptions } from "types/main.js";
+export interface IOptions {
+  virtualCodeOwners: string;
+  virtualTeams: string;
+  codeOwners: string;
+  emitLabeler: boolean;
+  labelerLocation: string;
+  dryRun: boolean;
+}
 
 export function main(pOptions: IOptions, pErrorStream: Writable) {
   const lTeamMap = readTeamMap(pOptions.virtualTeams);

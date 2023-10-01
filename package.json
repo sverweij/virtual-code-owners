@@ -3,32 +3,6 @@
   "version": "6.2.0",
   "description": "Makes your CODEOWNERS file liveable again",
   "type": "module",
-  "exports": {
-    "parse": [
-      {
-        "import": "./dist/parse-virtual-code-owners.js",
-        "types": "./types/parse-virtual-code-owners.d.ts"
-      },
-      "./dist/parse-virtual-code-owners.js"
-    ],
-    "generateCodeOwners": [
-      {
-        "import": "./dist/generate-codeowners.js",
-        "types": "./types/generate-codeowners.d.ts"
-      },
-      "./dist/generate-codeowners.js"
-    ],
-    "generateLabelerYml": [
-      {
-        "import": "./dist/generate-labeler-yml.js",
-        "types": "./types/generate-labeler-yml.d.ts"
-      },
-      "./dist/generate-labeler-yml.js"
-    ]
-  },
-  "main": "dist/main.js",
-  "module": "dist/main.js",
-  "types": "types/types.d.ts",
   "bin": "dist/run-cli.js",
   "files": [
     "dist/",

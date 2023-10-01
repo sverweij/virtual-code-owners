@@ -1,5 +1,18 @@
-import type { IAnomaly, ILineAnomaly, IUserAnomaly } from "types/anomaly.js";
-import type { IVirtualCodeOwnersCST } from "types/virtual-code-owners-cst.js";
+import type { IVirtualCodeOwnersCST } from "./cst.js";
+
+export type IAnomaly = ILineAnomaly | IUserAnomaly;
+export interface ILineAnomaly {
+  type: "invalid-line";
+  line: number;
+  raw: string;
+}
+export interface IUserAnomaly {
+  type: "invalid-user";
+  line: number;
+  userNumberWithinLine: number;
+  bareName: string;
+  raw: string;
+}
 
 export function getAnomalies(
   pVirtualCodeOwners: IVirtualCodeOwnersCST,
