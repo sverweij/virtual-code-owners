@@ -2,7 +2,7 @@ import { deepEqual, equal } from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { describe, it } from "node:test";
-import type { ITeamMap } from "../../types/types.js";
+import type { ITeamMap } from "../../types/team-map.js";
 import generateCodeOwners from "./generate.js";
 import { parse } from "../virtual-code-owners/parse.js";
 import readTeamMap from "../team-map/read.js";

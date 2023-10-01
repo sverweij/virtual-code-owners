@@ -1,10 +1,10 @@
 import { EOL } from "node:os";
+import type { ITeamMap } from "types/team-map.js";
 import type {
-  ITeamMap,
   IUser,
   IVirtualCodeOwnerLine,
   IVirtualCodeOwnersCST,
-} from "types/types.js";
+} from "types/virtual-code-owners-cst.js";
 import { isEmailIshUsername } from "../utensils.js";
 
 const DEFAULT_WARNING =

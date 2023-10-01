@@ -1,9 +1,5 @@
-import type {
-  IAnomaly,
-  ILineAnomaly,
-  IUserAnomaly,
-  IVirtualCodeOwnersCST,
-} from "types/types.js";
+import type { IAnomaly, ILineAnomaly, IUserAnomaly } from "types/anomaly.js";
+import type { IVirtualCodeOwnersCST } from "types/virtual-code-owners-cst.js";
 
 export function getAnomalies(
   pVirtualCodeOwners: IVirtualCodeOwnersCST,

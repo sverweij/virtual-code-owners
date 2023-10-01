@@ -1,6 +1,8 @@
 import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
-import type { IAnomaly, ITeamMap, IVirtualCodeOwnersCST } from "types/types.js";
+import type { IAnomaly } from "types/anomaly.js";
+import type { ITeamMap } from "types/team-map.js";
+import type { IVirtualCodeOwnersCST } from "types/virtual-code-owners-cst.js";
 import { parse as parseVirtualCodeOwners } from "./parse.js";
 import { getAnomalies } from "./anomalies.js";
 

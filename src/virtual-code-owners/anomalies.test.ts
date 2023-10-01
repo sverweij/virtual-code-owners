@@ -1,6 +1,6 @@
 import { deepEqual } from "node:assert/strict";
 import { describe, it } from "node:test";
-import type { IVirtualCodeOwnersCST } from "../../types/types.js";
+import type { IVirtualCodeOwnersCST } from "../../types/virtual-code-owners-cst.js";
 import { parse } from "./parse.js";
 import { getAnomalies } from "./anomalies.js";
 

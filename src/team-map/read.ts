@@ -1,7 +1,7 @@
 import Ajv from "ajv";
 import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
-import type { ITeamMap } from "types/types.js";
+import type { ITeamMap } from "types/team-map.js";
 import { parse as parseYaml } from "yaml";
 
 const TEAM_MAP_SCHEMA = JSON.parse(

@@ -1,10 +1,6 @@
-export interface ICommandLineOptions {
-  virtualCodeOwners: string;
-  virtualTeams: string;
-  codeOwners: string;
-  emitLabeler: boolean;
-  labelerLocation: string;
-  dryRun: boolean;
+import { IOptions } from "./main.js";
+
+export interface ICommandLineOptions extends IOptions {
   help: boolean;
   version: boolean;
 }

@@ -3,7 +3,7 @@ import { type Writable } from "node:stream";
 import { parseArgs } from "node:util";
 import { VERSION } from "./version.js";
 import { main } from "./main.js";
-import { ICommandLineOptions } from "types/cli.js";
+import type { ICommandLineOptions } from "types/cli.js";
 
 const HELP_MESSAGE = `Usage: virtual-code-owners [options]
 
