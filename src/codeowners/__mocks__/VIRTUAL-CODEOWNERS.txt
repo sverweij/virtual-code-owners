@@ -4,7 +4,7 @@
 # catch-all to ensure there at least _is_ a code owner, even when
 # it's _everyone_
 
-*       @baarden
+* @cloud-heroes-all
 
 # admin & ci stuff => transversal
 
@@ -12,7 +12,7 @@
 
 # generic stuff
 
-apps/framework/         @leren-lezen framework@example.com
+apps/framework/         @ch/transversal
 apps/ux-portal/         @ch/ux @ch/transversal
 libs/components/        @ch/ux
 
@@ -21,8 +21,8 @@ libs/components/        @ch/ux
 libs/ubc-sales/         @ch/sales
 libs/ubc-after-sales/   @ch/after-sales
 libs/ubc-pre-sales/     @ch/pre-sales
-libs/ubc-refund/        @ch/sales @ch/after-sales # shared responsibility
-libs/ubc-baarden/       @baarden
+libs/ubc-refund/        @ch/sales @ch/after-sales
+libs/ubc-baarden/       @ch/mannen-met-baarden
 #!
 #! The VIRTUAL-CODEOWNERS.txt file has the .txt extension because untamed vscode
 #! installations might otherwise interpret it as markdown and auto-correct

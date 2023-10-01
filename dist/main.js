@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
 import { EOL } from "node:os";
 import { parseArgs } from "node:util";
-import generateCodeOwners from "./generate-codeowners.js";
+import generateCodeOwners from "./codeowners/generate.js";
 import generateLabelerYml from "./labeler-yml/generate.js";
 import readTeamMap from "./read-team-map.js";
 import readVirtualCodeOwners from "./virtual-code-owners/read.js";

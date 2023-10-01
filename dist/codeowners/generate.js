@@ -1,5 +1,5 @@
 import { EOL } from "node:os";
-import { isEmailIshUsername } from "./utensils.js";
+import { isEmailIshUsername } from "../utensils.js";
 const DEFAULT_WARNING = `#${EOL}` +
     `# DO NOT EDIT - this file is generated and your edits will be overwritten${EOL}` +
     `#${EOL}` +
