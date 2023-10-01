@@ -37,17 +37,17 @@ export default async function* dotWithSummaryReporter(pSource) {
       case "test:diagnostic":
         lDiagnosticStack.push(lEvent);
         break;
-      // // uncomment these lines if you're interested in any stdout/stderr
-      // case "test:stdout":
-      // yield lEvent.data.message;
-      // break;
-      // case "test:stderr":
-      // yield lEvent.data.message;
-      //   break;
-      // // test:coverage apparently exists, but not seen in any runs so far
-      // case "test:coverage":
-      //   yield "C";
-      //   break;
+      // uncomment these lines if you're interested in any stdout/stderr
+      case "test:stdout":
+        yield lEvent.data.message;
+        break;
+      case "test:stderr":
+        yield lEvent.data.message;
+        break;
+      // test:coverage apparently exists, but not seen in any runs so far
+      case "test:coverage":
+        yield "C";
+        break;
       default:
         break;
     }
