@@ -5,7 +5,7 @@ import { parseArgs } from "node:util";
 import generateCodeOwners from "./generate-codeowners.js";
 import generateLabelerYml from "./generate-labeler-yml.js";
 import readTeamMap from "./read-team-map.js";
-import readVirtualCodeOwners from "./read-virtual-code-owners.js";
+import readVirtualCodeOwners from "./virtual-code-owners/read.js";
 import { VERSION } from "./version.js";
 
 interface IOptions {

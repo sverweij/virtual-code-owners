@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
-import { getAnomalies, parse as parseVirtualCodeOwners, } from "./parse-virtual-code-owners.js";
+import { parse as parseVirtualCodeOwners } from "./parse.js";
+import { getAnomalies } from "./anomalies.js";
 export default function readVirtualCodeOwners(pVirtualCodeOwnersFileName, pTeamMap) {
     const lVirtualCodeOwnersAsAString = readFileSync(pVirtualCodeOwnersFileName, {
         encoding: "utf-8",

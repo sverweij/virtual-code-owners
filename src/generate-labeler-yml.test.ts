@@ -6,7 +6,7 @@ import { parse as parseYaml } from "yaml";
 import type { IVirtualCodeOwnersCST } from "../types/types.js";
 import generateLabelerYml from "./generate-labeler-yml.js";
 import readTeamMap from "./read-team-map.js";
-import readVirtualCodeOwners from "./read-virtual-code-owners.js";
+import readVirtualCodeOwners from "./virtual-code-owners/read.js";
 
 const TEAMS = {
   "the-a-team": ["smith", "baracus", "peck", "murdock"],

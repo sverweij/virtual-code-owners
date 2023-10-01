@@ -1,0 +1,29 @@
+#! this is not the CODEOWNERS file - to get that one run
+#!   npx virtual-code-owners
+#!
+# catch-all to ensure there at least _is_ a code owner, even when
+# it's _everyone_
+
+*       @baarden
+
+# admin & ci stuff => transversal
+
+.github/                @ch/transversal
+
+# generic stuff
+
+apps/framework/         @leren-lezen framework@example.com
+apps/ux-portal/         @ch/ux @ch/transversal
+libs/components/        @ch/ux
+
+# specific functionality
+
+libs/ubc-sales/         @ch/sales
+libs/ubc-after-sales/   @ch/after-sales
+libs/ubc-pre-sales/     @ch/pre-sales
+libs/ubc-refund/        @ch/sales @ch/after-sales # shared responsibility
+libs/ubc-baarden/       @baarden
+#!
+#! The VIRTUAL-CODEOWNERS.txt file has the .txt extension because untamed vscode
+#! installations might otherwise interpret it as markdown and auto-correct
+#! and auto-format it as such

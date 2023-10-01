@@ -1,8 +1,8 @@
 import { deepEqual } from "node:assert/strict";
 import { describe, it } from "node:test";
-import type { IVirtualCodeOwnersCST } from "../types/types.js";
-import { parse } from "./parse-virtual-code-owners.js";
-import { getAnomalies } from "./virtual-code-owners-anomalies.js";
+import type { IVirtualCodeOwnersCST } from "../../types/types.js";
+import { parse } from "./parse.js";
+import { getAnomalies } from "./anomalies.js";
 
 describe("anomaly detection", () => {
   it("reports an invalid line", () => {
