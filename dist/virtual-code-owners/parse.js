@@ -8,7 +8,7 @@ export function parse(pVirtualCodeOwnersAsString, pTeamMap = {}) {
 function parseLine(pUntreatedLine, pTeamMap, pLineNo) {
     const lTrimmedLine = pUntreatedLine.trim();
     const lCommentSplitLine = lTrimmedLine.split(/\s*#/);
-    const lRule = lCommentSplitLine[0].match(/^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/);
+    const lRule = lCommentSplitLine[0]?.match(/^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/);
     if (lTrimmedLine.startsWith("#!")) {
         return { type: "ignorable-comment", line: pLineNo, raw: pUntreatedLine };
     }

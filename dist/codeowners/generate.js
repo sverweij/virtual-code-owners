@@ -36,7 +36,7 @@ function expandTeamToUserNames(pUser, pTeamMap) {
     return [pUser.raw];
 }
 function stringifyTeamMembers(pTeamMap, pTeamName) {
-    return pTeamMap[pTeamName].map(userNameToCodeOwner);
+    return (pTeamMap[pTeamName] ?? []).map(userNameToCodeOwner);
 }
 function userNameToCodeOwner(pUserName) {
     if (isEmailIshUsername(pUserName)) {

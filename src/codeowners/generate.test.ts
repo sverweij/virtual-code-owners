@@ -7,6 +7,7 @@ import type { ITeamMap } from "../team-map/team-map.js";
 import { parse } from "../virtual-code-owners/parse.js";
 import readVirtualCodeOwners from "../virtual-code-owners/read.js";
 import generateCodeOwners from "./generate.js";
+import { IVirtualCodeOwnersCST } from "../virtual-code-owners/cst.js";
 
 export function generateCodeOwnersFromString(
   pCodeOwnersFileAsString: string,
@@ -102,6 +103,32 @@ tools/ @team-tgif`;
       generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
       lExpected,
     );
+  });
+
+  it("corner case: skips when the virtual team name _is_ classified as virtual team, but despite that is not in the team map", () => {
+    const lASTFixture = [
+      {
+        type: "rule",
+        line: 1,
+        filesPattern: "tools/shared",
+        spaces: " ",
+        users: [
+          {
+            type: "virtual-team-name",
+            userNumberWithinLine: 1,
+            bareName: "not-in-the-team-map",
+            raw: "@not-in-the-team-map",
+          },
+        ],
+        inlineComment: "",
+        raw: "tools/shared @not-in-the-team-map",
+      },
+    ] as IVirtualCodeOwnersCST;
+    const lTeamMapFixture = {
+      "a-team": ["jan", "piet", "klaas"],
+    };
+    const lExpected = "tools/shared ";
+    equal(generateCodeOwners(lASTFixture, lTeamMapFixture, ""), lExpected);
   });
 
   it("replaces team names & deduplicates usernames when there's > 1 team on the line", () => {
