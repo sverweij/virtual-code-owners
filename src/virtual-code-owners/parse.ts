@@ -26,7 +26,7 @@ function parseLine(
 ): IVirtualCodeOwnerLine {
   const lTrimmedLine = pUntreatedLine.trim();
   const lCommentSplitLine = lTrimmedLine.split(/\s*#/);
-  const lRule = lCommentSplitLine[0].match(
+  const lRule = lCommentSplitLine[0]?.match(
     /^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/,
   );
 
@@ -46,9 +46,9 @@ function parseLine(
   return {
     type: "rule",
     line: pLineNo,
-    filesPattern: lRule.groups.filesPattern,
-    spaces: lRule.groups.spaces,
-    users: parseUsers(lRule.groups.userNames, pTeamMap),
+    filesPattern: lRule.groups.filesPattern as string,
+    spaces: lRule.groups.spaces as string,
+    users: parseUsers(lRule.groups.userNames as string, pTeamMap),
     inlineComment: lCommentSplitLine[1] ?? "",
     raw: pUntreatedLine,
   };

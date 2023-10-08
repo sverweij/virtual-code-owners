@@ -61,7 +61,7 @@ function expandTeamToUserNames(pUser: IUser, pTeamMap: ITeamMap): string[] {
 }
 
 function stringifyTeamMembers(pTeamMap: ITeamMap, pTeamName: string): string[] {
-  return pTeamMap[pTeamName].map(userNameToCodeOwner);
+  return (pTeamMap[pTeamName] ?? []).map(userNameToCodeOwner);
 }
 
 function userNameToCodeOwner(pUserName: string): string {
