@@ -51,7 +51,7 @@
     "prettier": "3.0.3",
     "tsx": "3.13.0",
     "typescript": "5.2.2",
-    "upem": "8.0.0",
+    "upem": "9.0.2",
     "watskeburt": "1.0.1"
   },
   "dependencies": {
