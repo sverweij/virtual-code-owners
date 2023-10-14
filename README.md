@@ -19,6 +19,8 @@ This generates your `CODEOWNERS` file (_patterns_ x _users_) from
 npx virtual-code-owners
 ```
 
+... :sparkles:
+
 ## Formats
 
 ### VIRTUAL-CODEOWNERS.txt
