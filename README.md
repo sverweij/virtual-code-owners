@@ -1,9 +1,9 @@
 ## What?
 
-This generates a CODEOWNERS file with _file patterns_ x _users_ from
+This generates a CODEOWNERS` file` with _patterns_ x _users_ from
 
-- a VIRTUAL-CODEOWNERS.txt file with _file patterns_ x _teams_
-- a `virtual-teams.yml` file with _teams_ x _users_
+- a `VIRTUAL-CODEOWNERS.txt` with _patterns_ x _teams_
+- a `virtual-teams.yml` with _teams_ x _users_
 
 ... which eases keeping your CODEOWNERS in sync on multi-team mono repos.
 
