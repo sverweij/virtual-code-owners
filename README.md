@@ -1,80 +1,30 @@
 ## What?
 
-This takes a
+This generates a CODEOWNERS file with _file patterns_ x _users_ from
 
-- VIRTUAL-CODEOWNERS.txt file with (virtual) teams
-- a `virtual-teams.yml` file which define the teams
+- a VIRTUAL-CODEOWNERS.txt file with _file patterns_ x _teams_
+- a `virtual-teams.yml` file with _teams_ x _users_
 
-... and merges them into a CODEOWNERS with user names.
+... which eases keeping your CODEOWNERS in sync on multi-team mono repos.
+
+(Especially when the teams are not defined on GitHub level).
 
 ## Usage
 
 - Rename your `.github/CODEOWNERS` to `.github/VIRTUAL-CODEOWNERS.txt` and put team names in them.
-- Specify team names that don't (yet) exist on GitHub level in a `.github/virtual-teams.yml`
+- Define teams that don't (yet) exist on GitHub level in `.github/virtual-teams.yml`
 - Run this:
 
 ```
 npx virtual-code-owners
 ```
 
-or, if you want to be verbose
-
-```
-npx virtual-code-owners \
-  --virtualCodeOwners .github/VIRTUAL-CODEOWNERS.txt \
-  --virtualTeams      .github/virtual-teams.yml \
-  --codeOwners        .github/CODEOWNERS
-```
-
-## Why?
-
-Organizations sometimes have large mono repositories with loads of code owners.
-They or their bureaucracy haven't landed on actually using GitHub teams to clearly
-demarcate that. Teams in those organizations who want to have clear code ownership
-have the following choices:
-
-- Wrestle the bureaucracy.  
-  This is the recommended approach. It might take a while, though - and even
-  though there are good people on many levels in bureaucracies, it might
-  eventually not pan out because #reasons.
-- Maintain a CODEOWNERS file with code assigned to large lists of individuals.  
-  An option, but laborious to maintain, even for smaller projects; for example:
-
-```CODEOWNERS
-# catch-all to ensure there at least _is_ a code owner, even when
-# it's _everyone_
-
-* @cloud-heroes-all
-
-# admin & ci stuff => transversal
-
-.github/                @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
-
-# generic stuff
-
-apps/framework/         @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
-apps/ux-portal/         @abraham-lincoln @benjamin-franklin @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
-libs/components/        @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets
-
-# specific functionality
-
-libs/ubc-sales/         @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-charleston-ch @dagny-taggert-ch @gregory-gregson-ch @jane-doe-ch @karl-marx-ch
-libs/ubc-after-sales/   @daisy-duck @donald-duck @john-doe-ch @pete-peterson-ch @william-the-fourth-ch
-libs/ubc-pre-sales/     @averel-dalton-ch @jean-claude-ch @john-galt-ch @valerie-valerton-ch
-libs/ubc-refund/        @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-charleston-ch @dagny-taggert-ch @daisy-duck @donald-duck @gregory-gregson-ch @jane-doe-ch @john-doe-ch @karl-marx-ch @pete-peterson-ch @william-the-fourth-ch
-libs/ubc-baarden/       jan@example.com korneel@example.com pier@example.com tjorus@example.com
-```
-
-This is where `virtual-code-owners` comes in.
-
 ## Formats
 
 ### VIRTUAL-CODEOWNERS.txt
 
-`VIRTUAL-CODEOWNERS.txt` is a regular, valid GitHub [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) file.
-The only difference between VIRTUAL-CODEOWNERS.txt and a CODEOWNERS file is that
-the _teams_ the former uses might not exist yet, except in a `virtual-teams.yml`.
-This enables you to write a _much_ easier to maintain list of code owners.
+`VIRTUAL-CODEOWNERS.txt` sticks to the [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) format,
+but adds the ability to include teams defined in `virtual-teams.yml`.
 
 For example the CODEOWNERS file above can then look like this:
 
@@ -110,9 +60,9 @@ libs/ubc-baarden/       @ch/mannen-met-baarden
 
 ### virtual-teams.yml
 
-A valid YAML file that contains a list of teams, with for each team its members.
-If a new team member joins, you can enter it here, run `npx virtual-code-owners`
-to update CODEOWNERS.
+A valid YAML file that contains a list of teams and their members.
+Update it whenever you have new team members and run `npx virtual-code-owners`
+to keep CODEOWNERS current.
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/sverweij/virtual-code-owners/main/src/virtual-teams.schema.json
@@ -150,59 +100,51 @@ ch/transversal:
   - abraham-lincoln
 ```
 
+### CODEOWNERS
+
+Running `npx virtual-code-owners` would combine this into a CODEOWNERS file like this:
+
+```CODEOWNERS
+#
+# DO NOT EDIT - this file is generated and your edits will be overwritten
+#
+# To make changes:
+#
+#   - edit .github/VIRTUAL-CODEOWNERS.txt
+#   - and/ or add team members to .github/virtual-teams.yml
+#   - run 'npx virtual-code-owners' (or 'npx virtual-code-owners --emitLabeler' if you also
+#     want to generate a .github/labeler.yml)
+#
+
+# catch-all to ensure there at least _is_ a code owner, even when
+# it's _everyone_
+
+* @cloud-heroes-all
+
+# admin & ci stuff => transversal
+
+.github/                @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
+
+# generic stuff
+
+apps/framework/         @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
+apps/ux-portal/         @abraham-lincoln @benjamin-franklin @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
+libs/components/        @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets
+
+# specific functionality
+
+libs/ubc-sales/         @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-charleston-ch @dagny-taggert-ch @gregory-gregson-ch @jane-doe-ch @karl-marx-ch
+libs/ubc-after-sales/   @daisy-duck @donald-duck @john-doe-ch @pete-peterson-ch @william-the-fourth-ch
+libs/ubc-pre-sales/     @averel-dalton-ch @jean-claude-ch @john-galt-ch @valerie-valerton-ch
+libs/ubc-refund/        @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-charleston-ch @dagny-taggert-ch @daisy-duck @donald-duck @gregory-gregson-ch @jane-doe-ch @john-doe-ch @karl-marx-ch @pete-peterson-ch @william-the-fourth-ch
+libs/ubc-baarden/       jan@example.com korneel@example.com pier@example.com tjorus@example.com
+```
+
 ## FAQ
 
-### Can I mix real and virtual teams in `VIRTUAL-CODEOWNERS.txt`?
+### Any gotcha's?
 
-Yes.
-
-It might be you already have a team or two defined, but just want to use
-_additional_ teams. In that case just don't specify the already-defined teams
-in `virtual-teams.yml` and _virtual-code-owners_ will leave them alone.
-
-### Can I still use usernames in `VIRTUAL-CODEOWNERS.txt`?
-
-Yes.
-
-Just make sure there's no name clashes between the username and a (virtual)
-team name and _virtual-code-owners_ will leave the real name alone.
-
-### What validations does virtual-code-owners perform?
-
-On the VIRTUAL-CODEOWNERS.txt file it performs is a little bit of validation:
-
-- it will find invalid user/ team names (those that don't start with an `@` or
-  aren't an e-mail address)
-- it will find invalid 'rules'; which is the case when there is a file pattern on
-  the line, but no user or team names.
-
-When it encounters any of these virtual-code-owners will emit a clear error message
-with the location of the error and exit with a non-zero code, to prevent the
-creation of a potentially invalid CODEOWNERS file.
-
-It _does not_ check whether the user or team names actually exist in the current
-project, though. Although nice, there's already tooling on the generated CODEOWNERS
-file that will check that for you.
-
-### Any limitations I should know of?
-
-- ~~Currently only works for _user names_ to identify team members - not for e-mail
-  addresses.~~
-  Works with both user names and e-mail addresses
-- Although _virtual-code-owners_ performs basic validations on the CODEOWNER
-  format and tries to emit clear and actionable error messages about them, it
-  might not catch all of them - e.g. it doesn't check if the users in
-  virtual-teams.yml actually exist.
-
-### Why the `.txt` extension?
-
-Various editors assume an ALL_CAPS file name with `#` characters on various lines
-to be markdown, and will auto format them as such - making for either very ugly
-or in worst cases invalid CODEOWNERS files. Usually such autoformatting is not
-present on text files.
-
-Apparently these editors know about CODEOWNERS, though so this auto formatting
-doesn't seem to be happening over there.
+It won't check whether the users or teams you entered exist.
 
 ### Do I have to run this each time I edit `VIRTUAL-CODEOWNERS.txt`?
 
@@ -220,14 +162,27 @@ like this:
 }
 ```
 
-### It'd be _pretty_ handy if I could see for which virtual teams a PR is. For instance with a bunch of :label: labels.
+### Can I mix real and virtual teams in `VIRTUAL-CODEOWNERS.txt`?
 
-How do I go about that?
+Yes.
 
-You can use the [actions/labeler](https://github.com/actions/labeler) action for
-for this. Maintaining the configuration file (`.github/labeler.yml`) and keeping it
-sync with the virtual-teams and virtual code-owners files manually is a bit of
-a chore, though, so `virtual-code-owners` has an option to automate that.
+It might be you already have a team or two defined, but just want to use
+_additional_ teams. In that case just don't specify the already-defined teams
+in `virtual-teams.yml` and _virtual-code-owners_ will leave them alone.
+
+### Can I still use usernames in `VIRTUAL-CODEOWNERS.txt`?
+
+Yes.
+
+Just make sure there's no name clashes between the username and a (virtual)
+team name and _virtual-code-owners_ will leave the real name alone.
+
+### Can I automatically label PR's for virtual teams?
+
+Yep.
+
+Use [actions/labeler](https://github.com/actions/labeler) and tickle
+`virtual-code-owners` to generate the labeler config file:
 
 ```sh
 npx virtual-code-owners --emitLabeler
@@ -237,12 +192,62 @@ npx virtual-code-owners --emitLabeler
 If you have an alternate file location for the `labeler.yml` you can specify that
 with virtual-code-owner's `--labelerLocation` parameter.
 
-### Can I just run virtual-code-owners to validate VIRTUAL-CODEOWNERS.txt & virtual-teams.yml?
+### What validations does virtual-code-owners perform?
+
+virtual-code-owners checks for basic CODEOWNERS format errors and invalid
+user/team names but doesn't verify their existence in the project.
+
+- valid user/team names start with an `@` or are an e-mail address
+- valid rules have a file pattern and at least one user/team name
+
+### I want to specify different locations for the files (e.g. because I'm using GitLab)
+
+Here you go:
+
+```
+npx virtual-code-owners \
+  --virtualCodeOwners .gitlab/VIRTUAL-CODEOWNERS.txt \
+  --virtualTeams      .gitlab/virtual-teams.yml \
+  --codeOwners        .gitlab/CODEOWNERS
+```
+
+### Can I just validate VIRTUAL-CODEOWNERS.txt & virtual-teams.yml without generating output?
 
 So _without_ generating any output?
 
-Yes. Use the `--dryRun` command line option:
+Sure thing. Use `--dryRun`:
 
 ```
 npx virtual-code-owners --dryRun
 ```
+
+### Why the `.txt` extension?
+
+It keeps editors and IDE's from messing up your formatting.
+
+Various editors assume an ALL_CAPS file name with `#` characters on various lines
+to be markdown, and will auto format them as such. This makes for either very ugly
+or in worst cases invalid CODEOWNERS files. Usually such autoformatting is not
+present on text files.
+
+Apparently these editors know about CODEOWNERS, though, so they don't mess with
+the formatting of _those_.
+
+### Why does this exist at all? Why not just use GitHub teams?
+
+You should _totally_ use GitHub teams! If you can.
+
+Organizations sometimes have large mono repositories with loads of code owners.
+They or their bureaucracy haven't landed on actually using GitHub teams to clearly
+demarcate that. Or you're working on a cross-functional team that doesn't follow
+the organization chart (and hence the GitHub teams). Teams in those organizations
+who want to have clear code ownership have the following choices:
+
+- Wrestle the bureaucracy.  
+  This is the recommended approach. It might take a while, though - and even
+  though there are good people on many levels in bureaucracies, it might
+  eventually not pan out because #reasons.
+- Maintain a CODEOWNERS file with code assigned to large lists of individuals.  
+  An option, but laborious to maintain, even for smaller projects
+
+This is where `virtual-code-owners` comes in.
