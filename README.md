@@ -28,7 +28,7 @@ npx virtual-code-owners
 `VIRTUAL-CODEOWNERS.txt` sticks to the [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) format,
 but adds the ability to include teams defined in `virtual-teams.yml`.
 
-For example the CODEOWNERS file above can then look like this:
+For example a CODEOWNERS file can look like this:
 
 ```CODEOWNERS
 #! comments that start with #! won't appear in the CODEOWNERS output
@@ -59,6 +59,9 @@ libs/ubc-pre-sales/     @ch/pre-sales
 libs/ubc-refund/        @ch/sales @ch/after-sales
 libs/ubc-baarden/       @ch/mannen-met-baarden
 ```
+
+... where only the @cloud-heroes-all is a 'real' team on GitHub level. The other
+ones are defined in `virtual-teams.yml`.
 
 ### virtual-teams.yml
 
@@ -109,7 +112,7 @@ ch/mannen-met-baarden:
 
 ### CODEOWNERS
 
-Running `npx virtual-code-owners` would combine this into a CODEOWNERS file like this:
+Running `npx virtual-code-owners` will combine these into a CODEOWNERS file like this:
 
 ```CODEOWNERS
 #
