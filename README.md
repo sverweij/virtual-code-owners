@@ -16,6 +16,7 @@ When those teams are not defined on GitHub level.
 
 ```
 npx virtual-code-owners
+# Wrote '.github/CODEOWNERS'
 ```
 
 - :sparkles:
