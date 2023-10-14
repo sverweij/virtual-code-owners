@@ -1,6 +1,6 @@
 ## What?
 
-This generates a `CODEOWNERS` (_patterns_ x _users_) from
+This generates a `CODEOWNERS` file (_patterns_ x _users_) from
 
 - a `VIRTUAL-CODEOWNERS.txt` (_patterns_ x _teams_)
 - a `virtual-teams.yml` (_teams_ x _users_)
