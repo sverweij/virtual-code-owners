@@ -3,13 +3,7 @@ import { readFileSync } from "node:fs";
 import { EOL } from "node:os";
 import type { ITeamMap } from "./team-map.js";
 import { parse as parseYaml } from "yaml";
-
-const TEAM_MAP_SCHEMA = JSON.parse(
-  readFileSync(
-    new URL("../virtual-teams.schema.json", import.meta.url),
-    "utf-8",
-  ),
-);
+import virtualTeamsSchema from "./virtual-teams.schema.js";
 
 export default function readTeamMap(pVirtualTeamsFileName: string): ITeamMap {
   const lVirtualTeamsAsAString = readFileSync(pVirtualTeamsFileName, {
@@ -29,7 +23,7 @@ function assertTeamMapValid(pTeamMap: ITeamMap, pVirtualTeamsFileName: string) {
     verbose: true,
   });
 
-  if (!ajv.validate(TEAM_MAP_SCHEMA, pTeamMap)) {
+  if (!ajv.validate(virtualTeamsSchema, pTeamMap)) {
     throw new Error(
       `This is not a valid virtual-teams.yml:${EOL}${formatAjvErrors(
         ajv.errors,
