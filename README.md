@@ -6,8 +6,7 @@ This generates your `CODEOWNERS` file (_patterns_ x _users_) from
 - a `virtual-teams.yml` (_teams_ x _users_)
 
 ... which makes it easier to keep `CODEOWNERS` in sync on multi-team mono repos.
-
-(When those teams are not defined on GitHub level).
+When those teams are not defined on GitHub level.
 
 ## Usage
 
