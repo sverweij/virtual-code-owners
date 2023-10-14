@@ -100,6 +100,11 @@ ch/transversal:
   - benjamin-franklin
   - koos-koets
   - abraham-lincoln
+ch/mannen-met-baarden:
+  - jan@example.com
+  - pier@example.com
+  - tjorus@example.com
+  - korneel@example.com
 ```
 
 ### CODEOWNERS
