@@ -21,6 +21,8 @@
     "depcruise:html": "depcruise src tools --output-type err-html --output-to dependency-violation-report.html",
     "format": "prettier --log-level warn --write \"**/*.{md,ts,json,yml}\"",
     "prepare": "husky install",
+    "prepack": "clean-pkg-json",
+    "postpack": "git restore package.json",
     "scm:stage": "git add .",
     "test": "c8 node --no-warnings --loader 'tsx' --test-reporter ./tools/dot-with-summary.reporter.js --test src/*.test.ts src/**/*.test.ts",
     "update-dependencies": "npm run upem:update && npm run upem:install && npm run check",
@@ -45,6 +47,7 @@
   "devDependencies": {
     "@types/node": "20.8.6",
     "c8": "8.0.1",
+    "clean-pkg-json": "1.2.0",
     "dependency-cruiser": "14.1.1",
     "husky": "8.0.3",
     "lint-staged": "15.0.0",
