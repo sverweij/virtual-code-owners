@@ -39,7 +39,7 @@
   "homepage": "https://github.com/sverweij/virtual-code-owners",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sverweij/virtual-code-owners"
+    "url": "git+https://github.com/sverweij/virtual-code-owners.git"
   },
   "bugs": {
     "url": "https://github.com/sverweij/virtual-code-owners/issues"
