@@ -1,6 +1,6 @@
 {
   "name": "virtual-code-owners",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Makes your CODEOWNERS file liveable again",
   "type": "module",
   "bin": "dist/run-cli.js",
