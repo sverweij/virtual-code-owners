@@ -30,7 +30,7 @@ function generateLine(pCSTLine, pTeamMap) {
     return pCSTLine.raw;
 }
 function expandTeamToUserNames(pUser, pTeamMap) {
-    if (pUser.type == "virtual-team-name") {
+    if (pUser.type === "virtual-team-name") {
         return stringifyTeamMembers(pTeamMap, pUser.bareName);
     }
     return [pUser.raw];

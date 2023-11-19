@@ -54,7 +54,7 @@ function generateLine(
 }
 
 function expandTeamToUserNames(pUser: IUser, pTeamMap: ITeamMap): string[] {
-  if (pUser.type == "virtual-team-name") {
+  if (pUser.type === "virtual-team-name") {
     return stringifyTeamMembers(pTeamMap, pUser.bareName);
   }
   return [pUser.raw];
