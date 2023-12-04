@@ -25,6 +25,8 @@ export function main(pOptions: IOptions, pErrorStream: Writable) {
   if (!pOptions.dryRun) {
     writeFileSync(pOptions.codeOwners, lCodeOwnersContent, {
       encoding: "utf-8",
+      // need to explicitly set the "w" flag due to a bug in node 21.3.0 see https://github.com/nodejs/node/issues/50989
+      flag: "w",
     });
   }
 
@@ -33,6 +35,8 @@ export function main(pOptions: IOptions, pErrorStream: Writable) {
     if (!pOptions.dryRun) {
       writeFileSync(pOptions.labelerLocation, lLabelerContent, {
         encoding: "utf-8",
+        // need to explicitly set the "w" flag due to a bug in node 21.3.0 see https://github.com/nodejs/node/issues/50989
+        flag: "w",
       });
     }
     pErrorStream.write(

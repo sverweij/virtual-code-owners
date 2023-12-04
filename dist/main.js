@@ -14,6 +14,7 @@ export function main(pOptions, pErrorStream) {
   if (!pOptions.dryRun) {
     writeFileSync(pOptions.codeOwners, lCodeOwnersContent, {
       encoding: "utf-8",
+      flag: "w",
     });
   }
   if (pOptions.emitLabeler) {
@@ -21,6 +22,7 @@ export function main(pOptions, pErrorStream) {
     if (!pOptions.dryRun) {
       writeFileSync(pOptions.labelerLocation, lLabelerContent, {
         encoding: "utf-8",
+        flag: "w",
       });
     }
     pErrorStream.write(
