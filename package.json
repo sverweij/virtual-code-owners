@@ -1,6 +1,6 @@
 {
   "name": "virtual-code-owners",
-  "version": "7.0.2",
+  "version": "7.0.3",
   "description": "Makes your CODEOWNERS file liveable again",
   "type": "module",
   "bin": {
