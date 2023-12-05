@@ -1,7 +1,7 @@
 {
   "name": "virtual-code-owners",
   "version": "7.0.3",
-  "description": "Makes your CODEOWNERS file liveable again",
+  "description": "CODEOWNERS for teams that can't use GitHub teams",
   "type": "module",
   "bin": {
     "virtual-code-owners": "dist/run-cli.js"
