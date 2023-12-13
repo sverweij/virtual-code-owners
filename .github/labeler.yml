@@ -9,24 +9,23 @@
 #
 
 vco:
-- changed-files:
-  - any-glob-to-any-file: "**"
-  - any-glob-to-any-file: README.md
+  - changed-files:
+      - any-glob-to-any-file: "**"
+      - any-glob-to-any-file: README.md
 
 vco-admins:
-- changed-files:
-  - any-glob-to-any-file: .github/**
-  - any-glob-to-any-file: tools/**
+  - changed-files:
+      - any-glob-to-any-file: .github/**
+      - any-glob-to-any-file: tools/**
 
 tools:
-- changed-files:
-  - any-glob-to-any-file: tools/**
+  - changed-files:
+      - any-glob-to-any-file: tools/**
 
 admin:
-- changed-files:
-  - any-glob-to-any-file: .github/**
+  - changed-files:
+      - any-glob-to-any-file: .github/**
 
 documentation:
-- changed-files:
-  - any-glob-to-any-file: README.md
-
+  - changed-files:
+      - any-glob-to-any-file: README.md
