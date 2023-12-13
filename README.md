@@ -202,6 +202,15 @@ npx virtual-code-owners --emitLabeler
 If you have an alternate file location for the `labeler.yml` you can specify that
 with virtual-code-owner's `--labelerLocation` parameter.
 
+> [!NOTE]
+> actions/labeler changed the labeler.yml format from v4 to v5.
+>
+> - virtual-code-owners < 8.0.0 generates labeler.yml v4 format,
+> - virtual-code-owners >= 8.0.0 generates labeler.yml v5 format.
+>
+> see [actions/labeler#v5](https://github.com/actions/labeler/blob/8558fd74291d67161a8a78ce36a881fa63b766a9/README.md)
+> for details on the v5 format.
+
 ### What validations does virtual-code-owners perform?
 
 virtual-code-owners checks for basic CODEOWNERS format errors and invalid

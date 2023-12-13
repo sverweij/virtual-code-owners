@@ -24,11 +24,16 @@ export default function generateLabelerYml(
   let lReturnValue = pGeneratedWarning;
   for (const lTeamName in pTeamMap) {
     const lPatternsForTeam = getPatternsForTeam(pCodeOwners, lTeamName)
-      .map((pPattern) => `  - ${transformForYamlAndMinimatch(pPattern)}${EOL}`)
+      .map(
+        (pPattern) =>
+          `      - any-glob-to-any-file: ${transformForYamlAndMinimatch(
+            pPattern,
+          )}${EOL}`,
+      )
       .join("");
 
     if (lPatternsForTeam) {
-      lReturnValue += `${lTeamName}:${EOL}${lPatternsForTeam}${EOL}`;
+      lReturnValue += `${lTeamName}:${EOL}  - changed-files:${EOL}${lPatternsForTeam}${EOL}`;
     }
   }
   return lReturnValue;
