@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=this-is-not-a-prometheus-schema
 ---
 # rules from the 'recommended' preset:
 - name: no-circular
@@ -145,3 +146,29 @@
   to:
     dependencyTypes:
       - npm-peer
+- name: "no-tsconfig-basedir-use"
+  comment:
+    This module depends om something directly via a 'tsconfig.json' 'baseUrl' property.
+    This is discouraged, unless you're still doing AMD modules.
+    See https://www.typescriptlang.org/tsconfig#baseUrl"
+  severity: "error"
+  from: {}
+  to:
+    dependencyTypes:
+      - aliased-tsconfig-base-url
+- name: only-type-only-in-types
+  comment: This .d.ts depends on something via an import that is not 'type' only.
+  severity: error
+  from:
+    path: "[.]d[.][cm]?ts$"
+  to:
+    dependencyTypesNot:
+      - type-only
+- name: only-type-only-to-dts
+  comment: This module depends on a .d.ts file via an import that is not 'type' only.
+  severity: error
+  from: {}
+  to:
+    path: "[.]d[.][cm]?ts$"
+    dependencyTypesNot:
+      - type-only

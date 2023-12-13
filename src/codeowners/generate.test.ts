@@ -7,7 +7,7 @@ import type { ITeamMap } from "../team-map/team-map.js";
 import { parse } from "../virtual-code-owners/parse.js";
 import readVirtualCodeOwners from "../virtual-code-owners/read.js";
 import generateCodeOwners from "./generate.js";
-import { IVirtualCodeOwnersCST } from "../virtual-code-owners/cst.js";
+import type { IVirtualCodeOwnersCST } from "../virtual-code-owners/cst.js";
 
 export function generateCodeOwnersFromString(
   pCodeOwnersFileAsString: string,

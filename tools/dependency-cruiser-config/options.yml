@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/sverweij/dependency-cruiser/main/src/schema/configuration.schema.json#/definitions/OptionsType
 doNotFollow:
   path: node_modules
 moduleSystems:
