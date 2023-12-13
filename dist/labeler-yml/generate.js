@@ -19,13 +19,13 @@ export default function generateLabelerYml(
     const lPatternsForTeam = getPatternsForTeam(pCodeOwners, lTeamName)
       .map(
         (pPattern) =>
-          `  - any-glob-to-any-file: ${transformForYamlAndMinimatch(
+          `    - any-glob-to-any-file: ${transformForYamlAndMinimatch(
             pPattern,
           )}${EOL}`,
       )
       .join("");
     if (lPatternsForTeam) {
-      lReturnValue += `${lTeamName}:${EOL}- changed-files:${EOL}${lPatternsForTeam}${EOL}`;
+      lReturnValue += `${lTeamName}:${EOL}  - changed-files:${EOL}${lPatternsForTeam}${EOL}`;
     }
   }
   return lReturnValue;
