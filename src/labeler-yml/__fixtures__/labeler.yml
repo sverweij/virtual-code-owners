@@ -1,22 +1,28 @@
 ch/after-sales:
-  - libs/ubc-after-sales/**
-  - libs/ubc-refund/**
+  - changed-files:
+      - any-glob-to-any-file: libs/ubc-after-sales/**
+      - any-glob-to-any-file: libs/ubc-refund/**
 
 ch/sales:
-  - libs/ubc-sales/**
-  - libs/ubc-refund/**
+  - changed-files:
+      - any-glob-to-any-file: libs/ubc-sales/**
+      - any-glob-to-any-file: libs/ubc-refund/**
 
 ch/pre-sales:
-  - libs/ubc-pre-sales/**
+  - changed-files:
+      - any-glob-to-any-file: libs/ubc-pre-sales/**
 
 ch/ux:
-  - apps/ux-portal/**
-  - libs/components/**
+  - changed-files:
+      - any-glob-to-any-file: apps/ux-portal/**
+      - any-glob-to-any-file: libs/components/**
 
 ch/transversal:
-  - .github/**
-  - apps/framework/**
-  - apps/ux-portal/**
+  - changed-files:
+      - any-glob-to-any-file: .github/**
+      - any-glob-to-any-file: apps/framework/**
+      - any-glob-to-any-file: apps/ux-portal/**
 
 ch/mannen-met-baarden:
-  - libs/ubc-baarden/**
+  - changed-files:
+      - any-glob-to-any-file: libs/ubc-baarden/**

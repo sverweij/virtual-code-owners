@@ -82,7 +82,8 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
       },
     ];
     const lExpected = `the-a-team:
-  - knakkerdeknak/**
+- changed-files:
+  - any-glob-to-any-file: knakkerdeknak/**
 
 `;
     equal(generateLabelerYml(lVirtualCodeOwners, TEAMS, ""), lExpected);
@@ -108,7 +109,8 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
       },
     ];
     const lExpected = `baarden:
-  - "**"
+- changed-files:
+  - any-glob-to-any-file: "**"
 
 `;
     equal(generateLabelerYml(lVirtualCodeOwners, TEAMS, ""), lExpected);
@@ -134,7 +136,8 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
       },
     ];
     const lExpected = `baarden:
-  - "*/src/vlaai/*"
+- changed-files:
+  - any-glob-to-any-file: "*/src/vlaai/*"
 
 `;
     equal(generateLabelerYml(lVirtualCodeOwners, TEAMS, ""), lExpected);
@@ -160,7 +163,8 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
       },
     ];
     const lExpected = `# some header or other${EOL}baarden:
-  - src/vlaai/**
+- changed-files:
+  - any-glob-to-any-file: src/vlaai/**
 
 `;
     equal(
