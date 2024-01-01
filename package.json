@@ -47,7 +47,7 @@
     "url": "https://github.com/sverweij/virtual-code-owners/issues"
   },
   "devDependencies": {
-    "@types/node": "20.10.5",
+    "@types/node": "20.10.6",
     "c8": "8.0.1",
     "clean-pkg-json": "1.2.0",
     "dependency-cruiser": "16.0.0",
