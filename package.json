@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@types/node": "20.10.6",
-    "c8": "8.0.1",
+    "c8": "9.0.0",
     "clean-pkg-json": "1.2.0",
     "dependency-cruiser": "16.0.0",
     "husky": "8.0.3",
