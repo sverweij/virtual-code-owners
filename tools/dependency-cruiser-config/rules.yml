@@ -21,10 +21,10 @@
   from:
     orphan: true
     pathNot:
-      - "(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$"
-      - "\\.d\\.ts$"
-      - "(^|/)tsconfig\\.json$"
-      - "(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$"
+      - "(^|/)[.][^/]+[.](js|cjs|mjs|ts|json)$"
+      - "[.]d[.]ts$"
+      - "(^|/)tsconfig[.]json$"
+      - "(^|/)(babel|webpack)[.]config[.](js|cjs|mjs|ts|json)$"
   to: {}
 - name: no-deprecated-core
   comment:
@@ -108,7 +108,7 @@
   severity: error
   from: {}
   to:
-    path: "\\.test\\.ts$"
+    path: "[.]test[.]ts$"
 - name: not-to-dev-dep
   severity: error
   comment:
@@ -120,7 +120,7 @@
     the dependency-cruiser configuration
   from:
     path: "^(src)"
-    pathNot: "\\.test\\.ts$"
+    pathNot: "[.]test[.]ts$"
   to:
     dependencyTypes:
       - npm-dev
@@ -164,6 +164,8 @@
   to:
     dependencyTypesNot:
       - type-only
+      - type-import
+      - triple-slash-type-reference
 - name: only-type-only-to-dts
   comment: This module depends on a .d.ts file via an import that is not 'type' only.
   severity: error
@@ -172,3 +174,5 @@
     path: "[.]d[.][cm]?ts$"
     dependencyTypesNot:
       - type-only
+      - type-import
+      - triple-slash-type-reference
