@@ -18,10 +18,7 @@ function assertTeamMapValid(pTeamMap, pVirtualTeamsFileName) {
   });
   if (!ajv.validate(virtualTeamsSchema, pTeamMap)) {
     throw new Error(
-      `This is not a valid virtual-teams.yml:${EOL}${formatAjvErrors(
-        ajv.errors,
-        pVirtualTeamsFileName,
-      )}.\n`,
+      `This is not a valid virtual-teams.yml:${EOL}${formatAjvErrors(ajv.errors, pVirtualTeamsFileName)}.\n`,
     );
   }
 }
@@ -31,7 +28,5 @@ function formatAjvErrors(pAjvErrors, pVirtualTeamsFileName) {
     .join(EOL);
 }
 function formatAjvError(pAjvError, pVirtualTeamsFileName) {
-  return `${pVirtualTeamsFileName}: ${
-    pAjvError.instancePath
-  } - ${JSON.stringify(pAjvError.data)} ${pAjvError.message}`;
+  return `${pVirtualTeamsFileName}: ${pAjvError.instancePath} - ${JSON.stringify(pAjvError.data)} ${pAjvError.message}`;
 }

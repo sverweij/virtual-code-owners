@@ -16,10 +16,7 @@ export default function readVirtualCodeOwners(
   const lAnomalies = getAnomalies(lVirtualCodeOwners);
   if (lAnomalies.length > 0) {
     throw new Error(
-      `This is not a valid virtual code-owners file:${EOL}${reportAnomalies(
-        pVirtualCodeOwnersFileName,
-        lAnomalies,
-      )}`,
+      `This is not a valid virtual code-owners file:${EOL}${reportAnomalies(pVirtualCodeOwnersFileName, lAnomalies)}`,
     );
   }
   return lVirtualCodeOwners;
