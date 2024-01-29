@@ -51,7 +51,7 @@
     "c8": "9.1.0",
     "clean-pkg-json": "1.2.0",
     "dependency-cruiser": "16.0.0",
-    "husky": "8.0.3",
+    "husky": "9.0.6",
     "lint-staged": "15.2.0",
     "prettier": "3.2.4",
     "tsx": "4.7.0",
