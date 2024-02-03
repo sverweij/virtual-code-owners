@@ -23,7 +23,7 @@
     "depcruise:html": "depcruise src tools --output-type err-html --output-to dependency-violation-report.html",
     "format": "prettier --log-level warn --write \"**/*.{md,ts,json,yml}\"",
     "prepare": "husky install",
-    "prepack": "clean-pkg-json",
+    "prepack": "clean-pkg-json --dry --keep overrides --keep resolutions | jq '.scripts = {test: \"echo for test, build and static analysis scripts: see the github repository\"}' > smaller-package.json && mv smaller-package.json package.json",
     "postpack": "git restore package.json",
     "scm:stage": "git add .",
     "test": "c8 tsx --test-reporter ./tools/dot-with-summary.reporter.js --test src/*.test.ts src/**/*.test.ts",
