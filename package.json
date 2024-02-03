@@ -1,7 +1,7 @@
 {
   "name": "virtual-code-owners",
   "version": "8.0.0",
-  "description": "CODEOWNERS for teams that can't use GitHub teams",
+  "description": "CODEOWNERS with teams for teams that can't use GitHub teams",
   "type": "module",
   "bin": {
     "virtual-code-owners": "dist/run-cli.js"
