@@ -176,3 +176,10 @@
       - type-only
       - type-import
       - triple-slash-type-reference
+- name: "use-assert-strict"
+  comment: "This module uses 'node:assert'. It's better to use 'node:assert/strict' instead."
+  severity: "error"
+  from: {}
+  to:
+    path: "^assert$"
+    dependencyTypes: ["core"]

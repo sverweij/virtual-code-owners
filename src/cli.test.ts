@@ -1,4 +1,4 @@
-import { doesNotThrow, match, throws } from "node:assert";
+import { doesNotThrow, match, throws } from "node:assert/strict";
 import { accessSync, constants, rmSync } from "node:fs";
 import { Writable } from "node:stream";
 import { describe, it } from "node:test";
