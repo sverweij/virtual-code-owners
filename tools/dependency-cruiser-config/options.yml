@@ -35,7 +35,9 @@ reporterOptions:
         - criteria:
             source: ".test.ts"
           attributes:
-            fillcolor: "#ccccff"
+            fontcolor: "gray"
+            color: "gray"
+            fillcolor: "#faffff"
         - criteria:
             source: "\\.d\\.ts"
           attributes:
