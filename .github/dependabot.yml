@@ -1,9 +1,23 @@
+# yaml-language-server: $schema:https://json.schemastore.org/dependabot-2.0.json
 version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
+    # Group minor and patch updates for both dependencies and devDependencies
+    # into a single PR so there's less PR's we have to mind.
+    groups:
+      devDependencies:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+      dependencies:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
     commit-message:
       prefix: "build"
       prefix-development: "build"
