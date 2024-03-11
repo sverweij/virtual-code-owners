@@ -81,8 +81,6 @@ ch/sales:
   - gregory-gregson-ch
   - jane-doe-ch
   - abraham-ableton-ch
-  - boris-bubbleblower-ch
-  - charlotte-charleston-ch
   - dagny-taggert-ch
   - karl-marx-ch
 ch/pre-sales:
@@ -95,11 +93,9 @@ ch/ux:
   - john-johnson-ch
   - joe-dalton-ch
   - koos-koets
-  - charlotte-de-bourbon-ch
 ch/transversal:
   - mary-the-merry-ch
   - luke-the-lucky-ch
-  - naomi-the-namegiver-ch
   - benjamin-franklin
   - koos-koets
   - abraham-lincoln
@@ -133,20 +129,20 @@ Running `npx virtual-code-owners` will combine these into a CODEOWNERS file like
 
 # admin & ci stuff => transversal
 
-.github/                @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
+.github/                @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch
 
 # generic stuff
 
-apps/framework/         @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
-apps/ux-portal/         @abraham-lincoln @benjamin-franklin @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets @luke-the-lucky-ch @mary-the-merry-ch @naomi-the-namegiver-ch
-libs/components/        @charlotte-de-bourbon-ch @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets
+apps/framework/         @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch
+apps/ux-portal/         @abraham-lincoln @benjamin-franklin @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets @luke-the-lucky-ch @mary-the-merry-ch
+libs/components/        @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets
 
 # specific functionality
 
-libs/ubc-sales/         @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-charleston-ch @dagny-taggert-ch @gregory-gregson-ch @jane-doe-ch @karl-marx-ch
+libs/ubc-sales/         @abraham-ableton-ch @dagny-taggert-ch @gregory-gregson-ch @jane-doe-ch @karl-marx-ch
 libs/ubc-after-sales/   @daisy-duck @donald-duck @john-doe-ch @pete-peterson-ch @william-the-fourth-ch
 libs/ubc-pre-sales/     @averel-dalton-ch @jean-claude-ch @john-galt-ch @valerie-valerton-ch
-libs/ubc-refund/        @abraham-ableton-ch @boris-bubbleblower-ch @charlotte-charleston-ch @dagny-taggert-ch @daisy-duck @donald-duck @gregory-gregson-ch @jane-doe-ch @john-doe-ch @karl-marx-ch @pete-peterson-ch @william-the-fourth-ch
+libs/ubc-refund/        @abraham-ableton-ch @dagny-taggert-ch @daisy-duck @donald-duck @gregory-gregson-ch @jane-doe-ch @john-doe-ch @karl-marx-ch @pete-peterson-ch @william-the-fourth-ch
 libs/ubc-baarden/       jan@example.com korneel@example.com pier@example.com tjorus@example.com
 ```
 
