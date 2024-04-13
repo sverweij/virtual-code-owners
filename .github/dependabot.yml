@@ -8,12 +8,12 @@ updates:
     # Group minor and patch updates for both dependencies and devDependencies
     # into a single PR so there's less PR's we have to mind.
     groups:
-      devDependencies:
+      non-major-node-dev-dependencies:
         dependency-type: development
         update-types:
           - minor
           - patch
-      dependencies:
+      non-major-node-dependencies:
         dependency-type: production
         update-types:
           - minor
@@ -27,6 +27,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      all-github-actions:
+        update-types: ["major", "minor", "patch"]
     commit-message:
       prefix: "ci"
       include: scope
