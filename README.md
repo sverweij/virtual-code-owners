@@ -43,21 +43,20 @@ For example a CODEOWNERS file can look like this:
 
 # admin & ci stuff => transversal
 
-.github/                @ch/transversal
+.github/            @ch/transversal
 
 # generic stuff
 
-apps/framework/         @ch/transversal
-apps/ux-portal/         @ch/ux @ch/transversal
-libs/components/        @ch/ux
+apps/framework/     @ch/transversal
+apps/ux-portal/     @ch/ux @ch/transversal
+libs/components/    @ch/ux
 
 # specific functionality
 
-libs/ubc-sales/         @ch/sales
-libs/ubc-after-sales/   @ch/after-sales
-libs/ubc-pre-sales/     @ch/pre-sales
-libs/ubc-refund/        @ch/sales @ch/after-sales
-libs/ubc-baarden/       @ch/mannen-met-baarden
+libs/sales/         @ch/sales
+libs/after-sales/   @ch/after-sales
+libs/refund/        @ch/sales @ch/after-sales
+libs/baarden/       @ch/mannen-met-baarden
 ```
 
 ... where only the @cloud-heroes-all is a 'real' team on GitHub level. The other
@@ -74,7 +73,7 @@ to keep CODEOWNERS current.
 ch/after-sales:
   - john-doe-ch
   - pete-peterson-ch
-  - william-the-fourth-ch
+  - john-galt-ch
   - daisy-duck
   - donald-duck
 ch/sales:
@@ -83,11 +82,6 @@ ch/sales:
   - abraham-ableton-ch
   - dagny-taggert-ch
   - karl-marx-ch
-ch/pre-sales:
-  - jean-claude-ch
-  - valerie-valerton-ch
-  - averel-dalton-ch
-  - john-galt-ch
 ch/ux:
   - davy-davidson-ch
   - john-johnson-ch
@@ -129,21 +123,20 @@ Running `npx virtual-code-owners` will combine these into a CODEOWNERS file like
 
 # admin & ci stuff => transversal
 
-.github/                @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch
+.github/            @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch
 
 # generic stuff
 
-apps/framework/         @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch
-apps/ux-portal/         @abraham-lincoln @benjamin-franklin @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets @luke-the-lucky-ch @mary-the-merry-ch
-libs/components/        @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets
+apps/framework/     @abraham-lincoln @benjamin-franklin @koos-koets @luke-the-lucky-ch @mary-the-merry-ch
+apps/ux-portal/     @abraham-lincoln @benjamin-franklin @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets @luke-the-lucky-ch @mary-the-merry-ch
+libs/components/    @davy-davidson-ch @joe-dalton-ch @john-johnson-ch @koos-koets
 
 # specific functionality
 
-libs/ubc-sales/         @abraham-ableton-ch @dagny-taggert-ch @gregory-gregson-ch @jane-doe-ch @karl-marx-ch
-libs/ubc-after-sales/   @daisy-duck @donald-duck @john-doe-ch @pete-peterson-ch @william-the-fourth-ch
-libs/ubc-pre-sales/     @averel-dalton-ch @jean-claude-ch @john-galt-ch @valerie-valerton-ch
-libs/ubc-refund/        @abraham-ableton-ch @dagny-taggert-ch @daisy-duck @donald-duck @gregory-gregson-ch @jane-doe-ch @john-doe-ch @karl-marx-ch @pete-peterson-ch @william-the-fourth-ch
-libs/ubc-baarden/       jan@example.com korneel@example.com pier@example.com tjorus@example.com
+libs/sales/         @abraham-ableton-ch @dagny-taggert-ch @gregory-gregson-ch @jane-doe-ch @karl-marx-ch
+libs/after-sales/   @daisy-duck @donald-duck @john-doe-ch @john-galt @pete-peterson-ch
+libs/refund/        @abraham-ableton-ch @dagny-taggert-ch @daisy-duck @donald-duck @gregory-gregson-ch @jane-doe-ch @john-doe-ch @john-galt @karl-marx-ch @pete-peterson-ch
+libs/baarden/       jan@example.com korneel@example.com pier@example.com tjorus@example.com
 ```
 
 ## FAQ
@@ -252,16 +245,16 @@ the formatting of _those_.
 
 You should _totally_ use GitHub teams! If you can.
 
-Organizations sometimes have large mono repositories with loads of code owners.
-They or their bureaucracy haven't landed on actually using GitHub teams to clearly
+Organizations sometimes have large mono repositories with many code owners.
+They or their bureaucracy haven't landed on actually using GitHub teams to
 demarcate that. Or you're working on a cross-functional team that doesn't follow
 the organization chart (and hence the GitHub teams). Teams in those organizations
-who want to have clear code ownership have the following choices:
+who want to have clear code ownership can either:
 
 - Wrestle the bureaucracy.  
-  This is the recommended approach. It might take a while, though - and even
-  though there are good people on many levels in bureaucracies, it might
-  eventually not pan out because #reasons.
+  Recommended! It might take a while, though - and even though there are good
+  people on many levels in bureaucracies, it might eventually not pan out
+  because #reasons.
 - Maintain a CODEOWNERS file with code assigned to large lists of individuals.  
   An option, but laborious to maintain, even for smaller projects
 
