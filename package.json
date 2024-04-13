@@ -13,7 +13,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "rm -rf dist && tsx tools/get-version.ts > src/version.ts && tsx tools/js-json.ts < src/virtual-teams.schema.json > src/team-map/virtual-teams.schema.ts && tsc && prettier --log-level warn --write dist/",
+    "build": "rm -rf dist && tsx tools/get-version.ts > src/version.ts && tsx tools/js-json.ts < src/virtual-teams.schema.json > src/team-map/virtual-teams.schema.ts && tsc && prettier --log-level warn --write --use-tabs dist/",
     "check": "npm run format && npm run build && npm run depcruise -- --no-progress && npm test",
     "depcruise": "depcruise src tools",
     "depcruise:graph": "depcruise src --include-only '^(src)' --output-type x-dot-webpage --output-to dependency-graph.html",
@@ -23,7 +23,7 @@
     "depcruise:html": "depcruise src tools --output-type err-html --output-to dependency-violation-report.html",
     "format": "prettier --log-level warn --write \"**/*.{md,ts,json,yml}\"",
     "prepare": "husky install",
-    "prepack": "clean-pkg-json --dry --keep overrides --keep resolutions | jq '.scripts = {test: \"echo for test, build and static analysis scripts: see the github repository\"}' > smaller-package.json && mv smaller-package.json package.json",
+    "prepack": "clean-pkg-json --dry --keep overrides --keep resolutions | jq '.scripts = {test: \"echo for test, build and static analysis scripts: see the github repository\"}' > smaller-package.json && mv smaller-package.json package.json && prettier --log-level warn --write --use-tabs package.json",
     "postpack": "git restore package.json",
     "scm:stage": "git add .",
     "test": "c8 tsx --test-reporter ./tools/dot-with-summary.reporter.js --test src/*.test.ts src/**/*.test.ts",
