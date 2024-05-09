@@ -16,3 +16,6 @@
 .github/  @mcmeadow @sverweij
 tools/    @mcmeadow @sverweij
 README.md @sverweij
+
+^[optional-section][2] @sverweij
+dist/
