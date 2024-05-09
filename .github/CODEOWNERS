@@ -19,3 +19,7 @@ README.md @sverweij
 
 ^[optional-section][2] @sverweij
 dist/
+
+[non-optional-section][1] @mcmeadow
+.github/CODEOWNERS @sverweij @McMeadow 
+.github/workflows
