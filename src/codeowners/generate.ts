@@ -38,24 +38,14 @@ function generateLine(
   pTeamMap: ITeamMap,
 ): string {
   if (pCSTLine.type === "rule") {
-    const lUserNames = uniq(
-      pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)),
-    )
-      .sort(compareUserNames)
-      .join(" ");
     return (
       pCSTLine.filesPattern +
       pCSTLine.spaces +
-      lUserNames +
+      expandTeamsToUsersString(pCSTLine.users, pTeamMap) +
       (pCSTLine.inlineComment ? ` #${pCSTLine.inlineComment}` : "")
     );
   }
   if (pCSTLine.type === "section") {
-    const lUserNames = uniq(
-      pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)),
-    )
-      .sort(compareUserNames)
-      .join(" ");
     return (
       (pCSTLine.optional ? "^" : "") +
       "[" +
@@ -63,11 +53,17 @@ function generateLine(
       "]" +
       (pCSTLine.minApprovers ? `[${pCSTLine.minApprovers}]` : "") +
       pCSTLine.spaces +
-      lUserNames +
+      expandTeamsToUsersString(pCSTLine.users, pTeamMap) +
       (pCSTLine.inlineComment ? ` #${pCSTLine.inlineComment}` : "")
     );
   }
   return pCSTLine.raw;
+}
+
+function expandTeamsToUsersString(pUsers: IUser[], pTeamMap: ITeamMap): string {
+  return uniq(pUsers.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)))
+    .sort(compareUserNames)
+    .join(" ");
 }
 
 function expandTeamToUserNames(pUser: IUser, pTeamMap: ITeamMap): string[] {

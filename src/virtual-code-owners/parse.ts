@@ -95,7 +95,7 @@ function parseSection(
   if (lSection.groups.minApprovers) {
     lReturnValue.minApprovers = parseInt(
       lSection.groups.minApprovers as string,
-      10
+      10,
     );
   }
 
