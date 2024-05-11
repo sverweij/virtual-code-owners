@@ -25,7 +25,7 @@ function reportAnomalies(pFileName, pAnomalies) {
 	return pAnomalies
 		.map((pAnomaly) => {
 			if (pAnomaly.type === "invalid-line") {
-				return `${pFileName}:${pAnomaly.line}:1 invalid line - neither a rule, comment nor empty: "${pAnomaly.raw}"`;
+				return `${pFileName}:${pAnomaly.line}:1 invalid line - neither a rule, section, comment nor empty: "${pAnomaly.raw}"`;
 			} else {
 				return (
 					`${pFileName}:${pAnomaly.line}:1 invalid user or team name "${pAnomaly.raw}" (#${pAnomaly.userNumberWithinLine} on this line). ` +

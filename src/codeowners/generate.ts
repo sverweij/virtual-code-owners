@@ -50,6 +50,23 @@ function generateLine(
       (pCSTLine.inlineComment ? ` #${pCSTLine.inlineComment}` : "")
     );
   }
+  if (pCSTLine.type === "section") {
+    const lUserNames = uniq(
+      pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)),
+    )
+      .sort(compareUserNames)
+      .join(" ");
+    return (
+      (pCSTLine.optional ? "^" : "") +
+      "[" +
+      pCSTLine.sectionName +
+      "]" +
+      (pCSTLine.minApprovers ? `[${pCSTLine.minApprovers}]` : "") +
+      pCSTLine.spaces +
+      lUserNames +
+      (pCSTLine.inlineComment ? ` #${pCSTLine.inlineComment}` : "")
+    );
+  }
   return pCSTLine.raw;
 }
 

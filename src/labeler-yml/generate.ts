@@ -1,7 +1,7 @@
 import { EOL } from "node:os";
 import type { ITeamMap } from "../team-map/team-map.js";
 import type {
-  IInterestingCSTLine,
+  IRuleCSTLine,
   IVirtualCodeOwnersCST,
 } from "../virtual-code-owners/cst.js";
 
@@ -48,12 +48,12 @@ function getPatternsForTeam(
       .filter((pLine) => {
         return (
           pLine.type === "rule" &&
-          lineContainsTeamName(pLine as IInterestingCSTLine, pTeamName)
+          lineContainsTeamName(pLine as IRuleCSTLine, pTeamName)
         );
       })
       // @ts-expect-error ts thinks it can still be an IBoringCSTLine,
       // but with the filter above we've ruled that out
-      .map((pLine: IInterestingCSTLine) => pLine.filesPattern)
+      .map((pLine: IRuleCSTLine) => pLine.filesPattern)
   );
 }
 
@@ -93,10 +93,7 @@ function transformForYamlAndMinimatch(pOriginalString: string): string {
   return lReturnValue;
 }
 
-function lineContainsTeamName(
-  pLine: IInterestingCSTLine,
-  pTeamName: string,
-): boolean {
+function lineContainsTeamName(pLine: IRuleCSTLine, pTeamName: string): boolean {
   return pLine.users.some(
     (pUser) =>
       pUser.type === "virtual-team-name" && pUser.bareName === pTeamName,

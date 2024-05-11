@@ -1,0 +1,289 @@
+[
+  {
+    "type": "ignorable-comment",
+    "line": 1,
+    "raw": "#! this is not the CODEOWNERS file - to get that one run",
+  },
+  {
+    "type": "ignorable-comment",
+    "line": 2,
+    "raw": "#!   npx virtual-code-owners",
+  },
+  { "type": "ignorable-comment", "line": 3, "raw": "#!" },
+  {
+    "type": "comment",
+    "line": 4,
+    "raw": "# catch-all to ensure there at least _is_ a code owner, even when",
+  },
+  { "type": "comment", "line": 5, "raw": "# it's _everyone_" },
+  { "type": "empty", "line": 6, "raw": "" },
+  {
+    "type": "rule",
+    "line": 7,
+    "filesPattern": "*",
+    "spaces": "       ",
+    "users":
+      [
+        {
+          "type": "virtual-team-name",
+          "userNumberWithinLine": 1,
+          "bareName": "baarden",
+          "raw": "@baarden",
+        },
+      ],
+    "inlineComment": "",
+    "raw": "*       @baarden",
+  },
+  { "type": "empty", "line": 8, "raw": "" },
+  { "type": "section-without-users", "line": 9, "raw": "[admin & ci stuff]" },
+  {
+    "type": "rule",
+    "line": 10,
+    "filesPattern": ".github/",
+    "spaces": "                ",
+    "users":
+      [
+        {
+          "type": "other-user-or-team",
+          "userNumberWithinLine": 1,
+          "bareName": "ch/transversal",
+          "raw": "@ch/transversal",
+        },
+      ],
+    "inlineComment": "",
+    "raw": ".github/                @ch/transversal",
+  },
+  { "type": "empty", "line": 11, "raw": "" },
+  {
+    "type": "section",
+    "line": 12,
+    "optional": false,
+    "sectionName": "generic stuff",
+    "minApprovers": 3,
+    "spaces": "      ",
+    "users":
+      [
+        {
+          "type": "virtual-team-name",
+          "userNumberWithinLine": 1,
+          "bareName": "baarden",
+          "raw": "@baarden",
+        },
+      ],
+    "inlineComment": "",
+    "raw": "[generic stuff][3]      @baarden",
+  },
+  {
+    "type": "rule",
+    "line": 13,
+    "filesPattern": "apps/framework/",
+    "spaces": "         ",
+    "users":
+      [
+        {
+          "type": "virtual-team-name",
+          "userNumberWithinLine": 1,
+          "bareName": "leren-lezen",
+          "raw": "@leren-lezen",
+        },
+        {
+          "type": "e-mail-address",
+          "userNumberWithinLine": 2,
+          "bareName": "framework@example.com",
+          "raw": "framework@example.com",
+        },
+      ],
+    "inlineComment": "",
+    "raw": "apps/framework/         @leren-lezen framework@example.com",
+  },
+  {
+    "type": "rule",
+    "line": 14,
+    "filesPattern": "apps/ux-portal/",
+    "spaces": "         ",
+    "users":
+      [
+        {
+          "type": "other-user-or-team",
+          "userNumberWithinLine": 1,
+          "bareName": "ch/ux",
+          "raw": "@ch/ux",
+        },
+        {
+          "type": "other-user-or-team",
+          "userNumberWithinLine": 2,
+          "bareName": "ch/transversal",
+          "raw": "@ch/transversal",
+        },
+      ],
+    "inlineComment": "",
+    "raw": "apps/ux-portal/         @ch/ux @ch/transversal",
+  },
+  {
+    "type": "rule",
+    "line": 15,
+    "filesPattern": "libs/components/",
+    "spaces": "        ",
+    "users":
+      [
+        {
+          "type": "other-user-or-team",
+          "userNumberWithinLine": 1,
+          "bareName": "ch/ux",
+          "raw": "@ch/ux",
+        },
+      ],
+    "inlineComment": "",
+    "raw": "libs/components/        @ch/ux",
+  },
+  { "type": "empty", "line": 16, "raw": "" },
+  {
+    "type": "section-without-users",
+    "line": 17,
+    "raw": "[specific functionality]",
+  },
+  {
+    "type": "rule",
+    "line": 18,
+    "filesPattern": "libs/ubc-sales/",
+    "spaces": "         ",
+    "users":
+      [
+        {
+          "type": "other-user-or-team",
+          "userNumberWithinLine": 1,
+          "bareName": "ch/sales",
+          "raw": "@ch/sales",
+        },
+      ],
+    "inlineComment": "",
+    "raw": "libs/ubc-sales/         @ch/sales",
+  },
+  {
+    "type": "rule",
+    "line": 19,
+    "filesPattern": "libs/ubc-after-sales/",
+    "spaces": "   ",
+    "users":
+      [
+        {
+          "type": "other-user-or-team",
+          "userNumberWithinLine": 1,
+          "bareName": "ch/after-sales",
+          "raw": "@ch/after-sales",
+        },
+      ],
+    "inlineComment": "",
+    "raw": "libs/ubc-after-sales/   @ch/after-sales",
+  },
+  {
+    "type": "rule",
+    "line": 20,
+    "filesPattern": "libs/ubc-pre-sales/",
+    "spaces": "     ",
+    "users":
+      [
+        {
+          "type": "other-user-or-team",
+          "userNumberWithinLine": 1,
+          "bareName": "ch/pre-sales",
+          "raw": "@ch/pre-sales",
+        },
+      ],
+    "inlineComment": "",
+    "raw": "libs/ubc-pre-sales/     @ch/pre-sales",
+  },
+  {
+    "type": "rule",
+    "line": 21,
+    "filesPattern": "libs/ubc-refund/",
+    "spaces": "        ",
+    "users":
+      [
+        {
+          "type": "other-user-or-team",
+          "userNumberWithinLine": 1,
+          "bareName": "ch/sales",
+          "raw": "@ch/sales",
+        },
+        {
+          "type": "other-user-or-team",
+          "userNumberWithinLine": 2,
+          "bareName": "ch/after-sales",
+          "raw": "@ch/after-sales",
+        },
+      ],
+    "inlineComment": " shared responsibility",
+    "raw": "libs/ubc-refund/        @ch/sales @ch/after-sales # shared responsibility",
+  },
+  {
+    "type": "rule",
+    "line": 22,
+    "filesPattern": "libs/ubc-baarden/",
+    "spaces": "       ",
+    "users":
+      [
+        {
+          "type": "virtual-team-name",
+          "userNumberWithinLine": 1,
+          "bareName": "baarden",
+          "raw": "@baarden",
+        },
+      ],
+    "inlineComment": "",
+    "raw": "libs/ubc-baarden/       @baarden",
+  },
+  { "type": "empty", "line": 23, "raw": "" },
+  {
+    "type": "section",
+    "line": 24,
+    "optional": true,
+    "sectionName": "non critical stuff",
+    "spaces": "   ",
+    "users":
+      [
+        {
+          "type": "virtual-team-name",
+          "userNumberWithinLine": 1,
+          "bareName": "baarden",
+          "raw": "@baarden",
+        },
+      ],
+    "inlineComment": "",
+    "raw": "^[non critical stuff]   @baarden",
+  },
+  {
+    "type": "rule",
+    "line": 25,
+    "filesPattern": "libs/ubc-foo/",
+    "spaces": "           ",
+    "users":
+      [
+        {
+          "type": "other-user-or-team",
+          "userNumberWithinLine": 1,
+          "bareName": "baardlozen",
+          "raw": "@baardlozen",
+        },
+      ],
+    "inlineComment": "",
+    "raw": "libs/ubc-foo/           @baardlozen",
+  },
+  { "type": "ignorable-comment", "line": 26, "raw": "#!" },
+  {
+    "type": "ignorable-comment",
+    "line": 27,
+    "raw": "#! The VIRTUAL-CODEOWNERS.txt file has the .txt extension because untamed vscode",
+  },
+  {
+    "type": "ignorable-comment",
+    "line": 28,
+    "raw": "#! installations might otherwise interpret it as markdown and auto-correct",
+  },
+  {
+    "type": "ignorable-comment",
+    "line": 29,
+    "raw": "#! and auto-format it as such",
+  },
+  { "type": "empty", "line": 30, "raw": "" },
+]
