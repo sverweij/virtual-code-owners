@@ -8,16 +8,3 @@
 .github/  @vco-admins @admin
 tools/    @vco-admins @tools
 README.md @vco @documentation
-
-[section]
-bla @vco
-
-[section-with-owners] @vco @vco-admins
-# blabla # Patronen ohne Nutzernahmen sind erlaubt in Sectionen mit Nutzernamen im Titel
-bladiebla @other-owner-still
-
-[section-with-approvers][3]
-# Diese Section ist leer. Is das erlaubt?
-
-^[optional-section]
-stonks/ @vco-admins @tools

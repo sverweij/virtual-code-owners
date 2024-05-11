@@ -49,7 +49,7 @@ function generateLine(pCSTLine, pTeamMap) {
 			"[" +
 			pCSTLine.sectionName +
 			"]" +
-			(pCSTLine.minApprovers ? `[(${pCSTLine.minApprovers})]` : "") +
+			(pCSTLine.minApprovers ? `[${pCSTLine.minApprovers}]` : "") +
 			pCSTLine.spaces +
 			lUserNames +
 			(pCSTLine.inlineComment ? ` #${pCSTLine.inlineComment}` : "")

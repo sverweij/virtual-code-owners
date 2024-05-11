@@ -16,16 +16,3 @@
 .github/  @mcmeadow @sverweij
 tools/    @mcmeadow @sverweij
 README.md @sverweij
-
-[section]
-bla @sverweij
-
-[section-with-owners][(1)] @mcmeadow @sverweij
-# blabla # Patronen ohne Nutzernahmen sind erlaubt in Sectionen mit Nutzernamen im Titel
-bladiebla @other-owner-still
-
-[section-with-approvers][3]
-# Diese Section ist leer. Is das erlaubt?
-
-^[optional-section]
-stonks/ @mcmeadow @sverweij

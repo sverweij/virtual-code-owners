@@ -57,19 +57,20 @@ function parseSection(pUntreatedLine, pLineNo, pTeamMap) {
 					raw: pUntreatedLine,
 				};
 	}
-	return {
+	const lReturnValue = {
 		type: "section",
 		line: pLineNo,
 		optional: lSection.groups.optionalIndicator === "^",
 		sectionName: lSection.groups.sectionName,
-		minApprovers: lSection.groups.minApprovers
-			? parseInt(lSection.groups.minApprovers, 10)
-			: 1,
 		spaces: lSection.groups.spaces,
 		users: parseUsers(lSection.groups.userNames, pTeamMap),
 		inlineComment: lTrimmedLine.split(/\s*#/)[1] ?? "",
 		raw: pUntreatedLine,
 	};
+	if (lSection.groups.minApprovers) {
+		lReturnValue.minApprovers = parseInt(lSection.groups.minApprovers);
+	}
+	return lReturnValue;
 }
 function parseUsers(pUserNamesString, pTeamMap) {
 	const lUserNames = pUserNamesString.split(/\s+/);

@@ -12,18 +12,15 @@ vco:
   - changed-files:
       - any-glob-to-any-file: "**"
       - any-glob-to-any-file: README.md
-      - any-glob-to-any-file: bla
 
 vco-admins:
   - changed-files:
       - any-glob-to-any-file: .github/**
       - any-glob-to-any-file: tools/**
-      - any-glob-to-any-file: stonks/**
 
 tools:
   - changed-files:
       - any-glob-to-any-file: tools/**
-      - any-glob-to-any-file: stonks/**
 
 admin:
   - changed-files:
