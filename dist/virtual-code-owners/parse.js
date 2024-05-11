@@ -68,7 +68,7 @@ function parseSection(pUntreatedLine, pLineNo, pTeamMap) {
 		raw: pUntreatedLine,
 	};
 	if (lSection.groups.minApprovers) {
-		lReturnValue.minApprovers = parseInt(lSection.groups.minApprovers);
+		lReturnValue.minApprovers = parseInt(lSection.groups.minApprovers, 10);
 	}
 	return lReturnValue;
 }
