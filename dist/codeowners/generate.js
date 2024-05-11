@@ -33,7 +33,7 @@ function generateLine(pCSTLine, pTeamMap) {
 			(pCSTLine.inlineComment ? ` #${pCSTLine.inlineComment}` : "")
 		);
 	}
-	if (pCSTLine.type === "section") {
+	if (pCSTLine.type === "section-heading") {
 		return (
 			(pCSTLine.optional ? "^" : "") +
 			"[" +

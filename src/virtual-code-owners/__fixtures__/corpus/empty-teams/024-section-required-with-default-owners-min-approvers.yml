@@ -7,7 +7,7 @@
     raw: "[required-section][42] @default-user @default-group",
     sectionName: "required-section",
     spaces: " ",
-    type: "section",
+    type: "section-heading",
     users:
       [
         {

@@ -1,6 +1,6 @@
 export type IVirtualCodeOwnersCST = IVirtualCodeOwnerLine[];
 export type IVirtualCodeOwnerLine = IBoringCSTLine | IInterestingCSTLine;
-export type IInterestingCSTLine = IRuleCSTLine | ISectionCSTLine;
+export type IInterestingCSTLine = IRuleCSTLine | ISectionHeadingCSTLine;
 export interface IBoringCSTLine {
   type:
     | "comment"
@@ -20,8 +20,8 @@ export interface IRuleCSTLine {
   inlineComment: string;
   raw: string;
 }
-export interface ISectionCSTLine {
-  type: "section";
+export interface ISectionHeadingCSTLine {
+  type: "section-heading";
   line: number;
   optional: boolean;
   sectionName: string;

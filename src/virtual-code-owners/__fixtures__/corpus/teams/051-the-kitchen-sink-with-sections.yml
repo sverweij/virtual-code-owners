@@ -55,7 +55,7 @@
   },
   { "type": "empty", "line": 11, "raw": "" },
   {
-    "type": "section",
+    "type": "section-heading",
     "line": 12,
     "optional": false,
     "sectionName": "generic stuff",
@@ -235,7 +235,7 @@
   },
   { "type": "empty", "line": 23, "raw": "" },
   {
-    "type": "section",
+    "type": "section-heading",
     "line": 24,
     "optional": true,
     "sectionName": "non critical stuff",

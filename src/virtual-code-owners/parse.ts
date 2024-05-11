@@ -1,7 +1,7 @@
 import { EOL } from "node:os";
 import type { ITeamMap } from "../team-map/team-map.js";
 import type {
-  ISectionCSTLine,
+  ISectionHeadingCSTLine,
   IUser,
   IVirtualCodeOwnerLine,
   IVirtualCodeOwnersCST,
@@ -81,8 +81,8 @@ function parseSection(
           raw: pUntreatedLine,
         };
   }
-  const lReturnValue: ISectionCSTLine = {
-    type: "section",
+  const lReturnValue: ISectionHeadingCSTLine = {
+    type: "section-heading",
     line: pLineNo,
     optional: lSection.groups.optionalIndicator === "^",
     sectionName: lSection.groups.sectionName as string,

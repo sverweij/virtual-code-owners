@@ -31,7 +31,7 @@
     raw: "^[optional-section-with-default] @koos-koets",
     sectionName: "optional-section-with-default",
     spaces: " ",
-    type: "section",
+    type: "section-heading",
     users:
       [
         {

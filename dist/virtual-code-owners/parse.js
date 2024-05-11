@@ -58,7 +58,7 @@ function parseSection(pUntreatedLine, pLineNo, pTeamMap) {
 				};
 	}
 	const lReturnValue = {
-		type: "section",
+		type: "section-heading",
 		line: pLineNo,
 		optional: lSection.groups.optionalIndicator === "^",
 		sectionName: lSection.groups.sectionName,
