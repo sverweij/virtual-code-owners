@@ -26,7 +26,7 @@ function assertTeamMapValid(pTeamMap: ITeamMap, pVirtualTeamsFileName: string) {
   if (!ajv.validate(virtualTeamsSchema, pTeamMap)) {
     throw new Error(
       `This is not a valid virtual-teams.yml:${EOL}${formatAjvErrors(
-        ajv.errors,
+        ajv.errors as any[],
         pVirtualTeamsFileName,
       )}.\n`,
     );

@@ -1,0 +1,26 @@
+[
+  { line: 1, raw: "[required-section][42]", type: "section-without-users" },
+  {
+    filesPattern: "aap/",
+    inlineComment: "",
+    line: 2,
+    raw: "aap/ @some-user @some-other-user",
+    spaces: " ",
+    type: "rule",
+    users:
+      [
+        {
+          bareName: "some-user",
+          raw: "@some-user",
+          type: "other-user-or-team",
+          userNumberWithinLine: 1,
+        },
+        {
+          bareName: "some-other-user",
+          raw: "@some-other-user",
+          type: "other-user-or-team",
+          userNumberWithinLine: 2,
+        },
+      ],
+  },
+]

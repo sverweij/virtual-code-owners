@@ -1,11 +1,17 @@
 export type IVirtualCodeOwnersCST = IVirtualCodeOwnerLine[];
 export type IVirtualCodeOwnerLine = IBoringCSTLine | IInterestingCSTLine;
+export type IInterestingCSTLine = IRuleCSTLine | ISectionHeadingCSTLine;
 export interface IBoringCSTLine {
-  type: "comment" | "ignorable-comment" | "empty" | "unknown";
+  type:
+    | "comment"
+    | "ignorable-comment"
+    | "empty"
+    | "section-without-users"
+    | "unknown";
   line: number;
   raw: string;
 }
-export interface IInterestingCSTLine {
+export interface IRuleCSTLine {
   type: "rule";
   line: number;
   filesPattern: string;
@@ -14,6 +20,18 @@ export interface IInterestingCSTLine {
   inlineComment: string;
   raw: string;
 }
+export interface ISectionHeadingCSTLine {
+  type: "section-heading";
+  line: number;
+  optional: boolean;
+  sectionName: string;
+  minApprovers?: number;
+  spaces: string;
+  users: IUser[];
+  inlineComment: string;
+  raw: string;
+}
+
 export type UserType =
   | "virtual-team-name"
   | "e-mail-address"

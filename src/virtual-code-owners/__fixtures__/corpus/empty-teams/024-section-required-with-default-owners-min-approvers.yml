@@ -1,0 +1,50 @@
+[
+  {
+    inlineComment: "",
+    line: 1,
+    minApprovers: 42,
+    optional: false,
+    raw: "[required-section][42] @default-user @default-group",
+    sectionName: "required-section",
+    spaces: " ",
+    type: "section-heading",
+    users:
+      [
+        {
+          bareName: "default-user",
+          raw: "@default-user",
+          type: "other-user-or-team",
+          userNumberWithinLine: 1,
+        },
+        {
+          bareName: "default-group",
+          raw: "@default-group",
+          type: "other-user-or-team",
+          userNumberWithinLine: 2,
+        },
+      ],
+  },
+  {
+    filesPattern: "aap/",
+    inlineComment: "",
+    line: 2,
+    raw: "aap/ @some-user @some-other-user",
+    spaces: " ",
+    type: "rule",
+    users:
+      [
+        {
+          bareName: "some-user",
+          raw: "@some-user",
+          type: "other-user-or-team",
+          userNumberWithinLine: 1,
+        },
+        {
+          bareName: "some-other-user",
+          raw: "@some-other-user",
+          type: "other-user-or-team",
+          userNumberWithinLine: 2,
+        },
+      ],
+  },
+]

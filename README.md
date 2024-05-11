@@ -143,7 +143,10 @@ libs/baarden/       jan@example.com korneel@example.com pier@example.com tjorus@
 
 ### Any gotcha's?
 
-It won't check whether the users or teams you entered exist.
+- It won't check whether the users or teams you entered exist.
+- Only relevant when you're on GitLab: Section heading support is experimental
+  and when generating labeler.yml default section owners aren't expanded to
+  section rules.
 
 ### Do I have to run this each time I edit `VIRTUAL-CODEOWNERS.txt`?
 
@@ -207,6 +210,10 @@ user/team names but doesn't verify their existence in the project.
 
 - valid user/team names start with an `@` or are an e-mail address
 - valid rules have a file pattern and at least one user/team name
+- valid sections headings comply with the syntax described over at [GitLab](https://docs.gitlab.com/ee/user/project/codeowners/reference.html#sections)
+  > different from GitLab's syntax the line `[bla @group` is not interpreted
+  > as a rule, but as an erroneous section heading. This behaviour might change
+  > to be the same as GitLab's in future releases without a major version bump.
 
 ### I want to specify different locations for the files (e.g. because I'm using GitLab)
 

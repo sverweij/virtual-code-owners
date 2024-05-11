@@ -58,7 +58,7 @@ jobs:
       - run: npm test
         if: always() && matrix.node-version != '20.12.2'
       - name: run test & emit results to step summary
-        # code coverage report on 20.x only, as --experimental-test-coverage on node > 20.12.2 
+        # code coverage report on 20.x only, as --experimental-test-coverage on node > 20.12.2
         # is not stable (gives varying results over identical runs)
         if: always() && matrix.node-version == '20.12.2'
         run: |

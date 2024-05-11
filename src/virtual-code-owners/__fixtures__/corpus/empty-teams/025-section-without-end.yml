@@ -1,0 +1,20 @@
+[
+  { line: 1, raw: "[required-section bladiebla", type: "unknown" },
+  {
+    filesPattern: "aap/",
+    inlineComment: "",
+    line: 2,
+    raw: "aap/ @some-user",
+    spaces: " ",
+    type: "rule",
+    users:
+      [
+        {
+          bareName: "some-user",
+          raw: "@some-user",
+          type: "other-user-or-team",
+          userNumberWithinLine: 1,
+        },
+      ],
+  },
+]

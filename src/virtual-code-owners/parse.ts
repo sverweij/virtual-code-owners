@@ -1,6 +1,7 @@
 import { EOL } from "node:os";
 import type { ITeamMap } from "../team-map/team-map.js";
 import type {
+  ISectionHeadingCSTLine,
   IUser,
   IVirtualCodeOwnerLine,
   IVirtualCodeOwnersCST,
@@ -36,6 +37,9 @@ function parseLine(
   if (lTrimmedLine.startsWith("#")) {
     return { type: "comment", line: pLineNo, raw: pUntreatedLine };
   }
+  if (lTrimmedLine.startsWith("[") || lTrimmedLine.startsWith("^[")) {
+    return parseSection(pUntreatedLine, pLineNo, pTeamMap);
+  }
   if (!lRule?.groups) {
     if (lTrimmedLine === "") {
       return { type: "empty", line: pLineNo, raw: pUntreatedLine };
@@ -52,6 +56,50 @@ function parseLine(
     inlineComment: lCommentSplitLine[1] ?? "",
     raw: pUntreatedLine,
   };
+}
+
+function parseSection(
+  pUntreatedLine: string,
+  pLineNo: number,
+  pTeamMap: ITeamMap,
+): IVirtualCodeOwnerLine {
+  const lTrimmedLine = pUntreatedLine.trim();
+  const lCommentSplitLine = lTrimmedLine.split(/\s*#/);
+  const lSection = lCommentSplitLine[0]?.match(
+    /^(?<optionalIndicator>\^)?\[(?<sectionName>[^\]]+)\](\[(?<minApprovers>[0-9]+)\])?(?<spaces>\s+)(?<userNames>.*)$/,
+  );
+  if (!lSection?.groups) {
+    return lTrimmedLine.endsWith("]")
+      ? {
+          type: "section-without-users",
+          line: pLineNo,
+          raw: pUntreatedLine,
+        }
+      : {
+          type: "unknown",
+          line: pLineNo,
+          raw: pUntreatedLine,
+        };
+  }
+  const lReturnValue: ISectionHeadingCSTLine = {
+    type: "section-heading",
+    line: pLineNo,
+    optional: lSection.groups.optionalIndicator === "^",
+    sectionName: lSection.groups.sectionName as string,
+    spaces: lSection.groups.spaces as string,
+    users: parseUsers(lSection.groups.userNames as string, pTeamMap),
+    inlineComment: lTrimmedLine.split(/\s*#/)[1] ?? "",
+    raw: pUntreatedLine,
+  };
+
+  if (lSection.groups.minApprovers) {
+    lReturnValue.minApprovers = parseInt(
+      lSection.groups.minApprovers as string,
+      10,
+    );
+  }
+
+  return lReturnValue;
 }
 
 function parseUsers(pUserNamesString: string, pTeamMap: ITeamMap): IUser[] {
