@@ -49,7 +49,7 @@ function generateLine(
     return (
       (pCSTLine.optional ? "^" : "") +
       "[" +
-      pCSTLine.sectionName +
+      pCSTLine.name +
       "]" +
       (pCSTLine.minApprovers ? `[${pCSTLine.minApprovers}]` : "") +
       pCSTLine.spaces +

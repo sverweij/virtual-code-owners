@@ -37,7 +37,7 @@ function generateLine(pCSTLine, pTeamMap) {
 		return (
 			(pCSTLine.optional ? "^" : "") +
 			"[" +
-			pCSTLine.sectionName +
+			pCSTLine.name +
 			"]" +
 			(pCSTLine.minApprovers ? `[${pCSTLine.minApprovers}]` : "") +
 			pCSTLine.spaces +

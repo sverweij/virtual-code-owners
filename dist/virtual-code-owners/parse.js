@@ -42,7 +42,7 @@ function parseSection(pUntreatedLine, pLineNo, pTeamMap) {
 	const lTrimmedLine = pUntreatedLine.trim();
 	const lCommentSplitLine = lTrimmedLine.split(/\s*#/);
 	const lSection = lCommentSplitLine[0]?.match(
-		/^(?<optionalIndicator>\^)?\[(?<sectionName>[^\]]+)\](\[(?<minApprovers>[0-9]+)\])?(?<spaces>\s+)(?<userNames>.*)$/,
+		/^(?<optionalIndicator>\^)?\[(?<name>[^\]]+)\](\[(?<minApprovers>[0-9]+)\])?(?<spaces>\s+)(?<userNames>.*)$/,
 	);
 	if (!lSection?.groups) {
 		return lTrimmedLine.endsWith("]")
@@ -61,7 +61,7 @@ function parseSection(pUntreatedLine, pLineNo, pTeamMap) {
 		type: "section-heading",
 		line: pLineNo,
 		optional: lSection.groups.optionalIndicator === "^",
-		sectionName: lSection.groups.sectionName,
+		name: lSection.groups.name,
 		spaces: lSection.groups.spaces,
 		users: parseUsers(lSection.groups.userNames, pTeamMap),
 		inlineComment: lTrimmedLine.split(/\s*#/)[1] ?? "",

@@ -24,7 +24,7 @@ export interface ISectionHeadingCSTLine {
   type: "section-heading";
   line: number;
   optional: boolean;
-  sectionName: string;
+  name: string;
   minApprovers?: number;
   spaces: string;
   users: IUser[];

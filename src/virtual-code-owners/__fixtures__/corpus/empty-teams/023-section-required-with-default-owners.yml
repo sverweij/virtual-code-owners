@@ -4,7 +4,7 @@
     line: 1,
     optional: false,
     raw: "[required-section] @default-user @default-group",
-    sectionName: "required-section",
+    name: "required-section",
     spaces: " ",
     type: "section-heading",
     users:

@@ -5,7 +5,7 @@
     minApprovers: 42,
     optional: false,
     raw: "[required-section][42] @default-user @default-group",
-    sectionName: "required-section",
+    name: "required-section",
     spaces: " ",
     type: "section-heading",
     users:

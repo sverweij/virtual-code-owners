@@ -58,7 +58,7 @@
     "type": "section-heading",
     "line": 12,
     "optional": false,
-    "sectionName": "generic stuff",
+    "name": "generic stuff",
     "minApprovers": 3,
     "spaces": "      ",
     "users":
@@ -238,7 +238,7 @@
     "type": "section-heading",
     "line": 24,
     "optional": true,
-    "sectionName": "non critical stuff",
+    "name": "non critical stuff",
     "spaces": "   ",
     "users":
       [

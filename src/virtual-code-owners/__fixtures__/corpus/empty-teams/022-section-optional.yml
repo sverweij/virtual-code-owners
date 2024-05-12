@@ -29,7 +29,7 @@
     line: 4,
     optional: true,
     raw: "^[optional-section-with-default] @koos-koets",
-    sectionName: "optional-section-with-default",
+    name: "optional-section-with-default",
     spaces: " ",
     type: "section-heading",
     users:
