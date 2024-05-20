@@ -74,6 +74,50 @@ tools/ @team-tgif`;
     );
   });
 
+  it("replaces team names in optional section heads", () => {
+    const lFixture =
+      "^[some optional section head] @team-sales @team-after-sales";
+    const lTeamMapFixture = {
+      "team-sales": ["jan", "pier", "tjorus"],
+      "team-after-sales": ["wim", "zus", "jet"],
+    };
+    const lExpected =
+      "^[some optional section head] @jan @jet @pier @tjorus @wim @zus";
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected,
+    );
+  });
+
+  it("replaces team names in section heads with minimum approvers", () => {
+    const lFixture = "[some section head][3] @team-sales @team-after-sales";
+    const lTeamMapFixture = {
+      "team-sales": ["jan", "pier", "tjorus"],
+      "team-after-sales": ["wim", "zus", "jet"],
+    };
+    const lExpected =
+      "[some section head][3] @jan @jet @pier @tjorus @wim @zus";
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected,
+    );
+  });
+
+  it("replaces team names in section heads that have inline comments", () => {
+    const lFixture =
+      "[some section head] @team-sales @team-after-sales # some comment";
+    const lTeamMapFixture = {
+      "team-sales": ["jan", "pier", "tjorus"],
+      "team-after-sales": ["wim", "zus", "jet"],
+    };
+    const lExpected =
+      "[some section head] @jan @jet @pier @tjorus @wim @zus # some comment";
+    equal(
+      generateCodeOwnersFromString(lFixture, lTeamMapFixture, ""),
+      lExpected,
+    );
+  });
+
   it("correctly replaces a team name that is a substring of another one", () => {
     const lFixture = "tools/shared @substring";
     const lTeamMapFixture = {
