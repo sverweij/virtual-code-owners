@@ -27,7 +27,6 @@ const MAX_PERCENT = 100;
 export default async function* dotWithSummaryReporter(pSource) {
   let lFailStack = [];
   let lDiagnosticStack = [];
-  let lCoverageObject = {};
 
   for await (const lEvent of pSource) {
     switch (lEvent.type) {
@@ -59,7 +58,7 @@ export default async function* dotWithSummaryReporter(pSource) {
         yield lEvent.data.message;
         break;
       case "test:coverage":
-        lCoverageObject = lEvent;
+        yield "C";
         break;
       default:
         break;

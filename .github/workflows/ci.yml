@@ -31,7 +31,6 @@ jobs:
       matrix:
         node-version:
           - 18.x
-          - 20.12.2
           - 22.x
         platform:
           - ubuntu-latest
@@ -54,18 +53,12 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run depcruise -- --no-cache --progress performance-log
-        if: always() && matrix.node-version != '20.12.2'
       - run: npm test
-        if: always() && matrix.node-version != '20.12.2'
-      - name: run test & emit results to step summary
-        # code coverage report on 20.x only, as --experimental-test-coverage on node > 20.12.2
-        # is not stable (gives varying results over identical runs)
-        if: always() && matrix.node-version == '20.12.2'
+      - name: emit coverage results to step summary
+        if: always() && matrix.node-version == env.NODE_LATEST
         run: |
           echo '## Code coverage' >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          npm test >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
+          npx tsx tools/istanbul-json-summary-to-markdown.ts < coverage/coverage-summary.json >> $GITHUB_STEP_SUMMARY
       - name: on pushes to the default branch emit full depcruise results to step summary
         if: always() && matrix.node-version == env.NODE_LATEST && github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
         run: |
