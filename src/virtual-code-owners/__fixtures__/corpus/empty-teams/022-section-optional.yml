@@ -1,0 +1,62 @@
+[
+  { line: 1, raw: "^[optional-section]", type: "section-without-users" },
+  {
+    filesPattern: "aap/",
+    inlineComment: "",
+    line: 2,
+    raw: "aap/ @some-user @some-other-user",
+    spaces: " ",
+    type: "rule",
+    users:
+      [
+        {
+          bareName: "some-user",
+          raw: "@some-user",
+          type: "other-user-or-team",
+          userNumberWithinLine: 1,
+        },
+        {
+          bareName: "some-other-user",
+          raw: "@some-other-user",
+          type: "other-user-or-team",
+          userNumberWithinLine: 2,
+        },
+      ],
+  },
+  { line: 3, raw: "", type: "empty" },
+  {
+    inlineComment: "",
+    line: 4,
+    optional: true,
+    raw: "^[optional-section-with-default] @koos-koets",
+    name: "optional-section-with-default",
+    spaces: " ",
+    type: "section-heading",
+    users:
+      [
+        {
+          bareName: "koos-koets",
+          raw: "@koos-koets",
+          type: "other-user-or-team",
+          userNumberWithinLine: 1,
+        },
+      ],
+  },
+  {
+    filesPattern: "noot/",
+    inlineComment: "",
+    line: 5,
+    raw: "noot/ @robbie",
+    spaces: " ",
+    type: "rule",
+    users:
+      [
+        {
+          bareName: "robbie",
+          raw: "@robbie",
+          type: "other-user-or-team",
+          userNumberWithinLine: 1,
+        },
+      ],
+  },
+]

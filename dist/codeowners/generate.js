@@ -26,19 +26,31 @@ export default function generateCodeOwners(
 }
 function generateLine(pCSTLine, pTeamMap) {
 	if (pCSTLine.type === "rule") {
-		const lUserNames = uniq(
-			pCSTLine.users.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)),
-		)
-			.sort(compareUserNames)
-			.join(" ");
 		return (
 			pCSTLine.filesPattern +
 			pCSTLine.spaces +
-			lUserNames +
+			expandTeamsToUsersString(pCSTLine.users, pTeamMap) +
+			(pCSTLine.inlineComment ? ` #${pCSTLine.inlineComment}` : "")
+		);
+	}
+	if (pCSTLine.type === "section-heading") {
+		return (
+			(pCSTLine.optional ? "^" : "") +
+			"[" +
+			pCSTLine.name +
+			"]" +
+			(pCSTLine.minApprovers ? `[${pCSTLine.minApprovers}]` : "") +
+			pCSTLine.spaces +
+			expandTeamsToUsersString(pCSTLine.users, pTeamMap) +
 			(pCSTLine.inlineComment ? ` #${pCSTLine.inlineComment}` : "")
 		);
 	}
 	return pCSTLine.raw;
+}
+function expandTeamsToUsersString(pUsers, pTeamMap) {
+	return uniq(pUsers.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)))
+		.sort(compareUserNames)
+		.join(" ");
 }
 function expandTeamToUserNames(pUser, pTeamMap) {
 	if (pUser.type === "virtual-team-name") {
