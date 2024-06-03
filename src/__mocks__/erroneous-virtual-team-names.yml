@@ -1,0 +1,5 @@
+: - hasmembersbut
+  - teamnameisempty
+team name with spaces:
+  - isnot
+  - allowedeither

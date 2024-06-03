@@ -59,10 +59,12 @@ describe("cli", () => {
   it("shows an error when passed an invalid virtual-teams file", () => {
     let lOutStream = new WritableTestStream();
     let lErrStream = new WritableTestStream([
-      /ERROR: This is not a valid virtual-teams\.yml:/,
-      /src\/__mocks__\/erroneous\-virtual\-teams\.yml: \/ch~1after-sales\/3 - "@daisy-duck" must match pattern/,
-      /src\/__mocks__\/erroneous\-virtual\-teams\.yml: \/ch~1pre-sales\/3 - "john-galt-ch dagny-taggert-ch" must match pattern/,
-      /src\/__mocks__\/erroneous-virtual-teams.yml: \/ch~1mannen-met-baarden - "arie - jan@example.com - pier@example.com - tjorus@example.com - korneel@example.com" must be array/,
+      /ERROR:/,
+      /is not a valid virtual-teams\.yml:/,
+      /This username doesn't match .+: '@daisy-duck'/,
+      /This username doesn't match .+: 'john-galt-ch dagny-taggert-ch'/,
+      /This username is not a string: '123456789'/,
+      /This team is not an array: 'ch\/mannen-met-baarden'/,
     ]);
     cli(
       [
@@ -70,6 +72,56 @@ describe("cli", () => {
         "./src/__mocks__/virtual-codeowners.txt",
         "--virtualTeams",
         "./src/__mocks__/erroneous-virtual-teams.yml",
+        "--codeOwners",
+        "node_modules/tmp-code-owners.txt",
+        "--emitLabeler",
+        "--labelerLocation",
+        "node_modules/tmp-labeler.yml",
+      ],
+      lOutStream,
+      lErrStream,
+      0,
+    );
+  });
+
+  it("shows an error when passed an invalid virtual-teams file (invalid names)", () => {
+    let lOutStream = new WritableTestStream();
+    let lErrStream = new WritableTestStream([
+      /ERROR:/,
+      /is not a valid virtual-teams\.yml:/,
+      /These team names are not valid: '' \(empty string\), 'team name with spaces' \(contains spaces\)/,
+    ]);
+    cli(
+      [
+        "--virtualCodeOwners",
+        "./src/__mocks__/virtual-codeowners.txt",
+        "--virtualTeams",
+        "./src/__mocks__/erroneous-virtual-team-names.yml",
+        "--codeOwners",
+        "node_modules/tmp-code-owners.txt",
+        "--emitLabeler",
+        "--labelerLocation",
+        "node_modules/tmp-labeler.yml",
+      ],
+      lOutStream,
+      lErrStream,
+      0,
+    );
+  });
+
+  it("shows an error when passed an invalid virtual-teams file (not an object)", () => {
+    let lOutStream = new WritableTestStream();
+    let lErrStream = new WritableTestStream([
+      /ERROR:/,
+      /is not a valid virtual-teams\.yml:/,
+      /The team map is not an object/,
+    ]);
+    cli(
+      [
+        "--virtualCodeOwners",
+        "./src/__mocks__/virtual-codeowners.txt",
+        "--virtualTeams",
+        "./src/__mocks__/erroneous-virtual-team-is-an-array.yml",
         "--codeOwners",
         "node_modules/tmp-code-owners.txt",
         "--emitLabeler",
