@@ -48,11 +48,11 @@ function parseLine(
   if (lTrimmedLine.startsWith("#")) {
     return { type: "comment", line: pLineNo, raw: pUntreatedLine };
   }
-  if (lTrimmedLine.startsWith("[") || lTrimmedLine.startsWith("^[")) {
-    return parseSection(pUntreatedLine, pLineNo, pTeamMap);
-  }
   if (lTrimmedLine === "") {
     return { type: "empty", line: pLineNo, raw: pUntreatedLine };
+  }
+  if (lTrimmedLine.startsWith("[") || lTrimmedLine.startsWith("^[")) {
+    return parseSection(pUntreatedLine, pLineNo, pTeamMap);
   }
 
   return parseRule(pUntreatedLine, pLineNo, pTeamMap);
@@ -65,37 +65,24 @@ function parseRule(
 ): IVirtualCodeOwnerLine {
   const lTrimmedLine = pUntreatedLine.trim();
   const lCommentSplitLine = lTrimmedLine.split(/\s*#/);
-  const lRuleWithoutUsernames = lCommentSplitLine[0]?.match(
-    /^(?<filesPattern>[^\s]+)(?<spaces>\s*)$/,
-  );
   const lRule = lCommentSplitLine[0]?.match(
-    /^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.+)$/,
+    /^(?<filesPattern>[^\s]+)(?<spaces>\s+)?(?<userNames>.+)?$/,
   );
 
-  if (lRuleWithoutUsernames?.groups && STATE.currentSection) {
-    return {
-      type: "rule",
-      line: pLineNo,
-      raw: pUntreatedLine,
+  const ruleIsValid =
+    lRule?.groups &&
+    (lRule.groups.userNames || STATE.inheritedUsers.length > 0);
 
-      filesPattern: lRuleWithoutUsernames.groups.filesPattern as string,
-      spaces: lRuleWithoutUsernames.groups.spaces as string,
-      users: [],
-      inheritedUsers: STATE.inheritedUsers,
-      currentSection: STATE.currentSection,
-      inlineComment: lCommentSplitLine[1] ?? "",
-    };
-  }
-
-  if (lRule?.groups) {
+  if (ruleIsValid) {
     let lReturnValue: IRuleCSTLine = {
       type: "rule",
       line: pLineNo,
       raw: pUntreatedLine,
 
+      // @ts-expect-error 18048 - ruleIsValid ensures that groups is not null
       filesPattern: lRule.groups.filesPattern as string,
-      spaces: lRule.groups.spaces as string,
-      users: parseUsers(lRule.groups.userNames as string, pTeamMap),
+      spaces: lRule.groups?.spaces ?? "",
+      users: parseUsers(lRule.groups?.userNames ?? "", pTeamMap),
       inlineComment: lCommentSplitLine[1] ?? "",
     };
     if (STATE.currentSection) {

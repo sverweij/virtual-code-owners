@@ -34,33 +34,20 @@ function parseLine(pUntreatedLine, pTeamMap, pLineNo) {
 function parseRule(pUntreatedLine, pLineNo, pTeamMap) {
 	const lTrimmedLine = pUntreatedLine.trim();
 	const lCommentSplitLine = lTrimmedLine.split(/\s*#/);
-	const lRuleWithoutUsernames = lCommentSplitLine[0]?.match(
-		/^(?<filesPattern>[^\s]+)(?<spaces>\s*)$/,
-	);
 	const lRule = lCommentSplitLine[0]?.match(
-		/^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.+)$/,
+		/^(?<filesPattern>[^\s]+)(?<spaces>\s+)?(?<userNames>.+)?$/,
 	);
-	if (lRuleWithoutUsernames?.groups && STATE.currentSection) {
-		return {
-			type: "rule",
-			line: pLineNo,
-			raw: pUntreatedLine,
-			filesPattern: lRuleWithoutUsernames.groups.filesPattern,
-			spaces: lRuleWithoutUsernames.groups.spaces,
-			users: [],
-			inheritedUsers: STATE.inheritedUsers,
-			currentSection: STATE.currentSection,
-			inlineComment: lCommentSplitLine[1] ?? "",
-		};
-	}
-	if (lRule?.groups) {
+	const ruleIsValid =
+		lRule?.groups &&
+		(lRule.groups.userNames || STATE.inheritedUsers.length > 0);
+	if (ruleIsValid) {
 		let lReturnValue = {
 			type: "rule",
 			line: pLineNo,
 			raw: pUntreatedLine,
 			filesPattern: lRule.groups.filesPattern,
-			spaces: lRule.groups.spaces,
-			users: parseUsers(lRule.groups.userNames, pTeamMap),
+			spaces: lRule.groups?.spaces ?? "",
+			users: parseUsers(lRule.groups?.userNames ?? "", pTeamMap),
 			inlineComment: lCommentSplitLine[1] ?? "",
 		};
 		if (STATE.currentSection) {
