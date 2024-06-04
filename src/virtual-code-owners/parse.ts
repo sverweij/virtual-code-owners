@@ -69,7 +69,7 @@ function parseRule(
     /^(?<filesPattern>[^\s]+)(?<spaces>\s*)$/,
   );
   const lRule = lCommentSplitLine[0]?.match(
-    /^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/,
+    /^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.+)$/,
   );
 
   if (lRuleWithoutUsernames?.groups && STATE.currentSection) {
@@ -140,7 +140,7 @@ function parseSection(
     name: lSection.groups.name as string,
     spaces: lSection.groups?.spaces ?? "",
     users: parseUsers(lSection.groups?.userNames ?? "", pTeamMap),
-    inlineComment: lTrimmedLine.split(/\s*#/)[1] ?? "",
+    inlineComment: lCommentSplitLine[1] ?? "",
   };
 
   if (lSection.groups.minApprovers) {
