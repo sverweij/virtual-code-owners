@@ -217,7 +217,7 @@ user/team names but doesn't verify their existence in the project.
   > as a rule, but as an erroneous section heading. This behaviour might change
   > to be the same as GitLab's in future releases without a major version bump.
 
-### Does virtual-code-owners support GitLab style section headings?
+### Does virtual-code-owners support GitLab style sections?
 
 Yes.
 
@@ -248,7 +248,7 @@ Various editors assume an ALL_CAPS file name with `#` characters on various line
 to be markdown, and will auto format them as such. Usually such autoformatting is
 not present on text files.
 
-Often these editors know about CODEOWNERS, so _those_ they won't confuse to be
+Often these editors know about CODEOWNERS, so they won't confuse _those_ with
 markdown.
 
 ### Why does this exist at all? Why not just use GitHub teams?
@@ -265,6 +265,6 @@ who want to have clear code ownership can either:
   Recommended! It will often require patience though, and in the mean time
   you might want to have some clarity on code ownership.
 - Maintain a CODEOWNERS file with code assigned to large lists of individuals.  
-  We found this laborious to maintain, even for smaller projects
+  That's a lotta work, even for smaller projects
 
 This is where `virtual-code-owners` comes in.
