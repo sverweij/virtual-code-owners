@@ -35,10 +35,22 @@
     "raw": "*       @baarden",
   },
   { "type": "empty", "line": 8, "raw": "" },
-  { "type": "section-without-users", "line": 9, "raw": "[admin & ci stuff]" },
   {
-    "type": "rule",
+    "line": 9,
+    "type": "section-heading",
+    "raw": "[admin & ci stuff]",
+
+    "optional": false,
+    "name": "admin & ci stuff",
+    "spaces": "",
+    "users": [],
+    "inlineComment": "",
+  },
+  {
     "line": 10,
+    "type": "rule",
+    "raw": ".github/                @ch/transversal",
+
     "filesPattern": ".github/",
     "spaces": "                ",
     "users":
@@ -50,13 +62,16 @@
           "raw": "@ch/transversal",
         },
       ],
+    "inheritedUsers": [],
+    "currentSection": "admin & ci stuff",
     "inlineComment": "",
-    "raw": ".github/                @ch/transversal",
   },
   { "type": "empty", "line": 11, "raw": "" },
   {
-    "type": "section-heading",
     "line": 12,
+    "type": "section-heading",
+    "raw": "[generic stuff][3]      @baarden",
+
     "optional": false,
     "name": "generic stuff",
     "minApprovers": 3,
@@ -71,11 +86,12 @@
         },
       ],
     "inlineComment": "",
-    "raw": "[generic stuff][3]      @baarden",
   },
   {
-    "type": "rule",
     "line": 13,
+    "type": "rule",
+    "raw": "apps/framework/         @leren-lezen framework@example.com",
+
     "filesPattern": "apps/framework/",
     "spaces": "         ",
     "users":
@@ -93,12 +109,23 @@
           "raw": "framework@example.com",
         },
       ],
+    "inheritedUsers":
+      [
+        {
+          "type": "virtual-team-name",
+          "userNumberWithinLine": 1,
+          "bareName": "baarden",
+          "raw": "@baarden",
+        },
+      ],
+    "currentSection": "generic stuff",
     "inlineComment": "",
-    "raw": "apps/framework/         @leren-lezen framework@example.com",
   },
   {
-    "type": "rule",
     "line": 14,
+    "type": "rule",
+    "raw": "apps/ux-portal/         @ch/ux @ch/transversal",
+
     "filesPattern": "apps/ux-portal/",
     "spaces": "         ",
     "users":
@@ -116,12 +143,23 @@
           "raw": "@ch/transversal",
         },
       ],
+    "inheritedUsers":
+      [
+        {
+          "type": "virtual-team-name",
+          "userNumberWithinLine": 1,
+          "bareName": "baarden",
+          "raw": "@baarden",
+        },
+      ],
+    "currentSection": "generic stuff",
     "inlineComment": "",
-    "raw": "apps/ux-portal/         @ch/ux @ch/transversal",
   },
   {
     "type": "rule",
     "line": 15,
+    "raw": "libs/components/        @ch/ux",
+
     "filesPattern": "libs/components/",
     "spaces": "        ",
     "users":
@@ -133,19 +171,36 @@
           "raw": "@ch/ux",
         },
       ],
+    "inheritedUsers":
+      [
+        {
+          "type": "virtual-team-name",
+          "userNumberWithinLine": 1,
+          "bareName": "baarden",
+          "raw": "@baarden",
+        },
+      ],
+    "currentSection": "generic stuff",
     "inlineComment": "",
-    "raw": "libs/components/        @ch/ux",
   },
   { "type": "empty", "line": 16, "raw": "" },
   {
-    "type": "section-without-users",
     "line": 17,
+    "type": "section-heading",
     "raw": "[specific functionality]",
+
+    "optional": false,
+    "name": "specific functionality",
+    "spaces": "",
+    "users": [],
+    "inlineComment": "",
   },
   {
-    "type": "rule",
     "line": 18,
+    "type": "rule",
     "filesPattern": "libs/ubc-sales/",
+    "raw": "libs/ubc-sales/         @ch/sales",
+
     "spaces": "         ",
     "users":
       [
@@ -156,12 +211,15 @@
           "raw": "@ch/sales",
         },
       ],
+    "inheritedUsers": [],
+    "currentSection": "specific functionality",
     "inlineComment": "",
-    "raw": "libs/ubc-sales/         @ch/sales",
   },
   {
-    "type": "rule",
     "line": 19,
+    "type": "rule",
+    "raw": "libs/ubc-after-sales/   @ch/after-sales",
+
     "filesPattern": "libs/ubc-after-sales/",
     "spaces": "   ",
     "users":
@@ -173,12 +231,15 @@
           "raw": "@ch/after-sales",
         },
       ],
+    "inheritedUsers": [],
+    "currentSection": "specific functionality",
     "inlineComment": "",
-    "raw": "libs/ubc-after-sales/   @ch/after-sales",
   },
   {
-    "type": "rule",
     "line": 20,
+    "type": "rule",
+    "raw": "libs/ubc-pre-sales/     @ch/pre-sales",
+
     "filesPattern": "libs/ubc-pre-sales/",
     "spaces": "     ",
     "users":
@@ -190,12 +251,15 @@
           "raw": "@ch/pre-sales",
         },
       ],
+    "inheritedUsers": [],
+    "currentSection": "specific functionality",
     "inlineComment": "",
-    "raw": "libs/ubc-pre-sales/     @ch/pre-sales",
   },
   {
-    "type": "rule",
     "line": 21,
+    "type": "rule",
+    "raw": "libs/ubc-refund/        @ch/sales @ch/after-sales # shared responsibility",
+
     "filesPattern": "libs/ubc-refund/",
     "spaces": "        ",
     "users":
@@ -213,12 +277,15 @@
           "raw": "@ch/after-sales",
         },
       ],
+    "inheritedUsers": [],
+    "currentSection": "specific functionality",
     "inlineComment": " shared responsibility",
-    "raw": "libs/ubc-refund/        @ch/sales @ch/after-sales # shared responsibility",
   },
   {
-    "type": "rule",
     "line": 22,
+    "type": "rule",
+    "raw": "libs/ubc-baarden/       @baarden",
+
     "filesPattern": "libs/ubc-baarden/",
     "spaces": "       ",
     "users":
@@ -230,13 +297,16 @@
           "raw": "@baarden",
         },
       ],
+    "inheritedUsers": [],
+    "currentSection": "specific functionality",
     "inlineComment": "",
-    "raw": "libs/ubc-baarden/       @baarden",
   },
   { "type": "empty", "line": 23, "raw": "" },
   {
-    "type": "section-heading",
     "line": 24,
+    "type": "section-heading",
+    "raw": "^[non critical stuff]   @baarden",
+
     "optional": true,
     "name": "non critical stuff",
     "spaces": "   ",
@@ -250,11 +320,12 @@
         },
       ],
     "inlineComment": "",
-    "raw": "^[non critical stuff]   @baarden",
   },
   {
-    "type": "rule",
     "line": 25,
+    "type": "rule",
+    "raw": "libs/ubc-foo/           @baardlozen",
+
     "filesPattern": "libs/ubc-foo/",
     "spaces": "           ",
     "users":
@@ -266,8 +337,17 @@
           "raw": "@baardlozen",
         },
       ],
+    "inheritedUsers":
+      [
+        {
+          "type": "virtual-team-name",
+          "userNumberWithinLine": 1,
+          "bareName": "baarden",
+          "raw": "@baarden",
+        },
+      ],
+    "currentSection": "non critical stuff",
     "inlineComment": "",
-    "raw": "libs/ubc-foo/           @baardlozen",
   },
   { "type": "ignorable-comment", "line": 26, "raw": "#!" },
   {

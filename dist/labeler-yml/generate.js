@@ -49,8 +49,13 @@ function transformForYamlAndMinimatch(pOriginalString) {
 	return lReturnValue;
 }
 function lineContainsTeamName(pLine, pTeamName) {
-	return pLine.users.some(
+	const lHasTeamNameInRegularUsers = pLine.users.some(
 		(pUser) =>
 			pUser.type === "virtual-team-name" && pUser.bareName === pTeamName,
 	);
+	const lHasTeamNameInInheritedUsers = (pLine.inheritedUsers ?? []).some(
+		(pUser) =>
+			pUser.type === "virtual-team-name" && pUser.bareName === pTeamName,
+	);
+	return lHasTeamNameInRegularUsers || lHasTeamNameInInheritedUsers;
 }

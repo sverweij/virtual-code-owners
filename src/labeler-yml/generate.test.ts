@@ -69,14 +69,55 @@ describe("generate-labeler-yml generates a labeler.yml", () => {
           {
             type: "virtual-team-name",
             userNumberWithinLine: 2,
-            bareName: "the-a-team",
-            raw: "@the-a-team",
+            bareName: "the-b-team",
+            raw: "@the-b-team",
           },
           {
             type: "e-mail-address",
             userNumberWithinLine: 3,
             bareName: "pier@example.com",
             raw: "pier@example.com",
+          },
+        ],
+      },
+    ];
+    const lExpected = `the-a-team:
+  - changed-files:
+      - any-glob-to-any-file: knakkerdeknak/**
+
+`;
+    equal(generateLabelerYml(lVirtualCodeOwners, TEAMS, ""), lExpected);
+  });
+
+  it("virtual code owners with teams matching a rule yields the file pattern for that team", () => {
+    const lVirtualCodeOwners: IVirtualCodeOwnersCST = [
+      {
+        type: "rule",
+        line: 3,
+        spaces: " ",
+        raw: "knakkerdeknak/ @the-a-team @the-a-team pier@example.com",
+        filesPattern: "knakkerdeknak/",
+        inlineComment: "",
+        users: [
+          {
+            type: "virtual-team-name",
+            userNumberWithinLine: 2,
+            bareName: "the-b-team",
+            raw: "@the-b-team",
+          },
+          {
+            type: "e-mail-address",
+            userNumberWithinLine: 3,
+            bareName: "pier@example.com",
+            raw: "pier@example.com",
+          },
+        ],
+        inheritedUsers: [
+          {
+            type: "virtual-team-name",
+            userNumberWithinLine: 1,
+            bareName: "the-a-team",
+            raw: "@the-a-team",
           },
         ],
       },
