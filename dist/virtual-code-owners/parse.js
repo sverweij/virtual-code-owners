@@ -23,11 +23,11 @@ function parseLine(pUntreatedLine, pTeamMap, pLineNo) {
 	if (lTrimmedLine.startsWith("#")) {
 		return { type: "comment", line: pLineNo, raw: pUntreatedLine };
 	}
-	if (lTrimmedLine.startsWith("[") || lTrimmedLine.startsWith("^[")) {
-		return parseSection(pUntreatedLine, pLineNo, pTeamMap);
-	}
 	if (lTrimmedLine === "") {
 		return { type: "empty", line: pLineNo, raw: pUntreatedLine };
+	}
+	if (lTrimmedLine.startsWith("[") || lTrimmedLine.startsWith("^[")) {
+		return parseSection(pUntreatedLine, pLineNo, pTeamMap);
 	}
 	return parseRule(pUntreatedLine, pLineNo, pTeamMap);
 }

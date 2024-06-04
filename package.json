@@ -13,7 +13,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "rm -rf dist && tsx tools/get-version.ts > src/version.ts && tsx tools/js-json.ts < src/virtual-teams.schema.json > src/team-map/virtual-teams.schema.ts && tsc && prettier --log-level warn --write --use-tabs dist/",
+    "build": "rm -rf dist && tsx tools/get-version.ts > src/version.ts && tsc && prettier --log-level warn --write --use-tabs dist/",
     "check": "npm run format && npm run build && npm run depcruise -- --no-progress && npm test",
     "depcruise": "depcruise src tools",
     "depcruise:graph": "depcruise src --include-only '^(src)' --output-type x-dot-webpage --output-to dependency-graph.html",
