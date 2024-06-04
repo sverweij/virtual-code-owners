@@ -1,12 +1,13 @@
 [
   {
-    inlineComment: "",
     line: 1,
-    optional: false,
+    type: "section-heading",
     raw: "[required-section] @default-user @default-group",
+
+    inlineComment: "",
+    optional: false,
     name: "required-section",
     spaces: " ",
-    type: "section-heading",
     users:
       [
         {
@@ -24,12 +25,12 @@
       ],
   },
   {
-    filesPattern: "aap/",
-    inlineComment: "",
     line: 2,
-    raw: "aap/ @some-user @some-other-user",
-    spaces: " ",
     type: "rule",
+    raw: "aap/ @some-user @some-other-user",
+
+    filesPattern: "aap/",
+    spaces: " ",
     users:
       [
         {
@@ -45,5 +46,22 @@
           userNumberWithinLine: 2,
         },
       ],
+    currentSection: "required-section",
+    inheritedUsers:
+      [
+        {
+          bareName: "default-user",
+          raw: "@default-user",
+          type: "other-user-or-team",
+          userNumberWithinLine: 1,
+        },
+        {
+          bareName: "default-group",
+          raw: "@default-group",
+          type: "other-user-or-team",
+          userNumberWithinLine: 2,
+        },
+      ],
+    inlineComment: "",
   },
 ]

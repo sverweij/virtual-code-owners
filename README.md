@@ -210,10 +210,16 @@ user/team names but doesn't verify their existence in the project.
 
 - valid user/team names start with an `@` or are an e-mail address
 - valid rules have a file pattern and at least one user/team name
+  (unless they're in a _section_ that has default owners `[sales related] @ch/sales`
+  in which case the rule inherits the default owners of that section)
 - valid sections headings comply with the syntax described over at [GitLab](https://docs.gitlab.com/ee/user/project/codeowners/reference.html#sections)
   > different from GitLab's syntax the line `[bla @group` is not interpreted
   > as a rule, but as an erroneous section heading. This behaviour might change
   > to be the same as GitLab's in future releases without a major version bump.
+
+### Does virtual-code-owners support GitLab style sections?
+
+Yes.
 
 ### I want to specify different locations for the files (e.g. because I'm using GitLab)
 
@@ -228,8 +234,6 @@ npx virtual-code-owners \
 
 ### Can I just validate VIRTUAL-CODEOWNERS.txt & virtual-teams.yml without generating output?
 
-So _without_ generating any output?
-
 Sure thing. Use `--dryRun`:
 
 ```
@@ -241,16 +245,15 @@ npx virtual-code-owners --dryRun
 It keeps editors and IDE's from messing up your formatting.
 
 Various editors assume an ALL_CAPS file name with `#` characters on various lines
-to be markdown, and will auto format them as such. This makes for either very ugly
-or in worst cases invalid CODEOWNERS files. Usually such autoformatting is not
-present on text files.
+to be markdown, and will auto format them as such. Usually such autoformatting is
+not present on text files.
 
-Apparently these editors know about CODEOWNERS, though, so they don't mess with
-the formatting of _those_.
+Often these editors know about CODEOWNERS, so they won't confuse _those_ with
+markdown.
 
 ### Why does this exist at all? Why not just use GitHub teams?
 
-You should _totally_ use GitHub teams! If you can.
+If you can you should _totally_ use GitHub teams!
 
 Organizations sometimes have large mono repositories with many code owners.
 They or their bureaucracy haven't landed on actually using GitHub teams to
@@ -259,10 +262,9 @@ the organization chart (and hence the GitHub teams). Teams in those organization
 who want to have clear code ownership can either:
 
 - Wrestle the bureaucracy.  
-  Recommended! It might take a while, though - and even though there are good
-  people on many levels in bureaucracies, it might eventually not pan out
-  because #reasons.
+  Recommended! It will often require patience though, and in the mean time
+  you might want to have some clarity on code ownership.
 - Maintain a CODEOWNERS file with code assigned to large lists of individuals.  
-  An option, but laborious to maintain, even for smaller projects
+  That's a lotta work, even for smaller projects
 
 This is where `virtual-code-owners` comes in.

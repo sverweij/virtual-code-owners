@@ -1,12 +1,24 @@
 [
-  { line: 1, raw: "[required-section]", type: "section-without-users" },
   {
-    filesPattern: "aap/",
+    line: 1,
+    type: "section-heading",
+    raw: "[required-section]",
+
+    optional: false,
+    name: "required-section",
+    spaces: "",
+    users: [],
     inlineComment: "",
+  },
+  {
     line: 2,
-    raw: "aap/ @some-user @some-other-user",
-    spaces: " ",
     type: "rule",
+    raw: "aap/ @some-user @some-other-user",
+
+    filesPattern: "aap/",
+    currentSection: "required-section",
+    inlineComment: "",
+    spaces: " ",
     users:
       [
         {
@@ -22,5 +34,6 @@
           userNumberWithinLine: 2,
         },
       ],
+    inheritedUsers: [],
   },
 ]
