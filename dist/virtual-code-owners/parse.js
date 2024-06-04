@@ -38,7 +38,7 @@ function parseRule(pUntreatedLine, pLineNo, pTeamMap) {
 		/^(?<filesPattern>[^\s]+)(?<spaces>\s*)$/,
 	);
 	const lRule = lCommentSplitLine[0]?.match(
-		/^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.*)$/,
+		/^(?<filesPattern>[^\s]+)(?<spaces>\s+)(?<userNames>.+)$/,
 	);
 	if (lRuleWithoutUsernames?.groups && STATE.currentSection) {
 		return {
@@ -97,7 +97,7 @@ function parseSection(pUntreatedLine, pLineNo, pTeamMap) {
 		name: lSection.groups.name,
 		spaces: lSection.groups?.spaces ?? "",
 		users: parseUsers(lSection.groups?.userNames ?? "", pTeamMap),
-		inlineComment: lTrimmedLine.split(/\s*#/)[1] ?? "",
+		inlineComment: lCommentSplitLine[1] ?? "",
 	};
 	if (lSection.groups.minApprovers) {
 		lReturnValue.minApprovers = parseInt(lSection.groups.minApprovers, 10);
