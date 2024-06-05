@@ -144,9 +144,6 @@ libs/baarden/       jan@example.com korneel@example.com pier@example.com tjorus@
 ### Any gotcha's?
 
 - It won't check whether the users or teams you entered exist.
-- Only relevant when you're on GitLab: Section heading support is experimental
-  and when generating labeler.yml default section owners aren't expanded to
-  section rules.
 
 ### Do I have to run this each time I edit `VIRTUAL-CODEOWNERS.txt`?
 
