@@ -5,12 +5,12 @@ This generates your `CODEOWNERS` file (_patterns_ x _users_) from
 - a `VIRTUAL-CODEOWNERS.txt` (_patterns_ x _teams_)
 - a `virtual-teams.yml` (_teams_ x _users_)
 
-... which makes it easier to keep `CODEOWNERS` in sync on multi-team mono repos.
-When those teams are not defined on GitHub level.
+... which makes it easier to keep `CODEOWNERS` in sync on multi-team mono repos
+when you don't have (enough) 'real' GitHub or GitLab teams.
 
 ## Usage
 
-- Rename your `.github/CODEOWNERS` to `.github/VIRTUAL-CODEOWNERS.txt` and put team names in them.
+- Rename `.github/CODEOWNERS` to `.github/VIRTUAL-CODEOWNERS.txt` and put team names in them.
 - Define teams that don't (yet) exist on GitHub level in `.github/virtual-teams.yml`
 - Run this:
 
