@@ -60,7 +60,7 @@
     "watskeburt": "4.0.2"
   },
   "dependencies": {
-    "yaml": "2.4.3"
+    "yaml": "2.4.5"
   },
   "engines": {
     "node": "^18.11.0||>=20.0.0"
