@@ -52,9 +52,9 @@
     "clean-pkg-json": "1.2.0",
     "dependency-cruiser": "16.3.3",
     "husky": "9.0.11",
-    "lint-staged": "15.2.5",
-    "prettier": "3.3.1",
-    "tsx": "4.15.1",
+    "lint-staged": "15.2.7",
+    "prettier": "3.3.2",
+    "tsx": "4.15.5",
     "typescript": "5.4.5",
     "upem": "9.0.4",
     "watskeburt": "4.0.2"
