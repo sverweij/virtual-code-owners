@@ -30,9 +30,10 @@ export default function generateLabelerYml(
 }
 function getPatternsForTeam(pCodeOwners, pTeamName) {
 	return pCodeOwners
-		.filter((pLine) => {
-			return pLine.type === "rule" && lineContainsTeamName(pLine, pTeamName);
-		})
+		.filter(
+			(pLine) =>
+				pLine.type === "rule" && lineContainsTeamName(pLine, pTeamName),
+		)
 		.map((pLine) => pLine.filesPattern);
 }
 function transformForYamlAndMinimatch(pOriginalString) {

@@ -45,12 +45,11 @@ function getPatternsForTeam(
 ): string[] {
   return (
     pCodeOwners
-      .filter((pLine) => {
-        return (
+      .filter(
+        (pLine) =>
           pLine.type === "rule" &&
-          lineContainsTeamName(pLine as IRuleCSTLine, pTeamName)
-        );
-      })
+          lineContainsTeamName(pLine as IRuleCSTLine, pTeamName),
+      )
       // @ts-expect-error ts thinks it can still be an IBoringCSTLine,
       // but with the filter above we've ruled that out
       .map((pLine: IRuleCSTLine) => pLine.filesPattern)
