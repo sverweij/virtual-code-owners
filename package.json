@@ -51,10 +51,10 @@
     "c8": "10.1.2",
     "clean-pkg-json": "1.2.0",
     "dependency-cruiser": "16.3.10",
-    "husky": "9.1.1",
-    "lint-staged": "15.2.7",
+    "husky": "9.1.4",
+    "lint-staged": "15.2.8",
     "prettier": "3.3.3",
-    "tsx": "4.16.2",
+    "tsx": "4.16.5",
     "typescript": "5.5.4",
     "upem": "9.0.4",
     "watskeburt": "4.1.0"
