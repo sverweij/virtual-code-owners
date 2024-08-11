@@ -18,8 +18,8 @@
     "depcruise": "depcruise src tools",
     "depcruise:graph": "depcruise src --include-only '^(src)' --output-type x-dot-webpage --output-to dependency-graph.html",
     "depcruise:graph:dev": "depcruise src --prefix vscode://file/$(pwd)/ --output-type x-dot-webpage | browser",
-    "depcruise:graph:diff:dev": "depcruise src --prefix vscode://file/$(pwd)/ --output-type x-dot-webpage --reaches \"$(watskeburt $SHA -T regex)\"| browser",
-    "depcruise:graph:diff:mermaid": "depcruise src tools --output-type mermaid --output-to - --reaches \"$(watskeburt $SHA -T regex)\"",
+    "depcruise:graph:diff:dev": "depcruise src --prefix vscode://file/$(pwd)/ --output-type x-dot-webpage --affected $SHA | browser",
+    "depcruise:graph:diff:mermaid": "depcruise src tools --output-type mermaid --output-to - --affected $SHA",
     "depcruise:html": "depcruise src tools --output-type err-html --output-to dependency-violation-report.html",
     "format": "prettier --log-level warn --write \"**/*.{md,ts,json,yml}\"",
     "prepare": "husky",
@@ -47,20 +47,20 @@
     "url": "https://github.com/sverweij/virtual-code-owners/issues"
   },
   "devDependencies": {
-    "@types/node": "20.14.12",
+    "@types/node": "22.5.0",
     "c8": "10.1.2",
     "clean-pkg-json": "1.2.0",
-    "dependency-cruiser": "16.3.10",
-    "husky": "9.1.1",
-    "lint-staged": "15.2.7",
+    "dependency-cruiser": "16.4.0",
+    "husky": "9.1.5",
+    "lint-staged": "15.2.9",
     "prettier": "3.3.3",
-    "tsx": "4.16.2",
+    "tsx": "4.17.0",
     "typescript": "5.5.4",
     "upem": "9.0.4",
     "watskeburt": "4.1.0"
   },
   "dependencies": {
-    "yaml": "2.5.0"
+    "yaml": "^2.5.0"
   },
   "engines": {
     "node": "^18.11.0||>=20.0.0"
