@@ -18,7 +18,7 @@ export default function readTeamMap(pVirtualTeamsFileName: string): ITeamMap {
 function assertTeamMapValid(
   pTeamMapCandidate: any,
   pVirtualTeamsFileName: string,
-) {
+): void {
   const [lValid, lError] = validateTeamMap(pTeamMapCandidate);
   if (!lValid) {
     throw new Error(

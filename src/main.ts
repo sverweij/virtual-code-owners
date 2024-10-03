@@ -14,7 +14,7 @@ export interface IOptions {
   dryRun: boolean;
 }
 
-export function main(pOptions: IOptions, pErrorStream: Writable) {
+export function main(pOptions: IOptions, pErrorStream: Writable): void {
   const lTeamMap = readTeamMap(pOptions.virtualTeams);
   const lVirtualCodeOwners = readVirtualCodeOwners(
     pOptions.virtualCodeOwners,

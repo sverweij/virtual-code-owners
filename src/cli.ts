@@ -38,7 +38,7 @@ export function cli(
   pOutStream: Writable = process.stdout,
   pErrorStream: Writable = process.stderr,
   pErrorExitCode: number = 1,
-) {
+): void {
   try {
     const lOptions = getOptions(pArguments);
 
