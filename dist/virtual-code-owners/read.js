@@ -23,15 +23,11 @@ export default function readVirtualCodeOwners(
 }
 function reportAnomalies(pFileName, pAnomalies) {
 	return pAnomalies
-		.map((pAnomaly) => {
-			if (pAnomaly.type === "invalid-line") {
-				return `${pFileName}:${pAnomaly.line}:1 invalid line - neither a rule, section heading, comment nor empty: "${pAnomaly.raw}"`;
-			} else {
-				return (
-					`${pFileName}:${pAnomaly.line}:1 invalid user or team name "${pAnomaly.raw}" (#${pAnomaly.userNumberWithinLine} on this line). ` +
-					`It should either start with "@" or be an e-mail address.`
-				);
-			}
-		})
+		.map((pAnomaly) =>
+			pAnomaly.type === "invalid-line"
+				? `${pFileName}:${pAnomaly.line}:1 invalid line - neither a rule, section heading, comment nor empty: "${pAnomaly.raw}"`
+				: `${pFileName}:${pAnomaly.line}:1 invalid user or team name "${pAnomaly.raw}" (#${pAnomaly.userNumberWithinLine} on this line). ` +
+					`It should either start with "@" or be an e-mail address.`,
+		)
 		.join(EOL);
 }

@@ -174,8 +174,5 @@ function getUserNameType(
 }
 
 function getBareUserName(pUserName: string): string {
-  if (pUserName.startsWith("@")) {
-    return pUserName.slice(1);
-  }
-  return pUserName;
+  return pUserName.startsWith("@") ? pUserName.slice(1) : pUserName;
 }

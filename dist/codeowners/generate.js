@@ -53,19 +53,15 @@ function expandTeamsToUsersString(pUsers, pTeamMap) {
 		.join(" ");
 }
 function expandTeamToUserNames(pUser, pTeamMap) {
-	if (pUser.type === "virtual-team-name") {
-		return stringifyTeamMembers(pTeamMap, pUser.bareName);
-	}
-	return [pUser.raw];
+	return pUser.type === "virtual-team-name"
+		? stringifyTeamMembers(pTeamMap, pUser.bareName)
+		: [pUser.raw];
 }
 function stringifyTeamMembers(pTeamMap, pTeamName) {
 	return (pTeamMap[pTeamName] ?? []).map(userNameToCodeOwner);
 }
 function userNameToCodeOwner(pUserName) {
-	if (isEmailIshUsername(pUserName)) {
-		return pUserName;
-	}
-	return `@${pUserName}`;
+	return isEmailIshUsername(pUserName) ? pUserName : `@${pUserName}`;
 }
 function compareUserNames(pLeftName, pRightName) {
 	return pLeftName.toLowerCase() > pRightName.toLowerCase() ? 1 : -1;

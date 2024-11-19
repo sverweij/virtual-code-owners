@@ -67,10 +67,9 @@ function expandTeamsToUsersString(pUsers: IUser[], pTeamMap: ITeamMap): string {
 }
 
 function expandTeamToUserNames(pUser: IUser, pTeamMap: ITeamMap): string[] {
-  if (pUser.type === "virtual-team-name") {
-    return stringifyTeamMembers(pTeamMap, pUser.bareName);
-  }
-  return [pUser.raw];
+  return pUser.type === "virtual-team-name"
+    ? stringifyTeamMembers(pTeamMap, pUser.bareName)
+    : [pUser.raw];
 }
 
 function stringifyTeamMembers(pTeamMap: ITeamMap, pTeamName: string): string[] {
@@ -78,10 +77,7 @@ function stringifyTeamMembers(pTeamMap: ITeamMap, pTeamName: string): string[] {
 }
 
 function userNameToCodeOwner(pUserName: string): string {
-  if (isEmailIshUsername(pUserName)) {
-    return pUserName;
-  }
-  return `@${pUserName}`;
+  return isEmailIshUsername(pUserName) ? pUserName : `@${pUserName}`;
 }
 
 function compareUserNames(pLeftName: string, pRightName: string): number {
