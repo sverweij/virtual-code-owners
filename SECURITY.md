@@ -11,7 +11,6 @@ If you think you have found a vulnerability, please report responsibly. Don't
 create GitHub issues for security issues. Instead, please send an email to
 sander_verweij@yahoo.com and/ or a direct message (DM) to
 [@mcmeadow@mstdn.social](https://mstdn.social/@mcmeadow) on Mastodon
-(or on [twitter](https://twitter.com/mcmeadow) while it lasts)
 and we'll look into it as soon as we can.
 
 We appreciate any responsible disclosure of vulnerabilities that might impact
