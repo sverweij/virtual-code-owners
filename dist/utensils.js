@@ -1,4 +1,7 @@
 export function isEmailIshUsername(pUsername) {
-	const lEmailIshUsernameRE = /^.+@.+$/;
-	return Boolean(pUsername.match(lEmailIshUsernameRE));
+	return (
+		!pUsername.startsWith("@") &&
+		!pUsername.endsWith("@") &&
+		pUsername.includes("@")
+	);
 }

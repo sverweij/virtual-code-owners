@@ -103,7 +103,7 @@ function parseSection(
   const lTrimmedLine = pUntreatedLine.trim();
   const lCommentSplitLine = lTrimmedLine.split(/\s*#/);
   const lSection = lCommentSplitLine[0]?.match(
-    /^(?<optionalIndicator>\^)?\[(?<name>[^\]]+)\](\[(?<minApprovers>[0-9]+)\])?(?<spaces>\s+)?(?<userNames>.+)?$/,
+    /^(?<optionalIndicator>\^)?\[(?<name>[^\]]+)\](\[(?<minApprovers>\d+)\])?(?<spaces>\s+)?(?<userNames>.+)?$/,
   );
   if (!lSection?.groups) {
     return {
@@ -131,10 +131,7 @@ function parseSection(
   };
 
   if (lSection.groups.minApprovers) {
-    lReturnValue.minApprovers = parseInt(
-      lSection.groups.minApprovers as string,
-      10,
-    );
+    lReturnValue.minApprovers = parseInt(lSection.groups.minApprovers, 10);
   }
 
   return lReturnValue;

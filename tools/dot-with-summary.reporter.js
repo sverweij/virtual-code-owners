@@ -1,7 +1,7 @@
 import { EOL } from "node:os";
 
 const FILES_TO_IGNORE_RE =
-  /node_modules|[.](?:spec|test|mock)[.](?:ts|mts|cts|js|mjs|cjs)$/;
+  /node_modules|(?:[.](?:spec|test|mock)[.](?:ts|mts|cts|js|mjs|cjs))$/;
 const BRANCH_COVERAGE_THRESHOLD = 1;
 const FUNCTION_COVERAGE_THRESHOLD = 1;
 const LINE_COVERAGE_THRESHOLD = 1;

@@ -62,7 +62,7 @@ function parseSection(pUntreatedLine, pLineNo, pTeamMap) {
 	const lTrimmedLine = pUntreatedLine.trim();
 	const lCommentSplitLine = lTrimmedLine.split(/\s*#/);
 	const lSection = lCommentSplitLine[0]?.match(
-		/^(?<optionalIndicator>\^)?\[(?<name>[^\]]+)\](\[(?<minApprovers>[0-9]+)\])?(?<spaces>\s+)?(?<userNames>.+)?$/,
+		/^(?<optionalIndicator>\^)?\[(?<name>[^\]]+)\](\[(?<minApprovers>\d+)\])?(?<spaces>\s+)?(?<userNames>.+)?$/,
 	);
 	if (!lSection?.groups) {
 		return {

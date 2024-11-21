@@ -27,7 +27,7 @@ class WritableTestStream extends Writable {
 
 describe("cli", () => {
   it("shows the version number when asked for", () => {
-    let lOutStream = new WritableTestStream(/^[0-9]+\.[0-9]+\.[0-9]+(-.+)?\n$/);
+    let lOutStream = new WritableTestStream(/^\d+\.\d+\.\d+(-.+)?\n$/);
     let lErrStream = new WritableTestStream();
     cli(["-V"], lOutStream, lErrStream);
     cli(["--version"], lOutStream, lErrStream);

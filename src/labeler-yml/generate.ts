@@ -47,8 +47,7 @@ function getPatternsForTeam(
     pCodeOwners
       .filter(
         (pLine) =>
-          pLine.type === "rule" &&
-          lineContainsTeamName(pLine as IRuleCSTLine, pTeamName),
+          pLine.type === "rule" && lineContainsTeamName(pLine, pTeamName),
       )
       // @ts-expect-error ts thinks it can still be an IBoringCSTLine,
       // but with the filter above we've ruled that out
