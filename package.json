@@ -47,7 +47,7 @@
     "url": "https://github.com/sverweij/virtual-code-owners/issues"
   },
   "devDependencies": {
-    "@types/node": "22.9.1",
+    "@types/node": "22.9.3",
     "c8": "10.1.2",
     "clean-pkg-json": "1.2.0",
     "dependency-cruiser": "16.6.0",
@@ -55,9 +55,9 @@
     "lint-staged": "15.2.10",
     "prettier": "3.3.3",
     "tsx": "4.19.2",
-    "typescript": "5.6.3",
+    "typescript": "5.7.2",
     "upem": "9.0.4",
-    "watskeburt": "4.1.0"
+    "watskeburt": "4.1.1"
   },
   "dependencies": {
     "yaml": "^2.6.1"
