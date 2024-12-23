@@ -51,7 +51,6 @@ describe("parses VIRTUAL-CODEOWNERS.txt - with 'virtual teams'", () => {
         rel(getOutputFileName(pFileName)),
         "utf-8",
       );
-      // console.log(JSON.stringify(parse(lInput, TEAMS), null, 2));
       it(`parses ${pFileName}`, () => {
         deepEqual(parse(lInput, TEAMS), parseYaml(lExpected));
       });
