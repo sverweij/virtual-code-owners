@@ -5,6 +5,7 @@ moduleSystems:
   - cjs
   - es6
 prefix: https://github.com/sverweij/virtual-code-owners/blob/main/
+skipAnalysisNotInRules: true
 tsPreCompilationDeps: true
 tsConfig:
   fileName: tsconfig.json
