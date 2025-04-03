@@ -1,4 +1,5 @@
-: - hasmembersbut
+: 
+  - hasmembersbut
   - teamnameisempty
 team name with spaces:
   - isnot
