@@ -11,6 +11,7 @@ export default function readVirtualCodeOwners(
 ): IVirtualCodeOwnersCST {
   const lVirtualCodeOwnersAsAString = readFileSync(pVirtualCodeOwnersFileName, {
     encoding: "utf-8",
+    flag: "r",
   });
   const lVirtualCodeOwners = parseVirtualCodeOwners(
     lVirtualCodeOwnersAsAString,
