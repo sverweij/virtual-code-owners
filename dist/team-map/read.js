@@ -4,6 +4,7 @@ import { EOL } from "node:os";
 export default function readTeamMap(pVirtualTeamsFileName) {
 	const lVirtualTeamsAsAString = readFileSync(pVirtualTeamsFileName, {
 		encoding: "utf-8",
+		flag: "r",
 	});
 	const lTeamMap = parseYaml(lVirtualTeamsAsAString);
 	assertTeamMapValid(lTeamMap, pVirtualTeamsFileName);

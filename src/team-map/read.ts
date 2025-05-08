@@ -8,6 +8,7 @@ type BooleanResultType = [value: boolean, error?: string];
 export default function readTeamMap(pVirtualTeamsFileName: string): ITeamMap {
   const lVirtualTeamsAsAString = readFileSync(pVirtualTeamsFileName, {
     encoding: "utf-8",
+    flag: "r",
   });
   const lTeamMap = parseYaml(lVirtualTeamsAsAString) as ITeamMap;
   assertTeamMapValid(lTeamMap, pVirtualTeamsFileName);
