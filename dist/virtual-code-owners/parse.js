@@ -1,4 +1,3 @@
-import { EOL } from "node:os";
 import { isEmailIshUsername } from "../utensils.js";
 let STATE = {
 	currentSection: "",
@@ -10,7 +9,7 @@ export function parse(pVirtualCodeOwnersAsString, pTeamMap = {}) {
 		inheritedUsers: [],
 	};
 	return pVirtualCodeOwnersAsString
-		.split(EOL)
+		.split(/\r?\n/)
 		.map((pUntreatedLine, pLineNo) =>
 			parseLine(pUntreatedLine, pTeamMap, pLineNo + 1),
 		);
