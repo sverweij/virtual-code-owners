@@ -32,7 +32,7 @@ export function parse(
       // os.EOL looks like the better choice here, however, even though os.EOL
       // might report `\n` as a line ending, what we read in that repo
       // might still use `\r\n` as a line ending - or the other way around.
-      // Hence, for parsing, we use this platform independent regex in stead.
+      // Hence, for parsing, we use this platform independent regex instead.
       .split(/\r?\n/)
       .map((pUntreatedLine, pLineNo) =>
         parseLine(pUntreatedLine, pTeamMap, pLineNo + 1),
