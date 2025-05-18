@@ -56,3 +56,30 @@ describe("parses VIRTUAL-CODEOWNERS.txt - with 'virtual teams'", () => {
       });
     });
 });
+describe("parse - parsing regular expressions", () => {
+  it("handles windows and unix line endings regardless of os", () => {
+    const lInputWindowsEOLs = "# a comment\r\n*.js @team";
+    const lInputUnixEOLs = "# a comment\n*.js @team";
+    const lResult = [
+      { type: "comment", line: 1, raw: "# a comment" },
+      {
+        type: "rule",
+        line: 2,
+        raw: "*.js @team",
+        filesPattern: "*.js",
+        spaces: " ",
+        users: [
+          {
+            type: "other-user-or-team",
+            userNumberWithinLine: 1,
+            bareName: "team",
+            raw: "@team",
+          },
+        ],
+        inlineComment: "",
+      },
+    ];
+    deepEqual(parse(lInputWindowsEOLs, TEAMS_EMPTY), lResult);
+    deepEqual(parse(lInputUnixEOLs, TEAMS_EMPTY), lResult);
+  });
+});
