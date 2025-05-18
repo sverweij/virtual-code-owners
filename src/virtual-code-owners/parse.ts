@@ -1,4 +1,3 @@
-import { EOL } from "node:os";
 import type { ITeamMap } from "../team-map/team-map.js";
 import type {
   IRuleCSTLine,
@@ -28,11 +27,17 @@ export function parse(
     currentSection: "",
     inheritedUsers: [],
   };
-  return pVirtualCodeOwnersAsString
-    .split(EOL)
-    .map((pUntreatedLine, pLineNo) =>
-      parseLine(pUntreatedLine, pTeamMap, pLineNo + 1),
-    );
+  return (
+    pVirtualCodeOwnersAsString
+      // os.EOL looks like the better choice here, however, even though os.EOL
+      // might report `\n` as a line ending, what we read in that repo
+      // might still use `\r\n` as a line ending - or the other way around.
+      // Hence, for parsing, we use this platform independent regex instead.
+      .split(/\r?\n/)
+      .map((pUntreatedLine, pLineNo) =>
+        parseLine(pUntreatedLine, pTeamMap, pLineNo + 1),
+      )
+  );
 }
 
 function parseLine(
