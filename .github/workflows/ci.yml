@@ -30,7 +30,7 @@ jobs:
       fail-fast: true
       matrix:
         node-version:
-          - 18.x
+          - 20.x
           - 24.x
         platform:
           - ubuntu-latest
@@ -50,16 +50,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{matrix.node-version}}
-      - name: remove .npmrc on node 18 so that the npm install works
-        # e.g. lint-staged doesn't work with node 18 anymore, but we don't need it
-        # on the ci and hence don't want it to block the ci run. By removing the .npmrc
-        # engine-strict = true isn't enforced anymore, and the install will still work
-        # the other stuff in .npmrc is still relevant, so se set it with npm config.
-        if: matrix.node-version == '18.x'
-        run: |
-          rm -f .npmrc
-          npm config set package-lock=true
-          npm config set save-exact=true
       - run: npm install
       - run: npm run build
       - run: npm run depcruise -- --no-cache --progress performance-log
