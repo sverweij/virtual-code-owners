@@ -165,7 +165,7 @@ function getUserNameType(
   }
 
   if (pUserName.startsWith("@")) {
-    if (pTeamMap.hasOwnProperty(pBareName)) {
+    if (Object.hasOwn(pTeamMap, pBareName)) {
       return "virtual-team-name";
     }
     return "other-user-or-team";

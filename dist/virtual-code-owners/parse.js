@@ -107,7 +107,7 @@ function getUserNameType(pUserName, pBareName, pTeamMap) {
 		return "e-mail-address";
 	}
 	if (pUserName.startsWith("@")) {
-		if (pTeamMap.hasOwnProperty(pBareName)) {
+		if (Object.hasOwn(pTeamMap, pBareName)) {
 			return "virtual-team-name";
 		}
 		return "other-user-or-team";
