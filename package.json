@@ -1,6 +1,6 @@
 {
   "name": "virtual-code-owners",
-  "version": "8.2.7",
+  "version": "9.0.0",
   "description": "CODEOWNERS with teams for teams that can't use GitHub teams",
   "type": "module",
   "bin": {
