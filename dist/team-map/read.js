@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { parse as parseYaml } from "yaml";
 import { EOL } from "node:os";
+const MAX_TEAM_NAME_LENGTH = 80;
 export default function readTeamMap(pVirtualTeamsFileName) {
 	const lVirtualTeamsAsAString = readFileSync(pVirtualTeamsFileName, {
 		encoding: "utf-8",
@@ -45,13 +46,19 @@ function validateTeamMap(pCandidateTeamMap) {
 }
 function validateTeamName(pTeamNameCandidate) {
 	if (typeof pTeamNameCandidate !== "string") {
-		return [false, "not a string"];
+		return [false, `${pTeamNameCandidate} (is not a string)`];
 	}
 	if (pTeamNameCandidate === "") {
-		return [false, "'' (empty string)"];
+		return [false, "'' (is an empty string)"];
 	}
 	if (pTeamNameCandidate.includes(" ")) {
 		return [false, `'${pTeamNameCandidate}' (contains spaces)`];
+	}
+	if (pTeamNameCandidate.length > MAX_TEAM_NAME_LENGTH) {
+		return [
+			false,
+			`'${pTeamNameCandidate}' (is too long - keep it <= ${MAX_TEAM_NAME_LENGTH} characters)`,
+		];
 	}
 	return [true];
 }

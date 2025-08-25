@@ -4,6 +4,7 @@ import { parse as parseYaml } from "yaml";
 import { EOL } from "node:os";
 
 type BooleanResultType = [value: boolean, error?: string];
+const MAX_TEAM_NAME_LENGTH = 80;
 
 export default function readTeamMap(pVirtualTeamsFileName: string): ITeamMap {
   const lVirtualTeamsAsAString = readFileSync(pVirtualTeamsFileName, {
@@ -65,15 +66,22 @@ function validateTeamName(pTeamNameCandidate: any): BooleanResultType {
   // (tried 123, 123.45, true, false, null, [], {}). It's handy
   // as a type guard, though
   if (typeof pTeamNameCandidate !== "string") {
-    return [false, "not a string"];
+    return [false, `${pTeamNameCandidate} (is not a string)`];
   }
   /* c8 ignore stop */
   if (pTeamNameCandidate === "") {
-    return [false, "'' (empty string)"];
+    return [false, "'' (is an empty string)"];
   }
 
   if (pTeamNameCandidate.includes(" ")) {
     return [false, `'${pTeamNameCandidate}' (contains spaces)`];
+  }
+
+  if (pTeamNameCandidate.length > MAX_TEAM_NAME_LENGTH) {
+    return [
+      false,
+      `'${pTeamNameCandidate}' (is too long - keep it <= ${MAX_TEAM_NAME_LENGTH} characters)`,
+    ];
   }
   return [true];
 }

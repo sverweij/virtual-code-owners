@@ -89,7 +89,7 @@ describe("cli", () => {
     let lErrStream = new WritableTestStream([
       /ERROR:/,
       /is not a valid virtual-teams\.yml:/,
-      /These team names are not valid: '' \(empty string\), 'team name with spaces' \(contains spaces\)/,
+      /These team names are not valid: '' \(is an empty string\), 'team name with spaces' \(contains spaces\)/,
     ]);
     cli(
       [
@@ -97,6 +97,30 @@ describe("cli", () => {
         "./src/__mocks__/virtual-codeowners.txt",
         "--virtualTeams",
         "./src/__mocks__/erroneous-virtual-team-names.yml",
+        "--codeOwners",
+        "node_modules/tmp-code-owners.txt",
+        "--emitLabeler",
+        "--labelerLocation",
+        "node_modules/tmp-labeler.yml",
+      ],
+      lOutStream,
+      lErrStream,
+      0,
+    );
+  });
+  it("shows an error when passed an invalid virtual-teams file (name too long)", () => {
+    let lOutStream = new WritableTestStream();
+    let lErrStream = new WritableTestStream([
+      /ERROR:/,
+      /is not a valid virtual-teams\.yml:/,
+      /These team names are not valid: 'team-name-that-is-longer-than-eighty-characters1234567890123456789012345678901234' \(is too long - keep it <= 80 characters\)/,
+    ]);
+    cli(
+      [
+        "--virtualCodeOwners",
+        "./src/__mocks__/virtual-codeowners.txt",
+        "--virtualTeams",
+        "./src/__mocks__/erroneous-virtual-team-names-too-long.yml",
         "--codeOwners",
         "node_modules/tmp-code-owners.txt",
         "--emitLabeler",
