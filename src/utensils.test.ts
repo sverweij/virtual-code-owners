@@ -25,6 +25,7 @@ describe("utensils - isEmailIshUsername", () => {
       equal(bracketsMatch("[a[b]c]"), true);
       equal(bracketsMatch(""), true);
       equal(bracketsMatch("abc"), true);
+      equal(bracketsMatch("[abc][42] def # ]]]"), true);
     });
 
     it("should return false for mismatched brackets", () => {
@@ -34,6 +35,7 @@ describe("utensils - isEmailIshUsername", () => {
       equal(bracketsMatch("]]"), false);
       equal(bracketsMatch("]["), false);
       equal(bracketsMatch("[[]"), false);
+      equal(bracketsMatch("[[] # ]"), false);
     });
   });
 });

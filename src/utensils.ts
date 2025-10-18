@@ -5,8 +5,18 @@ export function isEmailIshUsername(pUsername: string): boolean {
     pUsername.includes("@")
   );
 }
+
+/**
+ * Checks if the brackets in the non-comment part of a given string
+ * are balanced.
+ *
+ * @param pString - The string to check for balanced brackets.
+ * @returns true if the brackets in the non-comment part of the string
+ *         are balanced, false otherwise.
+ */
 export function bracketsMatch(pString: string): boolean {
-  const lChars = pString.split("");
+  const lStringWithoutComment = exfiltrateNonComment(pString);
+  const lChars = lStringWithoutComment.split("");
   let lBalanceCounter = 0;
   for (let i = 0; i < lChars.length; i++) {
     if (lChars[i] === "[") {
@@ -19,4 +29,8 @@ export function bracketsMatch(pString: string): boolean {
     }
   }
   return lBalanceCounter === 0;
+}
+
+function exfiltrateNonComment(pString: string): string {
+  return pString.split(/\s*#/)[0] ?? "";
 }
