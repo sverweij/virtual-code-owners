@@ -7,12 +7,11 @@ export function isEmailIshUsername(pUsername) {
 }
 export function bracketsMatch(pString) {
 	const lStringWithoutComment = exfiltrateNonComment(pString);
-	const lChars = lStringWithoutComment.split("");
 	let lBalanceCounter = 0;
-	for (let i = 0; i < lChars.length; i++) {
-		if (lChars[i] === "[") {
+	for (const lChar of lStringWithoutComment) {
+		if (lChar === "[") {
 			lBalanceCounter++;
-		} else if (lChars[i] === "]") {
+		} else if (lChar === "]") {
 			lBalanceCounter--;
 		}
 		if (lBalanceCounter < 0) {
