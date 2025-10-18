@@ -1,6 +1,6 @@
 import { equal } from "node:assert/strict";
 import { describe, it } from "node:test";
-import { isEmailIshUsername } from "./utensils";
+import { bracketsMatch, isEmailIshUsername } from "./utensils";
 
 describe("utensils - isEmailIshUsername", () => {
   it("should return true for email-like usernames", () => {
@@ -15,5 +15,25 @@ describe("utensils - isEmailIshUsername", () => {
     equal(isEmailIshUsername("jane.doe+test"), false);
     equal(isEmailIshUsername("john@"), false);
     equal(isEmailIshUsername("@example.com"), false);
+  });
+
+  describe("utensils - bracketsMatch", () => {
+    it("should return true for matching brackets", () => {
+      equal(bracketsMatch("[]"), true);
+      equal(bracketsMatch("[abc]"), true);
+      equal(bracketsMatch("[[]]"), true);
+      equal(bracketsMatch("[a[b]c]"), true);
+      equal(bracketsMatch(""), true);
+      equal(bracketsMatch("abc"), true);
+    });
+
+    it("should return false for mismatched brackets", () => {
+      equal(bracketsMatch("["), false);
+      equal(bracketsMatch("]"), false);
+      equal(bracketsMatch("[["), false);
+      equal(bracketsMatch("]]"), false);
+      equal(bracketsMatch("]["), false);
+      equal(bracketsMatch("[[]"), false);
+    });
   });
 });
