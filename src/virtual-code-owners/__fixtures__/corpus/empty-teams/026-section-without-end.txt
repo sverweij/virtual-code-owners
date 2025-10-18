@@ -1,2 +1,2 @@
-[required-section bladiebla
+[required-section @bladiebla
 aap/ @some-user

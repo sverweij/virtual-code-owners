@@ -25,7 +25,10 @@ function parseLine(pUntreatedLine, pTeamMap, pLineNo) {
 	if (lTrimmedLine === "") {
 		return { type: "empty", line: pLineNo, raw: pUntreatedLine };
 	}
-	if (lTrimmedLine.startsWith("[") || lTrimmedLine.startsWith("^[")) {
+	if (
+		(lTrimmedLine.startsWith("[") || lTrimmedLine.startsWith("^[")) &&
+		lTrimmedLine.includes("]")
+	) {
 		return parseSection(pUntreatedLine, pLineNo, pTeamMap);
 	}
 	return parseRule(pUntreatedLine, pLineNo, pTeamMap);

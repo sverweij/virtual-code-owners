@@ -1,5 +1,21 @@
 [
-  { line: 1, raw: "[required-section bladiebla", type: "unknown" },
+  {
+    filesPattern: "[required-section",
+    inlineComment: "",
+    line: 1,
+    raw: "[required-section @bladiebla",
+    spaces: " ",
+    type: "rule",
+    users:
+      [
+        {
+          bareName: "bladiebla",
+          raw: "@bladiebla",
+          type: "other-user-or-team",
+          userNumberWithinLine: 1,
+        },
+      ],
+  },
   {
     filesPattern: "aap/",
     inlineComment: "",

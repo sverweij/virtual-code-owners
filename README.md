@@ -210,9 +210,8 @@ user/team names but doesn't verify their existence in the project.
   (unless they're in a _section_ that has default owners `[sales related] @ch/sales`
   in which case the rule inherits the default owners of that section)
 - valid sections headings comply with the syntax described over at [GitLab](https://docs.gitlab.com/ee/user/project/codeowners/reference.html#sections)
-  > different from GitLab's syntax the line `[bla @group` is not interpreted
-  > as a rule, but as an erroneous section heading. This behaviour might change
-  > to be the same as GitLab's in future releases without a major version bump.
+  > same as GitLab's syntax the line `[bla @group` is interpreted
+  > as a rule, and not as an erroneous section heading.
 
 ### Does virtual-code-owners support GitLab style sections?
 
