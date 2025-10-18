@@ -45,5 +45,5 @@ export function bracketsMatch(pString: string): boolean {
 function exfiltrateNonComment(pString: string): string {
   // @ts-expect-error TS2322 - split  _always_ returns an array with
   // at least one element, so the error is incorrect.
-  return pString.split(/\s*#/)[0];
+  return pString.split("#")[0];
 }
