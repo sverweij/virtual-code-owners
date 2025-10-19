@@ -21,5 +21,5 @@ export function bracketsMatch(pString) {
 	return lBalanceCounter === 0;
 }
 function exfiltrateNonComment(pString) {
-	return pString.split(/\s*#/)[0];
+	return pString.split("#")[0];
 }

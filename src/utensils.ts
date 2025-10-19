@@ -29,16 +29,6 @@ export function bracketsMatch(pString: string): boolean {
     }
   }
 
-  // for (let i = 0; i < lChars.length; i++) {
-  //   if (lChars[i] === "[") {
-  //     lBalanceCounter++;
-  //   } else if (lChars[i] === "]") {
-  //     lBalanceCounter--;
-  //   }
-  //   if (lBalanceCounter < 0) {
-  //     return false;
-  //   }
-  // }
   return lBalanceCounter === 0;
 }
 
