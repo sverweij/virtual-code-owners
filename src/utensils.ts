@@ -15,7 +15,7 @@ export function isEmailIshUsername(pUsername: string): boolean {
  *         are balanced, false otherwise.
  */
 export function bracketsMatch(pString: string): boolean {
-  const lStringWithoutComment = exfiltrateNonComment(pString);
+  const lStringWithoutComment = stripComment(pString);
   let lBalanceCounter = 0;
 
   for (const lChar of lStringWithoutComment) {
@@ -32,8 +32,9 @@ export function bracketsMatch(pString: string): boolean {
   return lBalanceCounter === 0;
 }
 
-function exfiltrateNonComment(pString: string): string {
-  // @ts-expect-error TS2322 - split  _always_ returns an array with
-  // at least one element, so the error is incorrect.
-  return pString.split("#")[0];
+function stripComment(pString: string): string {
+  const lCommentStartPosition = pString.indexOf("#");
+  return lCommentStartPosition === -1
+    ? pString
+    : pString.slice(0, lCommentStartPosition);
 }

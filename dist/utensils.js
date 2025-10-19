@@ -6,7 +6,7 @@ export function isEmailIshUsername(pUsername) {
 	);
 }
 export function bracketsMatch(pString) {
-	const lStringWithoutComment = exfiltrateNonComment(pString);
+	const lStringWithoutComment = stripComment(pString);
 	let lBalanceCounter = 0;
 	for (const lChar of lStringWithoutComment) {
 		if (lChar === "[") {
@@ -20,6 +20,9 @@ export function bracketsMatch(pString) {
 	}
 	return lBalanceCounter === 0;
 }
-function exfiltrateNonComment(pString) {
-	return pString.split("#")[0];
+function stripComment(pString) {
+	const lCommentStartPosition = pString.indexOf("#");
+	return lCommentStartPosition === -1
+		? pString
+		: pString.slice(0, lCommentStartPosition);
 }
