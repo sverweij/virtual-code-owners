@@ -1,4 +1,4 @@
-import { isEmailIshUsername } from "../utensils.js";
+import { bracketsMatch, isEmailIshUsername } from "../utensils.js";
 let STATE = {
 	currentSection: "",
 	inheritedUsers: [],
@@ -27,7 +27,7 @@ function parseLine(pUntreatedLine, pTeamMap, pLineNo) {
 	}
 	if (
 		(lTrimmedLine.startsWith("[") || lTrimmedLine.startsWith("^[")) &&
-		lTrimmedLine.includes("]")
+		bracketsMatch(lTrimmedLine)
 	) {
 		return parseSection(pUntreatedLine, pLineNo, pTeamMap);
 	}

@@ -7,7 +7,7 @@ import type {
   IVirtualCodeOwnersCST,
   UserType,
 } from "./cst.js";
-import { isEmailIshUsername } from "../utensils.js";
+import { bracketsMatch, isEmailIshUsername } from "../utensils.js";
 
 interface IInternalState {
   currentSection: string;
@@ -58,7 +58,7 @@ function parseLine(
   }
   if (
     (lTrimmedLine.startsWith("[") || lTrimmedLine.startsWith("^[")) &&
-    lTrimmedLine.includes("]")
+    bracketsMatch(lTrimmedLine)
   ) {
     return parseSection(pUntreatedLine, pLineNo, pTeamMap);
   }
