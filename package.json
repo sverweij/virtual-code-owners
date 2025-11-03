@@ -56,7 +56,7 @@
     "tsx": "4.20.6",
     "typescript": "5.9.3",
     "upem": "10.0.0",
-    "watskeburt": "4.2.3"
+    "watskeburt": "5.0.0"
   },
   "dependencies": {
     "yaml": "^2.8.1"
