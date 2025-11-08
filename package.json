@@ -59,7 +59,7 @@
     "watskeburt": "5.0.0"
   },
   "dependencies": {
-    "yaml": "^2.8.1"
+    "yaml": "2.8.1"
   },
   "engines": {
     "node": "^20.12||^22||>=24"
