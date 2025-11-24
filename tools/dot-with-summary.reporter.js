@@ -6,7 +6,6 @@ const BRANCH_COVERAGE_THRESHOLD = 1;
 const FUNCTION_COVERAGE_THRESHOLD = 1;
 const LINE_COVERAGE_THRESHOLD = 1;
 
-// eslint-disable-next-line no-undefined
 const LOCALE = undefined;
 const gTimeFormat = new Intl.NumberFormat(LOCALE, {
   style: "unit",
@@ -23,7 +22,6 @@ const gNumberFormat = new Intl.NumberFormat(LOCALE).format;
 
 const MAX_PERCENT = 100;
 
-// eslint-disable-next-line max-lines-per-function, complexity
 export default async function* dotWithSummaryReporter(pSource) {
   let lFailStack = [];
   let lDiagnosticStack = [];
@@ -71,7 +69,6 @@ export default async function* dotWithSummaryReporter(pSource) {
     .reduce((pAll, pDiagnostic) => ({ ...pAll, ...pDiagnostic }), {});
   const lTotals = calculateTotals(lCoverageObject, FILES_TO_IGNORE_RE);
 
-  // eslint-disable-next-line prefer-template
   yield `${
     EOL + lFailStack.map(summarizeFailsToText).filter(Boolean).join(EOL)
   }${EOL}` +
@@ -135,7 +132,6 @@ function summarizeCoverage(pTotals) {
     return "";
   }
   return (
-    // eslint-disable-next-line prefer-template
     "=============================== Coverage summary ===============================" +
     EOL +
     `Branches     : ${gPercentFormat(pTotals.coveredBranchPercent)} (${gNumberFormat(pTotals.coveredBranchCount)}/${gNumberFormat(pTotals.totalBranchCount)})` +
@@ -222,7 +218,6 @@ function summarizeCounts(pDiagnostics) {
   );
 }
 
-// eslint-disable-next-line complexity
 function determineExitCode(pFailStack, pTotals) {
   if (pFailStack.length > 0) {
     return 1;
@@ -252,7 +247,6 @@ function summarizeFailsToText(pFailEvent) {
 function diagnosticToObject(pDiagnosticEvent) {
   const lReturnValue = {};
   const [key, value] = pDiagnosticEvent.data.message.split(" ");
-  // eslint-disable-next-line security/detect-object-injection
   lReturnValue[key] = value;
   return lReturnValue;
 }

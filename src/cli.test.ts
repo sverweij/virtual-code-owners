@@ -27,38 +27,38 @@ class WritableTestStream extends Writable {
 
 describe("cli", () => {
   it("shows the version number when asked for", () => {
-    let lOutStream = new WritableTestStream(/^\d+\.\d+\.\d+(-.+)?\n$/);
-    let lErrStream = new WritableTestStream();
+    const lOutStream = new WritableTestStream(/^\d+\.\d+\.\d+(-.+)?\n$/);
+    const lErrStream = new WritableTestStream();
     cli(["-V"], lOutStream, lErrStream);
     cli(["--version"], lOutStream, lErrStream);
   });
 
   it("shows help when asked for", () => {
-    let lOutStream = new WritableTestStream(
+    const lOutStream = new WritableTestStream(
       /^Usage: virtual-code-owners \[options\].*/,
     );
-    let lErrStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream();
     cli(["-h"], lOutStream, lErrStream);
     cli(["--help"], lOutStream, lErrStream);
   });
 
   it("shows an error when passed a non-existing argument", () => {
-    let lOutStream = new WritableTestStream();
-    let lErrStream = new WritableTestStream(
+    const lOutStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream(
       /.*ERROR:.*'--thisArgumentDoesNotExist'.*/,
     );
     cli(["--thisArgumentDoesNotExist"], lOutStream, lErrStream, 0);
   });
 
   it("shows an error when passed a non-existing file", () => {
-    let lOutStream = new WritableTestStream();
-    let lErrStream = new WritableTestStream(/.*ERROR: ENOENT:.*/);
+    const lOutStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream(/.*ERROR: ENOENT:.*/);
     cli(["-v", "this-file-does-not-exist.txt"], lOutStream, lErrStream);
   });
 
   it("shows an error when passed an invalid virtual-teams file", () => {
-    let lOutStream = new WritableTestStream();
-    let lErrStream = new WritableTestStream([
+    const lOutStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream([
       /ERROR:/,
       /is not a valid virtual-teams\.yml:/,
       /This username doesn't match .+: '@daisy-duck'/,
@@ -85,8 +85,8 @@ describe("cli", () => {
   });
 
   it("shows an error when passed an invalid virtual-teams file (invalid names)", () => {
-    let lOutStream = new WritableTestStream();
-    let lErrStream = new WritableTestStream([
+    const lOutStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream([
       /ERROR:/,
       /is not a valid virtual-teams\.yml:/,
       /These team names are not valid: '' \(is an empty string\), 'team name with spaces' \(contains spaces\)/,
@@ -109,8 +109,8 @@ describe("cli", () => {
     );
   });
   it("shows an error when passed an invalid virtual-teams file (name too long)", () => {
-    let lOutStream = new WritableTestStream();
-    let lErrStream = new WritableTestStream([
+    const lOutStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream([
       /ERROR:/,
       /is not a valid virtual-teams\.yml:/,
       /These team names are not valid: 'team-name-that-is-longer-than-eighty-characters1234567890123456789012345678901234' \(is too long - keep it <= 80 characters\)/,
@@ -134,8 +134,8 @@ describe("cli", () => {
   });
 
   it("shows an error when passed an invalid virtual-teams file (not an object)", () => {
-    let lOutStream = new WritableTestStream();
-    let lErrStream = new WritableTestStream([
+    const lOutStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream([
       /ERROR:/,
       /is not a valid virtual-teams\.yml:/,
       /The team map is not an object/,
@@ -159,8 +159,8 @@ describe("cli", () => {
   });
 
   it("shows an error when passed an invalid virtual-code-owners file", () => {
-    let lOutStream = new WritableTestStream();
-    let lErrStream = new WritableTestStream(
+    const lOutStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream(
       /.*\.\/src\/__mocks__\/erroneous-virtual-codeowners.txt:16:1 invalid user or team name "jet" \(#6 on this line\). It should either start with "@" or be an e-mail address.*/,
     );
     cli(
@@ -182,8 +182,8 @@ describe("cli", () => {
   });
 
   it("with --dryRun, still shows an error when passed an invalid virtual-code-owners file", () => {
-    let lOutStream = new WritableTestStream();
-    let lErrStream = new WritableTestStream(
+    const lOutStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream(
       /.*\.\/src\/__mocks__\/erroneous-virtual-codeowners.txt:16:1 invalid user or team name "jet" \(#6 on this line\). It should either start with "@" or be an e-mail address.*/,
     );
     cli(
@@ -206,8 +206,8 @@ describe("cli", () => {
   });
 
   it("ignores positional arguments", () => {
-    let lOutStream = new WritableTestStream();
-    let lErrStream = new WritableTestStream(
+    const lOutStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream(
       /.*Wrote 'node_modules\/tmp-code-owners\.txt'.*/,
     );
     cli(
@@ -228,8 +228,8 @@ describe("cli", () => {
   });
 
   it("shows that both a codeowners and a labeler file were generated when --emitLabeler is used + emits files", () => {
-    let lOutStream = new WritableTestStream();
-    let lErrStream = new WritableTestStream(
+    const lOutStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream(
       /.*Wrote 'node_modules\/tmp-code-owners\.txt' AND 'node_modules\/tmp-labeler.yml'.*/,
     );
     const lCodeOwnersFileName = "node_modules/tmp-code-owners.txt";
@@ -263,8 +263,8 @@ describe("cli", () => {
   });
 
   it("with --dryRun, still shows that both a codeowners and a labeler file were generated when --emitLabeler is used + does not emit files", () => {
-    let lOutStream = new WritableTestStream();
-    let lErrStream = new WritableTestStream(
+    const lOutStream = new WritableTestStream();
+    const lErrStream = new WritableTestStream(
       /.*Wrote 'node_modules\/tmp-dry-run-so-shouldnt-exist-code-owners\.txt' AND 'node_modules\/tmp-dry-run-so-shouldnt-exist-labeler.yml'.*/,
     );
     cli(

@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "build": "rm -rf dist && tsx tools/get-version.ts > src/version.ts && tsc && prettier --log-level warn --write --use-tabs dist/",
-    "check": "npm run format && npm run build && npm run depcruise -- --no-progress && npm test",
+    "check": "npm run format && npm run lint:fix && npm run build && npm run depcruise -- --no-progress && npm test",
     "depcruise": "depcruise src tools",
     "depcruise:graph": "depcruise src --include-only '^(src)' --output-type x-dot-webpage --output-to dependency-graph.html",
     "depcruise:graph:dev": "depcruise src --prefix vscode://file/$(pwd)/ --output-type x-dot-webpage | browser",
@@ -22,6 +22,7 @@
     "depcruise:graph:diff:mermaid": "depcruise src tools --output-type mermaid --output-to - --affected $SHA",
     "depcruise:html": "depcruise src tools --output-type err-html --output-to dependency-violation-report.html",
     "format": "prettier --log-level warn --write \"**/*.{md,ts,json,yml}\"",
+    "lint:fix": "eslint --ext .ts src tools --fix",
     "prepare": "husky",
     "prepack": "clean-pkg-json --dry --keep overrides --keep resolutions | jq '.scripts = {test: \"echo for test, build and static analysis scripts: see the github repository\"}' > smaller-package.json && mv smaller-package.json package.json && prettier --log-level warn --write --use-tabs package.json",
     "postpack": "git restore package.json",
@@ -46,15 +47,19 @@
     "url": "https://github.com/sverweij/virtual-code-owners/issues"
   },
   "devDependencies": {
+    "@eslint/js": "9.39.1",
     "@types/node": "24.10.1",
     "c8": "10.1.3",
     "clean-pkg-json": "1.3.0",
     "dependency-cruiser": "17.3.1",
+    "eslint": "9.39.1",
+    "globals": "16.5.0",
     "husky": "9.1.7",
     "lint-staged": "16.2.7",
     "prettier": "3.6.2",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
+    "typescript-eslint": "8.47.0",
     "upem": "10.0.1",
     "watskeburt": "5.0.0"
   },

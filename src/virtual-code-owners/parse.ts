@@ -82,7 +82,7 @@ function parseRule(
     (lRule.groups.userNames || STATE.inheritedUsers.length > 0);
 
   if (ruleIsValid) {
-    let lReturnValue: IRuleCSTLine = {
+    const lReturnValue: IRuleCSTLine = {
       type: "rule",
       line: pLineNo,
       raw: pUntreatedLine,

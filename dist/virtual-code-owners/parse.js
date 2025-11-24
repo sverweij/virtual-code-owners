@@ -43,7 +43,7 @@ function parseRule(pUntreatedLine, pLineNo, pTeamMap) {
 		lRule?.groups &&
 		(lRule.groups.userNames || STATE.inheritedUsers.length > 0);
 	if (ruleIsValid) {
-		let lReturnValue = {
+		const lReturnValue = {
 			type: "rule",
 			line: pLineNo,
 			raw: pUntreatedLine,
