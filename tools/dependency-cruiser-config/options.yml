@@ -24,6 +24,9 @@ enhancedResolveOptions:
 reporterOptions:
   dot:
     collapsePattern: node_modules/[^/]+
+    filters:
+      includeOnly:
+        path: "src/"
     theme:
       graph:
         splines: ortho
