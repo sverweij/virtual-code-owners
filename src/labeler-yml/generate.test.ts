@@ -4,8 +4,8 @@ import { EOL } from "node:os";
 import { describe, it } from "node:test";
 import { parse as parseYaml } from "yaml";
 import readTeamMap from "../team-map/read.js";
-import readVirtualCodeOwners from "../virtual-code-owners/read.js";
-import type { IVirtualCodeOwnersCST } from "../virtual-code-owners/cst.js";
+import readVirtualCodeOwners from "../codeowners/read.js";
+import type { IVirtualCodeOwnersCST } from "../codeowners/cst.js";
 import generateLabelerYml from "./generate.js";
 
 const TEAMS = {

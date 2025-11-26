@@ -3,7 +3,7 @@ import { EOL } from "node:os";
 import generateCodeOwners from "./codeowners/generate.js";
 import generateLabelerYml from "./labeler-yml/generate.js";
 import readTeamMap from "./team-map/read.js";
-import readVirtualCodeOwners from "./virtual-code-owners/read.js";
+import readVirtualCodeOwners from "./codeowners/read.js";
 export function main(pOptions, pErrorStream) {
 	const lTeamMap = readTeamMap(pOptions.virtualTeams);
 	const lVirtualCodeOwners = readVirtualCodeOwners(

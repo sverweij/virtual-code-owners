@@ -4,10 +4,10 @@ import { EOL } from "node:os";
 import { describe, it } from "node:test";
 import readTeamMap from "../team-map/read.js";
 import type { ITeamMap } from "../team-map/team-map.js";
-import { parse } from "../virtual-code-owners/parse.js";
-import readVirtualCodeOwners from "../virtual-code-owners/read.js";
+import { parse } from "./parse.js";
+import readVirtualCodeOwners from "./read.js";
 import generateCodeOwners from "./generate.js";
-import type { IVirtualCodeOwnersCST } from "../virtual-code-owners/cst.js";
+import type { IVirtualCodeOwnersCST } from "./cst.js";
 
 export function generateCodeOwnersFromString(
   pCodeOwnersFileAsString: string,

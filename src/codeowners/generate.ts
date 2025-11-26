@@ -5,7 +5,7 @@ import type {
   IUser,
   IVirtualCodeOwnerLine,
   IVirtualCodeOwnersCST,
-} from "../virtual-code-owners/cst.js";
+} from "./cst.js";
 
 const DEFAULT_WARNING =
   `#${EOL}` +

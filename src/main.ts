@@ -4,7 +4,7 @@ import { type Writable } from "node:stream";
 import generateCodeOwners from "./codeowners/generate.js";
 import generateLabelerYml from "./labeler-yml/generate.js";
 import readTeamMap from "./team-map/read.js";
-import readVirtualCodeOwners from "./virtual-code-owners/read.js";
+import readVirtualCodeOwners from "./codeowners/read.js";
 export interface IOptions {
   virtualCodeOwners: string;
   virtualTeams: string;
