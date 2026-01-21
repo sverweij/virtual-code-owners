@@ -89,7 +89,10 @@ function parseSection(pUntreatedLine, pLineNo, pTeamMap) {
 		inlineComment: lCommentSplitLine[1] ?? "",
 	};
 	if (lSection.groups.minApprovers) {
-		lReturnValue.minApprovers = parseInt(lSection.groups.minApprovers, 10);
+		lReturnValue.minApprovers = Number.parseInt(
+			lSection.groups.minApprovers,
+			10,
+		);
 	}
 	return lReturnValue;
 }
