@@ -48,11 +48,11 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "@types/node": "25.5.0",
+    "@types/node": "25.5.2",
     "c8": "11.0.0",
     "clean-pkg-json": "1.4.1",
     "dependency-cruiser": "17.3.10",
-    "eslint": "10.1.0",
+    "eslint": "10.2.0",
     "globals": "17.4.0",
     "husky": "9.1.7",
     "lint-staged": "16.4.0",
