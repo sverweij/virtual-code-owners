@@ -30,7 +30,7 @@ jobs:
       fail-fast: true
       matrix:
         node-version:
-          - 20.x
+          - 22.x
           - 24.x
         platform:
           - ubuntu-latest
@@ -51,9 +51,9 @@ jobs:
         with:
           node-version: ${{matrix.node-version}}
       - run: npm install
-      - run: npm run build
-      - run: npm run depcruise -- --no-cache --progress performance-log
-      - run: npm test
+      - run: node --run=build
+      - run: node --run=depcruise -- --no-cache --progress performance-log
+      - run: node --run=test
       - name: emit coverage results to step summary
         if: always() && matrix.node-version == env.NODE_LATEST
         run: |
