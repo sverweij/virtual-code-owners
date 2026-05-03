@@ -5,16 +5,16 @@ import { describe, it } from "node:test";
 import { parse as parseYaml } from "yaml";
 import { parse } from "./parse.js";
 
-function relEmpty(pFileName) {
+function relEmpty(pFileName: string) {
   return new URL(
     join("__fixtures__/corpus/empty-teams", pFileName),
     import.meta.url,
   );
 }
-function rel(pFileName) {
+function rel(pFileName: string) {
   return new URL(join("__fixtures__/corpus/teams", pFileName), import.meta.url);
 }
-function getOutputFileName(pFileName) {
+function getOutputFileName(pFileName: string) {
   return pFileName.replace(/\.txt$/, ".yml");
 }
 

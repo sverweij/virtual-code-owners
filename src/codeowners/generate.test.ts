@@ -29,7 +29,7 @@ libs/after-sales @team-after-sales
 # tooling maintained by a rag tag band of 20% friday afternooners
 tools/ @team-tgif`;
 
-  it("leaves an code owners as-is when the team map is empty", () => {
+  it("leaves a code owners as-is when the team map is empty", () => {
     equal(generateCodeOwnersFromString(lCodeOwners, {}, ""), lCodeOwners);
   });
 
