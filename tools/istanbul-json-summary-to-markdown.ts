@@ -1,4 +1,4 @@
-import type { Readable, Writable } from "stream";
+import type { Readable, Writable } from "node:stream";
 
 interface ICoverageMetric {
   pct: number;
