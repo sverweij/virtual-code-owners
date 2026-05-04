@@ -8,3 +8,9 @@ tmp-*
 /coverage/
 dependency-graph.html
 dependency-violation-report.html
+
+# other stuffs
+.ash_history
+/.npm/
+/.podman-node-cache/
+start-dev-env.sh
