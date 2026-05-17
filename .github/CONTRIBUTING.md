@@ -19,7 +19,7 @@ To make this as easy as possible for you, here's some simple guidelines:
 ### Contributing code
 
 - We prefer well documented
-  **[pull requests](https://help.github.com/articles/creating-a-pull-request/)**
+  **[pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)**
   based on the most recent version of the **main** branch.
 - Code quality
   - virtual-code-owners has a bunch of automated checks (test coverage, depcruise,
@@ -33,7 +33,7 @@ To make this as easy as possible for you, here's some simple guidelines:
   Leave an [issue](https://github.com/sverweij/virtual-code-owners/issues/new/choose)
   on GitHub, so we can talk about it.
 - virtual-code-owners is released with a [code of conduct](../CODE_OF_CONDUCT.md), adapted
-  from the [contributor covenant](http://contributor-covenant.org/).
+  from the [contributor covenant](https://contributor-covenant.org/).
 
 ### Legal
 

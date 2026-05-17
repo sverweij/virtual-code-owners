@@ -5,7 +5,7 @@ This generates your `CODEOWNERS` file (_patterns_ x _users_) from
 - a `VIRTUAL-CODEOWNERS.txt` (_patterns_ x _teams_)
 - a `virtual-teams.yml` (_teams_ x _users_)
 
-... which makes it easier to keep `CODEOWNERS` in sync on multi-team mono repos
+... which makes it easier to keep `CODEOWNERS` in sync on multi-team monorepos
 when you don't have (enough) 'real' GitHub or GitLab teams.
 
 ## Usage
@@ -238,7 +238,7 @@ npx virtual-code-owners --dryRun
 
 ### Why the `.txt` extension?
 
-It keeps editors and IDE's from messing up your formatting.
+It keeps editors and IDEs from messing up your formatting.
 
 Various editors assume an ALL_CAPS file name with `#` characters on various lines
 to be markdown, and will auto format them as such. Usually such autoformatting is
@@ -258,9 +258,9 @@ the organization chart (and hence the GitHub teams). Teams in those organization
 who want to have clear code ownership can either:
 
 - Wrestle the bureaucracy.  
-  Recommended! It will often require patience though, and in the mean time
+  Recommended! It will often require patience though, and in the meantime
   you might want to have some clarity on code ownership.
 - Maintain a CODEOWNERS file with code assigned to large lists of individuals.  
-  That's a lotta work, even for smaller projects
+  That's a lot of work, even for smaller projects
 
 This is where `virtual-code-owners` comes in.
