@@ -1,6 +1,6 @@
 import { writeFileSync } from "node:fs";
 import { EOL } from "node:os";
-import { type Writable } from "node:stream";
+import type { Writable } from "node:stream";
 import generateCodeOwners from "./codeowners/generate.js";
 import generateLabelerYml from "./labeler-yml/generate.js";
 import readTeamMap from "./team-map/read.js";

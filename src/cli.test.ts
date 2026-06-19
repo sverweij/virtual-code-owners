@@ -13,7 +13,7 @@ class WritableTestStream extends Writable {
       this.expected = pExpected;
     }
   }
-  write(pChunk) {
+  write(pChunk: string): boolean {
     if (Array.isArray(this.expected)) {
       this.expected.forEach((pExpectedRE) => {
         match(pChunk, pExpectedRE);

@@ -1,5 +1,5 @@
 import { EOL } from "node:os";
-import { type Writable } from "node:stream";
+import type { Writable } from "node:stream";
 import { parseArgs } from "node:util";
 import type { IOptions } from "./main.js";
 import { main } from "./main.js";

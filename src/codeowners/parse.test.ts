@@ -5,13 +5,13 @@ import { describe, it } from "node:test";
 import { parse as parseYaml } from "yaml";
 import { parse } from "./parse.js";
 
-function relEmpty(pFileName: string) {
+function relEmpty(pFileName: string): URL {
   return new URL(
     join("__fixtures__/corpus/empty-teams", pFileName),
     import.meta.url,
   );
 }
-function rel(pFileName: string) {
+function rel(pFileName: string): URL {
   return new URL(join("__fixtures__/corpus/teams", pFileName), import.meta.url);
 }
 function getOutputFileName(pFileName: string) {

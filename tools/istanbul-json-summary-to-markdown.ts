@@ -40,7 +40,7 @@ function formatSummary(pCoverageSummary: ICoverageSummary): string {
  * @param pStream stream to read the JSON from
  * @param pOutStream stream to write the markdown to
  */
-function main(pInStream: Readable, pOutStream: Writable) {
+function main(pInStream: Readable, pOutStream: Writable): void {
   let lBuffer = "";
 
   pInStream
@@ -51,12 +51,12 @@ function main(pInStream: Readable, pOutStream: Writable) {
     .on(
       "error",
       /* c8 ignore start */
-      (pError) => {
+      (pError: string) => {
         process.stderr.write(`${pError}\n`);
       },
       /* c8 ignore stop */
     )
-    .on("data", (pChunk) => {
+    .on("data", (pChunk: string) => {
       lBuffer += pChunk;
     });
 }
