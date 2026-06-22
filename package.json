@@ -61,7 +61,7 @@
     "typescript": "6.0.3",
     "typescript-eslint": "8.61.0",
     "upem": "10.0.4",
-    "watskeburt": "5.0.3"
+    "watskeburt": "6.0.0"
   },
   "dependencies": {
     "yaml": "2.9.0"
