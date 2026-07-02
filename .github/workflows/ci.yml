@@ -52,6 +52,7 @@ jobs:
           node-version: ${{matrix.node-version}}
       - run: npm install
       - run: node --run=build
+      - run: node --run=lint
       - run: node --run=depcruise -- --no-cache --progress performance-log
       - run: node --run=test
       - name: emit coverage results to step summary
