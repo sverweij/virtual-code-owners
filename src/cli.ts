@@ -52,6 +52,9 @@ export function cli(
     }
 
     main(lOptions, pErrorStream);
+    /* oxlint-disable no-explicit-any - rather'd used the  one-line only variant, but
+       prettier puts that inline comment on a separate line
+    */
   } catch (pError: any) {
     pErrorStream.write(`${EOL}ERROR: ${pError.message}${EOL}${EOL}`);
     process.exitCode = pErrorExitCode;

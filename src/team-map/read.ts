@@ -18,7 +18,7 @@ export default function readTeamMap(pVirtualTeamsFileName: string): ITeamMap {
 }
 
 function assertTeamMapValid(
-  pTeamMapCandidate: any,
+  pTeamMapCandidate: unknown,
   pVirtualTeamsFileName: string,
 ): void {
   const [lValid, lError] = validateTeamMap(pTeamMapCandidate);
@@ -29,7 +29,7 @@ function assertTeamMapValid(
   }
 }
 
-function validateTeamMap(pCandidateTeamMap: any): BooleanResultType {
+function validateTeamMap(pCandidateTeamMap: unknown): BooleanResultType {
   if (
     typeof pCandidateTeamMap !== "object" ||
     pCandidateTeamMap === null ||
@@ -49,7 +49,7 @@ function validateTeamMap(pCandidateTeamMap: any): BooleanResultType {
   }
 
   const lTeamResults = Object.keys(pCandidateTeamMap).map((pKey) =>
-    validateTeam(pCandidateTeamMap[pKey], pKey),
+    validateTeam((pCandidateTeamMap as Record<string, unknown>)[pKey], pKey),
   );
   const lTeamErrors = lTeamResults.filter((result) => !result[0]);
 
@@ -60,7 +60,7 @@ function validateTeamMap(pCandidateTeamMap: any): BooleanResultType {
   return [true];
 }
 
-function validateTeamName(pTeamNameCandidate: any): BooleanResultType {
+function validateTeamName(pTeamNameCandidate: unknown): BooleanResultType {
   /* c8 ignore start */
   // seemingly, yaml keys are always (converted to) strings (automatically)
   // (tried 123, 123.45, true, false, null, [], {}). It's handy
@@ -87,7 +87,7 @@ function validateTeamName(pTeamNameCandidate: any): BooleanResultType {
 }
 
 function validateTeam(
-  pCandidateTeam: any,
+  pCandidateTeam: unknown,
   pTeamName: string,
 ): BooleanResultType {
   if (!Array.isArray(pCandidateTeam)) {
@@ -103,12 +103,9 @@ function validateTeam(
   return [true];
 }
 
-function validateTeamMember(pTeamMemberCandidate: any): BooleanResultType {
+function validateTeamMember(pTeamMemberCandidate: unknown): BooleanResultType {
   if (typeof pTeamMemberCandidate !== "string") {
-    return [
-      false,
-      `This username is not a string: '${pTeamMemberCandidate.toString()}'`,
-    ];
+    return [false, `This username is not a string: '${pTeamMemberCandidate}'`];
   }
   if (!/^[^@][^\s]+$/.test(pTeamMemberCandidate)) {
     return [

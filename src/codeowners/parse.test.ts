@@ -14,7 +14,7 @@ function relEmpty(pFileName: string): URL {
 function rel(pFileName: string): URL {
   return new URL(join("__fixtures__/corpus/teams", pFileName), import.meta.url);
 }
-function getOutputFileName(pFileName: string) {
+function getOutputFileName(pFileName: string): string {
   return pFileName.replace(/\.txt$/, ".yml");
 }
 

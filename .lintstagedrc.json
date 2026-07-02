@@ -4,7 +4,7 @@
     "git add ."
   ],
   "{workflows,src,tools}/**/*.{js,cjs,ts,json,md,yml}|*.{json,cjs,md}": [
-    "eslint --fix",
+    "oxlint --fix",
     "prettier --write"
   ]
 }

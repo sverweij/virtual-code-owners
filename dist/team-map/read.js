@@ -75,10 +75,7 @@ function validateTeam(pCandidateTeam, pTeamName) {
 }
 function validateTeamMember(pTeamMemberCandidate) {
 	if (typeof pTeamMemberCandidate !== "string") {
-		return [
-			false,
-			`This username is not a string: '${pTeamMemberCandidate.toString()}'`,
-		];
+		return [false, `This username is not a string: '${pTeamMemberCandidate}'`];
 	}
 	if (!/^[^@][^\s]+$/.test(pTeamMemberCandidate)) {
 		return [

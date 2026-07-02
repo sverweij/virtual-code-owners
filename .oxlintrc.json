@@ -1,0 +1,34 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "eslint",
+    "import",
+    "jsdoc",
+    "node",
+    "oxc",
+    "promise",
+    "typescript"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "restriction": "error",
+    "perf": "warn",
+    "style": "off", //
+    "nursery": "warn"
+  },
+  "rules": {
+    "explicit-member-accessibility": "off", // false positives: borks on any method called 'write'
+    "import/no-default-export": "off",
+    "import/no-relative-parent-imports": "off",
+    "no-plusplus": "off",
+    "no-use-before-define": "off",
+    "oxc/no-map-spread": "off", // perf rule - for current context not impactful to fix
+    "oxc/no-optional-chaining": "off",
+    "oxc/no-rest-spread-properties": "off"
+  },
+  "env": {
+    "builtin": true,
+    "node": true
+  }
+}
