@@ -32,10 +32,7 @@ export interface ISectionHeadingCSTLine {
 }
 
 export type UserType =
-  | "virtual-team-name"
-  | "e-mail-address"
-  | "other-user-or-team"
-  | "invalid";
+  "virtual-team-name" | "e-mail-address" | "other-user-or-team" | "invalid";
 export type IUser = {
   type: UserType;
   userNumberWithinLine: number;
