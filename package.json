@@ -48,15 +48,15 @@
     "url": "https://github.com/sverweij/virtual-code-owners/issues"
   },
   "devDependencies": {
-    "@types/node": "26.1.0",
+    "@types/node": "26.1.1",
     "c8": "11.0.0",
     "clean-pkg-json": "2.0.0",
-    "dependency-cruiser": "18.0.0",
+    "dependency-cruiser": "18.1.0",
     "husky": "9.1.7",
     "lint-staged": "17.0.8",
-    "oxlint": "1.72.0",
-    "prettier": "3.9.4",
-    "tsx": "4.22.5",
+    "oxlint": "1.73.0",
+    "prettier": "3.9.5",
+    "tsx": "4.23.0",
     "typescript": "6.0.3",
     "upem": "11.0.0",
     "watskeburt": "6.0.0"
