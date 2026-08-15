@@ -25,7 +25,8 @@
     "no-use-before-define": "off",
     "oxc/no-map-spread": "off", // perf rule - for current context not impactful to fix
     "oxc/no-optional-chaining": "off",
-    "oxc/no-rest-spread-properties": "off"
+    "oxc/no-rest-spread-properties": "off",
+    "prefer-const": "error"
   },
   "env": {
     "builtin": true,
