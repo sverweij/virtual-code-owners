@@ -62,7 +62,7 @@ function generateLine(
 
 function expandTeamsToUsersString(pUsers: IUser[], pTeamMap: ITeamMap): string {
   return uniq(pUsers.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)))
-    .sort(compareUserNames)
+    .toSorted(compareUserNames)
     .join(" ");
 }
 

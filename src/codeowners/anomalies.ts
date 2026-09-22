@@ -35,7 +35,7 @@ export function getAnomalies(
     }
     return [];
   }) as IUserAnomaly[];
-  return (weirdLines as IAnomaly[]).concat(weirdUsers).sort(orderAnomaly);
+  return (weirdLines as IAnomaly[]).concat(weirdUsers).toSorted(orderAnomaly);
 }
 function orderAnomaly(pLeft: IAnomaly, pRight: IAnomaly): number {
   if (

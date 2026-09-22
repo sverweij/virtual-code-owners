@@ -17,7 +17,7 @@ export function getAnomalies(pVirtualCodeOwners) {
 		}
 		return [];
 	});
-	return weirdLines.concat(weirdUsers).sort(orderAnomaly);
+	return weirdLines.concat(weirdUsers).toSorted(orderAnomaly);
 }
 function orderAnomaly(pLeft, pRight) {
 	if (

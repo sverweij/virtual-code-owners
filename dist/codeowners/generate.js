@@ -49,7 +49,7 @@ function generateLine(pCSTLine, pTeamMap) {
 }
 function expandTeamsToUsersString(pUsers, pTeamMap) {
 	return uniq(pUsers.flatMap((pUser) => expandTeamToUserNames(pUser, pTeamMap)))
-		.sort(compareUserNames)
+		.toSorted(compareUserNames)
 		.join(" ");
 }
 function expandTeamToUserNames(pUser, pTeamMap) {

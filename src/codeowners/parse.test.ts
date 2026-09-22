@@ -29,7 +29,7 @@ describe("parses VIRTUAL-CODEOWNERS.txt - empty 'virtual teams'", () => {
     .filter(
       (pFileName: string) => extname(relEmpty(pFileName).pathname) === ".txt",
     )
-    .sort()
+    .toSorted()
     .forEach((pFileName: string) => {
       const lInput = readFileSync(relEmpty(pFileName), "utf-8");
       const lExpected = readFileSync(
@@ -44,7 +44,7 @@ describe("parses VIRTUAL-CODEOWNERS.txt - empty 'virtual teams'", () => {
 describe("parses VIRTUAL-CODEOWNERS.txt - with 'virtual teams'", () => {
   readdirSync(rel(""))
     .filter((pFileName: string) => extname(rel(pFileName).pathname) === ".txt")
-    .sort()
+    .toSorted()
     .forEach((pFileName: string) => {
       const lInput = readFileSync(rel(pFileName), "utf-8");
       const lExpected = readFileSync(
