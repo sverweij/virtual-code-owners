@@ -29,7 +29,7 @@ jobs:
       - run: node --run=build
       - run: node --run=test
       - name: publish as latest
-        run: d publish --provenance --access public
+        run: npm stage publish --provenance --access public
         if: github.event.release.prerelease == false
       - name: publish as beta
         run: npm stage publish --provenance --access public --tag beta
