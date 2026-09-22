@@ -21,9 +21,6 @@ jobs:
         with:
           node-version: 26.x
           registry-url: https://registry.npmjs.org
-      # staged publishing works as of npm@11.15.0. Until that that or higher is
-      # shipped with nodejs by default we need to install it manually.
-      - run: npm install -g npm@11.18.0 --ignore-scripts
       - name: print node & npm versions
         run: |
           node --version
@@ -32,8 +29,8 @@ jobs:
       - run: node --run=build
       - run: node --run=test
       - name: publish as latest
-        run: npm staged publish --provenance --access public
+        run: d publish --provenance --access public
         if: github.event.release.prerelease == false
       - name: publish as beta
-        run: npm staged publish --provenance --access public --tag beta
+        run: npm stage publish --provenance --access public --tag beta
         if: github.event.release.prerelease == true
